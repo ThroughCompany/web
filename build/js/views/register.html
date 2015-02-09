@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <div id="account-register" class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Register</h3>
+            </div>
+            <div class="panel-body">
+                <form class="clearfix" name="registerForm" role="form" novalidate>
+                    <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.email.$invalid }">
+                        <label class="control-label" for="email">Email</label>
+                        <input class="form-control" name="email" tabindex="1" placeholder="Email" type="text" data-ng-model="form.email" required data-ng-pattern="regexes.email" />
+                        <span class="validation-error-message field-validation-error">
+                            <span data-ng-show="submitted && registerForm.email.$error.required">Please enter your email.</span>
+                            <span data-ng-show="submitted && registerForm.email.$error.pattern">Please enter a valid email.</span>
+                        </span>
+                    </div>
+                    <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.emailConfirmation.$invalid }">
+                        <label class="control-label" for="emailConfirmation">Retype Email</label>
+                        <input class="form-control" name="emailConfirmation" tabindex="2" placeholder="Re-enter Email" type="text" data-ng-model="form.emailConfirmation" required data-ng-pattern="regexes.email" />
+                        <span class="validation-error-message field-validation-error">
+                            <span data-ng-show="submitted && registerForm.emailConfirmation.$error.required">Please re-enter your email.
+                            </span>
+                            <span data-ng-show="submitted && registerForm.emailConfirmation.$error.pattern">Please enter a valid email.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.password.$invalid }">
+                        <label class="control-label" for="password">Password</label>
+                        <input class="form-control" name="password" tabindex="2" placeholder="Password" type="password" data-ng-model="form.password" required data-ng-minlength="6" />
+                        <span class="validation-error-message field-validation-error">
+                            <span data-ng-show="submitted && registerForm.password.$error.required">Please enter your password.
+                            </span>
+                            <span data-ng-show="submitted && registerForm.password.$error.minlength">Password must be at least 6 characters.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="alert alert-success" data-ng-show="registerSuccess">
+                        {{ registerSuccessMsg }}
+                    </div>
+                    <div class="alert alert-danger" data-ng-show="registerFail">
+                        {{ registerFailMsg }}
+                    </div>
+                    <button class="btn btn-primary pull-right" tabindex="3" data-ng-click="register(registerForm)">Register</button>
+                </form>
+                <hr>
+                <p>Already have an account? <a href="#" data-ui-sref="system.login">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

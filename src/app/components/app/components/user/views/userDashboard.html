@@ -1,0 +1,100 @@
+<div id="user-dashboard">
+    <div id="row-1" class="row">
+        <div class="col-md-12">
+            <!-- User Info -->
+            <div id="user-info" class="block">
+                <a id="user-avatar" class="media img-circle" href="#" data-ui-sref-name="routes.userSettings">
+                    <img data-ng-src="{{ user.imageUrl }}" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="row-2" class="row">
+        <div class="col-md-7 clearfix">
+            <!-- User Companies -->
+            <div id="user-companies" class="block block-height-1x">
+                <div class="block-header">
+                    <i class="block-header-icon fa fa-building-o"></i>&nbsp;Your Companies
+                    <div class="block-header-icons">
+                        <a href="#" data-ui-sref-name="routes.userCreateCompany">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div id="user-company-list">
+                    <div class="user-company clearfix" data-ng-repeat="company in companies | orderBy : 'name' ">
+                        <a class="clearfix" data-ui-sref-name="routes.userCompanyDashboard({ companyId : company._id })">
+                            <img class="user-company-avatar media-object img-circle" src="/images/company-avatar.jpg" alt="{{ companyUser.firstname + ' ' + companyUser.lastname }}" />
+                            <div>
+                                <strong>{{ company.name }}</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Temp Block -->
+            <div class="block block-height-1x">
+
+            </div>
+        </div>
+        <div class="col-md-5 clearfix">
+            <!-- User Messages -->
+            <div id="user-messages" class="block block-height-2x">
+                <div class="block-header">
+                    <i class="block-header-icon fa fa-envelope-square"></i>&nbsp;Recent Messages
+                    <div class="block-header-icons">
+                        <a href="#">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                        </a>
+                    </div>
+                </div>
+                <div id="user-message-list">
+                    <a href="#" class="user-message clearfix">
+                        <img class="user-message-pic media-object img-circle" src="/images/profile-pic-1.jpg" />
+                        <p class="user-message-subject">
+                            You forgot to update our terms and conditions
+                        </p>
+                        <p class="user-message-content">
+                            I have a few addional terms I need to update in our doc....
+                        </p>
+                    </a>
+                    <a href="#" class="user-message clearfix">
+                        <img class="user-message-pic media-object img-circle" src="/images/profile-pic-2.jpg" />
+                        <p class="user-message-subject">
+                            Did you get my messages about the merger????
+                        </p>
+                    </a>
+                    <a href="#" class="user-message clearfix">
+                        <img class="user-message-pic media-object img-circle" src="/images/profile-pic-3.jpg" />
+                        <p class="user-message-subject">
+                            You forgot to update our terms and conditions...
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="row-3" class="row">
+        <div class="col-md-4">
+            <!-- Temp Block -->
+            <div class="block block-height-1x">
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Temp Block -->
+            <div class="block block-height-1x">
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Temp Block -->
+            <div class="block block-height-1x">
+
+            </div>
+        </div>
+    </div>
+</div>

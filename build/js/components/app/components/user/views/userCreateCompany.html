@@ -1,0 +1,190 @@
+<div id="user-create-company" class="col-md-6 col-offset-6 col-md-offset-3">
+  <h4 class="wizard-header">Create a new company</h4>
+  <div id="user-create-company-steps" class="clearfix">
+    <div>
+      <a class="step-bubble" href="#" data-ng-click="goToStep(1, $event)" data-ng-class="{ active : currentStep === 1 }">
+        <span>
+          1
+        </span>
+      </a>
+    </div>
+    <div>
+      <a class="step-bubble" href="#" data-ng-click="goToStep(2, $event)" data-ng-class="{ active : currentStep === 2 }">
+        <span>
+          2
+        </span>
+      </a>
+    </div>
+    <div>
+      <a class="step-bubble" href="#" data-ng-click="goToStep(3, $event)" data-ng-class="{ active : currentStep === 3 }">
+        <span>
+          3
+        </span>
+      </a>
+    </div>
+    <div>
+      <a class="step-bubble" href="#" data-ng-click="goToStep(4, $event)" data-ng-class="{ active : currentStep === 4 }">
+        <span>
+          4
+        </span>
+      </a>
+    </div>
+  </div>
+  <!-- Step 1 -->
+  <div id="user-create-company-step-1" data-ng-show="currentStep === 1">
+    <form name="createUserCompanyForm1" role="form" novalidate>
+      <div class="form-group" data-ng-class="{ 'has-error' : submitted && createUserCompanyForm1.selectedState.$invalid }">
+        <label class="control-label">Select the state in which your company is incoporated:</label>
+        <select class="form-control" name="selectedState" data-ng-options="state.name for state in states" data-ng-model="form.selectedState" required></select>
+        <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm1.selectedState.$error.required">
+          <span>Please select a state.</span>
+        </span>
+      </div>
+      <div class="pull-right buttons">
+        <a href="#" class="btn btn-default" type="button" data-ui-sref-name="routes.userDashboard">Cancel</a>
+        <a href="#" class="btn btn-default" type="button" data-ng-click="currentStep = currentStep != 1 ? currentStep - 1 : currentStep" data-ng-disabled="currentStep === 1">Back</a>
+        <button class="btn btn-primary" type="button" data-ng-click="goToStep2(createUserCompanyForm1)">Next</button>
+      </div>
+    </form>
+  </div>
+  <!-- Step 2 -->
+  <div id="user-create-company-step-2" data-ng-show="currentStep === 2">
+    <form name="createUserCompanyForm2" role="form" novalidate>
+      <div class="form-group" data-ng-class="{ 'has-error' : submitted && createUserCompanyForm2.name.$invalid }">
+        <label class="control-label">Enter the name of your company:</label>
+        <input class="form-control" name="name" type="text" data-ng-model="form.name" required />
+        <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm2.name.$error.required">
+          <span>Please enter a name.</span>
+        </span>
+      </div>
+      <div class="pull-right buttons">
+        <a href="#" class="btn btn-default" type="button" data-ui-sref-name="routes.userDashboard">Cancel</a>
+        <a href="#" class="btn btn-default" type="button" data-ng-click="currentStep = currentStep - 1">Back</a>
+        <button class="btn btn-primary" type="button" data-ng-click="goToStep3(createUserCompanyForm2)">Next</button>
+      </div>
+    </form>
+  </div>
+  <!-- Step 3 -->
+  <div id="user-create-company-step-3" data-ng-show="currentStep === 3">
+    <form name="createUserCompanyForm3" role="form" novalidate>
+      <div class="form-group" data-ng-class="{ 'has-error' : submitted && createUserCompanyForm3.commonStock.$invalid }">
+        <label class="control-label">
+          Enter the amount of authorized common stock for your company:
+        </label>
+        <input class="form-control" name="commonStock" type="number" data-ng-model="form.commonStock" required min="0" />
+        <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm3.commonStock.$error.required && !createUserCompanyForm3.commonStock.$error.number">
+          <span>Please enter a value for common stock.</span>
+        </span>
+        <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm3.commonStock.$error.number">
+          <span>Please enter a number.</span>
+        </span>
+        <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm3.commonStock.$error.min">
+          <span>Number must be greater than 0.</span>
+        </span>
+      </div>
+      <div class="form-group clearfix" data-ng-class="{ 'has-error' : submitted && createUserCompanyForm3.parValue.$invalid }">
+        <label class="control-label">
+          Enter a par value for your common stock:
+        </label>
+        <div class="input-group">
+          <span class="input-group-addon">@</span>
+          <input class="form-control" name="parValue" type="number" data-ng-model="form.parValue" required min="0" />
+          <span class="input-group-addon">$</span>
+        </div>
+        <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm3.parValue.$error.required && !createUserCompanyForm3.parValue.$error.number">
+          <span>Please enter a value for par value.</span>
+        </span>
+        <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm3.parValue.$error.number">
+          <span>Please enter a number.</span>
+        </span>
+        <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm3.parValue.$error.min">
+          <span>Number must be greater than 0.</span>
+        </span>
+      </div>
+      <div class="pull-right buttons">
+        <a href="#" class="btn btn-default" type="button" data-ui-sref-name="routes.userDashboard">Cancel</a>
+        <a href="#" class="btn btn-default" type="button" data-ng-click="currentStep = currentStep - 1">Back</a>
+        <button class="btn btn-primary" type="button" data-ng-click="goToStep4(createUserCompanyForm3)">Next</button>
+      </div>
+    </form>
+  </div>
+  <!-- Step 4 -->
+  <div id="user-create-company-step-4" data-ng-show="currentStep === 4">
+    <form name="createUserCompanyForm4" role="form" novalidate>
+      <div class="form-group">
+        <label class="control-label">
+          Add any preferred stock for your company:
+        </label>
+      </div>
+      <div class="clearfix row">
+        <div class="form-group col-md-5" data-ng-class="{ 'has-error' : submitted && createUserCompanyForm4.preferredStockName.$invalid }">
+          <input class="form-control" name="preferredStockName" type="text" placeholder="Stock Name" data-ng-model="form.preferredStockName" required />
+        </div>
+        <div class="form-group col-md-5" data-ng-class="{ 'has-error' : submitted && createUserCompanyForm4.preferredStockAmount.$invalid }">
+          <input class="form-control" name="preferredStockAmount" type="number" placeholder="Stock Amount" data-ng-model="form.preferredStockAmount" required min="0" />
+        </div>
+        <div class="col-md-2 clearfix" type="button">
+          <button class="btn btn-default pull-right" type="button" data-ng-click="addPreferredStock(createUserCompanyForm4)">
+            Add
+          </button>
+        </div>
+      </div>
+      <table class="table table-bordered" data-ng-show="form.preferredStocks.length">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat="preferredStock in form.preferredStocks">
+            <td>
+              {{ preferredStock.name }}
+            </td>
+            <td>
+              {{ preferredStock.amount }}
+            </td>
+            <td class="centered">
+              <a href="#" data-ng-click="removePreferredStock(preferredStock, $event)">
+                <i class="fa fa-times"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    <div class="pull-right buttons">
+      <a href="#" class="btn btn-default" type="button" data-ui-sref-name="routes.userDashboard">Cancel</a>
+      <a href="#" class="btn btn-default" type="button" data-ng-click="currentStep = currentStep - 1">Back</a>
+      <button class="btn btn-primary" type="button" data-ng-click="createUserCompany()">Finish</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && createUserCompanyForm1.dateOfIncorporation.$invalid }">
+    <label class="control-label">Date of Incorporation</label>
+    <div class="input-group">
+        <div class="dropdown">
+            <a class="dropdown-toggle" id="date-incorporated" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="dateOfIncorporation" data-ng-model="form.dateOfIncorporation" data-ng-required="true" data-ng-pattern="regexes.date" />
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+            </a>
+            <div class="dropdown-menu">
+                <datetimepicker data-ng-model="form.dateOfIncorporationUnformatted" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#date-incorporated' }" />
+            </div>
+        </div>
+    </div>
+    <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm.dateOfIncorporation.$error.required">
+        <span>Please enter a date.</span>
+    </span>
+    <span class="validation-error-message field-validation-error" data-ng-show="submitted && createUserCompanyForm.dateOfIncorporation.$error.pattern">
+        <span>Date must be in the format mm/dd/yyyy.</span>
+    </span>
+</div>
+ -->

@@ -1,0 +1,138 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en" data-ng-app="system">
+<!--<![endif]-->
+
+<head>
+  <title>Company Floor</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" charset="utf-8" />
+  <link href='/css/site.css' rel='stylesheet' type='text/css'>
+  <link href='/bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,900|Lora:400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body data-ui-view="">
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/moment/moment.js"></script>
+  <script src="/bower_components/angular-resource/angular-resource.js"></script>
+  <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/bower_components/angular-route/angular-route.js"></script>
+  <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+  <script src="/vendor/js/ng-bs-animated-button.js"></script>
+  <script src="/bower_components/underscore/underscore.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/bower_components/ngstorage/ngStorage.js"></script>
+  <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.js"></script>
+
+  <!--
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/bower_components/moment/moment.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular-route.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+  <script src="/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+
+  <script src="/vendor/js/ng-bs-animated-button.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.js"></script>
+  <script src="/bower_components/ngstorage/ngStorage.js"></script>
+  -->
+
+  <!-- build:devscripts -->
+  <script src="/js/system.js"></script>
+
+  <script src="/js/routes/systemRoutes.js"></script>
+
+  <script src="/js/controllers/systemController.js"></script>
+  <script src="/js/controllers/errorController.js"></script>
+  <script src="/js/directives/systemDirectives.js"></script>
+  <script src="/js/controllers/homeController.js"></script>
+  <script src="/js/controllers/loginController.js"></script>
+  <script src="/js/controllers/registerController.js"></script>
+
+  <script src="/js/services/menuService.js"></script>
+  <script src="/js/services/regexService.js"></script>
+  <script src="/js/services/routeService.js"></script>
+  <script src="/js/services/authService.js"></script>
+  <script src="/js/services/authInterceptor.js"></script>
+
+  <script src="/js/services/entityServices/userEntityService.js"></script>
+  <script src="/js/services/entityServices/lookupEntityService.js"></script>
+
+  <script src="/js/services/appSettings.js"></script>
+  <script src="/js/config/httpProviderConfig.js"></script>
+
+  <!-- app -->
+  <script src="/js/components/app/app.js"></script>
+  <script src="/js/components/app/controllers/appController.js"></script>
+  <script src="/js/components/app/routes/appRoutes.js"></script>
+
+  <!-- app - user -->
+  <script src="/js/components/app/components/user/user.js"></script>
+  <script src="/js/components/app/components/user/routes/userRoutes.js"></script>
+
+  <script src="/js/components/app/components/user/controllers/userController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userDashboardController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userSettingsController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userCreateCompanyController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userCompanyController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userCompanyDashboardController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userCompanySettingsController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userCompanyAddSharesController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userCompanyAddRoundController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userCompanyAppointBoardMemberController.js"></script>
+  <script src="/js/components/app/components/user/controllers/userCompanyInviteUserController.js"></script>
+  <!-- endbuild -->
+
+  <!-- FACEBOOK -->
+  <script>
+  //https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.0
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '1484362698477368',
+      status: true, // check login status
+      cookie: true, // enable cookies to allow the server to access the session
+      xfbml: true, // parse XFBML
+      version: 'v2.0' // use version 2.0
+    });
+
+    FB.Event.subscribe('auth.authResponseChange', function(response) {
+      if (response.status === 'connected') {
+        console.log('Facebook connected');
+      } else if (response.status === 'not_authorized') {
+        FB.login();
+      } else if (response.status != 'unknown') {
+        FB.login();
+      }
+    });
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
+</body>
+
+</html>
