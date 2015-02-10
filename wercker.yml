@@ -10,7 +10,7 @@ build:
          token: 99025e7c63d2ec8d02398fc7aabe4e
          room-id: 232970
          from-name: Wercker
-          
+
 deploy:
     - add-to-known_hosts:
         hostname: heroku.com
