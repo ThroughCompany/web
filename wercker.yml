@@ -5,12 +5,11 @@ build:
     - npm-install
     - plasticine/bower-install@0.0.4
     - yeehaa/gulp@0.0.4
-
-    - script:
-        name: build info
-        code: |
-          echo "node version $(node -v) running"
-          echo "npm version $(npm -v) running"
+  after-steps:
+     - hipchat-notify:
+         token: 99025e7c63d2ec8d02398fc7aabe4e
+         room-id: 232970
+         from-name: Wercker
           
 deploy:
     - add-to-known_hosts:
