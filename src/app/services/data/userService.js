@@ -159,13 +159,14 @@ angular.module('throughCompanyApp').factory('userService', [
       }).$promise;
     };
 
-    UserService.prototype.getUserClaims = function(id) {
-      if (!id) throw new Error('id is required');
+    UserService.prototype.getUserClaims = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('userId is required');
 
       var self = this;
 
       return User.getUserClaims({
-        userId: id
+        userId: options.userId
       }).$promise;
     };
 

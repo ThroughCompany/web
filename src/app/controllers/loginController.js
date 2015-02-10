@@ -9,7 +9,7 @@ angular.module('throughCompanyApp').controller('loginController', [
     $scope.form = {};
 
     if (authService.isLoggedIn()) {
-      $state.go('system.app.user');
+      $state.go(routes.userDashboard);
     }
 
     $scope.login = function(loginForm) {

@@ -12,12 +12,16 @@ angular.module('throughCompanyApp').config([
         resolve: {
           user: ['userService', 'authService',
             function(userService, authService) {
-              return userService.getUserById(authService.getUserId());
+              return userService.getUserById({
+                userId: authService.getUserId()
+              });
             }
           ],
           userClaims: ['userService', 'authService',
             function(userService, authService) {
-              return userService.getUserClaims(authService.getUserId());
+              return userService.getUserClaims({
+                userId: authService.getUserId()
+              });
             }
           ]
         },
