@@ -12,6 +12,7 @@ build:
          from-name: Wercker
 
 deploy:
+  steps:
     - add-to-known_hosts:
         hostname: heroku.com
     - script:
@@ -37,7 +38,6 @@ deploy:
           git commit -am "deploy $WERCKER_GIT_COMMIT"
           git remote add heroku git@heroku.com:$APP.git
           git push heroku master --force
-
     after-steps:
         - sherzberg/slack-notify:
             subdomain: wercker
