@@ -28,7 +28,7 @@ var production = _.extend(_.clone(defaultSettings), {
 
 var development = _.extend(_.clone(defaultSettings), {
   ENV: 'development',
-  API: 'throughcompany-api-dev.herokuapp.com',
+  API: 'api-dev.throughcompany.com',
   NEWRELIC: {
     name: 'throughcompany-web-dev',
     key: '462c7ca3a4079021f443e836d9b9357ef276ba42'
