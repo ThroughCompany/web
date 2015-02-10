@@ -6,7 +6,7 @@ angular.module('throughCompanyApp').factory('userService', [
     var User = $resource(appSettings.baseUrl + '/users', null, {
       create: {
         method: 'POST',
-        url: appSettings.baseUrl + '/users'
+        url: appSettings.baseUrl + '/users',
       },
       getUserById: {
         method: 'GET',
@@ -23,46 +23,43 @@ angular.module('throughCompanyApp').factory('userService', [
         method: 'GET',
         url: appSettings.baseUrl + '/users/:userId/claims'
       },
-      //user companies
-      getUserCompanies: {
+      //user projects
+      getUserProjects: {
         method: 'GET',
-        url: appSettings.baseUrl + '/users/:userId/companies',
+        url: appSettings.baseUrl + '/users/:userId/projects',
         isArray: true
       },
-      getUserCompanyById: {
+      getUserProjectById: {
         method: 'GET',
-        url: appSettings.baseUrl + '/users/:userId/companies/:companyId'
+        url: appSettings.baseUrl + '/users/:userId/projects/:projectId',
+        params: {
+          projectId: '@projectId'
+        }
       },
-      createUserCompany: {
+      createUserProject: {
         method: 'POST',
-        url: appSettings.baseUrl + '/users/:userId/companies',
-        params: {
-          userId: "@userId"
-        }
+        url: appSettings.baseUrl + '/users/:userId/projects'
       },
-      updateUserCompanyById: {
+      updateUserProjectById: {
         method: 'PATCH',
-        url: appSettings.baseUrl + '/users/:userId/companies/:companyId',
+        url: appSettings.baseUrl + '/users/:userId/projects/:projectId',
         params: {
-          userId: '@userId',
-          companyId: '@companyId'
+          companyId: '@projectId'
         }
       },
-      getUserCompanyUsers: {
+      getUserProjectUsers: {
         method: 'GET',
-        url: appSettings.baseUrl + '/users/:userId/companies/:companyId/users',
+        url: appSettings.baseUrl + '/users/:userId/projects/:projectId/users',
         isArray: true,
         params: {
-          userId: '@userId',
-          companyId: '@companyId'
+          companyId: '@projectId'
         }
       },
-      addUserCompanyUser: {
+      addUserProjectUser: {
         method: 'POST',
-        url: appSettings.baseUrl + '/users/:userId/companies/:companyId/users',
+        url: appSettings.baseUrl + '/users/:userId/projects/:projectId/users',
         params: {
-          userId: '@userId',
-          companyId: '@companyId'
+          companyId: '@projectId'
         }
       }
     });
@@ -82,28 +79,30 @@ angular.module('throughCompanyApp').factory('userService', [
       }).$promise;
     };
 
-    UserService.prototype.getUserById = function(id) {
-      if (!id) throw new Error('id is required');
+    UserService.prototype.getUserById = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('userId is required');
 
       var self = this;
 
       return User.getUserById({
-        userId: id
+        userId: options.userId
       }).$promise;
     };
 
-    UserService.prototype.updateUserById = function(id, updates) {
-      if (!id) throw new Error('id is required');
-      if (!updates) throw new Error('updates is required');
+    UserService.prototype.updateUserById = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('userId is required');
+      if (!options.updates) throw new Error('updates is required');
 
       var self = this;
 
-      updates.userId = id;
+      updates.userId = options.userId;
 
       return User.updateUserById(updates).$promise;
     };
 
-    UserService.prototype.getUserCompanyById = function(id, companyId) {
+    UserService.prototype.getUserProjectById = function(id, companyId) {
       if (!id) throw new Error('id is required');
       if (!companyId) throw new Error('companyId is required');
 

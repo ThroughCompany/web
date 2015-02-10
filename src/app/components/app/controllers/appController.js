@@ -4,10 +4,8 @@
       '$state',
       'user',
       'userClaims',
-      'states',
-      function($scope, $rootScope, $state, user, userClaims, states) {
+      function($scope, $rootScope, $state, user, userClaims) {
         $rootScope.user = user;
         $rootScope.userClaims = userClaims;
-        $rootScope.states = states; //US states
       }
     ]);
