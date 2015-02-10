@@ -1,11 +1,5 @@
-(function() {
-  'use strict';
-
-  angular.module('system.app.user').controller('userCompanyDashboardController', [
+  angular.module('throughCompanyApp').controller('userCompanyDashboardController', [
     '$scope',
     'userEntityService',
-    function($scope, userEntityService) {
-    }
+    function($scope, userEntityService) {}
   ]);
-
-}());

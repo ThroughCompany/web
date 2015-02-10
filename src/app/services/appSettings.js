@@ -1,3 +1,3 @@
-angular.module('system').constant('appSettings', {
+angular.module('throughCompanyApp').constant('appSettings', {
   baseUrl: '@@API'
 });

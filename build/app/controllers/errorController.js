@@ -1,8 +1,3 @@
-(function() {
-  'use strict';
-
-  angular.module('system').controller('errorController', function($scope) {
+  angular.module('throughCompanyApp').controller('errorController', function($scope) {
 
   });
-
-}());

@@ -1,4 +1,4 @@
-angular.module('system').factory('authService', [
+angular.module('throughCompanyApp').factory('authService', [
   '$rootScope',
   '$window',
   '$http',

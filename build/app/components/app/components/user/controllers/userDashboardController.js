@@ -1,12 +1,7 @@
-(function() {
-  'use strict';
-
-  angular.module('system.app.user').controller('userDashboardController', [
+  angular.module('throughCompanyApp').controller('userDashboardController', [
     '$scope',
     'userCompanies',
     function($scope, userCompanies) {
       $scope.companies = userCompanies;
     }
   ]);
-
-}());

@@ -1,4 +1,4 @@
-angular.module('system').config(['$httpProvider',
+angular.module('throughCompanyApp').config(['$httpProvider',
   function($httpProvider) {
 
     var interceptor = ([
@@ -9,24 +9,16 @@ angular.module('system').config(['$httpProvider',
 
         return {
           request: function(config) {
-              config.headers = config.headers || {};
-              if ($window.sessionStorage.token) {
-                config.headers['x-access-token'] = $window.sessionStorage.token;
-              }
-              return config;
-            } //   responseError: function(rejection) {
-            //     if (rejection.status === 401) {
-            //       authService.isLoggedIn = false;
-            //       $state.transitionTo('system');
-            //     }
-            //     return $q.reject(rejection);
-            //   }
-            // };
+            config.headers = config.headers || {};
+            if ($window.sessionStorage.token) {
+              config.headers['x-access-token'] = $window.sessionStorage.token;
+            }
+            return config;
+          }
         };
       }
     ]);
 
     $httpProvider.interceptors.push(interceptor);
-
   }
 ]);

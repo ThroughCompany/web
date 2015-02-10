@@ -1,4 +1,4 @@
-angular.module('system').factory('menuService', [
+angular.module('throughCompanyApp').factory('menuService', [
   '$rootScope',
   '$state',
   '$window',

@@ -1,10 +1,4 @@
-(function() {
-  'use strict';
-
-  angular.module('system.app.user').controller('userCompanyAddSharesController', [
-    '$scope',
-    function($scope) {
-    }
-  ]);
-
-}());
+angular.module('throughCompanyApp').controller('userCompanyAddSharesController', [
+  '$scope',
+  function($scope) {}
+]);

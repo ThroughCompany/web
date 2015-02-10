@@ -1,4 +1,4 @@
-angular.module('system').factory('regexService', [
+angular.module('throughCompanyApp').factory('regexService', [
 
   function() {
     return {

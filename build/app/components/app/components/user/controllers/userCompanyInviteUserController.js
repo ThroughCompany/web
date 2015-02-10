@@ -1,7 +1,4 @@
-(function() {
-  'use strict';
-
-  angular.module('system.app.user').controller('userCompanyInviteUserController', [
+  angular.module('throughCompanyApp').controller('userCompanyInviteUserController', [
     '$scope',
     'userEntityService',
     function($scope, userEntityService) {
@@ -19,5 +16,3 @@
       };
     }
   ]);
-
-}());

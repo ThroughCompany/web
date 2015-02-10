@@ -1,4 +1,4 @@
-var system = angular.module('system', [
+var throughCompanyApp = angular.module('throughCompanyApp', [
   'ngCookies',
   'ngResource',
   'ui.bootstrap',
@@ -6,25 +6,16 @@ var system = angular.module('system', [
   'ng-bs-animated-button',
   'ui.bootstrap.datetimepicker',
   'ngStorage',
-  'ngAnimate',
-  'system.app',
-  'system.app.user'
+  'ngAnimate'
 ]);
 
-system.config(['$locationProvider',
+throughCompanyApp.config(['$locationProvider',
   function($locationProvider) {
     $locationProvider.html5Mode(true);
   }
 ]);
 
-system.config(['$httpProvider',
-  function($httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    $httpProvider.interceptors.push('authInterceptor');
-  }
-]);
-
-system.run([
+throughCompanyApp.run([
   '$rootScope',
   '$state',
   'menuService',
@@ -39,8 +30,8 @@ system.run([
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       if ((toState.data && toState.data.authenticate && !authService.getToken()) || !authService.isLoggedIn()) {
         // User isn’t authenticated
-        $state.go('system.home');
-        event.preventDefault();
+        //$state.go('system.home');
+        //event.preventDefault();
       }
     });
     $rootScope.$on('$viewContentLoaded', function(event, toState, toParams, fromState, fromParams) {

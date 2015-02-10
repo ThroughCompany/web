@@ -11,27 +11,27 @@ angular.module('throughCompanyApp').config([
     $stateProvider
       .state('system', {
         url: '/',
-        templateUrl: '/js/views/system.html',
+        templateUrl: '/app/views/system.html',
         controller: 'systemController'
       })
       .state('system.home', {
         url: 'home',
-        templateUrl: '/js/views/home.html',
+        templateUrl: '/app/views/home.html',
         controller: 'homeController'
       })
       .state('system.login', {
         url: 'login',
-        templateUrl: '/js/views/login.html',
+        templateUrl: '/app/views/login.html',
         controller: 'loginController'
       })
       .state('system.register', {
         url: 'register',
-        templateUrl: '/js/views/register.html',
+        templateUrl: '/app/views/register.html',
         controller: 'registerController'
       })
       .state('system.404', {
         url: '404',
-        templateUrl: '/js/views/404.html',
+        templateUrl: '/app/views/404.html',
         controller: 'errorController'
       });
 

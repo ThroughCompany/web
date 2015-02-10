@@ -1,11 +1,6 @@
-(function() {
-  'use strict';
-
-  angular.module('system.app.user').controller('userController', [
+  angular.module('throughCompanyApp').controller('userController', [
     '$scope',
     function($scope) {
 
     }
   ]);
-
-}());

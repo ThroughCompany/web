@@ -1,4 +1,4 @@
-angular.module('system').constant('routes', {
+angular.module('throughCompanyApp').constant('routes', {
   //
   home: 'system.home',
   login: 'system.login',

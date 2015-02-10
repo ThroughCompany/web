@@ -55,7 +55,7 @@ var LESSOPTIONS = {
 
 // Clean the build directory
 gulp.task('clean', function(next) {
-  return _init(gulp.src(BUILDDIR + '/*.*', {
+  return _init(gulp.src(BUILDDIR + '/**/*.*', {
       read: false
     }))
     .pipe(clean());
@@ -79,7 +79,7 @@ gulp.task('fonts', function(next) {
 
 // Replace vars in config
 gulp.task('replace', ['copy'], function() {
-  return _replace(gulp.src(['build/**/**/*', '!build/bower_components/**/*.js']))
+  return _replace(gulp.src(['build/**/*.*']))
     .pipe(gulp.dest(BUILDDIR));
 });
 
