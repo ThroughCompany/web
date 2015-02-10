@@ -12,7 +12,7 @@ if (process.env.NEWRELIC) {
 // start server
 app.listen(appConfig.PORT, function() {
   console.log('Listening on port: ' + appConfig.PORT);
-}); 
+});
 
 /* =========================================================================
  * Exorts
