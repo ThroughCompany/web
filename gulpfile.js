@@ -18,7 +18,7 @@ var gulpIf = require('gulp-if');
 var karma = require('karma').server;
 var protractor = require('gulp-protractor').protractor;
 var concat = require('gulp-concat');
-var fontcustom = require('fontcustom');
+//var fontcustom = require('fontcustom');
 
 require('gulp-task-list')(gulp);
 
