@@ -30,7 +30,7 @@ var development = _.extend(_.clone(defaultSettings), {
   ENV: 'development',
   API: 'throughcompany-api-dev.herokuapp.com',
   NEWRELIC: {
-    name: 'throughcompany-web-prod',
+    name: 'throughcompany-web-dev',
     key: '462c7ca3a4079021f443e836d9b9357ef276ba42'
   }
 });
