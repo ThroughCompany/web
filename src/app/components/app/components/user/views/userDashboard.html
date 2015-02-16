@@ -1,3 +1,23 @@
 <div id="user-dashboard">
-  <h1>USER DASHBOARD</h1>
+  <div class="col-md-3">
+
+  </div>
+  <div class="col-md-9">
+    <div>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+          <a href="#home" role="tab" data-toggle="tab">Projects</a>
+        </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="home">
+          <div ng-repeat="project in projects">
+            {{ project.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
