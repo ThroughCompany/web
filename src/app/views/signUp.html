@@ -1,0 +1,45 @@
+<div id="sign-up" class="container col-md-4 col-md-offset-4">
+  <button class="btn btn-facebook btn-block" tabindex="3" type="button" ng-click="loginFacebook($event)" ng-class="{ 'btn-danger' : loginFacebookError, 'btn-primary' : !loginFacebookError, 'facebook-login-btn' : !loginFacebookError }">
+    <span ng-hide="loggingInFacebook || loginFacebookError">
+        Signin with&nbsp;
+        <i class="fa fa-facebook-square"></i>
+      </span>
+    <span ng-show="loginFacebookError">
+        There was an eror logging in with Facebook
+      </span>
+    <i class="fa fa-refresh fa-spin" ng-show="loggingInFacebook && !loginFacebookError"></i>
+  </button>
+  <br>
+  <p class="center">
+    or
+  </p>
+  <br>
+  <form class="clearfix" name="registerForm" role="form" novalidate>
+    <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.email.$invalid }">
+      <input class="form-control" name="email" tabindex="1" placeholder="Email" type="text" data-ng-model="form.email" required data-ng-pattern="regexes.email" />
+      <span class="validation-error-message field-validation-error">
+                            <span data-ng-show="submitted && registerForm.email.$error.required">Please enter your email.</span>
+      <span data-ng-show="submitted && registerForm.email.$error.pattern">Please enter a valid email.</span>
+      </span>
+    </div>
+    <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.password.$invalid }">
+      <input class="form-control" name="password" tabindex="2" placeholder="Password" type="password" data-ng-model="form.password" required data-ng-minlength="6" />
+      <span class="validation-error-message field-validation-error">
+                            <span data-ng-show="submitted && registerForm.password.$error.required">Please enter your password.
+                            </span>
+      <span data-ng-show="submitted && registerForm.password.$error.minlength">Password must be at least 6 characters.
+                            </span>
+      </span>
+    </div>
+    <div class="alert alert-success" data-ng-show="registerSuccess">
+      {{ registerSuccessMsg }}
+    </div>
+    <div class="alert alert-danger" data-ng-show="registerFail">
+      {{ registerFailMsg }}
+    </div>
+    <button class="btn btn-primary btn-block" tabindex="3" data-ng-click="register(registerForm)">Register</button>
+  </form>
+  <hr>
+  <p>Already have an account? <a href="#" data-ui-sref="system.signIn">Sign In</a>
+  </p>
+</div>

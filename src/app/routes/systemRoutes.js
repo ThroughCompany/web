@@ -19,15 +19,15 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/views/home.html',
         controller: 'homeController'
       })
-      .state('system.login', {
-        url: 'login',
-        templateUrl: '/app/views/login.html',
-        controller: 'loginController'
+      .state('system.signIn', {
+        url: 'signin',
+        templateUrl: '/app/views/signIn.html',
+        controller: 'signInController'
       })
-      .state('system.register', {
-        url: 'register',
-        templateUrl: '/app/views/register.html',
-        controller: 'registerController'
+      .state('system.signUp', {
+        url: 'signup',
+        templateUrl: '/app/views/signUp.html',
+        controller: 'signUpController'
       })
       .state('system.404', {
         url: '404',

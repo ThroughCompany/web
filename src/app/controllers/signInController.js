@@ -1,4 +1,4 @@
-angular.module('throughCompanyApp').controller('loginController', [
+angular.module('throughCompanyApp').controller('signInController', [
   '$scope',
   'authService',
   'utilsService',

@@ -1,4 +1,15 @@
-<div id="login" class="container col-md-4 col-md-offset-4">
+<div id="sign-in" class="container col-md-4 col-md-offset-4">
+  <button class="btn btn-facebook btn-block" tabindex="3" type="button" ng-click="loginFacebook($event)" ng-class="{ 'btn-danger' : loginFacebookError, 'btn-primary' : !loginFacebookError, 'facebook-login-btn' : !loginFacebookError }">
+    <span ng-hide="loggingInFacebook || loginFacebookError">
+        Signin with&nbsp;
+        <i class="fa fa-facebook-square"></i>
+      </span>
+    <span ng-show="loginFacebookError">
+        There was an eror logging in with Facebook
+      </span>
+    <i class="fa fa-refresh fa-spin" ng-show="loggingInFacebook && !loginFacebookError"></i>
+  </button>
+  <p class="center or">or</p>
   <form class="clearfix" name="loginForm" role="form" novalidate>
     <div class="form-group" ng-class="{ 'has-error' : submitted && loginForm.email.$invalid }">
       <input class="form-control" tabindex="1" placeholder="Email" name="email" type="text" ng-model="form.email" required ng-pattern="regexes.email" />
@@ -15,23 +26,12 @@
     <div class="alert alert-danger" ng-show="signinFail">
       {{ signinFailMsg }}
     </div>
-    <button class="login-btn btn btn-primary pull-right" tabindex="3" type="button" ng-click="login(loginForm)">
+    <button class="login-btn btn-block btn btn-primary" tabindex="3" type="button" ng-click="login(loginForm)">
       <span ng-hide="loggingIn">Sign In</span>
       <i class="fa fa-refresh fa-spin" ng-show="loggingIn"></i>
     </button>
-    <p class="text-center">or</p>
-    <button class="login-btn btn pull-right" tabindex="3" type="button" ng-click="loginFacebook($event)" ng-class="{ 'btn-danger' : loginFacebookError, 'btn-primary' : !loginFacebookError, 'facebook-login-btn' : !loginFacebookError }">
-      <span ng-hide="loggingInFacebook || loginFacebookError">
-                        Login with&nbsp;
-                        <i class="fa fa-facebook-square"></i>
-                    </span>
-      <span ng-show="loginFacebookError">
-                        There was an eror logging in with Facebook
-                    </span>
-      <i class="fa fa-refresh fa-spin" ng-show="loggingInFacebook && !loginFacebookError"></i>
-    </button>
   </form>
   <hr>
-  <p>Don't have an account? <a href="#" ui-sref-name="routes.register">Sign Up</a>
+  <p>Don't have an account? <a href="#" ui-sref-name="routes.signUp">Sign Up</a>
   </p>
 </div>
