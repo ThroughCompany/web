@@ -1,23 +1,24 @@
 /* ========================================================================
  * Dependencies
  * ========================================================================= */
-var fs = require('fs')
-var gulp = require('gulp');
-var clean = require('gulp-clean');
-var less = require('gulp-less');
-var uglify = require('gulp-uglify');
-var replace = require('gulp-replace');
-var watch = require('gulp-watch');
-var jshint = require('gulp-jshint');
 var NODE_ENV = process.env.WERCKER_GIT_BRANCH || process.env.NODE_ENV || process.argv[3];
 var ENV = setupEnv(NODE_ENV);
 var ENV_PROD = (ENV == 'production');
+
 var appConfig = require('./config/appConfig')[ENV];
-var htmlReplace = require('gulp-html-replace');
+
+var fs = require('fs')
+var gulp = require('gulp');
 var gulpIf = require('gulp-if');
+var inject = require('gulp-inject');
+var jshint = require('gulp-jshint');
 var karma = require('karma').server;
+var less = require('gulp-less');
+var uglify = require('gulp-uglifyjs');
+var replace = require('gulp-replace');
+var sh = require('shelljs');
+var watch = require('gulp-watch');
 var protractor = require('gulp-protractor').protractor;
-var concat = require('gulp-concat');
 //var fontcustom = require('fontcustom');
 
 require('gulp-task-list')(gulp);
@@ -28,37 +29,37 @@ console.log('\n\nENV: ' + ENV + '\n\n');
  * Constants
  * ========================================================================= */
 var BUILDDIR = 'build';
+
 //js
+var MINIFIEDSCRIPT = 'tablelistApp.min.js';
 var UGLIFYOPTIONS = {
-  //http://davidwalsh.name/compress-uglify
   mangle: true,
-  compress: {
-    sequences: true,
-    dead_code: true,
-    conditionals: true,
-    booleans: true,
-    unused: true,
-    if_return: true,
-    join_vars: true,
-    drop_console: true
-  }
+  compress: true
 };
-var MINIFIEDSCRIPT = 'throughcompanyApp.min.js';
+
 //css
 var LESSOPTIONS = {
-  compress: ENV === 'production'
+  compress: ENV_PROD
 };
 
 /* =========================================================================
  * Tasks
  * ========================================================================= */
 
-// Clean the build directory
+/**
+ * List gulp tasks
+ */
+gulp.task('?', function(next) {
+  sh.exec('gulp task-list')
+  next();
+});
+
+/**
+ * Clean the build directory
+ */
 gulp.task('clean', function(next) {
-  return _init(gulp.src(BUILDDIR + '/**/*.*', {
-      read: false
-    }))
-    .pipe(clean());
+  sh.rm('-rf', BUILDDIR);
+  next();
 });
 
 // Copy src folder to build directory
@@ -68,14 +69,14 @@ gulp.task('copy', ['clean'], function(next) {
 });
 
 // Copy src folder to build directory
-gulp.task('fonts', function(next) {
-  return fontcustom({
-    path: 'src/font-glyphs/icons',
-    output: 'src/font-glyphs',
-    noisy: true,
-    force: true
-  });
-});
+// gulp.task('fonts', function(next) {
+//   return fontcustom({
+//     path: 'src/font-glyphs/icons',
+//     output: 'src/font-glyphs',
+//     noisy: true,
+//     force: true
+//   });
+// });
 
 // Replace vars in config
 gulp.task('replace', ['copy'], function() {
@@ -93,11 +94,22 @@ gulp.task('css', ['replace'], function() {
 /**
  * Minify javascript files
  */
-gulp.task('js', ['replace'], function() {
-  return _init(gulp.src([BUILDDIR + '/app/**/*.js']))
-    .pipe(gulpIf(ENV_PROD, concat(MINIFIEDSCRIPT)))
+gulp.task('js', ['copy', 'replace'], function() {
+  var target = gulp.src(BUILDDIR + '/index.html');
+
+  var sources = gulp.src(BUILDDIR + '/app/**/**/*.js')
     .pipe(gulpIf(ENV_PROD, uglify(MINIFIEDSCRIPT, UGLIFYOPTIONS)))
-    .pipe(gulp.dest(BUILDDIR + '/app'));
+    .pipe(gulpIf(ENV_PROD, gulp.dest(BUILDDIR + '/app')));
+
+  return target.pipe(inject(sources, {
+      starttag: '<!-- inject:js -->',
+      endtag: '<!-- endinject -->',
+      transform: function(filepath) {
+        var path = filepath.replace('/build', '');
+        return '<script src="' + path + '"></script>';
+      }
+    }))
+    .pipe(gulp.dest(BUILDDIR));
 });
 
 /**
@@ -216,9 +228,7 @@ gulp.task('test-e2e', ['server'], function(done) {
 });
 
 /* =========================================================================
- *
- *   Helper Functions
- *
+ * Helper Functions
  * ========================================================================= */
 
 function _init(stream) {
@@ -234,32 +244,7 @@ function _replace(stream) {
     }));
   }
 
-  _htmlReplace(stream);
-
   return stream;
-}
-
-function _htmlReplace(stream) {
-
-  if (ENV === 'production') {
-    stream.pipe(gulpIf(_isHtmlFile, htmlReplace({
-      devscripts: '<script src="/app/' + MINIFIEDSCRIPT + '"></script>'
-    })));
-  }
-
-  return stream;
-}
-
-function _isJsFile(file) {
-  return _endsWith(file.path, '.js');
-}
-
-function _isHtmlFile(file) {
-  return _endsWith(file.path, '.html');
-}
-
-function _endsWith(s, suffix) {
-  return s.indexOf(suffix, s.length - suffix.length) !== -1;
 }
 
 function setupEnv(env) {

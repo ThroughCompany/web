@@ -34,6 +34,5 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/views/404.html',
         controller: 'errorController'
       });
-
   }
 ]);
