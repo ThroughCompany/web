@@ -54,6 +54,11 @@ angular.module('throughCompanyApp').config([
         url: '/settings',
         templateUrl: '/app/components/app/components/userSettings/userSettings.html',
         controller: 'userSettingsCtrl'
+      })
+      .state('system.app.userSettings.profile', {
+        url: '/profile',
+        templateUrl: '/app/components/app/components/userSettings/userSettings-profile.html',
+        controller: 'userSettingsProfileCtrl'
       });
   }
 ]);

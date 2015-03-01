@@ -1,0 +1,38 @@
+<div id="user-settings-profile">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Profile Settings
+    </div>
+    <div class="panel-body">
+      <form name="updateUserForm" novalidate>
+        <div class="form-section">
+          <h4 class="form-section-header">Name</h4>
+          <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control" type="text" name="firstname" ng-model="currentUser.firstname" ng-change="form.firstname = currentUser.firstname" />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control" type="text" name="lastname" ng-model="currentUser.lastname" ng-change="form.lastname = currentUser.lastname" />
+          </div>
+        </div>
+        <div class="form-section">
+          <h4 class="form-section-header">Social</h4>
+          <div class="form-group">
+            <label>Facebook</label>
+            <input class="form-control" type="text" name="social-fb" ng-model="currentUser.social.facebook" ng-change="form.social.facebook = currentUser.social.facebook" />
+          </div>
+          <div class="form-group">
+            <label>Git Hub</label>
+            <input class="form-control" type="text" name="social-github" ng-model="currentUser.social.gitHub" ng-change="form.social.gitHub = currentUser.social.gitHub" />
+          </div>
+          <div class="form-group">
+            <label>Linked In</label>
+            <input class="form-control" type="text" name="social-linkedin" ng-model="currentUser.social.linkedIn" ng-change="form.social.linkedIn = currentUser.social.linkedIn" />
+          </div>
+        </div>
+        <button class="btn btn-primary pull-right" ng-click="updateUser(updateUserForm)">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

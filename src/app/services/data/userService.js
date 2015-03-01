@@ -64,29 +64,26 @@ angular.module('throughCompanyApp').factory('userService', [
       }).$promise;
     };
 
-    // UserService.prototype.updateUserById = function(options) {
-    //   if (!options) throw new Error('options is required');
-    //   if (!options.userId) throw new Error('userId is required');
-    //   if (!options.updates) throw new Error('updates is required');
+    UserService.prototype.updateUserById = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('userId is required');
 
-    //   var self = this;
+      var self = this;
 
-    //   updates.userId = options.userId;
+      return User.updateUserById(options).$promise;
+    };
 
-    //   return User.updateUserById(updates).$promise;
-    // };
+    UserService.prototype.getUserProjectById = function(id, companyId) {
+      if (!id) throw new Error('userId is required');
+      if (!companyId) throw new Error('companyId is required');
 
-    // UserService.prototype.getUserProjectById = function(id, companyId) {
-    //   if (!id) throw new Error('userId is required');
-    //   if (!companyId) throw new Error('companyId is required');
+      var self = this;
 
-    //   var self = this;
-
-    //   return User.getUserCompanyById({
-    //     userId: userId,
-    //     companyId: companyId
-    //   }).$promise;
-    // };
+      return User.getUserCompanyById({
+        userId: userId,
+        companyId: companyId
+      }).$promise;
+    };
 
     UserService.prototype.getUserProjects = function(options) {
       if (!options) throw new Error('options is required');
