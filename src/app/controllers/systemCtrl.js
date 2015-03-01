@@ -1,4 +1,4 @@
-angular.module('throughCompanyApp').controller('systemController', [
+angular.module('throughCompanyApp').controller('systemCtrl', [
   '$scope',
   '$rootScope',
   function($scope, $rootScope) {

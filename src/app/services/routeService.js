@@ -4,5 +4,6 @@ angular.module('throughCompanyApp').constant('routes', {
   signIn: 'system.signIn',
   signUp: 'system.signUp',
   //
-  userDashboard: 'system.app.user.dashboard'
+  userProfile: 'system.app.userProfile',
+  userSettings: 'system.app.userSettings'
 });

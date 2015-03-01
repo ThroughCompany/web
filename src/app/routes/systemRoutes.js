@@ -12,27 +12,27 @@ angular.module('throughCompanyApp').config([
       .state('system', {
         url: '/',
         templateUrl: '/app/views/system.html',
-        controller: 'systemController'
+        controller: 'systemCtrl'
       })
       .state('system.home', {
         url: 'home',
-        templateUrl: '/app/views/home.html',
-        controller: 'homeController'
+        templateUrl: '/app/components/home/home.html',
+        controller: 'homeCtrl'
       })
       .state('system.signIn', {
         url: 'signin',
-        templateUrl: '/app/views/signIn.html',
-        controller: 'signInController'
+        templateUrl: '/app/components/signIn/signIn.html',
+        controller: 'signInCtrl'
       })
       .state('system.signUp', {
         url: 'signup',
-        templateUrl: '/app/views/signUp.html',
-        controller: 'signUpController'
+        templateUrl: '/app/components/signUp/signUp.html',
+        controller: 'signUpCtrl'
       })
       .state('system.404', {
         url: '404',
-        templateUrl: '/app/views/404.html',
-        controller: 'errorController'
+        templateUrl: '/app/components/notFound/notFound.html',
+        controller: 'notFoundCtrl'
       });
   }
 ]);

@@ -8,18 +8,18 @@ angular.module('throughCompanyApp').config([
       .state('system.app', {
         url: 'app',
         templateUrl: '/app/components/app/views/app.html',
-        controller: 'appController',
+        controller: 'appCtrl',
         resolve: {
-          user: ['userService', 'authService', 'routes', '$q', '$state',
-            function(userService, authService, routes, $q, $state) {
+          user: ['$rootScope', 'userService', 'authService', 'routes', '$q', '$state',
+            function($rootScope, userService, authService, routes, $q, $state) {
               var deferred = $q.defer();
 
               userService.getUserById({
                 userId: authService.getUserId()
               }).then(function success(response) {
-                return deferred.resolve(response);
+                deferred.resolve(response);
               }, function error(response) {
-                return $state.go(routes.login);
+                deferred.resolve(null);
               });
 
               return deferred.promise;
@@ -32,9 +32,9 @@ angular.module('throughCompanyApp').config([
               userService.getUserClaims({
                 userId: authService.getUserId()
               }).then(function success(response) {
-                return deferred.resolve(response);
+                deferred.resolve(response);
               }, function error(response) {
-                return $state.go(routes.login);
+                deferred.resolve(null);
               });
 
               return deferred.promise;
@@ -44,7 +44,16 @@ angular.module('throughCompanyApp').config([
         data: {
           authenticate: true
         }
+      })
+      .state('system.app.userProfile', {
+        url: '/profile',
+        templateUrl: '/app/components/app/components/userProfile/userProfile.html',
+        controller: 'userProfileCtrl'
+      })
+      .state('system.app.userSettings', {
+        url: '/settings',
+        templateUrl: '/app/components/app/components/userSettings/userSettings.html',
+        controller: 'userSettingsCtrl'
       });
-
   }
 ]);

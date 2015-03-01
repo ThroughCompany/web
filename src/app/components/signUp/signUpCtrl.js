@@ -1,4 +1,4 @@
-angular.module('throughCompanyApp').controller('signUpController', [
+angular.module('throughCompanyApp').controller('signUpCtrl', [
   '$scope',
   '$state',
   'authService',
@@ -24,7 +24,7 @@ angular.module('throughCompanyApp').controller('signUpController', [
         $scope.registerSuccessMsg = 'Account created';
 
         $timeout(function() {
-          $state.transitionTo(routes.login);
+          $state.transitionTo(routes.signIn);
         }, 1000);
       }, function error(response) {
         if (response.status === 400) {

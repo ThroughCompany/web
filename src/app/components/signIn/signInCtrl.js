@@ -1,4 +1,4 @@
-angular.module('throughCompanyApp').controller('signInController', [
+angular.module('throughCompanyApp').controller('signInCtrl', [
   '$scope',
   'authService',
   'utilsService',
@@ -32,7 +32,7 @@ angular.module('throughCompanyApp').controller('signInController', [
             $scope.signinSuccessMsg = 'Log in successful';
 
             $timeout(function() {
-              $state.go(routes.userDashboard);
+              $state.go(routes.userProfile);
             }, 500);
           }, function error(response) {
             $scope.loggingIn = false;
@@ -53,7 +53,7 @@ angular.module('throughCompanyApp').controller('signInController', [
 
       authService.loginFacebook().then(function success(response) {
         $timeout(function() {
-          $state.go(routes.userDashboard);
+          $state.go(routes.userProfile);
         }, 500);
       }, function error(response) {
         $scope.loggingInFacebook = false;
