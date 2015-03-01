@@ -25,10 +25,25 @@ throughCompanyApp.run([
   'userService',
   function($rootScope, $state, authService, regexService, routes, loggerService, userService) {
     // $rootScope.menu = menuService.init();
+
+    $rootScope.meta = {
+      title: null,
+      description: null
+    };
+    $rootScope.setMetaTitle = function(title) {
+      $rootScope.meta.title = title;
+    };
+    $rootScope.setMetaDescription = function(description) {
+      $rootScope.meta.description = description;
+    };
+    $rootScope.setMetaTitle('Welcome');
+    $rootScope.setMetaDescription('Welcome to Through Company.com');
+
     $rootScope.logger = loggerService;
     $rootScope.regexes = regexService; //hash of regex constants
     $rootScope.auth = authService; //helpers for checking claims
     $rootScope.routes = routes;
+    
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       if (toState.data && toState.data.authenticate && !authService.isLoggedIn()) {
         // User isn’t authenticated

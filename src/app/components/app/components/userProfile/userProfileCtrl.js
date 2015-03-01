@@ -1,7 +1,9 @@
 angular.module('throughCompanyApp').controller('userProfileCtrl', [
   '$scope',
+  '$rootScope',
   'userService',
-  function($scope, userService) {
+  function($scope, $rootScope, userService) {
+    $rootScope.setMetaTitle($scope.currentUser.email);
 
     $scope.projects = [];
 

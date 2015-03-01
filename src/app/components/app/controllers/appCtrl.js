@@ -6,7 +6,7 @@ angular.module('throughCompanyApp').controller('appCtrl', [
   'user',
   'userClaims',
   function($scope, $rootScope, $state, routes, user, userClaims) {
-    $scope.logger.info('APP LOADED...');
+    $scope.logger.info('app controller loaded...');
 
     if (!user) {
       $state.go(routes.signIn);
@@ -14,5 +14,6 @@ angular.module('throughCompanyApp').controller('appCtrl', [
 
     $rootScope.currentUser = user;
     $rootScope.currentUserClaims = userClaims;
+    $rootScope.currentUserProjects = [];
   }
 ]);

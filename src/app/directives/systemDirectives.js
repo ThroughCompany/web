@@ -19,7 +19,7 @@ angular.module('throughCompanyApp')
               } else {
                 value = $scope.$eval(attrs.uiSrefName);
               }
-              console.log(value)
+
               element.attr('ui-sref', value);
               $compile(element)($scope);
             }
@@ -28,3 +28,17 @@ angular.module('throughCompanyApp')
       };
     }
   ]);
+  // .directive('uiSrefActiveName', [
+  //   '$compile',
+  //   function($compile) {
+  //     return {
+  //       restrict: 'A',
+  //       priority: 1000,
+  //       link: function(scope, element, attrs) {
+  //         scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+  //           console.log('HELOOOO');
+  //         });
+  //       }
+  //     };
+  //   }
+  // ]);

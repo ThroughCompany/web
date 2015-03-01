@@ -4,26 +4,21 @@ angular.module('throughCompanyApp').factory('projectService', [
   function($resource, appSettings) {
 
     var Project = $resource(appSettings.baseUrl + '/projects', null, {
-      // create: {
-      //   method: 'GET',
-      //   url: appSettings.baseUrl + '/projects',
-      // }
+      create: {
+        method: 'POST',
+        url: appSettings.baseUrl + '/projects'
+      }
     });
 
     var ProjectService = function() {};
 
-    // ProjectService.prototype.create = function(options) {
-    //   if (!options) throw new Error('options is required');
-    //   if (!options.email) throw new Error('email is required');
-    //   if (!options.password) throw new Error('password is required');
+    ProjectService.prototype.create = function(options) {
+      if (!options) throw new Error('options is required');
 
-    //   var self = this;
+      var self = this;
 
-    //   return User.create({
-    //     email: options.email,
-    //     password: options.password
-    //   }).$promise;
-    // };
+      return Project.create(options).$promise;
+    };
 
     return new ProjectService();
   }

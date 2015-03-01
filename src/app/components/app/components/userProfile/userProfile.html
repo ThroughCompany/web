@@ -4,6 +4,7 @@
       <img class="img-responsive img-rounded" ng-src="{{ currentUser.imageUrl }}" />
     </div>
     <div class="profile-info">
+      <p class="name" ng-show="!currentUser.firstName && !currentUser.lastName">{{ currentUser.email }}</p>
       <p class="name" ng-show="currentUser.firstName || currentUser.lastName">{{ currentUser.firstName }} {{ currentUser.lastName }}</p>
       <p ng-show="currentUser.location">
         <i class="fa fa-map-marker"></i> {{ currentUser.location }}
@@ -27,6 +28,7 @@
           </li>
         </ul>
       </div>
+      <a class="update-settings" href="#" ui-sref-name="routes.userSettingsProfile">Update your settings</a>
     </div>
   </div>
   <div class="col-md-9">
@@ -34,15 +36,41 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="active">
-          <a href="#home" role="tab" data-toggle="tab">Projects</a>
+          <a href="#projects" role="tab" data-toggle="tab">Projects</a>
+        </li>
+        <li>
+          <a href="#assets" role="tab" data-toggle="tab">Assets</a>
         </li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
-        <div class="tab-pane active" id="home">
-          <div ng-repeat="project in projects">
-            {{ project.name }}
+        <div class="tab-pane active project-tab" id="projects">
+          <div class="tab-pane-tools clearfix">
+            <a href="#" class="btn btn-default pull-right" ui-sref-name="routes.createProject">
+              <i class="fa fa-plus"></i> Add
+            </a>
           </div>
+          <div class="row">
+            <div class="col-md-6" ng-repeat="project in projects" ng-show="projects && projects.length">
+              <div class="project">
+                <p class="name">
+                  <a href="#">{{ project.name }}</a>
+                </p>
+                <p class="description">{{ project.shortDescription }}</p>
+                <p>Started on {{ project.created | date : 'MM/dd/yyyy' }}</p>
+              </div>
+            </div>
+            <div ng-hide="projects && projects.length">
+              <p class="center">
+                You don't have any projects yet...
+              </p>
+              <p class="center">
+                <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject">Create a Project</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane active assets-tab" id="assets">
         </div>
       </div>
     </div>

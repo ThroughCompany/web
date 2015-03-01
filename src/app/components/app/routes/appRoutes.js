@@ -59,6 +59,13 @@ angular.module('throughCompanyApp').config([
         url: '/profile',
         templateUrl: '/app/components/app/components/userSettings/userSettings-profile.html',
         controller: 'userSettingsProfileCtrl'
+      })
+      .state('system.app.createProject', {
+        url: '/new-project',
+        templateUrl: '/app/components/app/components/createProject/createProject.html',
+        controller: 'createProjectCtrl'
       });
+
+    $urlRouterProvider.when('/app/settings', '/app/settings/profile');
   }
 ]);

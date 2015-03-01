@@ -1,0 +1,48 @@
+#user-profile {
+  .profile-pic {
+    margin-bottom: 20px;
+  }
+  .profile-info {
+    .name {
+      font-size: @font-size-med;
+    }
+    .profile-social {
+      ul {
+        margin: 0;
+        padding: 0;
+        li {
+          a {
+            display: block;
+            padding: 4px 0;
+          }
+        }
+      }
+    }
+    .update-settings {
+      border-top: 1px solid @gray-lighter;
+      margin-top: 20px;
+      padding-top: 5px;
+      display: block;
+    }
+  }
+  .tab-pane {
+    padding: 15px;
+    &.project-tab {
+      .tab-pane-tools {
+        margin-bottom: 20px;
+      }
+      .project {
+        border: 1px solid @gray-lighter;
+        padding: 15px;
+        border-radius: @border-radius-base;
+        .name {
+          font-size: @font-size-med;
+          border-bottom: 1px solid @gray-lighter;
+          padding-bottom: 5px;
+          margin-bottom: 10px;
+        }
+        .description {}
+      }
+    }
+  }
+}

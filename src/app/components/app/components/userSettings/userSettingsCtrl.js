@@ -1,5 +1,6 @@
 angular.module('throughCompanyApp').controller('userSettingsCtrl', [
   '$scope',
-  function($scope) {
+  '$rootScope',
+  function($scope, $rootScope) {
   }
 ]);

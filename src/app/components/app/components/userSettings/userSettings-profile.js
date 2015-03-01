@@ -1,8 +1,10 @@
 angular.module('throughCompanyApp').controller('userSettingsProfileCtrl', [
   '$scope',
+  '$rootScope',
   'userService',
   'alertService',
-  function($scope, userService, alertService) {
+  function($scope, $rootScope, userService, alertService) {
+    $rootScope.setMetaTitle('Your Profile');
 
     $scope.form = {
       userId: $scope.currentUser._id
