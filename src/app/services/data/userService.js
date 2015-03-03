@@ -115,9 +115,21 @@ angular.module('throughCompanyApp').factory('userService', [
       if (!options.image) throw new Error('image is required');
       if (!options.imageType) throw new Error('imageType is required');
 
-      var self = this;
-
       var deferred = $q.defer();
+
+      if (!_.contains([
+          'image/jpeg',
+          'image/png'
+        ], options.image.type)) {
+        deferred.reject('Invalid File Type');
+        return deferred.promise;;
+      }
+      if (options.image.size > 2000000) {
+        deferred.reject('Image Size Cannot Exceed 2mb');
+        return deferred.promise;;
+      }
+
+      var self = this;
 
       var formData = new FormData();
       formData.append('image', options.image);

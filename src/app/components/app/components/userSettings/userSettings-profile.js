@@ -37,20 +37,25 @@ angular.module('throughCompanyApp').controller('userSettingsProfileCtrl', [
 
     $scope.updateProfilePic = function(files) {
 
+      var file = files[0];
+
       $scope.isSubmittingProfilePic = true;
       $scope.profilePicResult = null;
 
       userService.uploadImage({
         userId: $scope.currentUser._id,
-        image: files[0],
+        image: file,
         imageType: 'PROFILE_PIC'
       }).then(function success(response) {
         $scope.currentUser.profilePic = response.profilePic;
 
         alertService.success('Image Saved');
+
+        $scope.isSubmittingProfilePic = false;
         $scope.profilePicResult = 'success';
       }, function error(response) {
-        $scope.logger.error(response);
+        alertService.error(response);
+        $scope.isSubmittingProfilePic = false;
         $scope.profilePicResult = 'error';
       });
     };
