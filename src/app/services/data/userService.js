@@ -1,7 +1,9 @@
 angular.module('throughCompanyApp').factory('userService', [
   '$resource',
+  '$http',
+  '$q',
   'appSettings',
-  function($resource, appSettings) {
+  function($resource, $http, $q, appSettings) {
 
     var User = $resource(appSettings.baseUrl + '/users', null, {
       create: {
@@ -105,6 +107,35 @@ angular.module('throughCompanyApp').factory('userService', [
       return User.getUserClaims({
         userId: options.userId
       }).$promise;
+    };
+
+    UserService.prototype.uploadImage = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('userId is required');
+      if (!options.image) throw new Error('image is required');
+      if (!options.imageType) throw new Error('imageType is required');
+
+      var self = this;
+
+      var deferred = $q.defer();
+
+      var formData = new FormData();
+      formData.append('image', options.image);
+
+      var url = appSettings.baseUrl + '/users/' + options.userId + '/images?imageType=' + options.imageType;
+
+      $http.post(url, formData, {
+        headers: {
+          'Content-Type': undefined
+        },
+        transformRequest: angular.identity
+      }).success(function() {
+        deferred.resolve.apply(this, arguments);
+      }).error(function() {
+        deferred.reject.apply(this, arguments);
+      });
+
+      return deferred.promise;
     };
 
     return new UserService();

@@ -4,7 +4,6 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'ui.bootstrap',
   'ui.router',
   'ng-bs-animated-button',
-  'ui.bootstrap.datetimepicker',
   'ngStorage',
   'ngAnimate'
 ]);

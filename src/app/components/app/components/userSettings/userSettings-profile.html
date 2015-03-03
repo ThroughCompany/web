@@ -6,6 +6,15 @@
     <div class="panel-body">
       <form name="updateUserForm" novalidate>
         <div class="form-section">
+          <h4 class="form-section-header">Profile Pic</h4>
+          <img-upload file-selected="updateProfilePic">
+            <img class="profile-pic img-responsive img-rounded" src="{{ currentUser.profilePic }}" />
+            <p>
+              <button class="btn" type="submit" ng-hide="loading" ng-click="selectImage()" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" data-result="profilePicResult" data-options="profilePicBtnOptions"></button>
+            </p>
+          </img-upload>
+        </div>
+        <div class="form-section">
           <h4 class="form-section-header">Name</h4>
           <div class="form-group">
             <label>First Name</label>

@@ -18,6 +18,41 @@ angular.module('throughCompanyApp').controller('userSettingsProfileCtrl', [
       }, function(response) {
         $scope.logger.error(response);
       });
-    }
+    };
+
+    $scope.isSubmittingProfilePic = null;
+    $scope.profilePicResult = null;
+    $scope.profilePicBtnOptions = {
+      buttonInitialIcon: 'icon-left fa fa-image',
+      buttonSubmittingIcon: 'icon-left fa fa-spin fa-refresh',
+      buttonDefaultText: 'Upload Profile Pic',
+      buttonDefaultIcon: 'icon-left fa fa-image',
+      buttonSubmittingText: 'Saving Profile Pic...',
+      buttonSuccessIcon: 'icon-left fa fa-check',
+      buttonSuccessText: 'Profile Pic Updated',
+      buttonErrorIcon: 'icon-left fa fa-remove',
+      buttonErrorText: 'Error Uploading Profile Pic',
+      buttonErrorClass: 'animated-button-error'
+    };
+
+    $scope.updateProfilePic = function(files) {
+
+      $scope.isSubmittingProfilePic = true;
+      $scope.profilePicResult = null;
+
+      userService.uploadImage({
+        userId: $scope.currentUser._id,
+        image: files[0],
+        imageType: 'PROFILE_PIC'
+      }).then(function success(response) {
+        $scope.currentUser.profilePic = response.profilePic;
+
+        alertService.success('Image Saved');
+        $scope.profilePicResult = 'success';
+      }, function error(response) {
+        $scope.logger.error(response);
+        $scope.profilePicResult = 'error';
+      });
+    };
   }
 ]);
