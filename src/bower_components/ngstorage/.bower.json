@@ -18,13 +18,14 @@
     "chai": "~1.8.1"
   },
   "homepage": "https://github.com/gsklee/ngStorage",
-  "_release": "bea04980f7",
+  "version": "0.3.0",
+  "_release": "0.3.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "bea04980f76df1b0b1a92868dc95fd0fdd75fde0"
+    "type": "version",
+    "tag": "0.3.0",
+    "commit": "b68fef8a722a7d15c00d4d41041b96f95e867208"
   },
   "_source": "git://github.com/gsklee/ngStorage.git",
-  "_target": "master",
+  "_target": "0.3.0",
   "_originalSource": "ngstorage"
 }

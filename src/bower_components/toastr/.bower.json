@@ -16,7 +16,6 @@
     "commit": "78c67ab89b517f7150f14eb27efa10b8e4077e89"
   },
   "_source": "git://github.com/johnpapa/toastr-bower.git",
-  "_target": "~2.1.0",
-  "_originalSource": "toastr",
-  "_direct": true
+  "_target": "2.1.0",
+  "_originalSource": "toastr"
 }
