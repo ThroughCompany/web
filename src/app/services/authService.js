@@ -78,7 +78,7 @@ angular.module('throughCompanyApp').factory('authService', [
       delete $window.sessionStorage.userId;
       delete $window.sessionStorage.fbToken;
 
-      $state.transitionTo('system');
+      $state.transitionTo('system.home');
     };
 
     authService.getToken = function() {

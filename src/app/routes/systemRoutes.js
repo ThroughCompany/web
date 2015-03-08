@@ -7,7 +7,6 @@ angular.module('throughCompanyApp').config([
       .otherwise('/404');
 
     $urlRouterProvider.when('/', '/home');
-
     $stateProvider
       .state('system', {
         url: '/',
@@ -20,7 +19,7 @@ angular.module('throughCompanyApp').config([
         controller: 'homeCtrl'
       })
       .state('system.signIn', {
-        url: 'signin',
+        url: 'signin?email',
         templateUrl: '/app/components/signIn/signIn.html',
         controller: 'signInCtrl'
       })

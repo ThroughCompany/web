@@ -1,5 +1,5 @@
 <div id="sign-in" class="container col-md-4 col-md-offset-4">
-  <button class="btn btn-facebook btn-block" type="button" ng-click="loginFacebook($event)" ng-class="{ 'btn-danger' : loginFacebookError, 'btn-primary' : !loginFacebookError, 'facebook-login-btn' : !loginFacebookError }">
+  <!--   <button class="btn btn-facebook btn-block" type="button" ng-click="loginFacebook($event)" ng-class="{ 'btn-danger' : loginFacebookError, 'btn-primary' : !loginFacebookError, 'facebook-login-btn' : !loginFacebookError }">
     <span ng-hide="loggingInFacebook || loginFacebookError">
         Signin with&nbsp;
         <i class="fa fa-facebook-square"></i>
@@ -9,26 +9,19 @@
       </span>
     <i class="fa fa-refresh fa-spin" ng-show="loggingInFacebook && !loginFacebookError"></i>
   </button>
-  <p class="center or">or</p>
+  <p class="center or">or</p> -->
   <form class="clearfix" name="loginForm" role="form" novalidate>
-    <div class="form-group" ng-class="{ 'has-error' : submitted && loginForm.email.$invalid }">
+    <div class="form-group" ng-class="{ 'has-errors' : submitted && loginForm.email.$invalid }">
       <input class="form-control" tabindex="1" placeholder="Email" name="email" type="text" ng-model="form.email" required ng-pattern="regexes.email" />
+      <p class="error-msg" ng-show="submitted && loginForm.email.$error.required">Please enter your email.
+      </p>
     </div>
-    <div class="form-group" ng-class="{ 'has-error' : submitted && loginForm.password.$invalid }">
+    <div class="form-group" ng-class="{ 'has-errors' : submitted && loginForm.password.$invalid }">
       <input class="form-control" tabindex="2" placeholder="Password" name="password" type="password" ng-model="form.password" required />
+      <p class="error-msg" ng-show="submitted && loginForm.password.$error.required">Please enter your password.
+      </p>
     </div>
-    <div class="alert alert-info" ng-show="loggingIn">
-      Logging in...
-    </div>
-    <div class="alert alert-success" ng-show="signinSuccess">
-      {{ signinSuccessMsg }}
-    </div>
-    <div class="alert alert-danger" ng-show="signinFail">
-      {{ signinFailMsg }}
-    </div>
-    <button class="login-btn btn-block btn btn-primary" tabindex="3" type="button" ng-click="login(loginForm)">
-      <span ng-hide="loggingIn">Sign In</span>
-      <i class="fa fa-refresh fa-spin" ng-show="loggingIn"></i>
+    <button class="btn-block btn-icon-center" tabindex="3" ng-click="login(loginForm)" ng-bs-animated-button is-submitting="loginSubmitting" result="loginResult" options="loginBtnOptions">
     </button>
   </form>
   <hr>

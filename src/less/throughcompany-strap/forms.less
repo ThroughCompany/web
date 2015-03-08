@@ -1,0 +1,39 @@
+/* ------------------------------------------------------------------------
+ * Forms
+ * ------------------------------------------------------------------------ */
+
+.form-group {
+  &.has-errors {
+    .form-control {
+      border-color: @brand-danger;
+      background: #fcf7e1;
+    }
+    .error-msg {
+      display: block;
+    }
+  }
+}
+.input-group {
+  .input-group-addon {
+      
+  }
+}
+.form-control {
+  padding: 14px 10px;
+  height: 50px;
+}
+@media (min-width: @screen-md) {
+  .form-horizontal {
+    .control-label {
+      padding-top: 14px;
+    }
+  }
+  .error-msg {
+    display: none;
+    color: @brand-danger;
+    padding: 6px 0;
+    font-family: @font-family-serif;
+    font-size: (@font-size-small - 2);
+    font-style: italic;
+  }
+}
