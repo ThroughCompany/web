@@ -8,10 +8,10 @@ angular.module('throughCompanyApp').controller('systemCtrl', [
     $scope.getUserName = function() {
       if (!$scope.currentUser) return null;
 
-      if ($scope.currentUser.firstname && $scope.currentUser.lastname) {
-        return $scope.currentUser.firstname + ' ' + $scope.currentUser.lastname;
+      if ($scope.currentUser.firstName && $scope.currentUser.lastName) {
+        return $scope.currentUser.firstName + ' ' + $scope.currentUser.lastName;
       } else {
-        return $scope.currentUser.email;
+        return $scope.currentUser.email.split('@')[0];
       }
     };
   }

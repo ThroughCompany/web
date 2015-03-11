@@ -37,6 +37,10 @@ angular.module('throughCompanyApp').factory('userService', [
         params: {
           projectId: '@projectId'
         }
+      },
+      createAssetTag: {
+        method: 'POST',
+        url: appSettings.baseUrl + '/users/:userId/assettags'
       }
     });
 
@@ -148,6 +152,20 @@ angular.module('throughCompanyApp').factory('userService', [
       });
 
       return deferred.promise;
+    };
+
+    UserService.prototype.createAssetTag = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('options.userId is required');
+
+      var self = this;
+      var userId = options.userId;
+
+      delete options.userId;
+
+      return User.createAssetTag({
+        userId: userId
+      }, options).$promise;
     };
 
     return new UserService();

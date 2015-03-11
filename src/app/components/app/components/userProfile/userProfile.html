@@ -44,9 +44,10 @@
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
+        <!-- Projects -->
         <div class="tab-pane active project-tab" id="projects">
           <div class="tab-pane-tools clearfix">
-            <a href="#" class="btn btn-default pull-right" ui-sref-name="routes.createProject" ng-show="projects && projects.length">
+            <a href="#" class="btn btn-primary pull-right" ui-sref-name="routes.createProject" ng-show="projects && projects.length">
               <i class="fa fa-plus"></i> Add
             </a>
           </div>
@@ -70,7 +71,31 @@
             </div>
           </div>
         </div>
-        <div class="tab-pane active assets-tab" id="assets">
+        <!-- Assets -->
+        <div class="tab-pane assets-tab" id="assets">
+          <div class="tab-pane-tools clearfix">
+            <a href="#" class="btn btn-primary pull-right" ng-click="addAssetTags()" ng-show="currentUser.assetTags && currentUser.assetTags.length">
+              <i class="fa fa-plus"></i> Add
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-md-6" ng-repeat="assetTag in currentUser.assetTags" ng-show="currentUser.assetTags && currentUser.assetTags.length">
+              <div class="asset-tag">
+                <p class="name">
+                  <a href="#">{{ assetTag.name }}</a>
+                </p>
+                <p class="description">{{ assetTag.description }}</p>
+              </div>
+            </div>
+            <div ng-hide="currentUser.assetTags && currentUser.assetTags.length">
+              <p class="center">
+                You don't have any assets yet...
+              </p>
+              <p class="center">
+                <button class="btn btn-primary" ng-click="addAssetTags()">Add Assets</button>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
