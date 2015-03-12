@@ -65,7 +65,5 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/components/app/components/createProject/createProject.html',
         controller: 'createProjectCtrl'
       });
-
-    $urlRouterProvider.when('/app/settings', '/app/settings/profile');
   }
 ]);

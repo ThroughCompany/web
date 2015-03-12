@@ -12,6 +12,7 @@ angular.module('throughCompanyApp').directive('uiSrefName', [
             var rawValue = attrs.uiSrefName;
             var params = rawValue.indexOf('({') != -1 ? rawValue.substring(rawValue.indexOf('({'), rawValue.length) : '';
             var value;
+            
             if (params) {
               value = $scope.$eval(rawValue.substring(rawValue.indexOf('({'), 0));
               value += params;

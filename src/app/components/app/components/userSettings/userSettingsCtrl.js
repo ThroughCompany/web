@@ -1,6 +1,7 @@
 angular.module('throughCompanyApp').controller('userSettingsCtrl', [
   '$scope',
-  '$rootScope',
-  function($scope, $rootScope) {
+  '$state',
+  function($scope, $state) {
+    $state.go('system.app.userSettings.profile');
   }
 ]);
