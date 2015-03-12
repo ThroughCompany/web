@@ -1,5 +1,19 @@
-<div class="container">
-    <div id="home" class="col-md-12">
-        <p>Mauris auctor dolor orci, vitae pharetra neque elementum a. Aliquam erat volutpat. Vivamus eget bibendum turpis, eu aliquam dolor. Donec eu ante quis tellus iaculis ullamcorper. Aliquam ultrices felis viverra odio tristique elementum. Suspendisse dapibus ante eget pretium vehicula. Nunc vel mi non lectus euismod facilisis vitae vel ipsum. Sed consectetur suscipit congue. Phasellus blandit, orci sit amet vehicula volutpat, lorem leo bibendum dui, ut fringilla nunc turpis eget turpis. Morbi nec velit felis. Phasellus lorem urna, tincidunt sit amet mi vel, porttitor dictum ante. Integer tristique blandit eleifend. Quisque interdum ultricies diam, in laoreet nisl cursus eu. Praesent sit amet mauris vel sem pharetra pharetra sit amet eget neque. Aenean tristique ipsum felis, vitae porttitor dolor bibendum vel. Ut malesuada elementum suscipit.</p>
+<div id="home" class="clearfix">
+  <div class="banner">
+
+  </div>
+  <div class="content container">
+    <div class="project-list row">
+      <div class="col-md-3" ng-repeat="project in projects">
+        <div class="project">
+          <h4>
+            <a href="#" ui-sref-name="routes.project({ projectId : project.slug })">
+              {{ project.name }}
+            </a>
+          </h4>
+          <p class="started">{{ project.created | date : 'MM/dd/yyyy' }}</p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

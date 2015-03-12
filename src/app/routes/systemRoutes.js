@@ -18,6 +18,28 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/components/home/home.html',
         controller: 'homeCtrl'
       })
+      .state('system.project', {
+        url: 'project/:projectId',
+        templateUrl: '/app/components/project/project.html',
+        controller: 'projectCtrl',
+        resolve: {
+          project: ['$rootScope', '$stateParams', 'projectService', '$q',
+            function($rootScope, $stateParams, projectService, $q) {
+              var deferred = $q.defer();
+
+              projectService.getProjectById({
+                projectId: $stateParams.projectId
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ]
+        }
+      })
       .state('system.signIn', {
         url: 'signin?email',
         templateUrl: '/app/components/signIn/signIn.html',

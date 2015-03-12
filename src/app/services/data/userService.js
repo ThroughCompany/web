@@ -31,13 +31,6 @@ angular.module('throughCompanyApp').factory('userService', [
         url: appSettings.baseUrl + '/users/:userId/projects',
         isArray: true
       },
-      getUserProjectById: {
-        method: 'GET',
-        url: appSettings.baseUrl + '/users/:userId/projects/:projectId',
-        params: {
-          projectId: '@projectId'
-        }
-      },
       createAssetTag: {
         method: 'POST',
         url: appSettings.baseUrl + '/users/:userId/assettags'
@@ -53,10 +46,7 @@ angular.module('throughCompanyApp').factory('userService', [
 
       var self = this;
 
-      return User.create({
-        email: options.email,
-        password: options.password
-      }).$promise;
+      return User.create(options).$promise;
     };
 
     UserService.prototype.getUserById = function(options) {
@@ -65,9 +55,7 @@ angular.module('throughCompanyApp').factory('userService', [
 
       var self = this;
 
-      return User.getUserById({
-        userId: options.userId
-      }).$promise;
+      return User.getUserById(options).$promise;
     };
 
     UserService.prototype.updateUserById = function(options) {
@@ -79,27 +67,13 @@ angular.module('throughCompanyApp').factory('userService', [
       return User.updateUserById(options).$promise;
     };
 
-    UserService.prototype.getUserProjectById = function(id, companyId) {
-      if (!id) throw new Error('userId is required');
-      if (!companyId) throw new Error('companyId is required');
-
-      var self = this;
-
-      return User.getUserCompanyById({
-        userId: userId,
-        companyId: companyId
-      }).$promise;
-    };
-
     UserService.prototype.getUserProjects = function(options) {
       if (!options) throw new Error('options is required');
       if (!options.userId) throw new Error('userId is required');
 
       var self = this;
 
-      return User.getUserProjects({
-        userId: options.userId
-      }).$promise;
+      return User.getUserProjects(options).$promise;
     };
 
     UserService.prototype.getUserClaims = function(options) {
@@ -108,9 +82,7 @@ angular.module('throughCompanyApp').factory('userService', [
 
       var self = this;
 
-      return User.getUserClaims({
-        userId: options.userId
-      }).$promise;
+      return User.getUserClaims(options).$promise;
     };
 
     UserService.prototype.uploadImage = function(options) {

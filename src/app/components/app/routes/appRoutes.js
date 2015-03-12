@@ -87,7 +87,7 @@ angular.module('throughCompanyApp').config([
               return deferred.promise;
             }
           ]
-        },
+        }
       });
   }
 ]);
