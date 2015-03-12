@@ -13,7 +13,7 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
     $scope.addAssetTags = function() {
       var modalInstance = $modal.open({
         templateUrl: '/app/components/app/components/userAddAssetTags/userAddAssetTags.html',
-        controller: 'userAddAssetTagsController'
+        controller: 'userAddAssetTagsCtrl'
       });
     };
 

@@ -1,4 +1,4 @@
-angular.module('throughCompanyApp').controller('userAddAssetTagsController', [
+angular.module('throughCompanyApp').controller('userAddAssetTagsCtrl', [
   '$scope',
   '$rootScope',
   '$modalInstance',

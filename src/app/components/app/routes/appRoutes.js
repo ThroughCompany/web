@@ -10,8 +10,8 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/components/app/views/app.html',
         controller: 'appCtrl',
         resolve: {
-          user: ['$rootScope', 'userService', 'authService', 'routes', '$q', '$state',
-            function($rootScope, userService, authService, routes, $q, $state) {
+          user: ['$rootScope', 'userService', 'authService', '$q',
+            function($rootScope, userService, authService, $q) {
               var deferred = $q.defer();
 
               userService.getUserById({
@@ -25,8 +25,8 @@ angular.module('throughCompanyApp').config([
               return deferred.promise;
             }
           ],
-          userClaims: ['userService', 'authService', 'routes', '$q', '$state',
-            function(userService, authService, routes, $q, $state) {
+          userClaims: ['userService', 'authService', '$q',
+            function(userService, authService, $q) {
               var deferred = $q.defer();
 
               userService.getUserClaims({
@@ -45,6 +45,7 @@ angular.module('throughCompanyApp').config([
           authenticate: true
         }
       })
+      //user routes
       .state('system.app.userProfile', {
         url: '/profile',
         templateUrl: '/app/components/app/components/userProfile/userProfile.html',
@@ -57,13 +58,36 @@ angular.module('throughCompanyApp').config([
       })
       .state('system.app.userSettings.profile', {
         url: '/profile',
-        templateUrl: '/app/components/app/components/userSettings/userSettings-profile.html',
+        templateUrl: '/app/components/app/components/userSettings/userSettingsProfile.html',
         controller: 'userSettingsProfileCtrl'
       })
       .state('system.app.createProject', {
         url: '/new-project',
         templateUrl: '/app/components/app/components/createProject/createProject.html',
         controller: 'createProjectCtrl'
+      })
+      //project routes
+      .state('system.app.projectProfile', {
+        url: '/project/:projectId',
+        templateUrl: '/app/components/app/components/projectProfile/projectProfile.html',
+        controller: 'projectProfileCtrl',
+        resolve: {
+          project: ['$rootScope', '$stateParams', 'projectService', '$q',
+            function($rootScope, $stateParams, projectService, $q) {
+              var deferred = $q.defer();
+
+              projectService.getProjectById({
+                projectId: $stateParams.projectId
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ]
+        },
       });
   }
 ]);

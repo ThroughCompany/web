@@ -7,6 +7,10 @@ angular.module('throughCompanyApp').factory('projectService', [
       create: {
         method: 'POST',
         url: appSettings.baseUrl + '/projects'
+      },
+      getProjectById: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/projects/:projectId'
       }
     });
 
@@ -18,6 +22,17 @@ angular.module('throughCompanyApp').factory('projectService', [
       var self = this;
 
       return Project.create(options).$promise;
+    };
+
+    ProjectService.prototype.getProjectById = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.projectId) throw new Error('projectId is required');
+
+      var self = this;
+
+      return Project.getProjectById({
+        projectId: options.projectId
+      }).$promise;
     };
 
     return new ProjectService();
