@@ -21,8 +21,8 @@ var production = _.extend(_.clone(defaultSettings), {
   ENV: 'production',
   API: 'xxxxx', //TODO: need to setup
   NEWRELIC: {
-    name: 'http://api.throughcompany.com',
-    key: '462c7ca3a4079021f443e836d9b9357ef276ba42'
+    name: 'throughcompany-web-prod',
+    key: 'e7c5a21591fb5d706825572ef8cde21bb7cde86c'
   }
 });
 
@@ -31,7 +31,7 @@ var development = _.extend(_.clone(defaultSettings), {
   API: 'http://api-dev.throughcompany.com',
   NEWRELIC: {
     name: 'throughcompany-web-dev',
-    key: '462c7ca3a4079021f443e836d9b9357ef276ba42'
+    key: 'e7c5a21591fb5d706825572ef8cde21bb7cde86c'
   }
 });
 
