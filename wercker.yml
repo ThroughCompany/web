@@ -28,7 +28,7 @@ deploy:
         code: |
           git init
           git config --global user.name "wercker"
-          git config --global user.email "wercker@tablelist.com"
+          git config --global user.email "wercker@throughcompany.com"
           git add .
           git commit -am "deploy $WERCKER_GIT_COMMIT"
           git remote add heroku git@heroku.com:$APP.git
