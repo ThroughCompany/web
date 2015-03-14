@@ -1,4 +1,24 @@
 #project-settings {
   padding-top: 20px;
+  .back-link {
+    margin-bottom: 20px;
+  }
+  .profile-links {
+    ul {
+      li {
+        padding: 0;
+        a {
+          display: block;
+          padding: 10px 15px;
+          &.active {
+            background: @gray-lighter;
+          }
+          &:hover {
+            background: @gray-lighter;
+          }
+        }
+      }
+    }
+  }
 }
-#project-settings-profile {}
+#project-settings-profile {} #project-settings-wiki {}

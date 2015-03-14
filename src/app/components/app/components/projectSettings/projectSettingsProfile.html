@@ -6,19 +6,14 @@
     <div class="panel-body">
       <form name="updateProjectForm" novalidate>
         <div class="form-section">
-          <h4 class="form-section-header">Name</h4>
           <div class="form-group">
-            <label>First Name</label>
-            <input class="form-control" type="text" name="firstName" ng-model="currentUser.firstName" ng-change="form.firstName = currentUser.firstName" />
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input class="form-control" type="text" name="lastName" ng-model="currentUser.lastName" ng-change="form.lastName = currentUser.lastName" />
+            <label>Name</label>
+            <input class="form-control" type="text" name="name" ng-model="project.name" ng-change="form.name = project.name" />
           </div>
         </div>
         <div class="form-group">
-          <label>Location</label>
-          <input class="form-control" type="text" name="location" ng-model="currentUser.location" ng-change="form.location = currentUser.location" />
+          <label>Description</label>
+          <textarea class="form-control" type="text" name="description" ng-model="project.description" ng-change="form.description = project.description"></textarea>
         </div>
         <div class="form-section">
           <h4 class="form-section-header">Social</h4>

@@ -78,6 +78,11 @@ angular.module('throughCompanyApp').config([
         url: '/profile',
         templateUrl: '/app/components/app/components/projectSettings/projectSettingsProfile.html',
         controller: 'projectSettingsCtrl'
+      })
+      .state('system.app.projectSettings.wiki', {
+        url: '/wiki',
+        templateUrl: '/app/components/app/components/projectSettings/projectSettingsWiki.html',
+        controller: 'projectSettingsWikiCtrl'
       });
   }
 ]);

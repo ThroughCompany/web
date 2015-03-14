@@ -4,7 +4,7 @@ angular.module('throughCompanyApp').directive('wysiwyg', [
     return {
       restrict: 'E',
       replace: true,
-      template: '<textarea></textarea>',
+      template: '<textarea class="form-control"></textarea>',
       link: function(scope, element, attrs) {
         element.wysihtml5();
       }

@@ -9,5 +9,7 @@ angular.module('throughCompanyApp').constant('routes', {
   userSettings: 'system.app.userSettings',
   userSettingsProfile: 'system.app.userSettings.profile',
   createProject: 'system.app.createProject',
-  projectSettings: 'system.app.projectSettings'
+  projectSettings: 'system.app.projectSettings',
+  projectSettingsProfile: 'system.app.projectSettings.profile',
+  projectSettingsWiki: 'system.app.projectSettings.wiki'
 });
