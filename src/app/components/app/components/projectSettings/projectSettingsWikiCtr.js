@@ -5,8 +5,14 @@ angular.module('throughCompanyApp').controller('projectSettingsWikiCtrl', [
   'alertService',
   function($scope, $rootScope, userService, alertService) {
 
-    $scope.form = {
-      wiki: $scope.project.wiki
+    $scope.projectPromise.then(function(response) {
+      $scope.form = {
+        wiki: $scope.project.wiki
+      };
+    });
+
+    $scope.updateProject = function() {
+      alertService.success('save');
     };
   }
 ]);

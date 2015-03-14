@@ -5,7 +5,8 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'ui.router',
   'ng-bs-animated-button',
   'ngStorage',
-  'ngAnimate'
+  'ngAnimate',
+  'textAngular'
 ]);
 
 throughCompanyApp.config(['$locationProvider',

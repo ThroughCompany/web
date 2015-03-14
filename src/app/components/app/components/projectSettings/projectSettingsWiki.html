@@ -1,3 +1,6 @@
 <div id="project-settings-wiki">
-  <text-angular ng-model="form.wiki"></text-angular>
+  <form name="updateProjectForm" novalidate>
+    <div text-angular ng-model="form.wiki"></div>
+    <button class="btn btn-primary pull-right" ng-click="updateProject(updateProjectForm)">Save</button>
+  </form>
 </div>
