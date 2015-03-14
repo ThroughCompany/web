@@ -1,7 +1,10 @@
 angular.module('throughCompanyApp').factory('projectService', [
   '$resource',
   'appSettings',
-  function($resource, appSettings) {
+  '$localStorage',
+  '$q',
+  'baseService',
+  function($resource, appSettings, $localStorage, $q, baseService) {
 
     var Project = $resource(appSettings.baseUrl + '/projects', null, {
       create: {
@@ -19,7 +22,13 @@ angular.module('throughCompanyApp').factory('projectService', [
       }
     });
 
-    var ProjectService = function() {};
+    function ProjectService() {
+      var _this = this;
+      _this.cache = localStorage = [];
+
+      baseService.prototype.constructor.call(_this, 'Projects');
+    }
+    ProjectService.prototype = Object.create(baseService);
 
     ProjectService.prototype.create = function(options) {
       if (!options) throw new Error('options is required');
@@ -41,9 +50,24 @@ angular.module('throughCompanyApp').factory('projectService', [
       if (!options) throw new Error('options is required');
       if (!options.projectId) throw new Error('projectId is required');
 
-      var self = this;
+      var _this = this;
+      var deferred = $q.defer();
 
-      return Project.getProjectById(options).$promise;
+      var project = _this.cache.get(options.projectId);
+
+      if (project) {
+        deferred.resolve(project);
+      } else {
+        Project.getProjectById(options).$promise.then(function success(response) {
+          _this.cache.set(options.projectId, response);
+
+          deferred.resolve(response);
+        }, function error(response) {
+          deferred.reject(response);
+        });
+      }
+
+      return deferred.promise;
     };
 
     return new ProjectService();
