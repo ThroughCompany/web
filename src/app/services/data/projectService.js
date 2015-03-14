@@ -11,6 +11,13 @@ angular.module('throughCompanyApp').factory('projectService', [
         method: 'POST',
         url: appSettings.baseUrl + '/projects'
       },
+      updateProjectById: {
+        method: 'PATCH',
+        url: appSettings.baseUrl + '/projects/:projectId',
+        params: {
+          projectId: "@projectId"
+        }
+      },
       getProjects: {
         method: 'GET',
         url: appSettings.baseUrl + '/projects',
@@ -36,6 +43,15 @@ angular.module('throughCompanyApp').factory('projectService', [
       var self = this;
 
       return Project.create(options).$promise;
+    };
+
+    ProjectService.prototype.updateProjectById = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.projectId) throw new Error('projectId is required');
+
+      var self = this;
+
+      return Project.updateProjectById(options).$promise;
     };
 
     ProjectService.prototype.getProjects = function(options) {
