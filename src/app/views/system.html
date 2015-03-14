@@ -7,28 +7,30 @@
   </div>
   <div id="header-nav" class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
     <ul class="nav navbar-nav navbar-right">
-      <!--       <li ng-hide="auth.isLoggedIn()">
-        <a href="#" ui-sref-name="routes.signUp">Sign Up
-          </a>
-      </li>
-      <li ng-hide="auth.isLoggedIn()">
-        <a href="#" ui-sref-name="routes.signIn">Sign In
-          </a>
-      </li> -->
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="auth.isLoggedIn()">
-      <li>
-        <a href="#" ui-sref-name="routes.userProfile">
+      <li class="dropdown">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
           <img class="img-circle" ng-src="{{ currentUser.profilePic }}" height="20px" />&nbsp; {{ getUserName() }}
+          <i class="fa fa-caret-down"></i>
         </a>
-      </li>
-      <li>
-        <a href="#" ui-sref-name="routes.userSettings">
-          <i class="fa fa-gear"></i>
-        </a>
-      </li>
-      <li>
-        <a href="#" ng-click="auth.logout()">Logout</a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#" ui-sref-name="routes.userProfile">
+              <i class="fa fa-user"></i>&nbsp;Profile
+            </a>
+          </li>
+          <li>
+            <a href="#" ui-sref-name="routes.userSettings">
+              <i class="fa fa-gear"></i>&nbsp;Settings
+            </a>
+          </li>
+          <li>
+            <a href="#" ng-click="auth.logout()">
+              <i class="fa fa-sign-out"></i>&nbsp;Logout
+            </a>
+          </li>
+        </ul>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -36,7 +38,15 @@
         <a href="#">Labs</a>
       </li>
       <li>
-        <a href="#">About Us</a>
+        <a href="#">About</a>
+      </li>
+      <li ng-hide="auth.isLoggedIn()">
+        <a href="#" ui-sref-name="routes.signUp">Sign Up
+        </a>
+      </li>
+      <li ng-hide="auth.isLoggedIn()">
+        <a href="#" ui-sref-name="routes.signIn">Sign In
+          </a>
       </li>
     </ul>
   </div>

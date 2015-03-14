@@ -68,11 +68,16 @@ angular.module('throughCompanyApp').config([
       })
       .state('system.app.projectSettings', {
         url: 'project/:projectId/settings',
-        templateUrl: '/app/components/projectSettings/projectSettingsCtrl.html',
+        templateUrl: '/app/components/app/components/projectSettings/projectSettings.html',
         controller: 'projectSettingsCtrl',
         data: {
           authenticate: true
         }
+      })
+      .state('system.app.projectSettings.profile', {
+        url: '/profile',
+        templateUrl: '/app/components/app/components/projectSettings/projectSettingsProfile.html',
+        controller: 'projectSettingsCtrl'
       });
   }
 ]);

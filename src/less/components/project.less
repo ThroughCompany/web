@@ -1,30 +1,32 @@
 #project {
-  padding-top: 40px;
+  padding-top: 20px;
   .content {
     padding-top: 20px;
     .project-header {
       position: relative;
-      .name-line {
-        height: 18px;
-        top: 28px;
-        position: relative;
-        display: inline-block;
-        background-position: center;
-        background-size: cover;
-        padding: 0;
-        &.name-line-left {
-          background-image: url('/images/brush_left.jpg');
-        }
-        &.name-line-right {
-          background-image: url('/images/brush_right.jpg');
-        }
-      }
       .name {
-        font-size: 60px;
-        margin-top: 0;
-        margin-bottom: 0;
-        .font-family-serif;
-        color: @gray;
+        padding-bottom: 20px;
+        margin-bottom: 10px;
+        .name-line {
+          height: 18px;
+          top: 28px;
+          position: relative;
+          display: inline-block;
+          padding: 0;
+          &.name-line-left {
+            background-image: url('/images/brush_left.jpg');
+          }
+          &.name-line-right {
+            background-image: url('/images/brush_right.jpg');
+          }
+        }
+        h2 {
+          font-size: 60px;
+          margin-top: 0;
+          margin-bottom: 0;
+          .font-family-cursive;
+          color: @gray;
+        }
       }
       .link-list {
         margin: 0;
