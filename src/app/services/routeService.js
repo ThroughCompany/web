@@ -8,5 +8,6 @@ angular.module('throughCompanyApp').constant('routes', {
   userProfile: 'system.app.userProfile',
   userSettings: 'system.app.userSettings',
   userSettingsProfile: 'system.app.userSettings.profile',
-  createProject: 'system.app.createProject'
+  createProject: 'system.app.createProject',
+  projectSettings: 'system.app.projectSettings'
 });

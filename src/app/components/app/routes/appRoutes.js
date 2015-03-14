@@ -65,6 +65,14 @@ angular.module('throughCompanyApp').config([
         url: '/new-project',
         templateUrl: '/app/components/app/components/createProject/createProject.html',
         controller: 'createProjectCtrl'
+      })
+      .state('system.app.projectSettings', {
+        url: 'project/:projectId/settings',
+        templateUrl: '/app/components/projectSettings/projectSettingsCtrl.html',
+        controller: 'projectSettingsCtrl',
+        data: {
+          authenticate: true
+        }
       });
   }
 ]);
