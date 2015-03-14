@@ -1,17 +1,64 @@
 #project {
-  .banner {
-    height: 300px;
-    background: @gray-lighter;
-    h2 {
-      margin-top: 100px;
-      font-size: 60px;
-    }
-    h4 {
-      font-size: 24px;
-      font-style: italic;
-    }
-  }
+  padding-top: 40px;
   .content {
-    padding-top: 40px;
+    padding-top: 20px;
+    .project-header {
+      position: relative;
+      .name-line {
+        height: 18px;
+        top: 28px;
+        position: relative;
+        display: inline-block;
+        background-position: center;
+        background-size: cover;
+        padding: 0;
+        &.name-line-left {
+          background-image: url('/images/brush_left.jpg');
+        }
+        &.name-line-right {
+          background-image: url('/images/brush_right.jpg');
+        }
+      }
+      .name {
+        font-size: 60px;
+        margin-top: 0;
+        margin-bottom: 0;
+        .font-family-serif;
+        color: @gray;
+      }
+      .link-list {
+        margin: 0;
+        padding: 0;
+        li {
+          float: left;
+          margin-right: 15px;
+          a {
+            font-size: 30px;
+            margin-top: 20px;
+            color: lighten(@gray, 10%);
+          }
+        }
+      }
+    }
+    .project-wiki {
+      padding-top: 40px;
+      .quote {
+        display: block;
+        border-left: 3px solid @gray-lighter;
+        padding: 10px 0 10px 8px;
+        font-style: italic;
+        font-size: 22px;
+        margin: 25px 0;
+      }
+    }
+    .profile-pic {
+      margin-bottom: 20px;
+      img {
+        border-radius: 2px;
+        border: 1px solid @gray-lighter;
+      }
+      // height: 250px;
+      // width: 250px;
+    }
   }
 }

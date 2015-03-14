@@ -65,29 +65,6 @@ angular.module('throughCompanyApp').config([
         url: '/new-project',
         templateUrl: '/app/components/app/components/createProject/createProject.html',
         controller: 'createProjectCtrl'
-      })
-      //project routes
-      .state('system.app.projectProfile', {
-        url: '/project/:projectId',
-        templateUrl: '/app/components/app/components/projectProfile/projectProfile.html',
-        controller: 'projectProfileCtrl',
-        resolve: {
-          project: ['$rootScope', '$stateParams', 'projectService', '$q',
-            function($rootScope, $stateParams, projectService, $q) {
-              var deferred = $q.defer();
-
-              projectService.getProjectById({
-                projectId: $stateParams.projectId
-              }).then(function success(response) {
-                deferred.resolve(response);
-              }, function error(response) {
-                deferred.resolve(null);
-              });
-
-              return deferred.promise;
-            }
-          ]
-        }
       });
   }
 ]);

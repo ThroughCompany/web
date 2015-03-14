@@ -6,10 +6,10 @@
       <p class="error-msg" ng-show="submitted && createProjectForm.name.$error.required">Please enter a project name.
       </p>
     </div>
-    <div class="form-group" ng-class="{ 'has-errors' : submitted && !createProjectForm.shortDescription.$valid }">
+    <div class="form-group" ng-class="{ 'has-errors' : submitted && !createProjectForm.description.$valid }">
       <label class="control-label">Description</label>
-      <input class="form-control" type="text" name="shortDescription" ng-model="form.shortDescription" required />
-      <p class="error-msg" ng-show="submitted && createProjectForm.shortDescription.$error.required">Please a short description of your project.
+      <textarea class="form-control" type="text" name="description" ng-model="form.description" required></textarea>
+      <p class="error-msg" ng-show="submitted && createProjectForm.description.$error.required">Please a description of your project.
       </p>
     </div>
     <button class="btn btn-primary pull-right" tabindex="3" ng-click="createProject(createProjectForm)" ng-bs-animated-button is-submitting="createProjectSubmitting" result="createProjectResult" options="createProjectBtnOptions">

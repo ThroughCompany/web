@@ -11,8 +11,10 @@
   <meta name="description" content="{{ meta.description }}">
 
   <!-- VENDOR CSS -->
+  <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|Quicksand:300,400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="/font-glyphs/fontcustom.css" />
   <link rel="stylesheet" type="text/css" href="/bower_components/toastr/toastr.css" />
+  <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.css" />
   <link rel='stylesheet' type='text/css' href='/css/main.css' />
 </head>
 
@@ -35,9 +37,28 @@
   <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="/bower_components/angular-animate/angular-animate.js"></script>
   <script src="/bower_components/toastr/toastr.min.js"></script>
+  <script src="/bower_components/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.min.js"></script>
 
   <!-- inject:js -->
   <!-- endinject -->
+
+  <script>
+  //TODO: move to separate file
+  $('body').on('click', function(e) {
+    $('[data-toggle="popover"]').each(function() {
+      //the 'is' for buttons that trigger popups
+      //the 'has' for icons within a button that triggers a popup
+      if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+        $(this).popover('hide');
+      }
+    });
+  });
+  $(document).ready(function() {
+    $('body').tooltip({
+      selector: '[data-toggle=tooltip]'
+    });
+  });
+  </script>
 
   <!-- FACEBOOK -->
   <script>

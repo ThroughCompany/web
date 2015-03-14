@@ -6,16 +6,15 @@
     <a id="logo" href="#" class="navbar-brand" ui-sref-name="routes.home">Through Company</a>
   </div>
   <div id="header-nav" class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-    <ul class="nav navbar-nav navbar-right"></ul>
     <ul class="nav navbar-nav navbar-right">
-      <li ng-hide="auth.isLoggedIn()">
+      <!--       <li ng-hide="auth.isLoggedIn()">
         <a href="#" ui-sref-name="routes.signUp">Sign Up
           </a>
       </li>
       <li ng-hide="auth.isLoggedIn()">
         <a href="#" ui-sref-name="routes.signIn">Sign In
           </a>
-      </li>
+      </li> -->
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="auth.isLoggedIn()">
       <li>
@@ -30,6 +29,14 @@
       </li>
       <li>
         <a href="#" ng-click="auth.logout()">Logout</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="#">Labs</a>
+      </li>
+      <li>
+        <a href="#">About Us</a>
       </li>
     </ul>
   </div>
