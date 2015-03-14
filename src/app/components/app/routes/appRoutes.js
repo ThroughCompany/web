@@ -54,7 +54,8 @@ angular.module('throughCompanyApp').config([
       .state('system.app.userSettings', {
         url: '/settings',
         templateUrl: '/app/components/app/components/userSettings/userSettings.html',
-        controller: 'userSettingsCtrl'
+        controller: 'userSettingsCtrl',
+        abstract: true
       })
       .state('system.app.userSettings.profile', {
         url: '/profile',
@@ -70,6 +71,7 @@ angular.module('throughCompanyApp').config([
         url: 'project/:projectId/settings',
         templateUrl: '/app/components/app/components/projectSettings/projectSettings.html',
         controller: 'projectSettingsCtrl',
+        abstract: true,
         data: {
           authenticate: true
         }

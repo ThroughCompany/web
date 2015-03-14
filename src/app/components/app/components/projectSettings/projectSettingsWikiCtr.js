@@ -4,8 +4,9 @@ angular.module('throughCompanyApp').controller('projectSettingsWikiCtrl', [
   'userService',
   'alertService',
   function($scope, $rootScope, userService, alertService) {
-    $rootScope.setMetaTitle($scope.project.name + ' Wiki');
 
-    
+    $scope.form = {
+      wiki: $scope.project.wiki
+    };
   }
 ]);

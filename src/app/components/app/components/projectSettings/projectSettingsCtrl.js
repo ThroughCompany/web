@@ -4,10 +4,11 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
   '$stateParams',
   'projectService',
   function($scope, $state, $stateParams, projectService) {
-    projectService.getProjectById({
+    $scope.projectPromise = projectService.getProjectById({
       projectId: $stateParams.projectId
-    }).then(function(response) {
-      $state.go('system.app.projectSettings.profile');
+    });
+
+    $scope.projectPromise.then(function(response) {
       $scope.project = response;
     });
   }
