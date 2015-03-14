@@ -1,16 +1,16 @@
 <div id="project">
-  <div class="banner container clearfix">
-    <!-- <h2 class="center">{{ project.name }}</h2>
-    <h4 class="center">{{ project.shortDescription }}</h4> -->
-  </div>
   <div class="content container clearfix">
     <div class="project-header clearfix row">
       <div class="name clearfix">
-        <div class="name-line name-line-left col-xs-3"></div>
+        <div class="name-line name-line-left col-xs-3">
+          <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_left.jpg" />
+        </div>
         <h2 class="center col-xs-6">
           {{ project.name }}
         </h2>
-        <div class="name-line name-line-right col-xs-3"></div>
+        <div class="name-line name-line-right col-xs-3">
+          <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_right.jpg" />
+        </div>
       </div>
       <ul class="link-list pull-right">
         <li>
@@ -19,7 +19,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="settings" ui-sref-name="routes.projectSettings({ projectId : project.slug })" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+          <a href="#" class="settings" ui-sref-name="routes.projectSettings({ projectId : project.slug })" data-toggle="tooltip" data-placement="top" title="Edit Project Settings">
             <i class="fa fa-gear"></i>
           </a>
         </li>
@@ -27,7 +27,6 @@
     </div>
     <div>
       <div class="project-wiki">
-        <!-- <wysiwyg class="form-control" placeholder="Describe your project"></wysiwyg> -->
         <h2>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget purus nec arcu dictum interdum eget ut arcu. Etiam odio libero.
           </h2>
