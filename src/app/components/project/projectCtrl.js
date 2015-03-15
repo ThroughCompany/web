@@ -1,0 +1,52 @@
+angular.module('throughCompanyApp').controller('projectCtrl', [
+  '$scope',
+  '$rootScope',
+  '$modal',
+  '$timeout',
+  'projectService',
+  'alertService',
+  'project',
+  function($scope, $rootScope, $modal, $timeout, projectService, alertService, project) {
+    $rootScope.setMetaTitle(project.name);
+
+    $scope.project = project;
+    $scope.savingWiki = false;
+    $scope.loaded = false;
+
+    $scope.form = {
+      projectId: $scope.project._id,
+      wiki: $scope.project.wiki
+    };
+
+    $scope.$watch('form.wiki', function(val) {
+      if (!$scope.loaded) return;
+
+      if (val !== undefined && val !== null && val !== '') {
+        $scope.updateProjectThrottled();
+      }
+    });
+
+    $timeout(function() {
+      $scope.loaded = true;
+    });
+
+    $scope.updateProject = function(form) {
+      $scope.savingWiki = true;
+
+      projectService.updateProjectById($scope.form).then(function(response) {
+        $timeout(function() {
+          $scope.savingWiki = false;
+        }, 500);
+        $scope.project = _.extend($scope.project, response);
+      }, function(response) {
+        $timeout(function() {
+          $scope.savingWiki = false;
+        }, 500);
+
+        $scope.logger.error(response);
+      });
+    };
+
+    $scope.updateProjectThrottled = _.throttle($scope.updateProject, 2700);
+  }
+]);
