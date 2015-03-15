@@ -45,34 +45,91 @@
         }
       }
     }
-    .project-wiki {
-      padding-top: 20px;
-      .project-wiki-editor {
-        .ta-toolbar {
-          .btn {
-            font-size: 14px;
-            padding: 6px 12px;
+    .project-section {
+      padding-top: 40px;
+      &.project-wiki {
+        padding-top: 20px;
+        .project-wiki-editor {
+          .ta-toolbar {
+            .btn {
+              font-size: 14px;
+              padding: 6px 12px;
+            }
+          }
+          .ta-editor {
+            min-height: 300px;
+            height: auto;
+            overflow: auto;
+            font-family: inherit;
+            font-size: 100%;
+            margin: 0 0 20px;
+          }
+          .btn-group {
+            margin-right: 20px;
+            margin-bottom: 20px;
           }
         }
-        .ta-editor {
-          min-height: 300px;
-          height: auto;
-          overflow: auto;
-          font-family: inherit;
-          font-size: 100%;
-          margin: 0 0 20px;
+        .project-wiki-text {}
+      }
+      &.project-team {
+        .header {
+          .apply {
+            .btn {
+              margin-left: 20px;
+              padding: 4px 13px;
+              font-size: 14px;
+            }
+          }
         }
-        .btn-group {
-          margin-right: 20px;
-          margin-bottom: 20px;
+        .members {
+          .team-member {
+            border: 1px solid @gray-lighter;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-radius: 4px;
+            display: block;
+            color: @text-color;
+            &:hover {
+              box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.15);
+            }
+            img {
+              border: 1px solid @gray-lighter;
+            }
+            .name {} .social-links {
+              li {
+                a {
+                  display: block;
+                  padding: 10px 20px;
+                  border-radius: 50%;
+                  border: 1px solid gray;
+                  &.facebook {
+                    color: #3B5998;
+                    border-color: #3B5998;
+                  }
+                  &.linkedIn {
+                    color: #0077B5;
+                    border-color: #0077B5;
+                  }
+                }
+              }
+            }
+          }
         }
       }
-      .project-wiki-text {}
-    }
-    .project-team {
-      .team-member {
-        img {
-          border: 1px solid @gray-lighter;
+      &.project-needs {} .header {
+        border-bottom: 1px solid @gray-lighter;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+        h2 {
+          display: inline-block;
+          margin: 0;
+        }
+        .apply {
+          .btn {
+            margin-left: 20px;
+            padding: 4px 13px;
+            font-size: 14px;
+          }
         }
       }
     }
@@ -85,7 +142,6 @@
     width: 100%;
     margin: 0;
     background: fade(@brand-info, 24%);
-    //border-top-right-radius: 4px;
     font-style: italic;
     i {
       margin-right: 10px;

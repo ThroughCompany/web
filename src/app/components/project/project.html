@@ -47,24 +47,50 @@
         </ul>
       </div>
     </div>
-    <div class="project-wiki">
+    <div class="project-wiki project-section">
       <div class="project-wiki-editor" ng-show="editWiki">
         <div class="wiki-text" text-angular ng-model="form.wiki" ta-toolbar="[['h1','h2','h3', 'h4', 'h5'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['bold','italics', 'underline', 'strikeThrough'], ['p', 'pre', 'quote', 'ul', 'ol', 'insertImage']]"></div>
       </div>
       <div class="project-wiki-text wiki-text" ng-hide="editWiki" ng-bind-html="project.wiki">
       </div>
     </div>
-    <div class="project-team">
-      <h3>Team</h3>
-      <div class="clearfix row">
+    <div class="project-needs project-section">
+      <div class="header clearfix">
+        <h2>Needs</h2>
+
+      </div>
+    </div>
+    <div class="project-team project-section">
+      <div class="header clearfix">
+        <h2>Team</h2>
+        <div class="apply pull-right sans-serif">
+          Want to join our team?
+          <button class="btn btn-default">
+            Apply&nbsp;<i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="members clearfix row">
         <div class="col-md-4" ng-repeat="projectUser in projectUsers">
           <div class="team-member">
             <p class="center">
               <img class="img-circle" ng-src="{{ projectUser.profilePic }}" height="100px;" />
             </p>
-            <p class="name">
+            <p class="name center">
               {{ getProjectUserName(projectUser) }}
             </p>
+            <ul class="social-links clearfix">
+              <li class="col-xs-4">
+                <a class="facebook" href="{{ projectUser.social.facebook }}" target="_blank">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li class="col-xs-4">
+                <a class="linked-in" href="{{ projectUser.social.linkedIn }}" target="_blank">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

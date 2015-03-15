@@ -40,6 +40,28 @@ angular.module('throughCompanyApp').config([
           ]
         }
       })
+      .state('system.user', {
+        url: 'user/:userId',
+        templateUrl: '/app/components/user/user.html',
+        controller: 'userCtrl',
+        resolve: {
+          project: ['$rootScope', '$stateParams', 'userService', '$q',
+            function($rootScope, $stateParams, userService, $q) {
+              var deferred = $q.defer();
+
+              userService.getUserById({
+                userId: $stateParams.userId
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ]
+        }
+      })
       .state('system.signIn', {
         url: 'signin?email',
         templateUrl: '/app/components/signIn/signIn.html',
