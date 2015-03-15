@@ -45,7 +45,7 @@ angular.module('throughCompanyApp').controller('userSettingsProfileCtrl', [
       userService.uploadImage({
         userId: $scope.currentUser._id,
         image: file,
-        imageType: 'PROFILE_PIC'
+        imageType: 'PROFILE_PIC_USER'
       }).then(function success(response) {
         $scope.currentUser.profilePic = response.profilePic;
 

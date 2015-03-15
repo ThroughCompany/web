@@ -12,6 +12,11 @@
           <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_right.jpg" />
         </div>
       </div>
+      <div class="pull-left">
+        <p>
+          <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
+        </p>
+      </div>
       <ul class="link-list pull-right">
         <li>
           <a href="#" class="settings" ng-click="editWiki = !editWiki" data-toggle="tooltip" data-placement="top" title="Edit Project Settings">
@@ -36,6 +41,6 @@
     </div>
   </div>
   <p class="wiki-saving" ng-show="savingWiki">
-    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Saving...
+    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Saving changes...
   </p>
 </div>

@@ -79,7 +79,7 @@ angular.module('throughCompanyApp').config([
       .state('system.app.projectSettings.profile', {
         url: '/profile',
         templateUrl: '/app/components/app/components/projectSettings/projectSettingsProfile.html',
-        controller: 'projectSettingsCtrl'
+        controller: 'projectSettingsProfileCtrl'
       });
   }
 ]);
