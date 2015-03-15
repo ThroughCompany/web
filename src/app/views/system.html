@@ -11,23 +11,23 @@
     <ul class="nav navbar-nav navbar-right" ng-show="auth.isLoggedIn()">
       <li class="dropdown">
         <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-          <img class="img-circle" ng-src="{{ currentUser.profilePic }}" height="20px" />&nbsp; {{ getUserName() }}
+          <img class="img-circle" ng-src="{{ currentUser.profilePic }}" height="20px" />
           <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu">
           <li>
             <a href="#" ui-sref-name="routes.userProfile">
-              <i class="fa fa-user"></i>&nbsp;Profile
+              Profile
             </a>
           </li>
           <li>
             <a href="#" ui-sref-name="routes.userSettingsProfile">
-              <i class="fa fa-gear"></i>&nbsp;Settings
+              Settings
             </a>
           </li>
-          <li>
+          <li class="logout">
             <a href="#" ng-click="auth.logout()">
-              <i class="fa fa-sign-out"></i>&nbsp;Logout
+              Logout<i class="pull-right fa fa-chevron-right"></i>
             </a>
           </li>
         </ul>

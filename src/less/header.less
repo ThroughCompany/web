@@ -1,5 +1,4 @@
 #header {
-  //border-bottom: 1px solid @gray-lighter;
   margin-bottom: 0;
   .font-family-sans-serif;
   #logo {
@@ -14,6 +13,44 @@
         background: none;
         &:hover {
           background: none;
+        }
+      }
+    }
+  }
+  .dropdown {
+    position: relative;
+    &.open {
+      .dropdown-toggle {
+        border-left: 1px solid @gray-lighter;
+        z-index: 1000;
+        bottom: -1px;
+      }
+    }
+    .dropdown-toggle {
+      border-left: 1px solid white;
+      border-bottom: 1px solid white;
+    }
+    .dropdown-menu {
+      box-shadow: none;
+      border: 1px solid @gray-lighter;
+      width: 250px;
+      z-index: 100;
+      padding-top: 0;
+      padding-bottom: 0;
+      font-size: 14px;
+      li {
+        a {
+          padding: 12px 20px;
+          color: @gray-light;
+        }
+        &.logout {
+          list-style: none;
+          a {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-top: 1px solid @gray-lighter;
+            background: fade(@brand-primary, 10%);
+          }
         }
       }
     }
