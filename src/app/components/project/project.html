@@ -14,8 +14,8 @@
       </div>
       <ul class="link-list pull-right">
         <li>
-          <a href="#" class="settings">
-            <i class="fa fa-check-square-o"></i>
+          <a href="#" class="settings" ng-click="editWiki = !editWiki" data-toggle="tooltip" data-placement="top" title="Edit Project Settings">
+            <i class="fa fa-edit"></i>
           </a>
         </li>
         <li>
@@ -26,8 +26,16 @@
       </ul>
     </div>
     <div>
-      <div class="project-wiki wiki-text" ng-bind-html="project.wiki">
+      <div ng-show="editWiki">
+        <form name="updateProjectForm" novalidate>
+          <div class="wiki-text" text-angular ng-model="form.wiki"></div>
+        </form>
+      </div>
+      <div class="project-wiki wiki-text" ng-hide="editWiki" ng-bind-html="project.wiki">
       </div>
     </div>
   </div>
+  <p class="wiki-saving" ng-show="savingWiki">
+    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Saving...
+  </p>
 </div>

@@ -2,6 +2,7 @@
   padding-top: 20px;
   .content {
     padding-top: 20px;
+    padding-bottom: 80px;
     .project-header {
       position: relative;
       .name {
@@ -37,24 +38,33 @@
       }
     }
     .project-wiki {
-      padding-top: 40px;
-      .quote {
-        display: block;
-        border-left: 3px solid @gray-lighter;
-        padding: 10px 0 10px 8px;
-        font-style: italic;
-        font-size: 22px;
-        margin: 25px 0;
+      // .quote {
+      //   display: block;
+      //   border-left: 3px solid @gray-lighter;
+      //   padding: 10px 0 10px 8px;
+      //   font-style: italic;
+      //   font-size: 22px;
+      //   margin: 25px 0;
+      // }
+    }
+    .ta-toolbar {
+      .btn {
+        font-size: 14px;
+        padding: 6px 12px;
       }
     }
-    .profile-pic {
-      margin-bottom: 20px;
-      img {
-        border-radius: 2px;
-        border: 1px solid @gray-lighter;
-      }
-      // height: 250px;
-      // width: 250px;
+    .ta-editor {
+      min-height: 300px;
+      height: auto;
+      overflow: auto;
+      font-family: inherit;
+      font-size: 100%;
+      margin: 20px 0;
     }
+  }
+  .wiki-saving {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
   }
 }
