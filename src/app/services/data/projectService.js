@@ -1,11 +1,10 @@
 angular.module('throughCompanyApp').factory('projectService', [
   '$resource',
   'appSettings',
-  '$localStorage',
   '$http',
   '$q',
   'baseService',
-  function($resource, appSettings, $localStorage, $http, $q, baseService) {
+  function($resource, appSettings, $http, $q, baseService) {
 
     var Project = $resource(appSettings.baseUrl + '/projects', null, {
       create: {
@@ -27,12 +26,16 @@ angular.module('throughCompanyApp').factory('projectService', [
       getProjectById: {
         method: 'GET',
         url: appSettings.baseUrl + '/projects/:projectId'
-      }
+      },
+      getProjectUsers: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/projects/:projectId/users',
+        isArray: true
+      },
     });
 
     function ProjectService() {
       var _this = this;
-      _this.cache = localStorage = [];
 
       baseService.prototype.constructor.call(_this, 'Projects');
     }
@@ -61,6 +64,15 @@ angular.module('throughCompanyApp').factory('projectService', [
       var self = this;
 
       return Project.getProjects(options).$promise;
+    };
+
+    ProjectService.prototype.getProjectUsers = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.projectId) throw new Error('projectId is required');
+
+      var self = this;
+
+      return Project.getProjectUsers(options).$promise;
     };
 
     ProjectService.prototype.uploadImage = function(options) {

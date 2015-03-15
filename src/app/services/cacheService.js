@@ -1,18 +1,5 @@
-angular.module('throughCompanyApp').factory('baseService', [
-  '$resource',
-  'appSettings',
-  '$localStorage',
-  '$q',
-  function($resource, appSettings, $localStorage, $q) {
-
-    function BaseService(collectionName) {
-      var _this = this;
-      _this.collectionName = collectionName;
-
-      if (!_this.collectionName) throw new Error('collectionName is required');
-
-      _this.cache = new Cache(collectionName);
-    }
+angular.module('throughCompanyApp').factory('Cache', [
+  function() {
 
     function Cache(collectionName) {
       var _this = this;
@@ -38,6 +25,6 @@ angular.module('throughCompanyApp').factory('baseService', [
       return collection[key];
     };
 
-    return BaseService;
+    return Cache;
   }
 ]);

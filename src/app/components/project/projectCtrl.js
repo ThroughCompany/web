@@ -13,6 +13,17 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     $scope.savingWiki = false;
     $scope.loaded = false;
 
+    projectService.getProjectUsers({
+      projectId: $scope.project._id
+    }).then(function success(response) {
+      $scope.projectUsers = response;
+    });
+
+    $scope.getProjectUserName = function(projectUser) {
+      if (projectUser.firstName && projectUser.lastName) return projectUser.firstName + ' ' + projectUser.lastName;
+      return projectUser.email;
+    };
+
     $scope.form = {
       projectId: $scope.project._id,
       wiki: $scope.project.wiki

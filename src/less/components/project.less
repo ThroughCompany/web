@@ -5,6 +5,9 @@
     padding-bottom: 80px;
     .project-header {
       position: relative;
+      border-bottom: 1px solid lighten(@gray-lighter, 4%);
+      padding-bottom: 20px;
+      margin-bottom: 20px;
       .name {
         padding-bottom: 20px;
         margin-bottom: 10px;
@@ -29,6 +32,11 @@
         li {
           float: left;
           margin-right: 15px;
+          &.project-pic {
+            img {
+              margin-right: 10px;
+            }
+          }
           a {
             font-size: 30px;
             margin-top: 20px;
@@ -38,28 +46,35 @@
       }
     }
     .project-wiki {
-      // .quote {
-      //   display: block;
-      //   border-left: 3px solid @gray-lighter;
-      //   padding: 10px 0 10px 8px;
-      //   font-style: italic;
-      //   font-size: 22px;
-      //   margin: 25px 0;
-      // }
-    }
-    .ta-toolbar {
-      .btn {
-        font-size: 14px;
-        padding: 6px 12px;
+      padding-top: 20px;
+      .project-wiki-editor {
+        .ta-toolbar {
+          .btn {
+            font-size: 14px;
+            padding: 6px 12px;
+          }
+        }
+        .ta-editor {
+          min-height: 300px;
+          height: auto;
+          overflow: auto;
+          font-family: inherit;
+          font-size: 100%;
+          margin: 0 0 20px;
+        }
+        .btn-group {
+          margin-right: 20px;
+          margin-bottom: 20px;
+        }
       }
+      .project-wiki-text {}
     }
-    .ta-editor {
-      min-height: 300px;
-      height: auto;
-      overflow: auto;
-      font-family: inherit;
-      font-size: 100%;
-      margin: 20px 0;
+    .project-team {
+      .team-member {
+        img {
+          border: 1px solid @gray-lighter;
+        }
+      }
     }
   }
   .wiki-saving {

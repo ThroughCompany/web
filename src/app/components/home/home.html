@@ -3,23 +3,21 @@
     <div class="project-list row">
       <div class="col-md-4" ng-repeat="project in projects" equal-heights=".project" items="projects">
         <a class="project" href="#" ui-sref-name="routes.project({ projectId : project.slug })">
-          <h4 class="name">
+          <div class="project-pic" style="background-image: url('{{ project.profilePic }}')">
+
+          </div>
+          <div class="project-info">
+            <h4 class="name">
           {{ project.name }}
           </h4>
-          <div class="clearfix row">
-            <div class="col-md-3">
-              <img class="img-circle" ng-src="{{ project.profilePic }}" height="70px;" />
-            </div>
-            <div class="col-md-8">
-              <p class="started">{{ project.created | date : 'MM/dd/yyyy' }}</p>
-            </div>
+<!--             <p class="started">{{ project.created | date : 'MM/dd/yyyy' }}</p> -->
+            <p class="location" ng-hide="!project.location">
+              <i class="fa fa-map-marker"></i>&nbsp; {{ project.location }}
+            </p>
+            <p class="description">
+              {{ project.description }}
+            </p>
           </div>
-          <p class="location" ng-hide="!project.location">
-            <i class="fa fa-map-marker"></i>&nbsp; {{ project.location }}
-          </p>
-          <p class="description">
-            {{ project.description }}
-          </p>
         </a>
       </div>
     </div>

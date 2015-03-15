@@ -4,7 +4,6 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'ui.bootstrap',
   'ui.router',
   'ng-bs-animated-button',
-  'ngStorage',
   'ngAnimate',
   'textAngular'
 ]);
@@ -61,6 +60,7 @@ throughCompanyApp.run([
       }, function error(response) {
         $rootScope.logger.error('Error getting user');
       });
+      
       userService.getUserClaims({
         userId: authService.getUserId()
       }).then(function success(response) {
