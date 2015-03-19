@@ -43,7 +43,8 @@
     "karma-spec-reporter": "0.0.13",
     "mocha": "2.0.1",
     "phantomjs": "1.9.12",
-    "selenium": "2.20.0"
+    "selenium": "2.20.0",
+    "ui-select": "0.11.2"
   },
   "scripts": {
     "start": "node ./server.js"

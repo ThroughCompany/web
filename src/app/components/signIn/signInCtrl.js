@@ -3,10 +3,16 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
   '$stateParams',
   'authService',
   'utilsService',
+  'projectService',
   '$state',
   'routes',
   '$timeout',
-  function($scope, $stateParams, authService, utilsService, $state, routes, $timeout) {
+  function($scope, $stateParams, authService, utilsService, projectService, $state, routes, $timeout) {
+    $scope.project = $state.params.project ? JSON.parse($state.params.project) : null;
+
+    console.log('PROJECT');
+    console.log($scope.project);
+
     // ---------------- buttons ----------------
     // signin button
     $scope.loginSubmitting = null;
@@ -28,10 +34,6 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
       email: $stateParams.email
     };
 
-    if (authService.isLoggedIn()) {
-      $state.go(routes.userDashboard);
-    }
-
     $scope.login = function(loginForm) {
 
       $scope.submitted = true;
@@ -48,7 +50,19 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
             $timeout(function() {
               $scope.loginResult = 'success';
 
-              $state.go(routes.userProfile);
+              if ($scope.project) {
+                projectService.create($scope.project).then(function success(response) {
+                  $state.go($scope.routes.project, {
+                    projectId: response._id
+                  });
+                }, function error(response) {
+                  $state.go($scope.routes.userProfile);
+                });
+              } else {
+                $state.go(routes.userProfile, {
+                  project: $scope.project
+                });
+              }
             }, 500);
           }, function error(response) {
             $scope.loginSubmitting = false;

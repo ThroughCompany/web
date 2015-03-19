@@ -2,6 +2,7 @@ angular.module('throughCompanyApp').constant('routes', {
   //system routes
   home: 'system.home',
   project: 'system.project', //public project page
+  startProject: 'system.startProject', //public project page
   signIn: 'system.signIn',
   signUp: 'system.signUp',
   //user routes

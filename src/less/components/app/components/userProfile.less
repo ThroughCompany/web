@@ -1,6 +1,5 @@
 #user-profile {
   padding-top: 40px;
-  
   .profile-pic {
     margin-bottom: 20px;
   }
@@ -27,12 +26,28 @@
       display: block;
     }
   }
-  .tab-pane {
-    padding: 15px;
-    &.project-tab {
-      .tab-pane-tools {
-        margin-bottom: 20px;
+  .profile-section {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    &:last-child {
+      border-bottom: none;
+    }
+    .header {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid @gray-lighter;
+      h3 {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
       }
+      .add-tags-btn {
+        .btn {
+          padding: 4px 15px;
+        }
+      }
+    }
+    &.profile-section-projects {
       .project {
         border: 1px solid @gray-lighter;
         padding: 15px;
@@ -44,8 +59,23 @@
           padding-bottom: 5px;
           margin-bottom: 10px;
         }
-        .description {}
       }
+    }
+    &.profile-section-assets {
+      .add-tags {
+        margin-bottom: 30px;
+      }
+      .asset-tags {
+        .asset-tag {
+          background: @brand-info;
+          float: left;
+          margin-right: 15px;
+          margin-bottom: 15px;
+          padding: 8px 10px;
+          color: white;
+        }
+      }
+      .no-tags {}
     }
   }
 }

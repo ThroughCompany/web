@@ -34,71 +34,67 @@
     </div>
   </div>
   <div class="col-md-9">
-    <div>
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-          <a href="#projects" role="tab" data-toggle="tab">My Projects</a>
-        </li>
-        <li>
-          <a href="#assets" role="tab" data-toggle="tab">My Assets</a>
-        </li>
-      </ul>
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <!-- Projects -->
-        <div class="tab-pane active project-tab" id="projects">
-          <div class="tab-pane-tools clearfix">
-            <a href="#" class="btn btn-primary pull-right" ui-sref-name="routes.createProject" ng-show="projects && projects.length">
-              <i class="fa fa-plus"></i> Add
-            </a>
-          </div>
-          <div class="row">
-            <div class="col-md-6" ng-repeat="project in projects" equal-heights=".project" items="projects" ng-show="projects && projects.length">
-              <div class="project">
-                <p class="name">
-                  <a href="#" ui-sref-name="routes.project({ projectId : project.slug })">{{ project.name }}</a>
-                </p>
-                <p class="description">{{ project.shortDescription }}</p>
-                <p>Started on {{ project.created | date : 'MM/dd/yyyy' }}</p>
-              </div>
-            </div>
-            <div ng-hide="projects && projects.length">
-              <p class="center">
-                You don't have any projects yet...
-              </p>
-              <p class="center">
-                <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject">Create a Project</a>
-              </p>
-            </div>
+    <!-- Projects -->
+    <div class="profile-section profile-section-projects" id="projects">
+      <div class="header clearfix">
+        <h3>Projects</h3>
+        <!--         <div class="add-new pull-right">
+          <a href="#" class="btn btn-default" ui-sref-name="routes.createProject">
+            New Project&nbsp;<i class="fa fa-plus"></i>
+          </a>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="col-md-6" ng-repeat="project in projects" equal-heights=".project" items="projects" ng-show="projects && projects.length">
+          <div class="project">
+            <p class="name">
+              <a href="#" ui-sref-name="routes.project({ projectId : project.slug })">{{ project.name }}</a>
+            </p>
+            <p class="description">{{ project.shortDescription }}</p>
+            <p>Started on {{ project.created | date : 'MM/dd/yyyy' }}</p>
           </div>
         </div>
-        <!-- Assets -->
-        <div class="tab-pane assets-tab" id="assets">
-          <div class="tab-pane-tools clearfix">
-            <a href="#" class="btn btn-primary pull-right" ng-click="addAssetTags()" ng-show="currentUser.assetTags && currentUser.assetTags.length">
-              <i class="fa fa-plus"></i> Add
-            </a>
-          </div>
-          <div class="row">
-            <div class="col-md-6" ng-repeat="assetTag in currentUser.assetTags" ng-show="currentUser.assetTags && currentUser.assetTags.length">
-              <div class="asset-tag">
-                <p class="name">
-                  <a href="#">{{ assetTag.name }}</a>
-                </p>
-                <p class="description">{{ assetTag.description }}</p>
-              </div>
-            </div>
-            <div ng-hide="currentUser.assetTags && currentUser.assetTags.length">
-              <p class="center">
-                You don't have any assets yet...
-              </p>
-              <p class="center">
-                <button class="btn btn-primary" ng-click="addAssetTags()">Add Assets</button>
-              </p>
-            </div>
-          </div>
+        <div ng-hide="projects && projects.length">
+          <p class="center">
+            You don't have any projects yet...
+          </p>
+          <p class="center">
+            <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject">Create a Project</a>
+          </p>
         </div>
+      </div>
+    </div>
+    <!-- Assets -->
+    <div class="profile-section profile-section-assets" id="assets">
+      <div class="header clearfix">
+        <h3>Assets</h3>
+        <div class="add-tags-btn pull-right">
+          <a href="#" class="btn btn-primary" ng-click="addingAssetTags = true" ng-show="currentUser.assetTags && currentUser.assetTags.length">
+            <i class="fa fa-plus"></i> Add
+          </a>
+        </div>
+      </div>
+      <div class="add-tags clearfix">
+        <div ng-show="addingAssetTags">
+          <ui-select ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false" tagging="newAssetTag" ng-focus="addingAssetTags">
+            <ui-select-match placeholder="Enter a tag name">{{ $item }}</ui-select-match>
+            <ui-select-choices repeat="assetTag in assetTags | filter:$select.search" refresh="getAssetTags($select.search)" refresh-delay="200">
+              <div ng-bind-html="assetTag.name"></div>
+            </ui-select-choices>
+        </div>
+      </div>
+      <div class="asset-tags">
+        <a href="#" class="asset-tag btn btn-default" ng-repeat="assetTag in currentUser.assetTags">
+          {{ assetTag.name }}
+        </a>
+      </div>
+      <div class="no-tags" ng-hide="(currentUser.assetTags && currentUser.assetTags.length) || addingAssetTags">
+        <p class="center">
+          You don't have any assets yet...
+        </p>
+        <p class="center">
+          <button class="btn btn-primary" ng-click="addingAssetTags = true">Add Assets</button>
+        </p>
       </div>
     </div>
   </div>

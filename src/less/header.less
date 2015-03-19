@@ -3,12 +3,15 @@
   .font-family-sans-serif;
   #logo {
     padding: 20px;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     height: auto;
+    color: @gray-darker;
   }
   .nav {
     > li {
       > a {
+        color: @gray-darker;
         padding: 20px;
         background: none;
         &:hover {
@@ -24,11 +27,14 @@
         border-left: 1px solid @gray-lighter;
         z-index: 1000;
         bottom: -1px;
+        &:focus {
+          border:none;
+        }
       }
     }
     .dropdown-toggle {
-      border-left: 1px solid white;
-      border-bottom: 1px solid white;
+      // border-left: 1px solid white;
+      // border-bottom: 1px solid white;
     }
     .dropdown-menu {
       box-shadow: none;

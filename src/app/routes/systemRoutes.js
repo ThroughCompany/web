@@ -18,6 +18,11 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/components/home/home.html',
         controller: 'homeCtrl'
       })
+      .state('system.startProject', {
+        url: 'start-project',
+        templateUrl: '/app/components/startProject/startProject.html',
+        controller: 'startProjectCtrl'
+      })
       .state('system.project', {
         url: 'project/:projectId',
         templateUrl: '/app/components/project/project.html',
@@ -63,12 +68,12 @@ angular.module('throughCompanyApp').config([
         }
       })
       .state('system.signIn', {
-        url: 'signin?email',
+        url: 'signin?email&project',
         templateUrl: '/app/components/signIn/signIn.html',
         controller: 'signInCtrl'
       })
       .state('system.signUp', {
-        url: 'signup',
+        url: 'signup?project',
         templateUrl: '/app/components/signUp/signUp.html',
         controller: 'signUpCtrl'
       })

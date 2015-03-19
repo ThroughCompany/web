@@ -7,6 +7,8 @@ angular.module('throughCompanyApp').controller('signUpCtrl', [
   'routes',
   '$timeout',
   function($scope, $state, authService, userService, utilsService, routes, $timeout) {
+    $scope.project = $state.params.project;
+
     // ---------------- buttons ----------------
     // signup button
     $scope.registerSubmitting = null;
@@ -48,7 +50,8 @@ angular.module('throughCompanyApp').controller('signUpCtrl', [
 
             $timeout(function() {
               $state.transitionTo(routes.signIn, {
-                email: response.email
+                email: response.email,
+                project: $scope.project
               });
             }, 2500);
           }, 1000);
