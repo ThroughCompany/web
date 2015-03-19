@@ -14,9 +14,6 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
     $scope.createAssetTag = _createAssetTag;
     $scope.getAssetTags = _getAssetTags;
     $scope.newAssetTag = function(tag) {
-      console.log('new asset tag:');
-      console.log(tag);
-
       return {
         name: tag
       };
@@ -30,23 +27,21 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
     $scope.assetTags = [];
 
     $scope.$watch('addAssetTagForm.tags', function(val) {
-      console.log('TAGS = ');
-      console.log(val);
-
       if (!val || !val.length) return;
-      // if (!val || !val.length) return;
 
-      // var currentTags = $scope.currentUser.assetTags && $scope.currentUser.assetTags.length ? _.pluck($scope.currentUser.assetTags, 'name') : [];
-      // var newTags = _.filter(val, function(tag) {
-      //   return !_.contains(currentTags, tag);
-      // });
+      var currentTags = $scope.currentUser.assetTags && $scope.currentUser.assetTags.length ? _.pluck($scope.currentUser.assetTags, 'name') : [];
+      var newTags = _.filter(val, function(tag) {
+        return !_.contains(currentTags, tag);
+      });
 
-      // if (newTags && newTags.length) {
-      //   _.each(newTags, function(newTag) {
-      //     $scope.createAssetTag(newTag.name);
-      //   });
-      // }
-      //$scope.createAssetTag(val.name);
+      if (newTags && newTags.length) {
+        _.each(newTags, function(newTag) {
+          $scope.createAssetTag(newTag.name);
+        });
+        $scope.addAssetTagForm.tags = [];
+        $scope.assetTags.selected = undefined;
+        //$scope.assetTags = [];
+      }
     });
 
     function _createAssetTag(tagName) {
@@ -54,6 +49,8 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
         userId: $scope.currentUser._id,
         name: tagName
       }).then(function success(response) {
+        $scope.currentUser.assetTags.push(response);
+
         alertService.success('Asset added.');
       }, function error(response) {
         alertService.error('Error adding asset.');

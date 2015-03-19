@@ -69,15 +69,15 @@
       <div class="header clearfix">
         <h3>Assets</h3>
         <div class="add-tags-btn pull-right">
-          <a href="#" class="btn btn-primary" ng-click="addingAssetTags = true" ng-show="currentUser.assetTags && currentUser.assetTags.length">
+          <a href="#" class="btn btn-primary" ng-click="addingAssetTags = !addingAssetTags" ng-show="currentUser.assetTags && currentUser.assetTags.length">
             <i class="fa fa-plus"></i> Add
           </a>
         </div>
       </div>
       <div class="add-tags clearfix">
         <div ng-show="addingAssetTags">
-          <ui-select ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false" tagging="newAssetTag" ng-focus="addingAssetTags">
-            <ui-select-match placeholder="Enter a tag name">{{ $item }}</ui-select-match>
+          <ui-select multiple tagging="newAssetTag" ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false">
+            <ui-select-match placeholder="Enter a tag name">{{ $item.name }}</ui-select-match>
             <ui-select-choices repeat="assetTag in assetTags | filter:$select.search" refresh="getAssetTags($select.search)" refresh-delay="200">
               <div ng-bind-html="assetTag.name"></div>
             </ui-select-choices>
