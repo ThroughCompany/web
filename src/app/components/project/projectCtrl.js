@@ -6,7 +6,8 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
   'projectService',
   'alertService',
   'project',
-  function($scope, $rootScope, $modal, $timeout, projectService, alertService, project) {
+  'utilsService',
+  function($scope, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService) {
     $rootScope.setMetaTitle(project.name);
 
     $scope.project = project;
@@ -37,9 +38,13 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       }
     });
 
+    $scope.scrollTo = function(id) {
+      utilsService.scrollTo(id, 40);
+    };
+
     $timeout(function() {
       $scope.loaded = true;
-    });
+    }, 300);
 
     $scope.updateProject = function(form) {
       $scope.savingWiki = true;

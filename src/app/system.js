@@ -7,7 +7,8 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'ngAnimate',
   'textAngular',
   'ngSanitize',
-  'ui.select'
+  'ui.select',
+  'duScroll'
 ]);
 
 throughCompanyApp.config(['$locationProvider',
@@ -19,12 +20,14 @@ throughCompanyApp.config(['$locationProvider',
 throughCompanyApp.run([
   '$rootScope',
   '$state',
+  '$window',
+  '$timeout',
   'authService',
   'regexService',
   'routes',
   'loggerService',
   'userService',
-  function($rootScope, $state, authService, regexService, routes, loggerService, userService) {
+  function($rootScope, $state, $window, $timeout, authService, regexService, routes, loggerService, userService) {
     // $rootScope.menu = menuService.init();
 
     $rootScope.meta = {
@@ -52,6 +55,13 @@ throughCompanyApp.run([
         $state.go('system.home');
         event.preventDefault();
       }
+    });
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+      // ------------ auto scroll ------------ //
+      $timeout(function() {
+        $window.scrollTo(0, 0);
+      }, 100);
     });
 
     if (authService.isLoggedIn()) {

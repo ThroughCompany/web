@@ -14,11 +14,10 @@
           </div>
           <div class="project-info">
             <h4 class="name">
-          {{ project.name }}
-          </h4>
-            <!--             <p class="started">{{ project.created | date : 'MM/dd/yyyy' }}</p> -->
+              {{ project.name }}
+            </h4>
             <p class="location" ng-hide="!project.location">
-              <i class="fa fa-map-marker"></i>&nbsp; {{ project.location }}
+              <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
             </p>
             <p class="description">
               {{ project.description }}

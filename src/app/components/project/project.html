@@ -1,7 +1,7 @@
 <div id="project">
-  <div class="content container clearfix">
+  <div class="container clearfix">
     <div class="project-header clearfix">
-      <div class="name clearfix">
+      <div class="name clearfix preroll" ng-class="{ preroll : !loaded }">
         <div class="name-line name-line-left col-xs-3">
           <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_left.jpg" />
         </div>
@@ -12,81 +12,86 @@
           <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_right.jpg" />
         </div>
       </div>
-      <div class="clearfix">
-        <ul class="link-list pull-left">
-          <li class="project-pic">
-            <img class="" ng-src="{{ project.profilePic }}" height="35px" />&nbsp;<i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
-          </li>
-          <li ng-show="project.social.facebook">
-            <a href="{{ project.social.facebook }}" target="_blank">
-              <i class="fa fa-facebook"></i>
-            </a>
-          </li>
-          <li ng-show="project.social.linkedIn">
-            <a href="{{ project.social.linkedIn }}" target="_blank">
-              <i class="fa fa-linkedin"></i>
-            </a>
-          </li>
-        </ul>
-        <ul class="link-list pull-right">
-          <li>
-            <a href="#" class="settings" data-toggle="tooltip" data-placement="top" title="View Team Members">
-              <i class="fa fa-users"></i>
-            </a>
-          </li>
-          <li ng-show="auth.hasProjectIdClaim(project._id)">
-            <a href="#" class="settings" ng-click="editWiki = !editWiki" data-toggle="tooltip" data-placement="top" title="Edit Project Settings">
-              <i class="fa fa-edit"></i>
-            </a>
-          </li>
-          <li ng-show="auth.hasProjectIdClaim(project._id)">
-            <a href="#" class="settings" ui-sref-name="routes.projectSettingsProfile({ projectId : project.slug })" data-toggle="tooltip" data-placement="top" title="Edit Project Settings">
-              <i class="fa fa-gear"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
-    <div class="project-wiki project-section">
-      <div class="project-wiki-editor" ng-show="editWiki">
-        <div class="wiki-text" text-angular ng-model="form.wiki" ta-toolbar="[['h1','h2','h3', 'h4', 'h5'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['bold','italics', 'underline', 'strikeThrough'], ['p', 'pre', 'quote', 'ul', 'ol', 'insertImage']]"></div>
-      </div>
-      <div class="project-wiki-text wiki-text" ng-hide="editWiki" ng-bind-html="project.wiki">
-      </div>
-    </div>
-    <div class="project-needs project-section">
-      <div class="header clearfix">
-        <h2>Needs</h2>
-
-      </div>
-    </div>
-    <div class="project-team project-section">
-      <div class="header clearfix">
-        <h2>Team</h2>
-        <div class="apply pull-right sans-serif">
-          Want to join our team?
-          <button class="btn btn-default">
-            Apply&nbsp;<i class="fa fa-arrow-right"></i>
-          </button>
+    <div class="project-content-wrapper clearfix row">
+      <div class="project-content col-sm-9">
+        <div id="project-wiki" class="project-wiki project-section">
+          <div class="project-wiki-editor" ng-show="editWiki">
+            <div class="wiki-text" text-angular ng-model="form.wiki" ta-toolbar="[['h1','h2','h3', 'h4', 'h5'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['bold','italics', 'underline', 'strikeThrough'], ['p', 'pre', 'quote', 'ul', 'ol', 'insertImage']]"></div>
+          </div>
+          <div class="project-wiki-text wiki-text" ng-hide="editWiki" ng-bind-html="project.wiki">
+          </div>
+        </div>
+        <div id="project-needs" class="project-needs project-section">
+          <div class="header clearfix">
+            <h2>Needs</h2>
+          </div>
+        </div>
+        <div id="project-team" class="project-team project-section">
+          <div class="header clearfix">
+            <h2>Team</h2>
+            <div class="apply pull-right sans-serif">
+              Want to join our team?
+              <button class="btn btn-default">
+                Apply&nbsp;<i class="fa fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="members clearfix row">
+            <div class="col-md-4" ng-repeat="projectUser in projectUsers">
+              <div class="team-member">
+                <p class="center">
+                  <img class="img-circle" ng-src="{{ projectUser.profilePic }}" height="100px;" />
+                </p>
+                <p class="name center">
+                  {{ getProjectUserName(projectUser) }}
+                </p>
+                <ul class="social-links clearfix">
+                  <li class="col-xs-4">
+                    <a class="facebook" href="{{ projectUser.social.facebook }}" target="_blank">
+                      <i class="fa fa-facebook"></i>
+                    </a>
+                  </li>
+                  <li class="col-xs-4">
+                    <a class="linked-in" href="{{ projectUser.social.linkedIn }}" target="_blank">
+                      <i class="fa fa-linkedin"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="members clearfix row">
-        <div class="col-md-4" ng-repeat="projectUser in projectUsers">
-          <div class="team-member">
-            <p class="center">
-              <img class="img-circle" ng-src="{{ projectUser.profilePic }}" height="100px;" />
-            </p>
-            <p class="name center">
-              {{ getProjectUserName(projectUser) }}
-            </p>
-            <ul class="social-links clearfix">
-              <li class="col-xs-4">
-                <a class="facebook" href="{{ projectUser.social.facebook }}" target="_blank">
+      <div class="project-sidebar col-sm-3">
+        <div data-spy="affix" data-offset-top="250">
+          <ul class="link-list">
+            <li class="active">
+              <a href="#" ng-click="scrollTo('project-wiki')">Wiki</a>
+            </li>
+            <li>
+              <a href="#" ng-click="scrollTo('project-needs')">What We Need</a>
+            </li>
+            <li>
+              <a href="#" ng-click="scrollTo('project-team')">Who We Are</a>
+            </li>
+          </ul>
+          <hr>
+          <p>
+            <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
+          </p>
+          <!--           <a href="#" class="btn btn-default settings" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true">
+            <i class="fa fa-edit"></i>
+          </a> -->
+          <div class="social">
+            <ul>
+              <li>
+                <a href="{{ project.social.facebook }}" target="_blank">
                   <i class="fa fa-facebook"></i>
                 </a>
               </li>
-              <li class="col-xs-4">
-                <a class="linked-in" href="{{ projectUser.social.linkedIn }}" target="_blank">
+              <li>
+                <a href="{{ project.social.linkedIn }}" target="_blank">
                   <i class="fa fa-linkedin"></i>
                 </a>
               </li>

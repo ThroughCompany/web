@@ -1,5 +1,7 @@
 angular.module('throughCompanyApp').factory('utilsService', [
-  function() {
+  '$timeout',
+  '$document',
+  function($timeout, $document) {
 
     function UtilsService() {}
 
@@ -8,6 +10,18 @@ angular.module('throughCompanyApp').factory('utilsService', [
       if (!response.data.errors || !response.data.errors.length) return null;
 
       return response.data.errors[0].message;
+    };
+
+    UtilsService.prototype.scrollTo = function(_id, _offset, _speed, _delay) {
+      var id = (_id) ? _id : null;
+      var offset = (_offset) ? _offset : 30;
+      var speed = (_speed) ? _speed : 500;
+      var delay = (_delay) ? _delay : 0;
+
+      $timeout(function() {
+        // https://github.com/durated/angular-scroll/
+        $document.scrollToElement($('#' + id), offset, 500);
+      }, delay);
     };
 
     return new UtilsService();
