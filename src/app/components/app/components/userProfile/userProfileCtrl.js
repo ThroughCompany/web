@@ -6,7 +6,8 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
   'projectService',
   'assetTagService',
   'alertService',
-  function($scope, $state, $rootScope, userService, projectService, assetTagService, alertService) {
+  'utilsService', 
+  function($scope, $state, $rootScope, userService, projectService, assetTagService, alertService, utilsService) {
     $rootScope.setMetaTitle($scope.currentUser.email);
 
     $scope.addingAssetTags = false;
@@ -40,7 +41,6 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
         });
         $scope.addAssetTagForm.tags = [];
         $scope.assetTags.selected = undefined;
-        //$scope.assetTags = [];
       }
     });
 
@@ -53,7 +53,7 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
 
         alertService.success('Asset added.');
       }, function error(response) {
-        alertService.error('Error adding asset.');
+        alertService.error(utilsService.getServerErrorMessage(response));
       });
     }
 
@@ -63,7 +63,15 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
       assetTagService.getAll({
         name: tagName
       }).then(function success(response) {
-        $scope.assetTags = response;
+        var indexedTags = _.indexBy($scope.currentUser.assetTags, 'name');
+
+        $scope.assetTags = _.filter(response, function(tag) {
+
+          var exists = indexedTags[tag.name];
+          return exists ? false : true;
+        });
+
+        console.log($scope.assetTags);
       });
     }
 
@@ -73,7 +81,7 @@ angular.module('throughCompanyApp').controller('userProfileCtrl', [
       }).then(function success(response) {
         $scope.projects = $scope.projects.concat(response);
       }, function error(response) {
-        console.log(response);
+        console.log(utilsService.getServerErrorMessage(response));
       });
     }
   }
