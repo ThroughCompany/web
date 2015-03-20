@@ -10,8 +10,19 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
   function($scope, $stateParams, authService, utilsService, projectService, $state, routes, $timeout) {
     $scope.project = $state.params.project ? JSON.parse($state.params.project) : null;
 
-    console.log('PROJECT');
-    console.log($scope.project);
+    var start = 100;
+    $timeout(function() {
+      $scope.showEmail = true;
+    }, start);
+    $timeout(function() {
+      $scope.showPassword = true;
+    }, start + 100);
+    $timeout(function() {
+      $scope.showLoginBtn = true;
+    }, start + 200);
+    $timeout(function() {
+      $scope.showNoAccount = true;
+    }, start + 300);
 
     // ---------------- buttons ----------------
     // signin button

@@ -1,10 +1,12 @@
 angular.module('throughCompanyApp').controller('homeCtrl', [
   '$scope',
   'projectService',
-  function($scope, projectService) {
-    projectService.getProjects({
+  '$timeout',
+  function($scope, projectService, $timeout) {
+    $scope.loaded = false;
 
-    }).then(function success(response) {
+    projectService.getProjects({}).then(function success(response) {
+      $scope.loaded = true;
       $scope.projects = response;
     });
   }

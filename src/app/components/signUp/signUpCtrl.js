@@ -9,6 +9,20 @@ angular.module('throughCompanyApp').controller('signUpCtrl', [
   function($scope, $state, authService, userService, utilsService, routes, $timeout) {
     $scope.project = $state.params.project;
 
+    var start = 100;
+    $timeout(function() {
+      $scope.showEmail = true;
+    }, start);
+    $timeout(function() {
+      $scope.showPassword = true;
+    }, start + 100);
+    $timeout(function() {
+      $scope.showLoginBtn = true;
+    }, start + 200);
+    $timeout(function() {
+      $scope.showNoAccount = true;
+    }, start + 300);
+
     // ---------------- buttons ----------------
     // signup button
     $scope.registerSubmitting = null;
