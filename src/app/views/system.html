@@ -1,9 +1,12 @@
 <!-- Header -->
 <div id="header" class="navbar navbar-static-top navbar">
   <div class="navbar-header">
-    <button class="navbar-toggle" type="button" data-target=".bs-navbar-collapse" data-toggle="collapse"><i class="fa fa-bars"></i>
+    <button class="navbar-toggle" type="button" data-target=".bs-navbar-collapse" data-toggle="collapse">
+      <i class="fa fa-bars"></i>
     </button>
-    <a id="logo" href="#" class="navbar-brand" ui-sref-name="routes.home">Through Company</a>
+    <a id="logo" href="#" class="navbar-brand" ui-sref-name="routes.home">
+      Through Company
+    </a>
   </div>
   <div id="header-nav" class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
     <ul class="nav navbar-nav navbar-right">
@@ -11,7 +14,7 @@
     <ul class="nav navbar-nav navbar-right" ng-show="auth.isLoggedIn()">
       <li class="dropdown">
         <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-          <img class="img-circle" ng-src="{{ currentUser.profilePic }}" height="20px" />
+          <img class="img-circle" ng-src="{{ currentUser.profilePic }}" height="18px" />
           <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu">

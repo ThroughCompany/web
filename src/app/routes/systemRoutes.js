@@ -50,7 +50,7 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/components/user/user.html',
         controller: 'userCtrl',
         resolve: {
-          project: ['$rootScope', '$stateParams', 'userService', '$q',
+          user: ['$rootScope', '$stateParams', 'userService', '$q',
             function($rootScope, $stateParams, userService, $q) {
               var deferred = $q.defer();
 
