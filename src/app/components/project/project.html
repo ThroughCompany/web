@@ -1,6 +1,18 @@
 <div id="project">
+  <div class="hero">
+    <div class="hero-inner">
+    </div>
+    <div class="hero-text preroll" ng-class="{ preroll : !loaded }">
+      <h2 class="center">
+      {{ project.name }}
+    </h2>
+      <p class="center">
+        {{ project.description }}
+      </p>
+    </div>
+  </div>
   <div class="container clearfix">
-    <div class="project-header clearfix">
+    <!--  <div class="project-header clearfix">
       <div class="name clearfix preroll" ng-class="{ preroll : !loaded }">
         <div class="name-line name-line-left col-xs-3">
           <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_left.jpg" />
@@ -12,8 +24,44 @@
           <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_right.jpg" />
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="project-content-wrapper clearfix row">
+      <div class="project-sidebar col-sm-3">
+        <div data-spy="affix" data-offset-top="250">
+          <ul class="link-list">
+            <li class="active">
+              <a href="#" ng-click="scrollTo('project-wiki')">Wiki</a>
+            </li>
+            <li>
+              <a href="#" ng-click="scrollTo('project-needs')">Needs</a>
+            </li>
+            <li>
+              <a href="#" ng-click="scrollTo('project-team')">Team</a>
+            </li>
+          </ul>
+          <hr>
+          <p>
+            <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
+          </p>
+          <a href="#" class="btn btn-default settings" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true">
+            <i class="fa fa-edit"></i>
+          </a>
+          <div class="social">
+            <ul>
+              <li>
+                <a href="{{ project.social.facebook }}" target="_blank">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{ project.social.linkedIn }}" target="_blank">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="project-content col-sm-9">
         <div id="project-wiki" class="project-wiki project-section">
           <div class="project-wiki-editor" ng-show="editWiki">
@@ -48,42 +96,6 @@
                 </p>
               </a>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="project-sidebar col-sm-3">
-        <div data-spy="affix" data-offset-top="250">
-          <ul class="link-list">
-            <li class="active">
-              <a href="#" ng-click="scrollTo('project-wiki')">Wiki</a>
-            </li>
-            <li>
-              <a href="#" ng-click="scrollTo('project-needs')">What We Need</a>
-            </li>
-            <li>
-              <a href="#" ng-click="scrollTo('project-team')">Who We Are</a>
-            </li>
-          </ul>
-          <hr>
-          <p>
-            <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
-          </p>
-          <a href="#" class="btn btn-default settings" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true">
-            <i class="fa fa-edit"></i>
-          </a>
-          <div class="social">
-            <ul>
-              <li>
-                <a href="{{ project.social.facebook }}" target="_blank">
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </li>
-              <li>
-                <a href="{{ project.social.linkedIn }}" target="_blank">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

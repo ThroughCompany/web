@@ -1,33 +1,50 @@
 #project {
-  padding-top: 20px;
+  .hero {
+    background-position: center;
+    background-size: cover;
+    background-image: url('https://s3.amazonaws.com/throughcompany-assets/images/banner1.jpg');
+    height: 600px;
+    margin-bottom: 80px;
+    position: relative;
+    .sans-serif;
+    color: white;
+    .hero-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      opacity: .25;
+      z-index: 0;
+    }
+    .hero-text {
+      opacity: 1;
+      z-index: 5;
+      position: relative;
+      .transition(.4s ease-in-out);
+      &.preroll {
+        transform: translate(0, 30px);
+        opacity: 0;
+      }
+    }
+    h2 {
+      text-align: center;
+      padding-top: 150px;
+      font-weight: 800;
+      font-size: 68px;
+      margin: 0;
+    }
+    p {
+      display: block;
+      margin: 0 auto;
+      margin-top: 40px;
+      font-size: 22px;
+    }
+  }
   .container {
     padding-top: 20px;
     padding-bottom: 80px;
-    .project-header {
-      position: relative;
-      margin-bottom: 60px;
-      .name {
-        .transition(.5s ease-in-out);
-        &.preroll {
-          //transform: translate(0, 30px);
-          opacity: 0;
-        }
-        .name-line {
-          height: 18px;
-          top: 28px;
-          position: relative;
-          display: inline-block;
-          padding: 0;
-        }
-        h2 {
-          font-size: 60px;
-          margin-top: 0;
-          margin-bottom: 0;
-          .font-family-cursive;
-          color: @gray;
-        }
-      }
-    }
     .project-content-wrapper {
       .project-content {
         .project-section {
@@ -125,6 +142,7 @@
         > div {
           &.affix {
             top: 0;
+            width: 220px;
           }
           .link-list {
             margin: 0;
@@ -133,7 +151,7 @@
             li {
               &.active {
                 a {
-                  border-left-color: white;
+                  border-right-color: white;
                 }
               }
               &:first-child {
@@ -149,7 +167,7 @@
               a {
                 padding: 12px;
                 display: block;
-                border-left: 1px solid @gray-lighter;
+                border-right: 1px solid @gray-lighter;
                 //border-bottom: 1px solid darken(@gray-lighter, 10%);
                 border-top: 1px solid @gray-lighter;
                 .transition(.2s ease-in-out);
