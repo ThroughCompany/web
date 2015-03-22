@@ -10,6 +10,5 @@ angular.module('throughCompanyApp').constant('routes', {
   userProfile: 'system.app.userProfile',
   userSettingsProfile: 'system.app.userSettings.profile',
   createProject: 'system.app.createProject',
-  projectSettingsProfile: 'system.app.projectSettings.profile',
-  projectSettingsWiki: 'system.app.projectSettings.wiki'
+  projectSettingsProfile: 'system.app.projectSettings.profile'
 });

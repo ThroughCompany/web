@@ -1,5 +1,5 @@
 <div id="project">
-  <div class="hero">
+  <div class="hero" ng-class="{ 'has-banner' : project.bannerPic }" style="background-image: url('{{ project.bannerPic }}')">
     <div class="hero-inner">
     </div>
     <div class="hero-text preroll" ng-class="{ preroll : !loaded }">
@@ -27,25 +27,31 @@
     </div> -->
     <div class="project-content-wrapper clearfix row">
       <div class="project-sidebar col-sm-3">
-        <div data-spy="affix" data-offset-top="250">
+        <div affix data-offset-top="760">
           <ul class="link-list">
             <li class="active">
-              <a href="#" ng-click="scrollTo('project-wiki')">Wiki</a>
+              <a href="#" ng-click="scrollTo('project-wiki')">
+                <i class="fa fa-pencil"></i>&nbsp;Wiki
+              </a>
             </li>
             <li>
               <a href="#" ng-click="scrollTo('project-needs')">Needs</a>
             </li>
             <li>
-              <a href="#" ng-click="scrollTo('project-team')">Team</a>
+              <a href="#" ng-click="scrollTo('project-team')">
+                <i class="fa fa-users"></i>&nbsp;Team
+              </a>
+            </li>
+            <li ng-show="auth.hasProjectIdClaim(project._id)">
+              <a href="#" ui-sref-name="routes.projectSettingsProfile({ projectId : project._id })">
+                <i class="fa fa-gear"></i>&nbsp;Settings
+              </a>
             </li>
           </ul>
           <hr>
           <p>
             <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
           </p>
-          <a href="#" class="btn btn-default settings" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true">
-            <i class="fa fa-edit"></i>
-          </a>
           <div class="social">
             <ul>
               <li>
@@ -63,6 +69,11 @@
         </div>
       </div>
       <div class="project-content col-sm-9">
+        <div class="edit-wiki clearfix">
+          <a href="#" class="btn btn-default btn-xs pull-right" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true" ng-show="auth.hasProjectIdClaim(project._id)">
+            <i class="fa fa-edit"></i>
+          </a>
+        </div>
         <div id="project-wiki" class="project-wiki project-section">
           <div class="project-wiki-editor" ng-show="editWiki">
             <div class="wiki-text" text-angular ng-model="form.wiki" ta-toolbar="[['h1','h2','h3', 'h4', 'h5'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['bold','italics', 'underline', 'strikeThrough'], ['p', 'pre', 'quote', 'ul', 'ol', 'insertImage']]"></div>
@@ -80,7 +91,7 @@
             <h2>Team</h2>
             <div class="apply pull-right sans-serif">
               Want to join our team?
-              <button class="btn btn-default">
+              <button class="btn btn-xs btn-default">
                 Apply&nbsp;<i class="fa fa-arrow-right"></i>
               </button>
             </div>

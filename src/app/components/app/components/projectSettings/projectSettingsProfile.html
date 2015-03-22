@@ -14,6 +14,15 @@
             </p>
           </img-upload>
         </div>
+        <div class="form-section">
+          <h4 class="form-section-header">Banner Pic</h4>
+          <img-upload file-selected="updateBannerPic">
+            <img class="banner-pic img-responsive img-rounded" src="{{ project.bannerPic }}" />
+            <p>
+              <button class="btn" type="submit" ng-hide="loading" ng-click="selectImage()" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingBannerPic" data-result="bannerPicResult" data-options="bannerPicBtnOptions"></button>
+            </p>
+          </img-upload>
+        </div>
         <div class="form-group">
           <label>Description</label>
           <textarea class="form-control" name="description" ng-model="project.description" ng-change="form.description = project.description"></textarea>

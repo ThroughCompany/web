@@ -65,21 +65,9 @@ throughCompanyApp.run([
     });
 
     if (authService.isLoggedIn()) {
-      userService.getUserById({
-        userId: authService.getUserId()
-      }).then(function success(response) {
-        $rootScope.currentUser = response;
-      }, function error(response) {
-        $rootScope.logger.error('Error getting user');
-      });
+      authService.getUser();
 
-      userService.getUserClaims({
-        userId: authService.getUserId()
-      }).then(function success(response) {
-        $rootScope.currentUserClaims = response;
-      }, function error(response) {
-        $rootScope.logger.error('Error getting user claims');
-      });
+      authService.getUserClaims();
     }
   }
 ]);

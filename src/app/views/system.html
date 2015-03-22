@@ -36,11 +36,15 @@
         </ul>
       </li>
     </ul>
-    <a class="pull-right btn btn-primary" href="#" ui-sref-name="routes.signUp">Sign Up
-    </a>
-    <ul class="nav navbar-nav navbar-right">
-      <li ng-hide="auth.isLoggedIn()">
-        <a href="#" ui-sref-name="routes.signIn">Sign In
+    <ul class="nav navbar-nav navbar-right" ng-hide="auth.isLoggedIn()">
+      <li>
+        <a href="#" ui-sref-name="routes.signIn">
+          Sign In
+        </a>
+      </li>
+      <li class="sign-in">
+        <a class="btn btn-primary" href="#" ui-sref-name="routes.signUp">
+          Sign Up
         </a>
       </li>
     </ul>

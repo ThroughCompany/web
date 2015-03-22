@@ -1,24 +1,27 @@
-angular.module('throughCompanyApp').directive('imgUpload', function() {
-  return {
-    restrict: 'E',
-    transclude: true,
-    replace: true,
-    template: '<span ng-transclude></span>',
-    link: function(scope, element, attrs) {
+angular.module('throughCompanyApp').directive('imgUpload', [
+  '$compile',
+  function($compile) {
+    return {
+      restrict: 'E',
+      transclude: true,
+      replace: true,
+      template: '<span ng-transclude></span>',
+      //scope: {},
+      link: function(scope, element, attrs) {
+        scope.fileSelectedFn = scope.$eval(attrs.fileSelected);
+        scope.selectImage = function() {
+          fileInput.click();
+        };
 
-      var btnClass = attrs.btnClass;
-      var fileInput = angular.element('<input type="file" style="display:none" />');
-      var fileSelectedFn = scope.$eval(attrs.fileSelected);
+        var btnClass = attrs.btnClass;
+        var fileInput = angular.element('<input type="file" style="display:none" />');
 
-      element.after(fileInput);
+        element.after(fileInput);
 
-      scope.selectImage = function() {
-        fileInput.click();
-      };
-
-      fileInput.on('change', function() {
-        if (this.files) fileSelectedFn(this.files);
-      });
-    }
-  };
-});
+        fileInput.on('change', function() {
+          if (this.files) scope.fileSelectedFn(this.files);
+        });
+      }
+    };
+  }
+]);

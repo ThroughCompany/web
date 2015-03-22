@@ -68,7 +68,7 @@ angular.module('throughCompanyApp').config([
         controller: 'createProjectCtrl'
       })
       .state('system.app.projectSettings', {
-        url: 'project/:projectId/settings',
+        url: '/project/:projectId/settings',
         templateUrl: '/app/components/app/components/projectSettings/projectSettings.html',
         controller: 'projectSettingsCtrl',
         abstract: true,

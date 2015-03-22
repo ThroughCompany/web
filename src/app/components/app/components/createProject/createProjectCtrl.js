@@ -5,7 +5,9 @@ angular.module('throughCompanyApp').controller('createProjectCtrl', [
   '$state',
   'projectService',
   'alertService',
-  function($scope, $rootScope, $timeout, $state, projectService, alertService) {
+  'utilsService',
+  'authService',
+  function($scope, $rootScope, $timeout, $state, projectService, alertService, utilsService, authService) {
     $rootScope.setMetaTitle('Create a New Project');
 
     // ---------------- buttons ----------------
@@ -44,6 +46,8 @@ angular.module('throughCompanyApp').controller('createProjectCtrl', [
           $state.go($scope.routes.userProfile);
 
           alertService.success('Project Created');
+
+          authService.getUserClaims();
         }, 500);
       }, function error(response) {
         $scope.createProjectSubmitting = false;

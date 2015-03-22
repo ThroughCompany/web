@@ -38,6 +38,11 @@
     <div class="profile-section profile-section-projects" id="projects">
       <div class="header clearfix">
         <h3>Projects</h3>
+        <div class="add-new-btn pull-right">
+          <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject" ng-show="projects && projects.length">
+            <i class="fa fa-plus"></i> Add
+          </a>
+        </div>
         <!--         <div class="add-new pull-right">
           <a href="#" class="btn btn-default" ui-sref-name="routes.createProject">
             New Project&nbsp;<i class="fa fa-plus"></i>
@@ -68,7 +73,7 @@
     <div class="profile-section profile-section-assets" id="assets">
       <div class="header clearfix">
         <h3>Assets</h3>
-        <div class="add-tags-btn pull-right">
+        <div class="add-new-btn pull-right">
           <a href="#" class="btn btn-primary" ng-click="addingAssetTags = !addingAssetTags" ng-show="currentUser.assetTags && currentUser.assetTags.length">
             <i class="fa fa-plus"></i> Add
           </a>

@@ -28,8 +28,8 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/components/project/project.html',
         controller: 'projectCtrl',
         resolve: {
-          project: ['$rootScope', '$stateParams', 'projectService', '$q',
-            function($rootScope, $stateParams, projectService, $q) {
+          project: ['$rootScope', '$stateParams', '$state', 'projectService', '$q',
+            function($rootScope, $stateParams, $state, projectService, $q) {
               var deferred = $q.defer();
 
               projectService.getProjectById({
@@ -37,6 +37,7 @@ angular.module('throughCompanyApp').config([
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {
+                $state.go('system.404');
                 deferred.resolve(null);
               });
 

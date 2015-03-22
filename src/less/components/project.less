@@ -2,13 +2,21 @@
   .hero {
     background-position: center;
     background-size: cover;
-    background-image: url('https://s3.amazonaws.com/throughcompany-assets/images/banner1.jpg');
-    height: 600px;
-    margin-bottom: 80px;
+    height: 520px;
+    margin-bottom: 40px;
     position: relative;
+    &.has-banner {
+      .hero-inner {
+        display: block;
+      }
+      .hero-text {
+        color: white;
+      }
+    }
     .sans-serif;
     color: white;
     .hero-inner {
+      display: none;
       position: absolute;
       top: 0;
       left: 0;
@@ -22,24 +30,27 @@
       opacity: 1;
       z-index: 5;
       position: relative;
+      margin: 0 auto;
+      max-width: 1000px;
+      color: @gray-darker;
       .transition(.4s ease-in-out);
       &.preroll {
         transform: translate(0, 30px);
         opacity: 0;
       }
-    }
-    h2 {
-      text-align: center;
-      padding-top: 150px;
-      font-weight: 800;
-      font-size: 68px;
-      margin: 0;
-    }
-    p {
-      display: block;
-      margin: 0 auto;
-      margin-top: 40px;
-      font-size: 22px;
+      h2 {
+        text-align: center;
+        padding-top: 150px;
+        font-weight: 800;
+        font-size: 68px;
+        margin: 0;
+      }
+      p {
+        display: block;
+        margin: 0 auto;
+        margin-top: 40px;
+        font-size: 22px;
+      }
     }
   }
   .container {
@@ -47,6 +58,12 @@
     padding-bottom: 80px;
     .project-content-wrapper {
       .project-content {
+        .edit-wiki {
+          margin-bottom: 20px;
+          .btn {
+            padding-right: 8px;
+          }
+        }
         .project-section {
           padding-top: 40px;
           &.project-wiki {
@@ -78,8 +95,6 @@
               .apply {
                 .btn {
                   margin-left: 20px;
-                  padding: 4px 13px;
-                  font-size: 14px;
                 }
               }
             }
@@ -128,21 +143,15 @@
               display: inline-block;
               margin: 0;
             }
-            .apply {
-              .btn {
-                margin-left: 20px;
-                padding: 4px 13px;
-                font-size: 14px;
-              }
-            }
           }
         }
       }
       .project-sidebar {
         > div {
+          width: 252px;
+          padding: 0;
           &.affix {
             top: 0;
-            width: 220px;
           }
           .link-list {
             margin: 0;
@@ -173,6 +182,9 @@
                 .transition(.2s ease-in-out);
                 &:hover {
                   background: lighten(@brand-primary, 40%);
+                }
+                i {
+                  margin-right: 10px;
                 }
               }
             }

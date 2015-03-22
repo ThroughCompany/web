@@ -6,7 +6,8 @@ angular.module('throughCompanyApp').factory('authService', [
   'appSettings',
   '$state',
   'loggerService',
-  function($rootScope, $window, $http, $q, appSettings, $state, loggerService) {
+  'userService',
+  function($rootScope, $window, $http, $q, appSettings, $state, loggerService, userService) {
 
     function AuthService() {}
 
@@ -108,6 +109,34 @@ angular.module('throughCompanyApp').factory('authService', [
       var projectIds = claims.projectIds;
 
       return _.contains(projectIds, projectId);
+    };
+
+    AuthService.prototype.getUser = function() {
+
+      var _this = this;
+
+      userService.getUserById({
+        userId: _this.getUserId()
+      }).then(function success(response) {
+        $rootScope.currentUser = response;
+      }, function error(response) {
+        $rootScope.logger.error('Error getting user');
+        _this.logout();
+      });
+    };
+
+    AuthService.prototype.getUserClaims = function() {
+
+      var _this = this;
+
+      userService.getUserClaims({
+        userId: _this.getUserId()
+      }).then(function success(response) {
+        $rootScope.currentUserClaims = response;
+      }, function error(response) {
+        $rootScope.logger.error('Error getting user claims');
+        _this.logout();
+      });
     };
 
     return new AuthService();

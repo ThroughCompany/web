@@ -9,7 +9,6 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <meta name="title" content="{{ meta.title }}">
   <meta name="description" content="{{ meta.description }}">
-
   <!-- VENDOR CSS -->
   <link href='http://fonts.googleapis.com/css?family=Permanent+Marker|PT+Serif:400,700,400italic|Raleway:700,400' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="/font-glyphs/fontcustom.css" />
@@ -24,10 +23,8 @@
   <div id="fb-root"></div>
   <!-- need for ngAnimate -->
   <base href="/" />
-
   <div class="view-container view-frame view-fade-in" ui-view="">
   </div>
-
   <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
   <script src="/bower_components/moment/moment.js"></script>
@@ -46,31 +43,17 @@
   <script src="/bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
   <script src="/bower_components/textAngular/dist/textAngular.min.js"></script>
   <script src="/bower_components/angular-ui-select/dist/select.js"></script>
-
   <!-- inject:js -->
   <!-- endinject -->
-
   <script>
-  //TODO: move to separate file
-  $('body').on('click', function(e) {
-    $('[data-toggle="popover"]').each(function() {
-      //the 'is' for buttons that trigger popups
-      //the 'has' for icons within a button that triggers a popup
-      if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-        $(this).popover('hide');
-      }
-    });
-  });
   $(document).ready(function() {
     $('body').tooltip({
       selector: '[data-toggle=tooltip]'
     });
   });
   </script>
-
   <!-- FACEBOOK -->
-  <script>
-  //https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.0
+  <!-- <script>
   window.fbAsyncInit = function() {
     FB.init({
       appId: '1484362698477368',
@@ -100,7 +83,7 @@
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-  </script>
+  </script> -->
 </body>
 
 </html>
