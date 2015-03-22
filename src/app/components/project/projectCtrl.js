@@ -26,9 +26,25 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     };
 
     $scope.form = {
-      projectId: $scope.project._id,
-      wiki: $scope.project.wiki
+      projectId: $scope.project._id
     };
+
+    $scope.changeWikiPage = function(page) {
+      $scope.form.wiki = page.text;
+      $scope.form.pageId = page._id;
+    };
+
+    $scope.createWikiPage = function() {
+      projectService.createWikiPage({
+        projectId: $scope.project._id
+      }).then(function(response) {
+        $scope.project.wiki.pages.push(response);
+      }, function(response) {
+        $scope.logger.error(response);
+      });
+    };
+
+    $scope.changeWikiPage($scope.project.wiki.pages[0]);
 
     $scope.$watch('form.wiki', function(val) {
       if (!$scope.loaded) return;
@@ -49,7 +65,11 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     $scope.updateProject = function(form) {
       $scope.savingWiki = true;
 
-      projectService.updateProjectById($scope.form).then(function(response) {
+      projectService.updateWikiPageById({
+        projectId: $scope.project._id,
+        pageId: $scope.form.pageId,
+        text: $scope.form.wiki
+      }).then(function(response) {
         $timeout(function() {
           $scope.savingWiki = false;
         }, 500);

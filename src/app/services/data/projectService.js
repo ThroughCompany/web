@@ -32,6 +32,14 @@ angular.module('throughCompanyApp').factory('projectService', [
         url: appSettings.baseUrl + '/projects/:projectId/users',
         isArray: true
       },
+      createWikiPage: {
+        method: 'POST',
+        url: appSettings.baseUrl + '/projects/:projectId/wiki/pages'
+      },
+      updateWikiPage: {
+        method: 'PATCH',
+        url: appSettings.baseUrl + '/projects/:projectId/wiki/pages/:pageId'
+      }
     });
 
     function ProjectService() {
@@ -136,6 +144,53 @@ angular.module('throughCompanyApp').factory('projectService', [
           deferred.reject(response);
         });
       }
+
+      return deferred.promise;
+    };
+
+    ProjectService.prototype.createWikiPage = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.projectId) throw new Error('projectId is required');
+
+      var _this = this;
+      var deferred = $q.defer();
+
+      var projectId = options.projectId
+      delete options.projectId;
+
+      Project.createWikiPage({
+        projectId: projectId
+      }, options).$promise.then(function success(response) {
+        deferred.resolve(response);
+      }, function error(response) {
+        deferred.reject(response);
+      });
+
+      return deferred.promise;
+    };
+
+    ProjectService.prototype.updateWikiPageById = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.projectId) throw new Error('projectId is required');
+      if (!options.pageId) throw new Error('pageId is required');
+
+      var _this = this;
+      var deferred = $q.defer();
+
+      var projectId = options.projectId
+      delete options.projectId;
+
+      var pageId = options.pageId
+      delete options.pageId;
+
+      Project.updateWikiPage({
+        projectId: projectId,
+        pageId: pageId
+      }, options).$promise.then(function success(response) {
+        deferred.resolve(response);
+      }, function error(response) {
+        deferred.reject(response);
+      });
 
       return deferred.promise;
     };

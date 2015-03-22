@@ -3,7 +3,6 @@
     background-position: center;
     background-size: cover;
     height: 520px;
-    margin-bottom: 40px;
     position: relative;
     &.has-banner {
       .hero-inner {
@@ -40,7 +39,7 @@
       }
       h2 {
         text-align: center;
-        padding-top: 150px;
+        padding-top: 170px;
         font-weight: 800;
         font-size: 68px;
         margin: 0;
@@ -53,9 +52,42 @@
       }
     }
   }
-  .container {
-    padding-top: 20px;
+  .project-nav {
+    border-bottom: 1px solid @gray-lighter;
+    background: white;
+    width: 100%;
+    top: 0;
+    left: 0;
+    &.affix {
+      z-index: 1000;
+    }
+    .nav {
+      margin: 0;
+      padding: 0;
+      > li {
+        float: left;
+        &.active, &.open {
+          > a {
+            border-bottom: 5px solid @brand-primary;
+          }
+        }
+        > a {
+          padding: 20px 30px;
+          display: block;
+          border-bottom: 5px solid white;
+          &:hover {
+            border-bottom: 5px solid @brand-primary;
+          }
+        }
+      }
+    }
+  }
+  .project-container {
     padding-bottom: 80px;
+    &.affix {
+      position: static;
+      padding-top: 68px;
+    }
     .project-content-wrapper {
       .project-content {
         .edit-wiki {
