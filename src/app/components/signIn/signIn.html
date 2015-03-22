@@ -1,0 +1,29 @@
+<div id="sign-in" class="container col-md-4 col-md-offset-4">
+  <!--   <button class="btn btn-facebook btn-block" type="button" ng-click="loginFacebook($event)" ng-class="{ 'btn-danger' : loginFacebookError, 'btn-primary' : !loginFacebookError, 'facebook-login-btn' : !loginFacebookError }">
+    <span ng-hide="loggingInFacebook || loginFacebookError">
+        Signin with&nbsp;
+        <i class="fa fa-facebook-square"></i>
+      </span>
+    <span ng-show="loginFacebookError">
+        There was an eror logging in with Facebook
+      </span>
+    <i class="fa fa-refresh fa-spin" ng-show="loggingInFacebook && !loginFacebookError"></i>
+  </button>
+  <p class="center or">or</p> -->
+  <form class="clearfix" name="loginForm" role="form" novalidate>
+    <div class="form-group" ng-class="{ 'has-errors' : submitted && loginForm.email.$invalid }">
+      <input class="form-control preroll" tabindex="1" placeholder="Email" name="email" type="text" ng-model="form.email" ng-class=" { preroll : !showEmail }" required ng-pattern="regexes.email" />
+      <p class="error-msg" ng-show="submitted && loginForm.email.$error.required">Please enter your email.
+      </p>
+    </div>
+    <div class="form-group" ng-class="{ 'has-errors' : submitted && loginForm.password.$invalid }">
+      <input class="form-control preroll" tabindex="2" placeholder="Password" name="password" type="password" ng-model="form.password" ng-class="{ preroll : !showPassword }" required />
+      <p class="error-msg" ng-show="submitted && loginForm.password.$error.required">Please enter your password.
+      </p>
+    </div>
+    <button class="btn-block btn-icon-center preroll" tabindex="3" ng-click="login(loginForm)" ng-bs-animated-button is-submitting="loginSubmitting" result="loginResult" options="loginBtnOptions" ng-class="{ preroll : !showLoginBtn }">
+    </button>
+    <p class="center no-account preroll" ng-class="{ preroll : !showNoAccount }">Don't have an account? <a href="#" ui-sref="system.signUp({ project : project })">Sign Up</a>
+    </p>
+  </form>
+</div>

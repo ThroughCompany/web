@@ -6,18 +6,35 @@ build:
     - plasticine/bower-install@0.0.4
     - yeehaa/gulp@0.0.4
 
-    - script:
-        name: build info
-        code: |
-          echo "node version $(node -v) running"
-          echo "npm version $(npm -v) running"
 deploy:
-    steps:
-        - heroku-deploy:
-            key-name: HEROKU_DEPLOY_KEY
-
-    after-steps:
-        - sherzberg/slack-notify:
-            subdomain: wercker
-            token: $SLACK_TOKEN
-            channel: $SLACK_CHANNEL
+  steps:
+    - add-to-known_hosts:
+        hostname: heroku.com
+    - script:
+        name: add-ssh-keys
+        code: |
+          rsync ssh/* ~/.ssh
+          chmod 600 ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa.pub
+    - script:
+        name: clean-build
+        code: |
+          rm -rf .git*
+          rm -rf node_modules
+          rm -rf ssh
+          rm -rf src
+    - script:
+        name: deploy
+        code: |
+          git init
+          git config --global user.name "wercker"
+          git config --global user.email "wercker@throughcompany.com"
+          git add .
+          git commit -am "deploy $WERCKER_GIT_COMMIT"
+          git remote add heroku git@heroku.com:$APP.git
+          git push heroku master --force
+  after-steps:
+     - sherzberg/slack-notify:
+         subdomain: wercker
+         token: $SLACK_TOKEN
+         channel: $SLACK_CHANNEL

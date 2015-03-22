@@ -1,11 +1,45 @@
-﻿@import "../bower_components/bootstrap/less/bootstrap.less";
-@import "../bower_components/font-awesome/less/font-awesome.less";
-@import "_variables.less";
-@import "_globals.less";
+﻿@import "throughcompany-strap/throughcompany-strap.less";
+@import "_appVariables.less";
+@import "_appComponents.less";
 @import "_appAnimations.less";
 @import "header.less";
-@import "home.less";
-@import "login.less";
-@import "components/user/app-user-dashboard.less";
+/* Components */
 
+@import "components/home.less";
+@import "components/project.less";
+@import "components/startProject.less";
+@import "components/user.less";
+@import "components/signup.less";
+@import "components/signin.less";
+// /* Components - App */
+@import "components/app/components/userProfile.less";
+@import "components/app/components/userSettings.less";
+@import "components/app/components/createProject.less";
+@import "components/app/components/projectSettings.less";
 /* ------------------------------------------------------ */
+
+body {
+  .serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  .sans-serif;
+}
+
+a {
+  text-decoration: none;
+  &:active {
+    text-decoration: none;
+  }
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.container {
+  //max-width: 1000px;
+}

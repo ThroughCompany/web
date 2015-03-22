@@ -7,33 +7,81 @@ angular.module('throughCompanyApp').config([
       .otherwise('/404');
 
     $urlRouterProvider.when('/', '/home');
-
     $stateProvider
       .state('system', {
         url: '/',
         templateUrl: '/app/views/system.html',
-        controller: 'systemController'
+        controller: 'systemCtrl'
       })
       .state('system.home', {
         url: 'home',
-        templateUrl: '/app/views/home.html',
-        controller: 'homeController'
+        templateUrl: '/app/components/home/home.html',
+        controller: 'homeCtrl'
       })
-      .state('system.login', {
-        url: 'login',
-        templateUrl: '/app/views/login.html',
-        controller: 'loginController'
+      .state('system.startProject', {
+        url: 'start-project',
+        templateUrl: '/app/components/startProject/startProject.html',
+        controller: 'startProjectCtrl'
       })
-      .state('system.register', {
-        url: 'register',
-        templateUrl: '/app/views/register.html',
-        controller: 'registerController'
+      .state('system.project', {
+        url: 'project/:projectId',
+        templateUrl: '/app/components/project/project.html',
+        controller: 'projectCtrl',
+        resolve: {
+          project: ['$rootScope', '$stateParams', '$state', 'projectService', '$q',
+            function($rootScope, $stateParams, $state, projectService, $q) {
+              var deferred = $q.defer();
+
+              projectService.getProjectById({
+                projectId: $stateParams.projectId
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                $state.go('system.404');
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ]
+        }
+      })
+      .state('system.user', {
+        url: 'user/:userId',
+        templateUrl: '/app/components/user/user.html',
+        controller: 'userCtrl',
+        resolve: {
+          user: ['$rootScope', '$stateParams', 'userService', '$q',
+            function($rootScope, $stateParams, userService, $q) {
+              var deferred = $q.defer();
+
+              userService.getUserById({
+                userId: $stateParams.userId
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ]
+        }
+      })
+      .state('system.signIn', {
+        url: 'signin?email&project',
+        templateUrl: '/app/components/signIn/signIn.html',
+        controller: 'signInCtrl'
+      })
+      .state('system.signUp', {
+        url: 'signup?project',
+        templateUrl: '/app/components/signUp/signUp.html',
+        controller: 'signUpCtrl'
       })
       .state('system.404', {
         url: '404',
-        templateUrl: '/app/views/404.html',
-        controller: 'errorController'
+        templateUrl: '/app/components/notFound/notFound.html',
+        controller: 'notFoundCtrl'
       });
-
   }
 ]);

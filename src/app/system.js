@@ -4,9 +4,11 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'ui.bootstrap',
   'ui.router',
   'ng-bs-animated-button',
-  'ui.bootstrap.datetimepicker',
-  'ngStorage',
-  'ngAnimate'
+  'ngAnimate',
+  'textAngular',
+  'ngSanitize',
+  'ui.select',
+  'duScroll'
 ]);
 
 throughCompanyApp.config(['$locationProvider',
@@ -18,28 +20,54 @@ throughCompanyApp.config(['$locationProvider',
 throughCompanyApp.run([
   '$rootScope',
   '$state',
-  'menuService',
+  '$window',
+  '$timeout',
   'authService',
   'regexService',
   'routes',
-  function($rootScope, $state, menuService, authService, regexService, routes) {
-    $rootScope.menu = menuService.init();
+  'loggerService',
+  'userService',
+  function($rootScope, $state, $window, $timeout, authService, regexService, routes, loggerService, userService) {
+    // $rootScope.menu = menuService.init();
+
+    $rootScope.meta = {
+      title: null,
+      description: null
+    };
+    $rootScope.setMetaTitle = function(title) {
+      $rootScope.meta.title = title;
+    };
+    $rootScope.setMetaDescription = function(description) {
+      $rootScope.meta.description = description;
+    };
+    $rootScope.setMetaTitle('Welcome');
+    $rootScope.setMetaDescription('Welcome to Through Company.com');
+
+    $rootScope.logger = loggerService;
     $rootScope.regexes = regexService; //hash of regex constants
     $rootScope.auth = authService; //helpers for checking claims
     $rootScope.routes = routes;
+
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      if ((toState.data && toState.data.authenticate && !authService.getToken()) || !authService.isLoggedIn()) {
+      if (toState.data && toState.data.authenticate && !authService.isLoggedIn()) {
         // User isn’t authenticated
-        //$state.go('system.home');
-        //event.preventDefault();
+        $rootScope.logger.error('Not Authenticated');
+        $state.go('system.home');
+        event.preventDefault();
       }
     });
-    $rootScope.$on('$viewContentLoaded', function(event, toState, toParams, fromState, fromParams) {
-      // if (!authService.isLoggedIn()) {
-      //     // User isn’t authenticated
-      //     //$state.go('system.home');
-      //     //event.preventDefault();
-      // }
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+      // ------------ auto scroll ------------ //
+      $timeout(function() {
+        $window.scrollTo(0, 0);
+      }, 100);
     });
+
+    if (authService.isLoggedIn()) {
+      authService.getUser();
+
+      authService.getUserClaims();
+    }
   }
 ]);
