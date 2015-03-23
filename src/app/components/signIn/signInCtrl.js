@@ -1,5 +1,6 @@
 angular.module('throughCompanyApp').controller('signInCtrl', [
   '$scope',
+  '$rootScope',
   '$stateParams',
   'authService',
   'utilsService',
@@ -7,7 +8,7 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
   '$state',
   'routes',
   '$timeout',
-  function($scope, $stateParams, authService, utilsService, projectService, $state, routes, $timeout) {
+  function($scope, $rootScope, $stateParams, authService, utilsService, projectService, $state, routes, $timeout) {
     $scope.project = $state.params.project ? JSON.parse($state.params.project) : null;
 
     var start = 100;
@@ -57,6 +58,9 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
         authService.login($scope.form.email, $scope.form.password)
           .then(function success(response) {
             $scope.loginSubmitting = false;
+
+            $rootScope.currentUser = response.user;
+            authService.getUserClaims();
 
             $timeout(function() {
               $scope.loginResult = 'success';

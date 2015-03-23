@@ -64,10 +64,9 @@ throughCompanyApp.run([
       }, 100);
     });
 
-    if (authService.isLoggedIn()) {
-      authService.getUser();
-
-      authService.getUserClaims();
-    }
+    // if (authService.isLoggedIn()) {
+    //   authService.getUser();
+    //   authService.getUserClaims();
+    // }
   }
 ]);

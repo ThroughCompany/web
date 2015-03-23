@@ -11,7 +11,48 @@ angular.module('throughCompanyApp').config([
       .state('system', {
         url: '/',
         templateUrl: '/app/views/system.html',
-        controller: 'systemCtrl'
+        controller: 'systemCtrl',
+        abstract: true,
+        resolve: {
+          user: ['$rootScope', 'userService', 'authService', '$q',
+            function($rootScope, userService, authService, $q) {
+              var deferred = $q.defer();
+
+              var userId = authService.getUserId();
+
+              if (!userId) return deferred.resolve(null);
+
+              userService.getUserById({
+                userId: userId
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ],
+          userClaims: ['userService', 'authService', '$q',
+            function(userService, authService, $q) {
+              var deferred = $q.defer();
+
+              var userId = authService.getUserId();
+
+              if (!userId) return deferred.resolve(null);
+
+              userService.getUserClaims({
+                userId: userId
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ]
+        }
       })
       .state('system.home', {
         url: 'home',
@@ -82,6 +123,42 @@ angular.module('throughCompanyApp').config([
         url: '404',
         templateUrl: '/app/components/notFound/notFound.html',
         controller: 'notFoundCtrl'
+      })
+      //user routes
+      .state('system.userProfile', {
+        url: 'profile',
+        templateUrl: '/app/components/userProfile/userProfile.html',
+        controller: 'userProfileCtrl'
+      })
+      .state('system.userSettings', {
+        url: 'settings',
+        templateUrl: '/app/components/userSettings/userSettings.html',
+        controller: 'userSettingsCtrl',
+        abstract: true
+      })
+      .state('system.userSettings.profile', {
+        url: 'profile',
+        templateUrl: '/app/components/userSettings/userSettingsProfile.html',
+        controller: 'userSettingsProfileCtrl'
+      })
+      .state('system.createProject', {
+        url: 'new-project',
+        templateUrl: '/app/components/createProject/createProject.html',
+        controller: 'createProjectCtrl'
+      })
+      .state('system.projectSettings', {
+        url: 'project/:projectId/settings',
+        templateUrl: '/app/components/projectSettings/projectSettings.html',
+        controller: 'projectSettingsCtrl',
+        abstract: true,
+        data: {
+          authenticate: true
+        }
+      })
+      .state('system.projectSettings.profile', {
+        url: '/profile',
+        templateUrl: '/app/components/projectSettings/projectSettingsProfile.html',
+        controller: 'projectSettingsProfileCtrl'
       });
   }
 ]);

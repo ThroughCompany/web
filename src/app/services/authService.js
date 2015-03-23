@@ -12,7 +12,9 @@ angular.module('throughCompanyApp').factory('authService', [
     function AuthService() {}
 
     AuthService.prototype.login = function(email, password) {
-      return $http.post(appSettings.baseUrl + '/auth/credentials', {
+      var deferred = $q.defer();
+
+      $http.post(appSettings.baseUrl + '/auth/credentials', {
         email: email,
         password: password
       }).then(function success(response) {
@@ -22,10 +24,12 @@ angular.module('throughCompanyApp').factory('authService', [
         $window.sessionStorage.token = response.data.token;
         $window.sessionStorage.userId = response.data.user._id;
 
-        $rootScope.user = response.data.user;
-
-        return response;
+        return deferred.resolve(response.data);
+      }, function error(response) {
+        return deferred.reject(response.data);
       });
+
+      return deferred.promise;
     };
 
     AuthService.prototype.loginFacebook = function() {
@@ -62,10 +66,7 @@ angular.module('throughCompanyApp').factory('authService', [
         $window.sessionStorage.userId = response.data.user._id;
         $window.sessionStorage.fbToken = fbToken;
 
-        $rootScope.user = response.data.user;
-        return response;
-      }, function error(response) {
-        return response;
+        return response.data;
       });
     };
 

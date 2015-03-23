@@ -2,8 +2,13 @@ angular.module('throughCompanyApp').controller('systemCtrl', [
   '$scope',
   '$rootScope',
   'loggerService',
-  function($scope, $rootScope, logger) {
+  'user',
+  'userClaims',
+  function($scope, $rootScope, logger, user, userClaims) {
     logger.info('system controller loaded...');
+
+    $rootScope.currentUser = user;
+    $rootScope.currentUserClaims = userClaims;
 
     $scope.getUserName = function() {
       if (!$scope.currentUser) return null;
