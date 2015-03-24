@@ -1,5 +1,6 @@
 angular.module('throughCompanyApp').controller('projectCtrl', [
   '$scope',
+  '$state',
   '$rootScope',
   '$modal',
   '$timeout',
@@ -8,7 +9,7 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
   'project',
   'utilsService',
   'scrollbar',
-  function($scope, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService, scrollbar) {
+  function($scope, $state, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService, scrollbar) {
     $rootScope.setMetaTitle(project.name);
 
     $scope.project = project;
@@ -57,12 +58,34 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       }
     });
 
+    $scope.$on('scroll', function(event, args) {
+      if (!args || !args.id) return;
+
+      $scope.scrollTo(args.id);
+    });
+
     $scope.scrollTo = function(id) {
       var currentHeight = scrollbar.getCurrentHeight();
 
       if (id === 'project-wiki' && (currentHeight > 200 && currentHeight < 600)) return;
 
       utilsService.scrollTo(id, 40);
+    };
+
+    $scope.navigateTo = function(state, id) {
+      var currentState = $state.current.name;
+      
+      if (currentState !== state) {
+        $state.go(state);
+
+        $timeout(function() {
+          $scope.$emit('scroll', {
+            id: id
+          });
+        });
+      } else {
+        $scope.scrollTo(id);
+      }
     };
 
     $timeout(function() {

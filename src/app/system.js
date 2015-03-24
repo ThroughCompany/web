@@ -47,6 +47,7 @@ throughCompanyApp.run([
     $rootScope.regexes = regexService; //hash of regex constants
     $rootScope.auth = authService; //helpers for checking claims
     $rootScope.routes = routes;
+    $rootScope.$state = $state;
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       if (toState.data && toState.data.authenticate && !authService.isLoggedIn()) {

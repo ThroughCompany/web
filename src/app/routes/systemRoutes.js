@@ -7,6 +7,7 @@ angular.module('throughCompanyApp').config([
       .otherwise('/404');
 
     $urlRouterProvider.when('/', '/home');
+
     $stateProvider
       .state('system', {
         url: '/',
@@ -87,6 +88,11 @@ angular.module('throughCompanyApp').config([
           ]
         }
       })
+      .state('system.project.settings', {
+        url: '/settings',
+        templateUrl: '/app/components/project/projectSettings.html',
+        controller: 'projectSettingsCtrl'
+      })
       .state('system.user', {
         url: 'user/:userId',
         templateUrl: '/app/components/user/user.html',
@@ -134,17 +140,26 @@ angular.module('throughCompanyApp').config([
         url: 'settings',
         templateUrl: '/app/components/userSettings/userSettings.html',
         controller: 'userSettingsCtrl',
-        abstract: true
+        abstract: true,
+        data: {
+          authenticate: true
+        }
       })
       .state('system.userSettings.profile', {
         url: 'profile',
         templateUrl: '/app/components/userSettings/userSettingsProfile.html',
-        controller: 'userSettingsProfileCtrl'
+        controller: 'userSettingsProfileCtrl',
+        data: {
+          authenticate: true
+        }
       })
       .state('system.createProject', {
         url: 'new-project',
         templateUrl: '/app/components/createProject/createProject.html',
-        controller: 'createProjectCtrl'
+        controller: 'createProjectCtrl',
+        data: {
+          authenticate: true
+        }
       })
       .state('system.projectSettings', {
         url: 'project/:projectId/settings',

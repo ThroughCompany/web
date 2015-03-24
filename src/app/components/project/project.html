@@ -30,15 +30,15 @@
           </ul>
         </li>
         <li>
-          <a href="#" ng-click="scrollTo('project-needs')">Needs</a>
+          <a href="#" ng-click="navigateTo(routes.project, 'project-needs')">Needs</a>
         </li>
         <li>
-          <a href="#" ng-click="scrollTo('project-team')">
+          <a href="#" ng-click="navigateTo(routes.project, 'project-team')">
             <i class="fa fa-users"></i>&nbsp;Team
           </a>
         </li>
         <li ng-show="auth.hasProjectIdClaim(project._id)">
-          <a href="#" ui-sref-name="routes.projectSettingsProfile({ projectId : project._id })">
+          <a href="#" ng-click="navigateTo(routes.projectSettings, 'project-settings')">
             <i class="fa fa-gear"></i>&nbsp;Settings
           </a>
         </li>
@@ -46,42 +46,9 @@
     </div>
   </div>
   <div class="project-container container clearfix" affix data-offset-top="584">
-    <!--  <div class="project-header clearfix">
-      <div class="name clearfix preroll" ng-class="{ preroll : !loaded }">
-        <div class="name-line name-line-left col-xs-3">
-          <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_left.jpg" />
-        </div>
-        <h2 class="center col-xs-6">
-          {{ project.name }}
-        </h2>
-        <div class="name-line name-line-right col-xs-3">
-          <img class="img-responsive" src="https://s3.amazonaws.com/throughcompany-assets/images/brush_right.jpg" />
-        </div>
-      </div>
-    </div> -->
-    <div class="project-content-wrapper clearfix row">
+    <div class="project-landing clearfix row" ng-show="$state.current.name === 'system.project'">
       <div class="project-sidebar col-sm-3">
         <div affix data-offset-top="760">
-          <!--           <ul class="link-list">
-            <li class="active">
-              <a href="#" ng-click="scrollTo('project-wiki')">
-                <i class="fa fa-pencil"></i>&nbsp;Wiki
-              </a>
-            </li>
-            <li>
-              <a href="#" ng-click="scrollTo('project-needs')">Needs</a>
-            </li>
-            <li>
-              <a href="#" ng-click="scrollTo('project-team')">
-                <i class="fa fa-users"></i>&nbsp;Team
-              </a>
-            </li>
-            <li ng-show="auth.hasProjectIdClaim(project._id)">
-              <a href="#" ui-sref-name="routes.projectSettingsProfile({ projectId : project._id })">
-                <i class="fa fa-gear"></i>&nbsp;Settings
-              </a>
-            </li>
-          </ul> -->
           <hr>
           <p>
             <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
@@ -144,6 +111,8 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="project-pages view-container view-frame view-fade-in" ui-view>
     </div>
   </div>
   <p class="wiki-saving" ng-show="savingWiki">

@@ -1,17 +1,15 @@
-angular.module('throughCompanyApp').controller('projectSettingsProfileCtrl', [
+angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
   '$scope',
   '$rootScope',
   'userService',
   'alertService',
   'projectService',
   function($scope, $rootScope, userService, alertService, projectService) {
-    $scope.projectPromise.then(function() {
-      $rootScope.setMetaTitle($scope.project.name + ' Profile');
+    $rootScope.setMetaTitle($scope.project.name + ' Profile');
 
-      $scope.form = {
-        projectId: $scope.project._id
-      };
-    });
+    $scope.form = {
+      projectId: $scope.project._id
+    };
 
     $scope.updateProject = function(form) {
       if (!form.$valid) return;
