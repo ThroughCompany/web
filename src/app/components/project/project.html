@@ -12,8 +12,8 @@
     </div>
   </div>
   <div class="project-nav clearfix" affix data-offset-top="584">
-    <div class="container">
-      <ul class="nav clearfix">
+    <div class="container clearfix">
+      <ul class="nav clearfix pull-left">
         <li class="dropdown">
           <a href="#" ng-click="scrollTo('project-wiki')" data-toggle="dropdown">
             <i class="fa fa-pencil"></i>&nbsp;Wiki&nbsp;<span class="fa fa-chevron-down"></span>
@@ -40,6 +40,14 @@
         <li ng-show="auth.hasProjectIdClaim(project._id)">
           <a href="#" ng-click="navigateTo(routes.projectSettings, 'project-settings')">
             <i class="fa fa-gear"></i>&nbsp;Settings
+          </a>
+        </li>
+      </ul>
+      <ul class="nav clearfix pull-right">
+        <li>
+          <!-- TODO: only show if needs are listed -->
+          <a href="#" ng-click="navigateTo(routes.projectApply, 'project-apply')">
+            <i class="fa fa-star"></i>&nbsp;Join Us
           </a>
         </li>
       </ul>
@@ -92,9 +100,9 @@
             <h2>Team</h2>
             <div class="apply pull-right sans-serif">
               Want to join our team?
-              <button class="btn btn-xs btn-default">
+              <a href="#" class="btn btn-xs btn-default" ng-click="navigateTo(routes.projectApply, 'project-apply')">
                 Apply&nbsp;<i class="fa fa-arrow-right"></i>
-              </button>
+              </a>
             </div>
           </div>
           <div class="members clearfix row">

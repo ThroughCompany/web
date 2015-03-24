@@ -3,6 +3,7 @@ angular.module('throughCompanyApp').constant('routes', {
   home: 'system.home',
   project: 'system.project', //public project page
   projectSettings: 'system.project.settings',
+  projectApply: 'system.project.apply',
   user: 'system.user', //public user page
   startProject: 'system.startProject', //public project page
   signIn: 'system.signIn',
