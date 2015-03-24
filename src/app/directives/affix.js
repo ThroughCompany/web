@@ -1,6 +1,7 @@
 angular.module('throughCompanyApp').directive('affix', [
   '$rootScope',
-  function($rootScope) {
+  '$timeout',
+  function($rootScope, $timeout) {
     return {
       restrict: 'A',
       scope: {
@@ -8,8 +9,6 @@ angular.module('throughCompanyApp').directive('affix', [
       },
       link: function(scope, element, attrs) {
         var $el = angular.element(element);
-
-        console.log('afffiiix');
 
         scope.offsetTopTablet = attrs.offsetTopTablet;
         scope.offsetTopMobile = attrs.offsetTopMobile;
@@ -23,23 +22,26 @@ angular.module('throughCompanyApp').directive('affix', [
         scope.offsetBottom = scope.offsetBottom > 0 ? scope.offsetBottom : null;
 
         $document.scroll(function() {
-          var windowWidth = $window.width();
+          $timeout(function() {
+            var windowWidth = $window.width();
 
-          if (windowWidth <= 992 && windowWidth >= 768 && scope.offsetTopTablet) {
-            scope.offsetTop = scope.offsetTopTablet;
-          } else if (windowWidth <= 768 && scope.offsetTopMobile) {
-            scope.offsetTop = scope.offsetTopMobile;
-          } else {
-            scope.offsetTop = originalOffsetTop;
-          }
+            if (windowWidth <= 992 && windowWidth >= 768 && scope.offsetTopTablet) {
+              scope.offsetTop = scope.offsetTopTablet;
+            } else if (windowWidth <= 768 && scope.offsetTopMobile) {
+              scope.offsetTop = scope.offsetTopMobile;
+            } else {
+              scope.offsetTop = originalOffsetTop;
+            }
 
-          var y = $(this).scrollTop();
+            var y = $(this).scrollTop();
 
-          if (y >= scope.offsetTop) {
-            element.addClass('affix');
-          } else {
-            element.removeClass('affix');
-          }
+            if (y >= scope.offsetTop) {
+              element.addClass('affix');
+            } else {
+              element.removeClass('affix');
+            }
+          });
+
           // if (scope.offsetBottom !== undefined && scope.offsetBottom !== null) {
           //   if (y >= (docHeight - scope.offsetBottom)) {
           //     element.removeClass('affix');

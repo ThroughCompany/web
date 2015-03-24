@@ -7,7 +7,8 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
   'alertService',
   'project',
   'utilsService',
-  function($scope, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService) {
+  'scrollbar',
+  function($scope, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService, scrollbar) {
     $rootScope.setMetaTitle(project.name);
 
     $scope.project = project;
@@ -35,6 +36,8 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     };
 
     $scope.createWikiPage = function() {
+      if (!$scope.currentUser) return;
+
       projectService.createWikiPage({
         projectId: $scope.project._id
       }).then(function(response) {
@@ -47,7 +50,7 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     $scope.changeWikiPage($scope.project.wiki.pages[0]);
 
     $scope.$watch('form.wiki', function(val) {
-      if (!$scope.loaded) return;
+      if (!$scope.currentUser || !$scope.loaded) return;
 
       if (val !== undefined && val !== null && val !== '') {
         $scope.updateProjectThrottled();
@@ -55,6 +58,10 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     });
 
     $scope.scrollTo = function(id) {
+      var currentHeight = scrollbar.getCurrentHeight();
+
+      if (id === 'project-wiki' && (currentHeight > 200 && currentHeight < 600)) return;
+
       utilsService.scrollTo(id, 40);
     };
 

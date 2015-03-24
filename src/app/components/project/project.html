@@ -3,10 +3,10 @@
     <div class="hero-inner">
     </div>
     <div class="hero-text preroll" ng-class="{ preroll : !loaded }">
-      <h2 class="center">
+      <h2 class="center" inline-edit inline-edit-show="auth.hasProjectIdClaim(project._id)">
       {{ project.name }}
-    </h2>
-      <p class="center">
+      </h2>
+      <p class="center" inline-edit inline-edit-show="auth.hasProjectIdClaim(project._id)">
         {{ project.description }}
       </p>
     </div>
@@ -22,7 +22,7 @@
             <li ng-repeat="page in project.wiki.pages">
               <a href="#" ng-click="changeWikiPage(page, $event)">{{ page.title }}</a>
             </li>
-            <li>
+            <li ng-show="auth.hasProjectIdClaim(project._id)">
               <a href="#" ng-click="createWikiPage($event)">
                 <i class="fa fa-plus"></i>&nbsp;Add
               </a>

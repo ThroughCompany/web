@@ -64,6 +64,7 @@
     .nav {
       margin: 0;
       padding: 0;
+      .sans-serif;
       > li {
         float: left;
         &.active, &.open {
@@ -75,8 +76,9 @@
           padding: 20px 30px;
           display: block;
           border-bottom: 5px solid white;
-          &:hover {
+          &:hover, &:focus {
             border-bottom: 5px solid @brand-primary;
+            background: none;
           }
           .fa-chevron-down {
             margin-left: 10px;
@@ -143,6 +145,7 @@
                 display: block;
                 color: @text-color;
                 &:hover {
+                  .transition(.4s ease-in-out);
                   box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.15);
                 }
                 img {

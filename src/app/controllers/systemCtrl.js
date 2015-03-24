@@ -9,6 +9,7 @@ angular.module('throughCompanyApp').controller('systemCtrl', [
 
     $rootScope.currentUser = user;
     $rootScope.currentUserClaims = userClaims;
+    $scope.currentYear = (new Date()).getFullYear();
 
     $scope.getUserName = function() {
       if (!$scope.currentUser) return null;

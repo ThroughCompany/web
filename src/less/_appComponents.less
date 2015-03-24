@@ -1,12 +1,39 @@
 .wiki-text {
   .font-family-serif;
-  color:@gray;
+  color: @gray;
   ul {
     list-style: disc;
     margin: 0;
     //padding: 0;
   }
   ol {
-  	list-style: decimal;
+    list-style: decimal;
+  }
+}
+
+// ---------------------------------------------
+// Inline Edit
+// ---------------------------------------------
+.inline-edit-wrapper {
+  position: relative;
+  &.inline-edit-show {
+    .inline-edit {
+      opacity: 1;
+    }
+  }
+  .inline-edit-element {
+
+  }
+  .inline-edit {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin: 0 auto;
+    opacity: 0;
+    .transition(.4s ease-in-out);
+    input {
+      background: fade(@gray-dark, 50%);
+      border-color: @gray-light;
+    }
   }
 }
