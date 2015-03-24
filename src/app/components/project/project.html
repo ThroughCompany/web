@@ -15,10 +15,10 @@
     <div class="container clearfix">
       <ul class="nav clearfix pull-left">
         <li class="dropdown">
-          <a href="#" ng-click="scrollTo('project-wiki')" data-toggle="dropdown">
-            <i class="fa fa-pencil"></i>&nbsp;Wiki&nbsp;<span class="fa fa-chevron-down"></span>
+          <a href="#" ng-click="navigateTo(routes.project, 'project-wiki')">
+            <i class="fa fa-pencil"></i>&nbsp;Wiki
           </a>
-          <ul class="dropdown-menu">
+          <!--           <ul class="dropdown-menu">
             <li ng-repeat="page in project.wiki.pages">
               <a href="#" ng-click="changeWikiPage(page, $event)">{{ page.title }}</a>
             </li>
@@ -27,7 +27,7 @@
                 <i class="fa fa-plus"></i>&nbsp;Add
               </a>
             </li>
-          </ul>
+          </ul> -->
         </li>
         <li>
           <a href="#" ng-click="navigateTo(routes.project, 'project-needs')">Needs</a>
@@ -94,16 +94,25 @@
           <div class="header clearfix">
             <h2>Needs</h2>
           </div>
+          <div class="clearfix">
+            <div class="project-needs-add" ng-show="auth.hasProjectIdClaim(project._id)">
+              <ui-select multiple tagging="newAssetTag" ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false">
+                <ui-select-match placeholder="Enter a tag name">{{ $item.name }}</ui-select-match>
+                <ui-select-choices repeat="assetTag in assetTags | filter:$select.search" refresh="getAssetTags($select.search)" refresh-delay="200">
+                  <div ng-bind-html="assetTag.name"></div>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <div class="asset-tags">
+              <a href="#" class="asset-tag btn btn-default" ng-repeat="assetTag in project.assetTags">
+                {{ assetTag.name }}
+              </a>
+            </div>
+          </div>
         </div>
         <div id="project-team" class="project-team project-section">
           <div class="header clearfix">
             <h2>Team</h2>
-            <div class="apply pull-right sans-serif">
-              Want to join our team?
-              <a href="#" class="btn btn-xs btn-default" ng-click="navigateTo(routes.projectApply, 'project-apply')">
-                Apply&nbsp;<i class="fa fa-arrow-right"></i>
-              </a>
-            </div>
           </div>
           <div class="members clearfix row">
             <div class="col-md-4" ng-repeat="projectUser in projectUsers">

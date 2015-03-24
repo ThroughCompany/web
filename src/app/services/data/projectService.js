@@ -39,6 +39,10 @@ angular.module('throughCompanyApp').factory('projectService', [
       updateWikiPage: {
         method: 'PATCH',
         url: appSettings.baseUrl + '/projects/:projectId/wiki/pages/:pageId'
+      },
+      createAssetTag: {
+        method: 'POST',
+        url: appSettings.baseUrl + '/projects/:projectId/assettags'
       }
     });
 
@@ -193,6 +197,20 @@ angular.module('throughCompanyApp').factory('projectService', [
       });
 
       return deferred.promise;
+    };
+
+    ProjectService.prototype.createAssetTag = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.projectId) throw new Error('options.projectId is required');
+
+      var self = this;
+      var projectId = options.projectId;
+
+      delete options.projectId;
+
+      return Project.createAssetTag({
+        projectId: projectId
+      }, options).$promise;
     };
 
     return new ProjectService();

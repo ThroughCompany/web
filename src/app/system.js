@@ -1,5 +1,4 @@
 var throughCompanyApp = angular.module('throughCompanyApp', [
-  'ngCookies',
   'ngResource',
   'ui.bootstrap',
   'ui.router',
