@@ -102,12 +102,12 @@ angular.module('throughCompanyApp').config([
       })
       .state('system.project.settings', {
         url: '/settings',
-        templateUrl: '/app/components/project/projectSettings.html',
+        templateUrl: '/app/components/project/settings/projectSettings.html',
         controller: 'projectSettingsCtrl'
       })
       .state('system.project.apply', {
         url: '/apply',
-        templateUrl: '/app/components/project/projectApply.html',
+        templateUrl: '/app/components/project/apply/projectApply.html',
         controller: 'projectApplyCtrl'
       })
       .state('system.user', {
