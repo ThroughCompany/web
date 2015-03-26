@@ -19,7 +19,7 @@ var defaultSettings = {
 
 var production = _.extend(_.clone(defaultSettings), {
   ENV: 'production',
-  API: 'xxxxx', //TODO: need to setup
+  API: 'https://api.throughcompany.com',
   NEWRELIC: {
     name: 'throughcompany-web-prod',
     key: 'e7c5a21591fb5d706825572ef8cde21bb7cde86c'

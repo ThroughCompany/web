@@ -79,13 +79,14 @@
       </div>
       <div class="project-content col-sm-9">
         <div class="edit-wiki clearfix">
-          <a href="#" class="btn btn-default btn-xs pull-right" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true" ng-show="auth.hasProjectIdClaim(project._id)">
+          <a href="#" class="btn btn-default btn-edit btn-xs pull-right" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true" ng-show="auth.hasProjectIdClaim(project._id)">
             <i class="fa fa-edit"></i>
           </a>
         </div>
         <div id="project-wiki" class="project-wiki project-section">
           <div class="project-wiki-editor" ng-show="editWiki">
-            <div class="wiki-text" text-angular ng-model="form.wiki" ta-toolbar="[['h1','h2','h3', 'h4', 'h5'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['bold','italics', 'underline', 'strikeThrough'], ['p', 'pre', 'quote', 'ul', 'ol', 'insertImage']]"></div>
+            <div class="wiki-text" text-angular ng-model="form.wiki" ta-toolbar="[['h1','h2','h3', 'h4', 'h5'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['bold','italics', 'underline', 'strikeThrough'], ['p', 'pre', 'quote', 'ul', 'ol', 'insertImage']]">
+            </div>
           </div>
           <div class="project-wiki-text wiki-text" ng-hide="editWiki" ng-bind-html="form.wiki">
           </div>
@@ -93,20 +94,47 @@
         <div id="project-needs" class="project-needs project-section">
           <div class="header clearfix">
             <h2>Needs</h2>
+            <p class="sub">What we need right now.</p>
+            <a href="#" class="btn btn-default btn-edit btn-xs pull-right" ng-click="editNeeds = !editNeeds" tooltip-placement="top" tooltip="Add What Your Project Needs" tooltip-append-to-body="true" ng-show="auth.hasProjectIdClaim(project._id)">
+              <i class="fa fa-plus"></i>
+            </a>
           </div>
           <div class="clearfix">
-            <div class="project-needs-add" ng-show="auth.hasProjectIdClaim(project._id)">
-              <ui-select multiple tagging="newAssetTag" ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false">
-                <ui-select-match placeholder="Enter a tag name">{{ $item.name }}</ui-select-match>
-                <ui-select-choices repeat="assetTag in assetTags | filter:$select.search" refresh="getAssetTags($select.search)" refresh-delay="200">
-                  <div ng-bind-html="assetTag.name"></div>
-                </ui-select-choices>
-              </ui-select>
+            <div class="project-needs-add" ng-show="auth.hasProjectIdClaim(project._id) && editNeeds">
+              <form name="addAssetForm" novalidate>
+                <div class="form-group">
+                  <label class="control-label">
+                    Search for what you need
+                  </label>
+                  <ui-select multiple tagging="newAssetTag" ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false">
+                    <ui-select-match placeholder="Enter a tag name">{{ $item.name }}</ui-select-match>
+                    <ui-select-choices repeat="assetTag in assetTags | filter:$select.search" refresh="getAssetTags($select.search)" refresh-delay="200">
+                      <div ng-bind-html="assetTag.name"></div>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+                <div class="form-group" ng-show="addAssetTagForm.tag">
+                  <label class="control-label">
+                    Add a description for what you need
+                  </label>
+                  <textarea class="form-control" name="description" ng-model="addAssetTagForm.description" required>
+                  </textarea>
+                </div>
+              </form>
             </div>
-            <div class="asset-tags">
-              <a href="#" class="asset-tag btn btn-default" ng-repeat="assetTag in project.assetTags">
-                {{ assetTag.name }}
-              </a>
+            <div class="asset-tags row" ng-hide="editNeeds">
+              <div class="col-md-3" ng-repeat="assetTag in project.assetTags">
+                <div class="asset-tag">
+                  <p class="name">
+                    {{ assetTag.name }}
+                  </p>
+                  <p class="connect">
+                    <a href="#" class="btn btn-default btn-sm">
+                      Connect
+                    </a>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

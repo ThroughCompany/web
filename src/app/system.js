@@ -55,6 +55,11 @@ throughCompanyApp.run([
         $state.go('system.home');
         event.preventDefault();
       }
+
+      if (toState.data && toState.data.meta) {
+        $rootScope.setMetaTitle(toState.data.meta.title);
+        $rootScope.setMetaDescription(toState.data.meta.description);
+      }
     });
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {

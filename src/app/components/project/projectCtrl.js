@@ -11,7 +11,8 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
   'scrollbar',
   'assetTagService',
   function($scope, $state, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService, scrollbar, assetTagService) {
-    $rootScope.setMetaTitle(project.name);
+    $scope.setMetaTitle(project.name);
+    $scope.setMetaDescription(project.name);
 
     $scope.project = project;
     $scope.savingWiki = false;
@@ -32,25 +33,30 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     };
 
     $scope.addAssetTagForm = {
-      tags: []
+      tags: [],
+      tag: null,
+      description: null
     };
     $scope.assetTags = [];
 
     $scope.$watch('addAssetTagForm.tags', function(val) {
       if (!val || !val.length) return;
 
-      var currentTags = $scope.project.assetTags && $scope.project.assetTags.length ? _.pluck($scope.project.assetTags, 'name') : [];
-      var newTags = _.filter(val, function(tag) {
-        return !_.contains(currentTags, tag);
-      });
+      $scope.addAssetTagForm.tag = val[0];
+      $scope.addAssetTagForm.tags = null;
 
-      if (newTags && newTags.length) {
-        _.each(newTags, function(newTag) {
-          $scope.createAssetTag(newTag.name);
-        });
-        $scope.addAssetTagForm.tags = [];
-        $scope.assetTags.selected = undefined;
-      }
+      // var currentTags = $scope.project.assetTags && $scope.project.assetTags.length ? _.pluck($scope.project.assetTags, 'name') : [];
+      // var newTags = _.filter(val, function(tag) {
+      //   return !_.contains(currentTags, tag);
+      // });
+
+      // if (newTags && newTags.length) {
+      //   _.each(newTags, function(newTag) {
+      //     $scope.createAssetTag(newTag.name);
+      //   });
+      //   $scope.addAssetTagForm.tags = [];
+      //   $scope.assetTags.selected = undefined;
+      // }
     });
 
     $scope.getProjectUserName = function(projectUser) {

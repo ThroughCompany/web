@@ -58,12 +58,24 @@ angular.module('throughCompanyApp').config([
       .state('system.home', {
         url: 'home',
         templateUrl: '/app/components/home/home.html',
-        controller: 'homeCtrl'
+        controller: 'homeCtrl',
+        data: {
+          meta: {
+            title: 'Welcome',
+            description: 'Welcome to Through Company.com'
+          }
+        }
       })
       .state('system.startProject', {
         url: 'start-project',
         templateUrl: '/app/components/startProject/startProject.html',
-        controller: 'startProjectCtrl'
+        controller: 'startProjectCtrl',
+        data: {
+          meta: {
+            title: 'Start a new Project',
+            description: 'Start a new Project'
+          }
+        }
       })
       .state('system.project', {
         url: 'project/:projectId',

@@ -98,9 +98,6 @@
         .edit-wiki {
           margin-bottom: 20px;
           margin-top: 20px;
-          .btn {
-            padding-right: 8px;
-          }
         }
         .project-section {
           padding-top: 40px;
@@ -179,12 +176,22 @@
             }
             .asset-tags {
               .asset-tag {
-                background: @brand-info;
-                float: left;
-                margin-right: 15px;
-                margin-bottom: 15px;
-                padding: 8px 10px;
-                color: white;
+                border-radius: 2px;
+                border: 1px solid @gray-lighter;
+                margin-bottom: 30px;
+                padding: 15px;
+                text-align: center;
+                .name {
+                  .sans-serif;
+                  font-weight: 600;
+                  font-size: 16px;
+                  margin-bottom: 20px;
+                }
+                .connect {
+                  .btn {
+                    width: 100%;
+                  }
+                }
               }
             }
           }
@@ -195,6 +202,14 @@
             h2 {
               display: inline-block;
               margin: 0;
+            }
+            .sub {
+              font-style: 12px;
+              display: inline-block;
+              font-style: italic;
+              .sans-serif;
+              margin-left: 20px;
+              color: fade(@gray-dark, 50%);
             }
           }
         }
@@ -230,7 +245,6 @@
                 padding: 12px;
                 display: block;
                 border-right: 1px solid @gray-lighter;
-                //border-bottom: 1px solid darken(@gray-lighter, 10%);
                 border-top: 1px solid @gray-lighter;
                 .transition(.2s ease-in-out);
                 &:hover {
@@ -258,6 +272,10 @@
         }
       }
     }
+  }
+  // ------ misc ------ //
+  .btn-edit {
+    padding-right: 8px;
   }
   .wiki-saving {
     position: fixed;

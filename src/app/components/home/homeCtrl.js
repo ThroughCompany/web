@@ -1,8 +1,9 @@
 angular.module('throughCompanyApp').controller('homeCtrl', [
   '$scope',
+  '$rootScope',
   'projectService',
   '$timeout',
-  function($scope, projectService, $timeout) {
+  function($scope, $rootScope, projectService, $timeout) {
     $scope.loaded = false;
 
     $timeout(function() {

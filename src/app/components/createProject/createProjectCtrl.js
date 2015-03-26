@@ -1,14 +1,14 @@
 angular.module('throughCompanyApp').controller('createProjectCtrl', [
   '$scope',
-  '$rootScope',
   '$timeout',
   '$state',
   'projectService',
   'alertService',
   'utilsService',
   'authService',
-  function($scope, $rootScope, $timeout, $state, projectService, alertService, utilsService, authService) {
-    $rootScope.setMetaTitle('Create a New Project');
+  function($scope, $timeout, $state, projectService, alertService, utilsService, authService) {
+    $scope.setMetaTitle('Create a New Project');
+    $scope.setMetaDescription('Have an great idea! Start a new project now.');
 
     // ---------------- buttons ----------------
     // create project button
