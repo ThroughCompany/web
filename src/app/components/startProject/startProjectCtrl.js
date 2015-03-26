@@ -5,8 +5,6 @@ angular.module('throughCompanyApp').controller('startProjectCtrl', [
   '$state',
   'alertService',
   function($scope, $rootScope, $timeout, $state, alertService) {
-    $rootScope.setMetaTitle('Start your Project');
-
     var start = 100;
     $timeout(function() {
       $scope.showTitle = true;
