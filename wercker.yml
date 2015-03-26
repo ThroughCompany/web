@@ -35,6 +35,6 @@ deploy:
           git push heroku master --force
   after-steps:
      - sherzberg/slack-notify:
-         subdomain: "$SLACK_DOMAIN"
-         token: "$SLACK_TOKEN"
-         channel: "$SLACK_CHANNEL"
+         subdomain: $SLACK_DOMAIN
+         token: $SLACK_TOKEN
+         channel: $SLACK_CHANNEL

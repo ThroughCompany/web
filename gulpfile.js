@@ -31,7 +31,7 @@ console.log('\n\nENV: ' + ENV + '\n\n');
 var BUILDDIR = 'build';
 
 //js
-var MINIFIEDSCRIPT = 'tablelistApp.min.js';
+var MINIFIEDSCRIPT = 'throughcompanyApp.min.js';
 var UGLIFYOPTIONS = {
   mangle: true,
   compress: true
