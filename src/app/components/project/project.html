@@ -1,0 +1,138 @@
+<div id="project">
+  <div class="hero" ng-class="{ 'has-banner' : project.bannerPic }" style="background-image: url('{{ project.bannerPic }}')">
+    <div class="hero-inner">
+    </div>
+    <div class="hero-text preroll" ng-class="{ preroll : !loaded }">
+      <h2 class="center" inline-edit inline-edit-show="auth.hasProjectIdClaim(project._id)">
+      {{ project.name }}
+      </h2>
+      <p class="center" inline-edit inline-edit-show="auth.hasProjectIdClaim(project._id)">
+        {{ project.description }}
+      </p>
+    </div>
+  </div>
+  <div class="project-nav clearfix" affix data-offset-top="584">
+    <div class="container clearfix">
+      <ul class="nav clearfix pull-left">
+        <li class="dropdown">
+          <a href="#" ng-click="navigateTo(routes.project, 'project-wiki')">
+            <i class="fa fa-pencil"></i>&nbsp;Wiki
+          </a>
+          <!--           <ul class="dropdown-menu">
+            <li ng-repeat="page in project.wiki.pages">
+              <a href="#" ng-click="changeWikiPage(page, $event)">{{ page.title }}</a>
+            </li>
+            <li ng-show="auth.hasProjectIdClaim(project._id)">
+              <a href="#" ng-click="createWikiPage($event)">
+                <i class="fa fa-plus"></i>&nbsp;Add
+              </a>
+            </li>
+          </ul> -->
+        </li>
+        <li>
+          <a href="#" ng-click="navigateTo(routes.project, 'project-needs')">Needs</a>
+        </li>
+        <li>
+          <a href="#" ng-click="navigateTo(routes.project, 'project-team')">
+            <i class="fa fa-users"></i>&nbsp;Team
+          </a>
+        </li>
+        <li ng-show="auth.hasProjectIdClaim(project._id)">
+          <a href="#" ng-click="navigateTo(routes.projectSettings, 'project-settings')">
+            <i class="fa fa-gear"></i>&nbsp;Settings
+          </a>
+        </li>
+      </ul>
+      <ul class="nav clearfix pull-right">
+        <li>
+          <!-- TODO: only show if needs are listed -->
+          <a href="#" ng-click="navigateTo(routes.projectApply, 'project-apply')">
+            <i class="fa fa-star"></i>&nbsp;Join Us
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="project-container container clearfix" affix data-offset-top="584">
+    <div class="project-landing clearfix row" ng-show="$state.current.name === 'system.project'">
+      <div class="project-sidebar col-sm-3">
+        <div affix data-offset-top="760">
+          <hr>
+          <p>
+            <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
+          </p>
+          <div class="social">
+            <ul>
+              <li>
+                <a href="{{ project.social.facebook }}" target="_blank">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{ project.social.linkedIn }}" target="_blank">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="project-content col-sm-9">
+        <div class="edit-wiki clearfix">
+          <a href="#" class="btn btn-default btn-xs pull-right" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true" ng-show="auth.hasProjectIdClaim(project._id)">
+            <i class="fa fa-edit"></i>
+          </a>
+        </div>
+        <div id="project-wiki" class="project-wiki project-section">
+          <div class="project-wiki-editor" ng-show="editWiki">
+            <div class="wiki-text" text-angular ng-model="form.wiki" ta-toolbar="[['h1','h2','h3', 'h4', 'h5'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['bold','italics', 'underline', 'strikeThrough'], ['p', 'pre', 'quote', 'ul', 'ol', 'insertImage']]"></div>
+          </div>
+          <div class="project-wiki-text wiki-text" ng-hide="editWiki" ng-bind-html="form.wiki">
+          </div>
+        </div>
+        <div id="project-needs" class="project-needs project-section">
+          <div class="header clearfix">
+            <h2>Needs</h2>
+          </div>
+          <div class="clearfix">
+            <div class="project-needs-add" ng-show="auth.hasProjectIdClaim(project._id)">
+              <ui-select multiple tagging="newAssetTag" ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false">
+                <ui-select-match placeholder="Enter a tag name">{{ $item.name }}</ui-select-match>
+                <ui-select-choices repeat="assetTag in assetTags | filter:$select.search" refresh="getAssetTags($select.search)" refresh-delay="200">
+                  <div ng-bind-html="assetTag.name"></div>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <div class="asset-tags">
+              <a href="#" class="asset-tag btn btn-default" ng-repeat="assetTag in project.assetTags">
+                {{ assetTag.name }}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div id="project-team" class="project-team project-section">
+          <div class="header clearfix">
+            <h2>Team</h2>
+          </div>
+          <div class="members clearfix row">
+            <div class="col-md-4" ng-repeat="projectUser in projectUsers">
+              <a class="team-member" href="#" ui-sref-name="routes.user({ userId : projectUser._id })">
+                <p class="center">
+                  <img class="img-circle" ng-src="{{ projectUser.profilePic }}" height="100px;" />
+                </p>
+                <p class="name center">
+                  {{ getProjectUserName(projectUser) }}
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="project-pages view-container view-frame view-fade-in" ui-view>
+    </div>
+  </div>
+  <p class="wiki-saving" ng-show="savingWiki">
+    <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Saving changes...
+  </p>
+</div>

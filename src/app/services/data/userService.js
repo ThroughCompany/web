@@ -1,7 +1,9 @@
 angular.module('throughCompanyApp').factory('userService', [
   '$resource',
+  '$http',
+  '$q',
   'appSettings',
-  function($resource, appSettings) {
+  function($resource, $http, $q, appSettings) {
 
     var User = $resource(appSettings.baseUrl + '/users', null, {
       create: {
@@ -29,38 +31,9 @@ angular.module('throughCompanyApp').factory('userService', [
         url: appSettings.baseUrl + '/users/:userId/projects',
         isArray: true
       },
-      getUserProjectById: {
-        method: 'GET',
-        url: appSettings.baseUrl + '/users/:userId/projects/:projectId',
-        params: {
-          projectId: '@projectId'
-        }
-      },
-      createUserProject: {
+      createAssetTag: {
         method: 'POST',
-        url: appSettings.baseUrl + '/users/:userId/projects'
-      },
-      updateUserProjectById: {
-        method: 'PATCH',
-        url: appSettings.baseUrl + '/users/:userId/projects/:projectId',
-        params: {
-          companyId: '@projectId'
-        }
-      },
-      getUserProjectUsers: {
-        method: 'GET',
-        url: appSettings.baseUrl + '/users/:userId/projects/:projectId/users',
-        isArray: true,
-        params: {
-          companyId: '@projectId'
-        }
-      },
-      addUserProjectUser: {
-        method: 'POST',
-        url: appSettings.baseUrl + '/users/:userId/projects/:projectId/users',
-        params: {
-          companyId: '@projectId'
-        }
+        url: appSettings.baseUrl + '/users/:userId/assettags'
       }
     });
 
@@ -73,10 +46,7 @@ angular.module('throughCompanyApp').factory('userService', [
 
       var self = this;
 
-      return User.create({
-        email: options.email,
-        password: options.password
-      }).$promise;
+      return User.create(options).$promise;
     };
 
     UserService.prototype.getUserById = function(options) {
@@ -85,78 +55,25 @@ angular.module('throughCompanyApp').factory('userService', [
 
       var self = this;
 
-      return User.getUserById({
-        userId: options.userId
-      }).$promise;
+      return User.getUserById(options).$promise;
     };
 
     UserService.prototype.updateUserById = function(options) {
       if (!options) throw new Error('options is required');
       if (!options.userId) throw new Error('userId is required');
-      if (!options.updates) throw new Error('updates is required');
 
       var self = this;
 
-      updates.userId = options.userId;
-
-      return User.updateUserById(updates).$promise;
+      return User.updateUserById(options).$promise;
     };
 
-    UserService.prototype.getUserProjectById = function(id, companyId) {
-      if (!id) throw new Error('id is required');
-      if (!companyId) throw new Error('companyId is required');
+    UserService.prototype.getUserProjects = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('userId is required');
 
       var self = this;
 
-      return User.getUserCompanyById({
-        userId: id,
-        companyId: companyId
-      }).$promise;
-    };
-
-    UserService.prototype.createUserCompany = function(id, name, companyType, stateOfIncorporation, authorizedSharesCommonStock, parValueCommonStock, preferredStock) {
-      if (!id) throw new Error('id is required');
-      if (!name) throw new Error('name is required');
-      if (!companyType) throw new Error('companyType is required');
-      if (!stateOfIncorporation) throw new Error('stateOfIncorporation is required');
-      if (!authorizedSharesCommonStock) throw new Error('authorizedSharesCommonStock is required');
-      if (!parValueCommonStock) throw new Error('parValueCommonStock is required');
-      if (!preferredStock) throw new Error('preferredStock is required');
-
-      var self = this;
-
-      return User.createUserCompany({
-        userId: id,
-        name: name,
-        type: companyType,
-        stateOfIncorporation: stateOfIncorporation,
-        authorizedSharesCommonStock: authorizedSharesCommonStock,
-        parValueCommonStock: parValueCommonStock,
-        preferredStock: preferredStock
-      }).$promise;
-    };
-
-    UserService.prototype.updateUserCompanyById = function(id, companyId, updates) {
-      if (!id) throw new Error('id is required');
-      if (!companyId) throw new Error('companyId is required');
-      if (!updates) throw new Error('updates is required');
-
-      var self = this;
-
-      updates.userId = id;
-      updates.companyId = companyId;
-
-      return User.updateUserCompanyById(updates).$promise;
-    };
-
-    UserService.prototype.getUserCompanies = function(id) {
-      if (!id) throw new Error('id is required');
-
-      var self = this;
-
-      return User.getUserCompanies({
-        userId: id
-      }).$promise;
+      return User.getUserProjects(options).$promise;
     };
 
     UserService.prototype.getUserClaims = function(options) {
@@ -165,37 +82,62 @@ angular.module('throughCompanyApp').factory('userService', [
 
       var self = this;
 
-      return User.getUserClaims({
-        userId: options.userId
-      }).$promise;
+      return User.getUserClaims(options).$promise;
     };
 
-    UserService.prototype.getUserCompanyUsers = function(id, companyId) {
-      if (!id) throw new Error('id is required');
-      if (!companyId) throw new Error('companyId is required');
+    UserService.prototype.uploadImage = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('userId is required');
+      if (!options.image) throw new Error('image is required');
+      if (!options.imageType) throw new Error('imageType is required');
+
+      var deferred = $q.defer();
+
+      if (!_.contains([
+          'image/jpeg',
+          'image/png'
+        ], options.image.type)) {
+        deferred.reject('Invalid File Type');
+        return deferred.promise;;
+      }
+      if (options.image.size > 2000000) {
+        deferred.reject('Image Size Cannot Exceed 2mb');
+        return deferred.promise;;
+      }
 
       var self = this;
 
-      return User.getUserCompanyUsers({
-        userId: id,
-        companyId: companyId
-      }).$promise;
+      var formData = new FormData();
+      formData.append('image', options.image);
+
+      var url = appSettings.baseUrl + '/users/' + options.userId + '/images?imageType=' + options.imageType;
+
+      $http.post(url, formData, {
+        headers: {
+          'Content-Type': undefined
+        },
+        transformRequest: angular.identity
+      }).success(function() {
+        deferred.resolve.apply(this, arguments);
+      }).error(function() {
+        deferred.reject.apply(this, arguments);
+      });
+
+      return deferred.promise;
     };
 
-    UserService.prototype.addUserCompanyUser = function(id, companyId, email, emailConfirmation) {
-      if (!id) throw new Error('id is required');
-      if (!companyId) throw new Error('companyId is required');
-      if (!email) throw new Error('email is required');
-      if (!emailConfirmation) throw new Error('emailConfirmation is required');
+    UserService.prototype.createAssetTag = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('options.userId is required');
 
       var self = this;
+      var userId = options.userId;
 
-      return User.addUserCompanyUser({
-        userId: id,
-        companyId: companyId,
-        email: email,
-        emailConfirmation: emailConfirmation
-      }).$promise;
+      delete options.userId;
+
+      return User.createAssetTag({
+        userId: userId
+      }, options).$promise;
     };
 
     return new UserService();

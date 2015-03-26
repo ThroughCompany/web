@@ -1,3 +1,4 @@
 angular.module('throughCompanyApp').constant('appSettings', {
-  baseUrl: '@@API'
+  baseUrl: '@@API',
+  env: '@@END'
 });

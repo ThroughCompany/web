@@ -1,0 +1,33 @@
+<div id="home" class="clearfix">
+  <div class="hero">
+    <p class="hero-text center preroll" ng-class="{ preroll : !showName }">
+      Want to create something awesome?
+    </p>
+    <p class="hero-cta center">
+      <button class="btn btn-primary btn-cta uppercase preroll" ui-sref-name="routes.startProject" ng-class="{ preroll : !showCta }">
+        Start a Project
+      </button>
+    </p>
+  </div>
+  <div class="content container">
+    <div class="project-list row">
+      <div class="col-md-4" ng-repeat="project in projects" equal-heights=".project" items="projects">
+        <a class="project" href="#" ui-sref-name="routes.project({ projectId : project.slug })">
+          <div class="project-pic" style="background-image: url('{{ project.profilePic }}')">
+          </div>
+          <div class="project-info">
+            <h4 class="name">
+              {{ project.name }}
+            </h4>
+            <p class="location" ng-hide="!project.location">
+              <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
+            </p>
+            <p class="description">
+              {{ project.description }}
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

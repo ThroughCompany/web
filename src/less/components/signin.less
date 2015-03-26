@@ -1,0 +1,39 @@
+#sign-in {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  .sans-serif;
+  form {
+    .preroll {
+      transform: translate(0, 60px);
+      opacity: 0;
+      .placeholder {
+      	opacity: 0;
+      }
+    }
+    * {
+      .transition(.4s ease-in-out);
+    }
+    .form-group {
+      position: relative;
+      &.filled {
+        .placeholder {
+          transform: translate(-100%, 0);
+        }
+      }
+      .placeholder {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 3;
+        pointer-events: none;
+        opacity: .5;
+      }
+      .form-control {
+        background: lighten(@brand-primary, 40%);
+      }
+    }
+    .no-account {
+      margin-top: 20px;
+    }
+  }
+}

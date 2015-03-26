@@ -1,0 +1,51 @@
+<div id="user-settings-profile">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Profile Settings
+    </div>
+    <div class="panel-body">
+      <form name="updateUserForm" novalidate>
+        <div class="form-section">
+          <h4 class="form-section-header">Profile Pic</h4>
+          <img-upload file-selected="updateProfilePic">
+            <img class="profile-pic img-responsive img-rounded" src="{{ currentUser.profilePic }}" />
+            <p>
+              <button class="btn" type="submit" ng-hide="loading" ng-click="selectImage()" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" data-result="profilePicResult" data-options="profilePicBtnOptions"></button>
+            </p>
+          </img-upload>
+        </div>
+        <div class="form-section">
+          <h4 class="form-section-header">Name</h4>
+          <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control" type="text" name="firstName" ng-model="currentUser.firstName" ng-change="form.firstName = currentUser.firstName" />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control" type="text" name="lastName" ng-model="currentUser.lastName" ng-change="form.lastName = currentUser.lastName" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input class="form-control" type="text" name="location" ng-model="currentUser.location" ng-change="form.location = currentUser.location" />
+        </div>
+        <div class="form-section">
+          <h4 class="form-section-header">Social</h4>
+          <div class="form-group">
+            <label>Facebook</label>
+            <input class="form-control" type="text" name="social-fb" ng-model="currentUser.social.facebook" ng-change="form.social.facebook = currentUser.social.facebook" />
+          </div>
+          <div class="form-group">
+            <label>Git Hub</label>
+            <input class="form-control" type="text" name="social-github" ng-model="currentUser.social.gitHub" ng-change="form.social.gitHub = currentUser.social.gitHub" />
+          </div>
+          <div class="form-group">
+            <label>Linked In</label>
+            <input class="form-control" type="text" name="social-linkedin" ng-model="currentUser.social.linkedIn" ng-change="form.social.linkedIn = currentUser.social.linkedIn" />
+          </div>
+        </div>
+        <button class="btn btn-primary pull-right" ng-click="updateUser(updateUserForm)">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

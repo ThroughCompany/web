@@ -1,0 +1,53 @@
+<div id="project-settings">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Profile Settings
+    </div>
+    <div class="panel-body">
+      <form name="updateProjectForm" novalidate>
+        <div class="form-section">
+          <h4 class="form-section-header">Profile Pic</h4>
+          <img-upload file-selected="updateProfilePic">
+            <img class="profile-pic img-responsive img-rounded" src="{{ project.profilePic }}" />
+            <p>
+              <button class="btn" type="submit" ng-hide="loading" ng-click="selectImage()" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" data-result="profilePicResult" data-options="profilePicBtnOptions"></button>
+            </p>
+          </img-upload>
+        </div>
+        <div class="form-section">
+          <h4 class="form-section-header">Banner Pic</h4>
+          <img-upload file-selected="updateBannerPic">
+            <img class="banner-pic img-responsive img-rounded" src="{{ project.bannerPic }}" />
+            <p>
+              <button class="btn" type="submit" ng-hide="loading" ng-click="selectImage()" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingBannerPic" data-result="bannerPicResult" data-options="bannerPicBtnOptions"></button>
+            </p>
+          </img-upload>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" name="description" ng-model="project.description" ng-change="form.description = project.description"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input class="form-control" type="text" name="location" ng-model="project.location" ng-change="form.location = project.location" />
+        </div>
+        <div class="form-section">
+          <h4 class="form-section-header">Social</h4>
+          <div class="form-group">
+            <label>Facebook</label>
+            <input class="form-control" type="text" name="social-fb" ng-model="project.social.facebook" ng-change="form.social.facebook = project.social.facebook" />
+          </div>
+          <div class="form-group">
+            <label>Git Hub</label>
+            <input class="form-control" type="text" name="social-github" ng-model="project.social.gitHub" ng-change="form.social.gitHub = project.social.gitHub" />
+          </div>
+          <div class="form-group">
+            <label>Linked In</label>
+            <input class="form-control" type="text" name="social-linkedin" ng-model="project.social.linkedIn" ng-change="form.social.linkedIn = project.social.linkedIn" />
+          </div>
+        </div>
+        <button class="btn btn-primary pull-right" ng-click="updateProject(updateProjectForm)">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

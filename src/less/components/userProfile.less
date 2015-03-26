@@ -1,0 +1,82 @@
+#user-profile {
+  padding-top: 40px;
+  padding-bottom: 120px;
+  .profile-pic {
+    margin-bottom: 20px;
+  }
+  .profile-info {
+    .name {
+      font-size: @font-size-med;
+    }
+    .profile-social {
+      ul {
+        margin: 0;
+        padding: 0;
+        li {
+          a {
+            display: block;
+            padding: 4px 0;
+          }
+        }
+      }
+    }
+    .update-settings {
+      border-top: 1px solid @gray-lighter;
+      margin-top: 20px;
+      padding-top: 5px;
+      display: block;
+    }
+  }
+  .profile-section {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    &:last-child {
+      border-bottom: none;
+    }
+    .header {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid @gray-lighter;
+      h3 {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .add-new-btn {
+        .btn {
+          padding: 4px 15px;
+        }
+      }
+    }
+    &.profile-section-projects {
+      .project {
+        border: 1px solid @gray-lighter;
+        padding: 15px;
+        margin-bottom: 30px;
+        border-radius: @border-radius-base;
+        .name {
+          font-size: @font-size-med;
+          border-bottom: 1px solid @gray-lighter;
+          padding-bottom: 5px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    &.profile-section-assets {
+      .add-tags {
+        margin-bottom: 30px;
+      }
+      .asset-tags {
+        .asset-tag {
+          background: @brand-info;
+          float: left;
+          margin-right: 15px;
+          margin-bottom: 15px;
+          padding: 8px 10px;
+          color: white;
+        }
+      }
+      .no-tags {}
+    }
+  }
+}
