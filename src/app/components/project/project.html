@@ -11,7 +11,7 @@
       </p>
     </div>
   </div>
-  <div class="project-nav clearfix" affix data-offset-top="584">
+  <div class="project-nav clearfix" affix offset-top="584">
     <div class="container clearfix">
       <ul class="nav clearfix pull-left">
         <li class="dropdown">
@@ -55,7 +55,7 @@
   </div>
   <div class="project-container container clearfix" affix data-offset-top="584">
     <div class="project-landing clearfix row" ng-show="$state.current.name === 'system.project'">
-      <div class="project-sidebar col-sm-3">
+<!--       <div class="project-sidebar col-sm-3">
         <div affix data-offset-top="760">
           <hr>
           <p>
@@ -76,8 +76,8 @@
             </ul>
           </div>
         </div>
-      </div>
-      <div class="project-content col-sm-9">
+      </div> -->
+      <div class="project-content">
         <div class="edit-wiki clearfix">
           <a href="#" class="btn btn-default btn-edit btn-xs pull-right" ng-click="editWiki = !editWiki" tooltip-placement="top" tooltip="Edit Project Wiki" tooltip-append-to-body="true" ng-show="auth.hasProjectIdClaim(project._id)">
             <i class="fa fa-edit"></i>
