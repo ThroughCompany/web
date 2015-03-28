@@ -111,7 +111,7 @@ angular.module('throughCompanyApp').config([
         controller: 'projectApplyCtrl'
       })
       .state('system.user', {
-        url: 'user/:userId',
+        url: 'user/:userName',
         templateUrl: '/app/components/user/user.html',
         controller: 'userCtrl',
         resolve: {
@@ -120,7 +120,7 @@ angular.module('throughCompanyApp').config([
               var deferred = $q.defer();
 
               userService.getUserById({
-                userId: $stateParams.userId
+                userId: $stateParams.userName
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {

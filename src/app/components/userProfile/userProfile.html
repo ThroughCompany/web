@@ -38,7 +38,7 @@
     <div class="profile-section profile-section-projects" id="projects">
       <div class="header clearfix">
         <h3>Projects</h3>
-        <div class="add-new-btn pull-right">
+        <div class="add-new-btn pull-right" ng-show="hasCurrentUserIdClaim()">
           <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject" ng-show="projects && projects.length">
             <i class="fa fa-plus"></i> Add
           </a>

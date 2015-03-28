@@ -28,7 +28,7 @@
           </li>
         </ul>
       </div>
-      <a class="update-settings" href="#" ui-sref-name="routes.userSettingsProfile">
+      <a class="update-settings" href="#" ui-sref-name="routes.userSettingsProfile" ng-show="auth.hasCurrentUserIdClaim(user._id)">
         <i class="fa fa-gear"></i> Update your settings
       </a>
     </div>
@@ -69,7 +69,7 @@
       <div class="header clearfix">
         <h3>Assets</h3>
         <div class="add-tags-btn pull-right">
-          <a href="#" class="btn btn-primary" ng-click="addingAssetTags = !addingAssetTags" ng-show="user.assetTags && user.assetTags.length">
+          <a href="#" class="btn btn-primary" ng-click="addingAssetTags = !addingAssetTags" ng-show="(user.assetTags && user.assetTags.length) && auth.hasCurrentUserIdClaim(user._id)">
             <i class="fa fa-plus"></i> Add
           </a>
         </div>

@@ -102,6 +102,16 @@ angular.module('throughCompanyApp').factory('authService', [
       return (_this.getToken() && _this.getToken().length) && !_this.authTokenExpired() && (_this.getUserId() && _this.getUserId().length);
     };
 
+    AuthService.prototype.hasCurrentUserIdClaim = function(userId) {
+      var _this = this;
+
+      var claims = $rootScope.currentUserClaims;
+
+      if (!claims) return false;
+
+      return claims.userId === userId;
+    };
+
     AuthService.prototype.hasProjectIdClaim = function(projectId) {
       var _this = this;
 

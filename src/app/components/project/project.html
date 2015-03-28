@@ -144,7 +144,7 @@
           </div>
           <div class="members clearfix row">
             <div class="col-md-4" ng-repeat="projectUser in projectUsers">
-              <a class="team-member" href="#" ui-sref-name="routes.user({ userId : projectUser._id })">
+              <a class="team-member" href="#" ui-sref-name="routes.user({ userName : projectUser.userName })">
                 <p class="center">
                   <img class="img-circle" ng-src="{{ projectUser.profilePic }}" height="100px;" />
                 </p>

@@ -8,7 +8,7 @@
       Through Company
     </a>
   </div>
-  <div id="header-nav" class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+  <div id="header-nav" class="collapse navbar-collapse bs-navbar-collapse" role="navigation" ng-class="{ 'not-logged-in' : !auth.isLoggedIn() }">
     <ul class="nav navbar-nav navbar-right">
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="auth.isLoggedIn()">

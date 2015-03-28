@@ -9,7 +9,9 @@
     color: @gray-darker;
   }
   #header-nav {
-    padding-right: 20px;
+    &.not-logged-in {
+      padding-right: 20px;
+    }
     .nav {
       > li {
         > a {
