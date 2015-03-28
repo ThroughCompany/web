@@ -10,8 +10,8 @@ angular.module('throughCompanyApp').config(['$httpProvider',
         return {
           request: function(config) {
             config.headers = config.headers || {};
-            if ($window.sessionStorage.token) {
-              config.headers['x-access-token'] = $window.sessionStorage.token;
+            if ($window.localStorage.token) {
+              config.headers['x-access-token'] = $window.localStorage.token;
             }
             return config;
           }
