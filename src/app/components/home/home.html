@@ -1,7 +1,18 @@
 <div id="home" class="clearfix">
   <div class="hero">
-    <p class="hero-text center preroll" ng-class="{ preroll : !showName }">
-      Want to create something awesome?
+    <div class="hero-slides" image-slide-show>
+      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner1.jpg')">
+      </div>
+      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner2.jpg')">
+      </div>
+      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner3.jpg')">
+      </div>
+    </div>
+    <p class="hero-text preroll" ng-class="{ preroll : !showName }">
+      "Without ambition one starts nothing. Without work one finishes nothing. The prize will not be sent to you. You have to win it."
+      <span class="author">
+        - Ralph Waldo Emerson
+      </span>
     </p>
     <p class="hero-cta center">
       <button class="btn btn-primary btn-cta uppercase preroll" ui-sref-name="routes.startProject" ng-class="{ preroll : !showCta }">

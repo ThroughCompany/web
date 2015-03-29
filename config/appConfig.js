@@ -14,7 +14,7 @@ var defaultSettings = {
   NEWRELIC: {
     name: 'xxxxxxxxxx',
     key: 'xxxxxxxxxx'
-  },
+  }
 };
 
 var production = _.extend(_.clone(defaultSettings), {
