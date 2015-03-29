@@ -20,9 +20,9 @@ angular.module('throughCompanyApp').factory('authService', [
       }).then(function success(response) {
         if (!response || !response.data) return $q.reject(response);
 
-        $window.sessionStorage.tokenExpires = new Date(response.data.expires);
-        $window.sessionStorage.token = response.data.token;
-        $window.sessionStorage.userId = response.data.user._id;
+        $window.localStorage.tokenExpires = new Date(response.data.expires);
+        $window.localStorage.token = response.data.token;
+        $window.localStorage.userId = response.data.user._id;
 
         return deferred.resolve(response.data);
       }, function error(response) {
@@ -61,10 +61,10 @@ angular.module('throughCompanyApp').factory('authService', [
       }).then(function storeToken(response) {
         if (!response || !response.data) return $q.reject(response);
 
-        $window.sessionStorage.tokenExpires = new Date(response.data.expires);
-        $window.sessionStorage.token = response.data.token;
-        $window.sessionStorage.userId = response.data.user._id;
-        $window.sessionStorage.fbToken = fbToken;
+        $window.localStorage.tokenExpires = new Date(response.data.expires);
+        $window.localStorage.token = response.data.token;
+        $window.localStorage.userId = response.data.user._id;
+        $window.localStorage.fbToken = fbToken;
 
         return response.data;
       });
@@ -72,11 +72,11 @@ angular.module('throughCompanyApp').factory('authService', [
 
     AuthService.prototype.logout = function() {
 
-      if ($window.sessionStorage.fbToken) FB.logout(function() {});
+      if ($window.localStorage.fbToken) FB.logout(function() {});
 
-      delete $window.sessionStorage.token;
-      delete $window.sessionStorage.userId;
-      delete $window.sessionStorage.fbToken;
+      delete $window.localStorage.token;
+      delete $window.localStorage.userId;
+      delete $window.localStorage.fbToken;
       $rootScope.currentUser = null
       $rootScope.currentUserClaims = null;
 
@@ -84,15 +84,15 @@ angular.module('throughCompanyApp').factory('authService', [
     };
 
     AuthService.prototype.getToken = function() {
-      return $window.sessionStorage.token;
+      return $window.localStorage.token;
     };
 
     AuthService.prototype.getUserId = function() {
-      return $window.sessionStorage.userId;
+      return $window.localStorage.userId;
     };
 
     AuthService.prototype.authTokenExpired = function() {
-      var tokenExpires = $window.sessionStorage.tokenExpires;
+      var tokenExpires = $window.localStorage.tokenExpires;
       return tokenExpires <= Date.now();
     };
 
@@ -100,6 +100,16 @@ angular.module('throughCompanyApp').factory('authService', [
       var _this = this;
 
       return (_this.getToken() && _this.getToken().length) && !_this.authTokenExpired() && (_this.getUserId() && _this.getUserId().length);
+    };
+
+    AuthService.prototype.hasCurrentUserIdClaim = function(userId) {
+      var _this = this;
+
+      var claims = $rootScope.currentUserClaims;
+
+      if (!claims) return false;
+
+      return claims.userId === userId;
     };
 
     AuthService.prototype.hasProjectIdClaim = function(projectId) {

@@ -1,100 +1,85 @@
-// angular.module('throughCompanyApp').directive('affix', [
-//   '$rootScope',
-//   '$timeout',
-//   function($rootScope, $timeout) {
-//     return {
-//       restrict: 'A',
-//       scope: {
-//         offsetTop: '='
-//       },
-//       link: function(scope, element, attrs) {
-//         var $el = angular.element(element);
+angular.module('throughCompanyApp').directive('affix', [
+  '$rootScope',
+  '$timeout',
+  function($rootScope, $timeout) {
+    return {
+      restrict: 'A',
+      scope: {
+        offsetTop: '='
+      },
+      link: function(scope, element, attrs) {
+        // scope.offsetTopTablet = attrs.offsetTopTablet;
+        // scope.offsetTopMobile = attrs.offsetTopMobile;
+        // scope.offsetBottom = attrs.offsetBottom;
 
-//         scope.offsetTopTablet = attrs.offsetTopTablet;
-//         scope.offsetTopMobile = attrs.offsetTopMobile;
-//         scope.offsetBottom = attrs.offsetBottom;
+        console.log('scope.offsetTop = ' + scope.offsetTop);
 
-//         var $document = $(document);
-//         var $window = $(window);
-//         var originalOffsetTop = scope.offsetTop;
+        element.affix({
+          offset: {
+            top: scope.offsetTop
+          }
+        });
 
-//         var docHeight = $document.height();
-//         scope.offsetBottom = scope.offsetBottom > 0 ? scope.offsetBottom : null;
+        // var $el = angular.element(element);
 
-//         $document.scroll(function() {
-//           $timeout(function() {
-//             var windowWidth = $window.width();
+        // scope.offsetTopTablet = attrs.offsetTopTablet;
+        // scope.offsetTopMobile = attrs.offsetTopMobile;
+        // scope.offsetBottom = attrs.offsetBottom;
 
-//             if (windowWidth <= 992 && windowWidth >= 768 && scope.offsetTopTablet) {
-//               scope.offsetTop = scope.offsetTopTablet;
-//             } else if (windowWidth <= 768 && scope.offsetTopMobile) {
-//               scope.offsetTop = scope.offsetTopMobile;
-//             } else {
-//               scope.offsetTop = originalOffsetTop;
-//             }
+        // var $document = $(document);
+        // var $window = $(window);
+        // var originalOffsetTop = scope.offsetTop;
 
-//             var y = $(this).scrollTop();
+        // var docHeight = $document.height();
+        // scope.offsetBottom = scope.offsetBottom > 0 ? scope.offsetBottom : null;
 
-//             if (y >= scope.offsetTop) {
-//               element.addClass('affix');
-//             } else {
-//               element.removeClass('affix');
-//             }
-//           });
+        // $document.scroll(function() {
+        //   $timeout(function() {
+        //     var windowWidth = $window.width();
 
-//           // if (scope.offsetBottom !== undefined && scope.offsetBottom !== null) {
-//           //   if (y >= (docHeight - scope.offsetBottom)) {
-//           //     element.removeClass('affix');
-//           //   }
-//           // }
-//         });
+        //     if (windowWidth <= 992 && windowWidth >= 768 && scope.offsetTopTablet) {
+        //       scope.offsetTop = scope.offsetTopTablet;
+        //     } else if (windowWidth <= 768 && scope.offsetTopMobile) {
+        //       scope.offsetTop = scope.offsetTopMobile;
+        //     } else {
+        //       scope.offsetTop = originalOffsetTop;
+        //     }
 
-//         if (scope.offsetTopTablet || scope.offsetTopMobile) {
-//           $window.resize(function() {
-//             var windowWidth = $window.width();
+        //     var y = $(this).scrollTop();
 
-//             if (windowWidth <= 992 && windowWidth >= 768) {
-//               scope.offsetTop = scope.offsetTopTablet;
-//             } else if (windowWidth <= 768) {
-//               scope.offsetTop = scope.offsetTopMobile;
-//             } else {
-//               scope.offsetTop = originalOffsetTop;
-//             }
-//           });
-//         }
+        //     if (y >= scope.offsetTop) {
+        //       element.addClass('affix');
+        //     } else {
+        //       element.removeClass('affix');
+        //     }
+        //   });
 
-//         $rootScope.$on('$stateChangeStart', function(event, toState, toParams) { //remove affix to avoid memory leaks
-//           $document.off('.affix');
-//           $window.off('.resize');
-//         });
-//       }
-//     };
-//   }
-// ]);
+        //   // if (scope.offsetBottom !== undefined && scope.offsetBottom !== null) {
+        //   //   if (y >= (docHeight - scope.offsetBottom)) {
+        //   //     element.removeClass('affix');
+        //   //   }
+        //   // }
+        // });
 
-// // angular.module('throughCompanyApp').directive('dynamicAffix', [
-// //   '$rootScope',
-// //   function($rootScope) {
-// //     'use strict';
+        // if (scope.offsetTopTablet || scope.offsetTopMobile) {
+        //   $window.resize(function() {
+        //     var windowWidth = $window.width();
 
-// //     return {
-// //       restrict: 'A',
-// //       link: function(scope, element, attrs) {
-// //         var $el = angular.element(element);
-// //         var offsetEl = attrs.offsetEl;
+        //     if (windowWidth <= 992 && windowWidth >= 768) {
+        //       scope.offsetTop = scope.offsetTopTablet;
+        //     } else if (windowWidth <= 768) {
+        //       scope.offsetTop = scope.offsetTopMobile;
+        //     } else {
+        //       scope.offsetTop = originalOffsetTop;
+        //     }
+        //   });
+        // }
 
-// //         var $document = $(document);
-
-// //         $el.affix({
-// //           offset: {
-// //             top: $(offsetEl).height()
-// //           }
-// //         });
-
-// //         $rootScope.$on('$stateChangeStart', function(event, toState, toParams) { //remove affix to avoid memory leaks
-// //           $document.off('.affix');
-// //         });
-// //       }
-// //     };
-// //   }
-// // ]);
+        // $rootScope.$on('$stateChangeStart', function(event, toState, toParams) { //remove affix to avoid memory leaks
+        //   $document.off('.affix');
+        //   $window.off('.resize');
+        // });
+      }
+    };
+  }
+]);
