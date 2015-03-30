@@ -15,6 +15,8 @@ var defaultSettings = {
     name: 'xxxxxxxxxx',
     key: 'xxxxxxxxxx'
   },
+  GOOGLE_ANALYTICS: 'xxxxxxxxxx',
+  SSL: process.env.SSL
 };
 
 var production = _.extend(_.clone(defaultSettings), {
@@ -23,7 +25,8 @@ var production = _.extend(_.clone(defaultSettings), {
   NEWRELIC: {
     name: 'throughcompany-web-prod',
     key: 'e7c5a21591fb5d706825572ef8cde21bb7cde86c'
-  }
+  },
+  GOOGLE_ANALYTICS: 'UA-61342983-1'
 });
 
 var development = _.extend(_.clone(defaultSettings), {
