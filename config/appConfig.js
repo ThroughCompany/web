@@ -15,7 +15,8 @@ var defaultSettings = {
     name: 'xxxxxxxxxx',
     key: 'xxxxxxxxxx'
   },
-  GOOGLE_ANALYTICS: 'xxxxxxxxxx'
+  GOOGLE_ANALYTICS: 'xxxxxxxxxx',
+  SSL: process.env.SSL
 };
 
 var production = _.extend(_.clone(defaultSettings), {
