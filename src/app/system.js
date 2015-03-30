@@ -26,7 +26,8 @@ throughCompanyApp.run([
   'routes',
   'loggerService',
   'userService',
-  function($rootScope, $state, $window, $timeout, authService, regexService, routes, loggerService, userService) {
+  'analytics',
+  function($rootScope, $state, $window, $timeout, authService, regexService, routes, loggerService, userService, analytics) {
     // $rootScope.menu = menuService.init();
 
     $rootScope.meta = {
