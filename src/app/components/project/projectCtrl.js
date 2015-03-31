@@ -32,6 +32,13 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       };
     };
 
+    $scope.applying = false;
+    $scope.applyingAssetTag = null;
+    $scope.apply = function(assetTag) {
+      $scope.applying = true;
+      $scope.applyingAssetTag = assetTag;
+    };
+
     $scope.addAssetTagForm = {
       tags: [],
       tag: null,

@@ -43,14 +43,6 @@
           </a>
         </li>
       </ul>
-      <ul class="nav clearfix pull-right">
-        <li>
-          <!-- TODO: only show if needs are listed -->
-          <a href="#" ng-click="navigateTo(routes.projectApply, 'project-apply')">
-            <i class="fa fa-star"></i>&nbsp;Join Us
-          </a>
-        </li>
-      </ul>
     </div>
   </div>
   <div class="project-container container clearfix" affix data-offset-top="584">
@@ -122,19 +114,10 @@
                 </div>
               </form>
             </div>
-            <div class="asset-tags row" ng-hide="editNeeds">
-              <div class="col-md-3" ng-repeat="assetTag in project.assetTags">
-                <div class="asset-tag">
-                  <p class="name">
-                    {{ assetTag.name }}
-                  </p>
-                  <p class="connect">
-                    <a href="#" class="btn btn-default btn-sm">
-                      Connect
-                    </a>
-                  </p>
-                </div>
-              </div>
+            <div class="asset-tags" ng-hide="editNeeds">
+              <a class="asset-tag btn btn-primary btn-sm" href="#" ng-repeat="assetTag in project.assetTags" ng-click="apply(assetTag)">
+                 {{ assetTag.name }}
+              </a>
             </div>
           </div>
         </div>
@@ -163,4 +146,14 @@
   <p class="wiki-saving" ng-show="savingWiki">
     <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Saving changes...
   </p>
+  <div id="project-apply" affix data-offset-top="584" ng-show="applying" ng-class="{ open : applying }">
+    <div class="apply-inner">
+      <a href="#" class="close" ng-click="applying = false">
+        <i class="fa fa-times"></i>
+      </a>
+      <h3 class="center">{{ applyingAssetTag.name }}</h3>
+      <h2 class="center">Coming soon!</h2>
+      <p class="center">Apply to join our project and start helping us out.</p>
+    </div>
+  </div>
 </div>
