@@ -1,5 +1,5 @@
 <div id="start-project" class="clearfix">
-  <!-- <div class="banner" ng-class=" { preroll : !showTitle }">
+  <div class="banner" ng-class=" { preroll : !showTitle }">
     <h2 class="center">What are you going to create?</h2>
   </div>
   <form class="project-form col-md-4 col-md-offset-4" name="createProjectForm" novalidate>
@@ -16,24 +16,5 @@
     <button class="btn btn-primary pull-right preroll" tabindex="3" ng-class=" { preroll : !showCreate }" ng-click="createProject(createProjectForm)">
       Create
     </button>
-  </form> -->
-  <div class="coming-soon col-md-6 col-md-offset-3">
-    <h2 class="center">
-      We're a startup based in Somerville, MA. We're applying to MassChallenge 2015.
-    </h2>
-    <h2 class="center">
-       Want to know how it goes?
-    </h2>
-    <form name="subsribeForm" novalidate>
-      <div class="form-group" ng-class="{ 'has-errors' : submitted && subsribeForm.email.$invalid }">
-        <input class="form-control" ng-model="form.email" type="text" name="email" required />
-        <p class="error-msg" ng-show="submitted && subsribeForm.email.$error.required">Please enter your email.
-        </p>
-      </div>
-      <p class="center">
-        <button class="btn btn-primary" tabindex="3" ng-click="subscribe(subsribeForm)" ng-bs-animated-button is-submitting="subscribeSubmitting" result="subscribeResult" options="subscribeBtnOptions">
-        </button>
-      </p>
-    </form>
-  </div>
+  </form>
 </div>

@@ -8,21 +8,23 @@
       <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner3.jpg')">
       </div>
     </div>
-    <p class="hero-text preroll" ng-class="{ preroll : !showName }">
-      "Without ambition one starts nothing. Without work one finishes nothing. The prize will not be sent to you. You have to win it."
-      <span class="author">
-        - Ralph Waldo Emerson
-      </span>
+    <p class="hero-text">
+      <span class="preroll" ng-class="{ preroll : !showName1 }">Start with an idea.</span>
+      <span class="preroll" ng-class="{ preroll : !showName2 }">Find what you need.</span>
+      <span class="preroll" ng-class="{ preroll : !showName3 }"><strong>Get to work.</strong></span>
     </p>
     <p class="hero-cta center">
-      <button class="btn btn-primary btn-cta uppercase preroll" ui-sref-name="routes.startProject" ng-class="{ preroll : !showCta }">
+      <!--       <button class="btn btn-primary btn-cta uppercase preroll" ui-sref-name="routes.startProject" ng-class="{ preroll : !showCta }">
         Start a Project
+      </button> -->
+      <button class="btn btn-primary btn-cta uppercase" ng-click="scrollTo('coming-soon')">
+        Find out more
       </button>
     </p>
   </div>
   <div class="content container">
     <div class="project-list row">
-      <div class="col-md-4" ng-repeat="project in projects" equal-heights=".project" items="projects">
+      <div class="col-md-4 col-sm-6" ng-repeat="project in projects" equal-heights=".project" items="projects">
         <a class="project" href="#" ui-sref-name="routes.project({ projectId : project.slug })">
           <div class="project-pic" style="background-image: url('{{ project.profilePic }}')">
           </div>
@@ -38,6 +40,32 @@
             </p>
           </div>
         </a>
+      </div>
+    </div>
+    <div id="coming-soon" class="coming-soon clearfix">
+      <div class="banner">
+        <p class="center">
+          <img src="http://masschallenge.org/sites/all/themes/mcbt4/assets/images/logo-masschallenge-retina.png" height="40px" alt="Mass Challenge 2015" />
+        </p>
+        <h2 class="center">
+          We're a startup based in Somerville, MA. We've just applied to MassChallenge 2015.
+        </h2>
+        <p class="center">
+          Want to know how it goes?
+        </p>
+      </div>
+      <div class="">
+        <form class="form-inline center" name="subsribeForm" novalidate>
+          <div class="form-group" ng-class="{ 'has-errors' : submitted && subsribeForm.email.$invalid }">
+            <input class="form-control" ng-model="form.email" type="text" name="email" required ng-pattern="/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" />
+            <button class="btn btn-primary" tabindex="3" ng-click="subscribe(subsribeForm)" ng-bs-animated-button is-submitting="subscribeSubmitting" result="subscribeResult" options="subscribeBtnOptions">
+            </button>
+            <p class="error-msg" ng-show="submitted && subsribeForm.email.$error.required">Please enter your email.
+            </p>
+            <p class="error-msg" ng-show="submitted && subsribeForm.email.$error.pattern">Please enter a valid email.
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -4,27 +4,27 @@
     height: 600px;
     margin-bottom: 80px;
     position: relative;
+    padding-bottom: 4px;
     .sans-serif;
     .hero-text {
       font-size: 50px;
-      font-weight: 800;
       color: white;
       line-height: 100px;
       position: relative;
       z-index: 100;
       line-height: 80px;
-      padding: 100px 80px 0 80px;
-      .transition(.7s ease-in-out);
-      .serif;
-      &.preroll {
-        opacity: 0;
-      }
-      .author {
-        .sans-serif;
-        font-size: 20px;
+      padding: 100px 140px 0 140px;
+      span {
+        .transition(.7s ease-in-out);
+        display: block;
+        &.preroll {
+          transform: translate(0, 50px);
+          opacity: 0;
+        }
       }
     }
     .hero-slides {
+      border-bottom: 10px solid @brand-secondary;
       height: 600px;
       width: 100%;
       position: absolute;
@@ -45,7 +45,6 @@
       z-index: 100;
       position: relative;
       .btn-cta {
-        font-weight: 600;
         .transition(.4s ease-in-out);
         &.preroll {
           transform: translate(0, 50px);
@@ -57,6 +56,7 @@
   .content {
     .project-list {
       .project {
+        overflow: hidden;
         border: 1px solid @gray-lighter;
         display: block;
         margin-bottom: 30px;
@@ -81,6 +81,41 @@
             .font-family-cursive;
           }
           .description {}
+        }
+      }
+    }
+    /* ------ Coming Soon ------ */
+    
+    .coming-soon {
+      padding-top: 120px;
+      padding-bottom: 120px;
+      .banner {
+        .sans-serif;
+        h2 {
+          font-size: 16px;
+          font-weight: 200;
+          margin-top: 60px;
+          margin-bottom: 20px;
+        }
+        p {
+          font-size: 24px;
+          font-weight: 600;
+          display: block;
+          margin-bottom: 20px;
+        }
+      }
+      form {
+        .form-group {
+          input {
+            min-width: 300px;
+          }
+          .error-msg {
+            text-align: left;
+            padding-left: 10px;
+          }
+        }
+        .btn {
+          .sans-serif;
         }
       }
     }
@@ -130,4 +165,3 @@
     }
   }
 }
-

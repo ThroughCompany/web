@@ -3,19 +3,72 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
   '$rootScope',
   'projectService',
   '$timeout',
-  function($scope, $rootScope, projectService, $timeout) {
+  'subscribeService',
+  'utilsService',
+  function($scope, $rootScope, projectService, $timeout, subscribeService, utilsService) {
     $scope.loaded = false;
 
     $timeout(function() {
-      $scope.showName = true;
-      $timeout(function() {
-        $scope.showCta = true;
-      }, 300);
-    }, 100);
+      $scope.showName1 = true;
+    }, 200);
+    $timeout(function() {
+      $scope.showName2 = true;
+    }, 1200);
+    $timeout(function() {
+      $scope.showName3 = true;
+    }, 2200);
 
     projectService.getProjects({}).then(function success(response) {
       $scope.loaded = true;
       $scope.projects = response;
     });
+
+    // ---------------- buttons ----------------
+    // subscribe button
+    $scope.subscribeSubmitting = null;
+    $scope.subscribeResult = null;
+    $scope.subscribeBtnOptions = {
+      buttonDefaultText: 'Keep in touch',
+      buttonDefaultClass: 'btn btn-primary',
+      buttonSubmittingText: 'Signing in...',
+      buttonSubmittingIcon: 'icon-left fa fa-spin fa-refresh',
+      buttonSuccessText: 'You\'ve been subscribed',
+      buttonSuccessIcon: 'icon-left fa fa-check',
+      buttonSuccessClass: 'btn-success',
+      buttonErrorText: 'Error subscribing',
+      buttonErrorIcon: 'icon-left fa fa-remove',
+      buttonErrorClass: 'btn-danger'
+    };
+
+    $scope.scrollTo = function(id) {
+      utilsService.scrollTo(id, 40);
+    };
+
+    $scope.subscribe = function(form) {
+      $scope.submitted = true;
+
+      if (!form.$valid) return;
+
+      $scope.subscribeSubmitting = true;
+
+      subscribeService.subscribe({
+        email: $scope.form.email
+      }).success(function success(response) {
+        $timeout(function() {
+          $scope.subscribeSubmitting = false;
+          $scope.subscribeResult = 'success';
+          $scope.form.email = null;
+          $scope.submitted = false;
+          form.email.$setPristine();
+        }, 600);
+      }).error(function error(response) {
+        $timeout(function() {
+          $scope.subscribeSubmitting = false;
+          $scope.subscribeResult = 'error';
+        }, 600);
+      });
+    };
+
+    $scope.form = {};
   }
 ]);
