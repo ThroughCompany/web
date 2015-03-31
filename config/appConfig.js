@@ -31,7 +31,7 @@ var production = _.extend(_.clone(defaultSettings), {
 
 var development = _.extend(_.clone(defaultSettings), {
   ENV: 'development',
-  API: 'http://api-dev.throughcompany.com',
+  API: 'https://api-dev.throughcompany.com',
   NEWRELIC: {
     name: 'throughcompany-web-dev',
     key: 'e7c5a21591fb5d706825572ef8cde21bb7cde86c'

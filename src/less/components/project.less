@@ -185,6 +185,7 @@
               .asset-tag {
                 border-radius: 2px;
                 border: 1px solid @gray-lighter;
+                margin-right: 30px;
                 margin-bottom: 30px;
                 padding: 15px;
                 text-align: center;
@@ -295,6 +296,32 @@
     font-style: italic;
     i {
       margin-right: 10px;
+    }
+  }
+  #project-apply {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    height: 100%;
+    width: 100%;
+    z-index: 800;
+    opacity: 0;
+    .transition(.4s ease-in-out);
+    &.open {
+      opacity: 1;
+    }
+    &.affix {
+      padding-top: 68px;
+    }
+    .apply-inner {
+      position: relative;
+      padding: 40px;
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+      }
     }
   }
 }

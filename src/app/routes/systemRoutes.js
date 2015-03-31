@@ -105,11 +105,6 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/components/project/settings/projectSettings.html',
         controller: 'projectSettingsCtrl'
       })
-      .state('system.project.apply', {
-        url: '/apply',
-        templateUrl: '/app/components/project/apply/projectApply.html',
-        controller: 'projectApplyCtrl'
-      })
       .state('system.user', {
         url: 'user/:userName',
         templateUrl: '/app/components/user/user.html',
