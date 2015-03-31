@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="project-container container clearfix" affix data-offset-top="584">
-    <div class="project-landing clearfix row" ng-show="$state.current.name === 'system.project'">
+    <div class="project-landing clearfix" ng-show="$state.current.name === 'system.project'">
       <!--       <div class="project-sidebar col-sm-3">
         <div affix data-offset-top="760">
           <hr>
@@ -115,7 +115,7 @@
               </form>
             </div>
             <div class="asset-tags" ng-hide="editNeeds">
-              <a class="asset-tag btn btn-primary btn-sm" href="#" ng-repeat="assetTag in project.assetTags" ng-click="apply(assetTag)">
+              <a class="asset-tag btn btn-warning btn-sm" href="#" ng-repeat="assetTag in project.assetTags" ng-click="apply(assetTag)">
                  {{ assetTag.name }}
               </a>
             </div>

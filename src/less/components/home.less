@@ -5,13 +5,12 @@
     margin-bottom: 80px;
     position: relative;
     padding-bottom: 4px;
-    .sans-serif;
     .hero-text {
       font-size: 50px;
       color: white;
       line-height: 100px;
       position: relative;
-      z-index: 100;
+      z-index: 10;
       line-height: 80px;
       padding: 100px 140px 0 140px;
       span {
@@ -30,6 +29,7 @@
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 0;
       .slide {
         background-position: center;
         background-size: cover;
@@ -42,7 +42,7 @@
     }
     .hero-cta {
       padding-top: 80px;
-      z-index: 100;
+      z-index: 10;
       position: relative;
       .btn-cta {
         .transition(.4s ease-in-out);
@@ -55,6 +55,16 @@
   }
   .content {
     .project-list {
+      .header {
+        margin-bottom: 50px;
+        h2 {
+          margin-bottom: 20px;
+        }
+        p {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+      }
       .project {
         overflow: hidden;
         border: 1px solid @gray-lighter;
@@ -73,12 +83,16 @@
         }
         .project-info {
           padding: 15px;
+          font-size: 14px;
           .name {
             font-size: @font-size-med;
-            border-bottom: 1px solid @gray-lighter;
             padding-bottom: 5px;
             margin-bottom: 10px;
-            .font-family-cursive;
+          }
+          .location {
+            i {
+              color: @brand-secondary;
+            }
           }
           .description {}
         }
@@ -90,7 +104,6 @@
       padding-top: 120px;
       padding-bottom: 120px;
       .banner {
-        .sans-serif;
         h2 {
           font-size: 16px;
           font-weight: 200;
@@ -113,9 +126,6 @@
             text-align: left;
             padding-left: 10px;
           }
-        }
-        .btn {
-          .sans-serif;
         }
       }
     }

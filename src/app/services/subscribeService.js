@@ -5,9 +5,21 @@ angular.module('throughCompanyApp').factory('subscribeService', [
 
     function SubscribeService() {}
 
-    SubscribeService.prototype.subscribe = function subsribe(options) {
+    SubscribeService.prototype.subscribeToMassChallenge = function subscribeToMassChallenge(options) {
       if (!options) throw new Error('options is required');
       if (!options.email) throw new Error('email is required');
+
+      options.list = 'massChallenge';
+
+      return $http.post(appSettings.baseUrl + '/subscribe', options);
+    };
+
+    SubscribeService.prototype.subscribeToProjectNeed = function subscribeToProjectNeed(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.email) throw new Error('email is required');
+      if (!options.need) throw new Error('need is required');
+
+      options.list = 'projectNeed';
 
       return $http.post(appSettings.baseUrl + '/subscribe', options);
     };

@@ -51,7 +51,7 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
 
       $scope.subscribeSubmitting = true;
 
-      subscribeService.subscribe({
+      subscribeService.subscribeToMassChallenge({
         email: $scope.form.email
       }).success(function success(response) {
         $timeout(function() {
