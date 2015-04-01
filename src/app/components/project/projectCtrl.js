@@ -65,6 +65,14 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       //   $scope.assetTags.selected = undefined;
       // }
     });
+    $scope.addAssetTag = function(form) {
+      if (!form.$valid) return;
+
+      $scope.createAssetTag({
+        name: $scope.addAssetTagForm.tag.name,
+        description: $scope.addAssetTagForm.description
+      });
+    };
 
     $scope.getProjectUserName = function(projectUser) {
       if (projectUser.firstName && projectUser.lastName) return projectUser.firstName + ' ' + projectUser.lastName;
@@ -159,10 +167,11 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
 
     $scope.updateProjectThrottled = _.throttle($scope.updateProject, 2700);
 
-    function _createAssetTag(tagName) {
+    function _createAssetTag(options) {
       projectService.createAssetTag({
         projectId: $scope.project._id,
-        name: tagName
+        name: options.name,
+        description: options.description
       }).then(function success(response) {
         $scope.project.assetTags.push(response);
 
