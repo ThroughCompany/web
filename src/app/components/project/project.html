@@ -112,6 +112,9 @@
                   <textarea class="form-control" name="description" ng-model="addAssetTagForm.description" required>
                   </textarea>
                 </div>
+                <button class="btn btn-default" ng-click="addAssetTag(addAssetForm)" ng-disabled="!addAssetForm.$valid">
+                  Add Need
+                </button>
               </form>
             </div>
             <div class="asset-tags" ng-hide="editNeeds">
