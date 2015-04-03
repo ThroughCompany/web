@@ -39,7 +39,7 @@
       <div class="header clearfix">
         <h3>Projects</h3>
         <div class="add-new-btn pull-right">
-          <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject" ng-show="projects && projects.length">
+          <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject" ng-show="(projects && projects.length) && auth.hasCurrentUserIdClaim(user._id)">
             <i class="fa fa-plus"></i> Add
           </a>
         </div>
