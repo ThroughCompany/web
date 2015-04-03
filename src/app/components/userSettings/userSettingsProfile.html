@@ -7,12 +7,12 @@
       <form name="updateUserForm" novalidate>
         <div class="form-section">
           <h4 class="form-section-header">Profile Pic</h4>
-          <img-upload file-selected="updateProfilePic">
+          <file-upload file-selected="updateProfilePic">
             <img class="profile-pic img-responsive img-rounded" src="{{ currentUser.profilePic }}" />
             <p>
-              <button class="btn" type="submit" ng-hide="loading" ng-click="selectImage()" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" data-result="profilePicResult" data-options="profilePicBtnOptions"></button>
+              <button class="btn" type="submit" ng-hide="loading" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" data-result="profilePicResult" data-options="profilePicBtnOptions" file-upload-trigger></button>
             </p>
-          </img-upload>
+          </file-upload>
         </div>
         <div class="form-section">
           <h4 class="form-section-header">Name</h4>
