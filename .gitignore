@@ -9,6 +9,8 @@ lib-cov
 
 *.DS_Store
 
+src/bower_components
+
 pids
 logs
 results

@@ -1,51 +1,54 @@
 <div id="project-settings">
-  <div class="col-md-9 col-md-offset-2">
+  <div class="sidebar col-md-3">
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="type in settingTypes">
+        <a href="#" ng-click="changeCurrentSettingsType(type)" ng-class="{ active : currentSettingsType.name === type.name }">
+          <i class="fa {{ type.icon }}"></i>&nbsp;{{ type.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-9">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Profile Settings
+        {{ currentSettingsType.name }}
       </div>
       <div class="panel-body">
         <form name="updateProjectForm" novalidate>
-          <div class="form-section">
-            <h4 class="form-section-header">Profile Pic</h4>
-            <file-upload file-selected="updateProfilePic">
-              <img class="profile-pic img-responsive img-rounded" src="{{ project.profilePic }}" />
-              <p>
-                <button class="btn" type="submit" ng-hide="loading" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" data-result="profilePicResult" data-options="profilePicBtnOptions" file-upload-trigger></button>
-              </p>
-            </file-upload>
-          </div>
-          <div class="form-section">
-            <h4 class="form-section-header">Banner Pic</h4>
-            <file-upload file-selected="updateBannerPic">
-              <img class="banner-pic img-responsive img-rounded" src="{{ project.bannerPic }}" />
-              <p>
-                <button class="btn" type="submit" ng-hide="loading" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingBannerPic" data-result="bannerPicResult" data-options="bannerPicBtnOptions" file-upload-trigger></button>
-              </p>
-            </file-upload>
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" name="description" ng-model="project.description" ng-change="form.description = project.description"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Location</label>
-            <input class="form-control" type="text" name="location" ng-model="project.location" ng-change="form.location = project.location" />
-          </div>
-          <div class="form-section">
-            <h4 class="form-section-header">Social</h4>
+          <!-- Profile -->
+          <div class="" ng-show="currentSettingsType.name === 'Profile'">
             <div class="form-group">
-              <label>Facebook</label>
-              <input class="form-control" type="text" name="social-fb" ng-model="project.social.facebook" ng-change="form.social.facebook = project.social.facebook" />
+              <label>Description</label>
+              <textarea class="form-control" name="description" ng-model="projectUpdates.description" ng-change="form.description = project.description"></textarea>
             </div>
             <div class="form-group">
-              <label>Git Hub</label>
-              <input class="form-control" type="text" name="social-github" ng-model="project.social.gitHub" ng-change="form.social.gitHub = project.social.gitHub" />
+              <label>Location</label>
+              <input class="form-control" type="text" name="location" ng-model="projectUpdates.location" ng-change="form.location = project.location" />
             </div>
-            <div class="form-group">
-              <label>Linked In</label>
-              <input class="form-control" type="text" name="social-linkedin" ng-model="project.social.linkedIn" ng-change="form.social.linkedIn = project.social.linkedIn" />
+          </div>
+          <!-- Images -->
+          <div class="" ng-show="currentSettingsType.name === 'Images'">
+            <div class="form-section">
+              <h4 class="form-section-header">Profile Pic</h4>
+              <file-upload file-selected="updateProfilePic">
+                <img class="profile-pic img-responsive img-rounded" src="{{ project.profilePic }}" width="240px" />
+                <p>
+                  <button class="btn" type="submit" ng-hide="loading" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" data-result="profilePicResult" data-options="profilePicBtnOptions" file-upload-trigger></button>
+                </p>
+              </file-upload>
             </div>
+            <div class="form-section">
+              <h4 class="form-section-header">Banner Pic</h4>
+              <file-upload file-selected="updateBannerPic">
+                <img class="banner-pic img-responsive img-rounded" src="{{ project.bannerPic }}" width="100%" />
+                <p>
+                  <button class="btn" type="submit" ng-hide="loading" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingBannerPic" data-result="bannerPicResult" data-options="bannerPicBtnOptions" file-upload-trigger></button>
+                </p>
+              </file-upload>
+            </div>
+          </div>
+          <!-- Links -->
+          <div ng-show="currentSettingsType.name === 'Links'">
           </div>
           <button class="btn btn-primary pull-right" ng-click="updateProject(updateProjectForm)">Save</button>
         </form>

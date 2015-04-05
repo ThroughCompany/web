@@ -1,21 +1,68 @@
 angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
   '$scope',
+  '$state',
+  '$stateParams',
+  '$location',
   '$rootScope',
   'userService',
   'alertService',
   'projectService',
-  function($scope, $rootScope, userService, alertService, projectService) {
+  function($scope, $state, $stateParams, $location, $rootScope, userService, alertService, projectService) {
     $rootScope.setMetaTitle($scope.project.name + ' Profile');
+
+    $scope.changeCurrentSettingsType = _changeCurrentSettingsType;
+
+    $scope.settingTypes = [{
+      name: 'Profile',
+      icon: 'fa fa-building'
+    }, {
+      name: 'Images',
+      icon: 'fa fa-image'
+    }, {
+      name: 'Links',
+      icon: 'fa fa-link'
+    }];
+
+    $scope.changeCurrentSettingsType($stateParams.type ? _.find($scope.settingTypes, function(type) {
+      return type.name.toLowerCase() === $stateParams.type.toLowerCase();
+    }) : $scope.settingTypes[0]);
 
     $scope.form = {
       projectId: $scope.project._id
     };
 
+    $scope.projectUpdates = _.clone($scope.project);
+
     $scope.updateProject = function(form) {
       if (!form.$valid) return;
 
-      projectService.updateProjectById($scope.form).then(function(response) {
+      var patches = [];
+
+      if ($scope.projectUpdates.description !== $scope.project.description) {
+        patches.push({
+          op: 'replace',
+          path: '/description',
+          value: $scope.projectUpdates.description
+        });
+      }
+
+      if ($scope.projectUpdates.location !== $scope.project.location) {
+        patches.push({
+          op: 'replace',
+          path: '/location',
+          value: $scope.projectUpdates.location
+        });
+      }
+
+      projectService.updateProjectById({
+        projectId: $scope.project._id,
+        patches: patches
+      }).then(function(response) {
         alertService.success('Settings Saved');
+
+        $scope.project.description = response.description;
+        $scope.project.location = response.location;
+
       }, function(response) {
         $scope.logger.error(response);
       });
@@ -99,6 +146,13 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
         $scope.isSubmittingBannerPic = false;
         $scope.bannerPicResult = 'error';
       });
+    };
+
+    function _changeCurrentSettingsType(type) {
+      if (!type) return $state.go('system.404');
+
+      $scope.currentSettingsType = type;
+      $location.path('/project/' + $scope.project.slug + '/settings/' + type.name.toLowerCase());
     };
   }
 ]);
