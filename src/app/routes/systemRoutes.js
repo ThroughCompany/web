@@ -54,7 +54,9 @@ angular.module('throughCompanyApp').config([
             }
           ]
         }
-      })
+      });
+
+    $stateProvider
       .state('system.home', {
         url: 'home',
         templateUrl: '/app/components/home/home.html',
@@ -65,7 +67,9 @@ angular.module('throughCompanyApp').config([
             description: 'Welcome to Through Company.com'
           }
         }
-      })
+      });
+
+    $stateProvider
       .state('system.startProject', {
         url: 'start-project',
         templateUrl: '/app/components/startProject/startProject.html',
@@ -76,7 +80,9 @@ angular.module('throughCompanyApp').config([
             description: 'Start a new Project'
           }
         }
-      })
+      });
+
+    $stateProvider
       .state('system.project', {
         url: 'project/:projectId',
         templateUrl: '/app/components/project/project.html',
@@ -99,12 +105,17 @@ angular.module('throughCompanyApp').config([
             }
           ]
         }
-      })
+      });
+
+    $stateProvider
       .state('system.project.settings', {
-        url: '/settings',
+        url: '/settings/:type',
         templateUrl: '/app/components/project/settings/projectSettings.html',
-        controller: 'projectSettingsCtrl'
-      })
+        controller: 'projectSettingsCtrl',
+        reloadOnSearch: false
+      });
+
+    $stateProvider
       .state('system.user', {
         url: 'user/:userName',
         templateUrl: '/app/components/user/user.html',
@@ -126,28 +137,38 @@ angular.module('throughCompanyApp').config([
             }
           ]
         }
-      })
+      });
+
+    $stateProvider
       .state('system.signIn', {
         url: 'signin?email&project',
         templateUrl: '/app/components/signIn/signIn.html',
         controller: 'signInCtrl'
-      })
+      });
+
+    $stateProvider
       .state('system.signUp', {
         url: 'signup?project',
         templateUrl: '/app/components/signUp/signUp.html',
         controller: 'signUpCtrl'
-      })
+      });
+
+    $stateProvider
       .state('system.404', {
         url: '404',
         templateUrl: '/app/components/notFound/notFound.html',
         controller: 'notFoundCtrl'
-      })
-      //user routes
+      });
+
+    //user routes
+    $stateProvider
       .state('system.userProfile', {
         url: 'profile',
         templateUrl: '/app/components/userProfile/userProfile.html',
         controller: 'userProfileCtrl'
-      })
+      });
+
+    $stateProvider
       .state('system.userSettings', {
         url: 'settings',
         templateUrl: '/app/components/userSettings/userSettings.html',
@@ -156,7 +177,9 @@ angular.module('throughCompanyApp').config([
         data: {
           authenticate: true
         }
-      })
+      });
+
+    $stateProvider
       .state('system.userSettings.profile', {
         url: 'profile',
         templateUrl: '/app/components/userSettings/userSettingsProfile.html',
@@ -164,7 +187,9 @@ angular.module('throughCompanyApp').config([
         data: {
           authenticate: true
         }
-      })
+      });
+
+    $stateProvider
       .state('system.createProject', {
         url: 'new-project',
         templateUrl: '/app/components/createProject/createProject.html',
@@ -172,20 +197,8 @@ angular.module('throughCompanyApp').config([
         data: {
           authenticate: true
         }
-      })
-      .state('system.projectSettings', {
-        url: 'project/:projectId/settings',
-        templateUrl: '/app/components/projectSettings/projectSettings.html',
-        controller: 'projectSettingsCtrl',
-        abstract: true,
-        data: {
-          authenticate: true
-        }
-      })
-      .state('system.projectSettings.profile', {
-        url: '/profile',
-        templateUrl: '/app/components/projectSettings/projectSettingsProfile.html',
-        controller: 'projectSettingsProfileCtrl'
       });
+
+    $urlRouterProvider.when('/', '/home');
   }
 ]);

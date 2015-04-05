@@ -9,7 +9,7 @@
     <div class="form-group" ng-class="{ 'has-errors' : submitted && !createProjectForm.description.$valid }">
       <label class="control-label">Description</label>
       <textarea class="form-control" type="text" name="description" ng-model="form.description" required></textarea>
-      <p class="error-msg" ng-show="submitted && createProjectForm.description.$error.required">Please a description of your project.
+      <p class="error-msg" ng-show="submitted && createProjectForm.description.$error.required">Please enter a description of your project.
       </p>
     </div>
     <button class="btn btn-primary pull-right" tabindex="3" ng-click="createProject(createProjectForm)" ng-bs-animated-button is-submitting="createProjectSubmitting" result="createProjectResult" options="createProjectBtnOptions">
