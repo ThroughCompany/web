@@ -71,11 +71,13 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
                     projectId: response._id
                   });
                 }, function error(response) {
-                  $state.go($scope.routes.userProfile);
+                  $state.go(outes.user, {
+                    userName: $scope.currentUser.userName
+                  });
                 });
               } else {
-                $state.go(routes.userProfile, {
-                  project: $scope.project
+                $state.go(routes.user, {
+                  userName: $scope.currentUser.userName
                 });
               }
             }, 500);

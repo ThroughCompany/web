@@ -58,6 +58,10 @@ angular.module('throughCompanyApp').config([
         }
       });
 
+    /* ------------------------------------------------------------
+     * Home
+     * ------------------------------------------------------------ */ 
+
     $stateProvider
       .state('system.home', {
         url: 'home',
@@ -71,6 +75,12 @@ angular.module('throughCompanyApp').config([
         }
       });
 
+    $urlRouterProvider.when('/', '/home');
+
+    /* ------------------------------------------------------------
+     * Start Project
+     * ------------------------------------------------------------ */
+
     $stateProvider
       .state('system.startProject', {
         url: 'start-project',
@@ -83,6 +93,20 @@ angular.module('throughCompanyApp').config([
           }
         }
       });
+
+    $stateProvider
+      .state('system.createProject', {
+        url: 'new-project',
+        templateUrl: '/app/components/createProject/createProject.html',
+        controller: 'createProjectCtrl',
+        data: {
+          authenticate: true
+        }
+      });
+
+    /* ------------------------------------------------------------
+     * Project
+     * ------------------------------------------------------------ */
 
     $stateProvider
       .state('system.project', {
@@ -114,8 +138,13 @@ angular.module('throughCompanyApp').config([
         url: '/settings/:type',
         templateUrl: '/app/components/project/settings/projectSettings.html',
         controller: 'projectSettingsCtrl',
-        reloadOnSearch: false
+        reloadOnSearch: false,
+        authenticate: true
       });
+
+    /* ------------------------------------------------------------
+     * User
+     * ------------------------------------------------------------ */
 
     $stateProvider
       .state('system.user', {
@@ -142,11 +171,28 @@ angular.module('throughCompanyApp').config([
       });
 
     $stateProvider
+      .state('system.user.settings', {
+        url: '/settings/:type',
+        templateUrl: '/app/components/user/settings/userSettings.html',
+        controller: 'userSettingsCtrl',
+        reloadOnSearch: false,
+        authenticate: true
+      });
+
+    /* ------------------------------------------------------------
+     * Sign In
+     * ------------------------------------------------------------ */
+      
+    $stateProvider
       .state('system.signIn', {
         url: 'signin?email&project',
         templateUrl: '/app/components/signIn/signIn.html',
         controller: 'signInCtrl'
       });
+
+    /* ------------------------------------------------------------
+     * Sign Up
+     * ------------------------------------------------------------ */
 
     $stateProvider
       .state('system.signUp', {
@@ -155,52 +201,15 @@ angular.module('throughCompanyApp').config([
         controller: 'signUpCtrl'
       });
 
+    /* ------------------------------------------------------------
+     * 404
+     * ------------------------------------------------------------ */
+
     $stateProvider
       .state('system.404', {
         url: '404',
         templateUrl: '/app/components/notFound/notFound.html',
         controller: 'notFoundCtrl'
       });
-
-    //user routes
-    $stateProvider
-      .state('system.userProfile', {
-        url: 'profile',
-        templateUrl: '/app/components/userProfile/userProfile.html',
-        controller: 'userProfileCtrl'
-      });
-
-    $stateProvider
-      .state('system.userSettings', {
-        url: 'settings',
-        templateUrl: '/app/components/userSettings/userSettings.html',
-        controller: 'userSettingsCtrl',
-        abstract: true,
-        data: {
-          authenticate: true
-        }
-      });
-
-    $stateProvider
-      .state('system.userSettings.profile', {
-        url: 'profile',
-        templateUrl: '/app/components/userSettings/userSettingsProfile.html',
-        controller: 'userSettingsProfileCtrl',
-        data: {
-          authenticate: true
-        }
-      });
-
-    $stateProvider
-      .state('system.createProject', {
-        url: 'new-project',
-        templateUrl: '/app/components/createProject/createProject.html',
-        controller: 'createProjectCtrl',
-        data: {
-          authenticate: true
-        }
-      });
-
-    $urlRouterProvider.when('/', '/home');
   }
 ]);
