@@ -7,7 +7,8 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
   'userService',
   'alertService',
   'projectService',
-  function($scope, $state, $stateParams, $location, $rootScope, userService, alertService, projectService) {
+  'utilsService',
+  function($scope, $state, $stateParams, $location, $rootScope, userService, alertService, projectService, utilsService) {
     $rootScope.setMetaTitle($scope.project.name + ' Profile');
 
     $scope.changeCurrentSettingsType = _changeCurrentSettingsType;
@@ -29,6 +30,40 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
 
     $scope.form = {
       projectId: $scope.project._id
+    };
+
+    $scope.addUpdateLink = function(link) {
+      console.log('ADD/UPDATE LINK');
+      console.log(link);
+
+      var patches = [{
+        op: 'add',
+        path: '/socialLinks/2',
+        value: link
+      }];
+
+      projectService.updateProjectById({
+        projectId: $scope.project._id,
+        patches: patches
+      }).then(function(response) {
+        alertService.success('Settings Saved');
+
+        $scope.project.socialLinks = response.socialLinks;
+
+      }, function(response) {
+        $scope.logger.error(response);
+        alertService.error(utilsService.getServerErrorMessage(response));
+      });
+    };
+
+    $scope.linkInputHandle = {};
+    $scope.showHideAddLinks = function() {
+      if ($scope.addLinks) {
+        $scope.addLinks = false;
+        $scope.linkInputHandle.clear();
+      } else {
+        $scope.addLinks = true;
+      }
     };
 
     $scope.projectUpdates = _.clone($scope.project);
@@ -65,6 +100,7 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
 
       }, function(response) {
         $scope.logger.error(response);
+        alertService.error(utilsService.getServerErrorMessage(response));
       });
     };
 
@@ -75,6 +111,7 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
       buttonSubmittingIcon: 'icon-left fa fa-spin fa-refresh',
       buttonDefaultText: 'Upload Profile Pic',
       buttonDefaultIcon: 'icon-left fa fa-image',
+      buttonDefaultClass: 'btn-default',
       buttonSubmittingText: 'Saving Profile Pic...',
       buttonSuccessIcon: 'icon-left fa fa-check',
       buttonSuccessText: 'Profile Pic Updated',
@@ -90,6 +127,7 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
       buttonSubmittingIcon: 'icon-left fa fa-spin fa-refresh',
       buttonDefaultText: 'Upload Banner Pic',
       buttonDefaultIcon: 'icon-left fa fa-image',
+      buttonDefaultClass: 'btn-default',
       buttonSubmittingText: 'Saving Banner Pic...',
       buttonSuccessIcon: 'icon-left fa fa-check',
       buttonSuccessText: 'Banner Pic Updated',

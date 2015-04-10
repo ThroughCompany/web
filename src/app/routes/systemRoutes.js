@@ -29,6 +29,7 @@ angular.module('throughCompanyApp').config([
                 deferred.resolve(response);
               }, function error(response) {
                 deferred.resolve(null);
+                authService.logout(true);
               });
 
               return deferred.promise;
@@ -48,6 +49,7 @@ angular.module('throughCompanyApp').config([
                 deferred.resolve(response);
               }, function error(response) {
                 deferred.resolve(null);
+                authService.logout(true);
               });
 
               return deferred.promise;

@@ -16,7 +16,7 @@
       <div class="panel-body">
         <form name="updateProjectForm" novalidate>
           <!-- Profile -->
-          <div class="" ng-show="currentSettingsType.name === 'Profile'">
+          <div class="profile-section settings-section" ng-show="currentSettingsType.name === 'Profile'">
             <div class="form-group">
               <label>Description</label>
               <textarea class="form-control" name="description" ng-model="projectUpdates.description" ng-change="form.description = project.description"></textarea>
@@ -25,15 +25,16 @@
               <label>Location</label>
               <input class="form-control" type="text" name="location" ng-model="projectUpdates.location" ng-change="form.location = project.location" />
             </div>
+            <button class="btn btn-primary pull-right" ng-click="updateProject(updateProjectForm)">Save</button>
           </div>
           <!-- Images -->
-          <div class="" ng-show="currentSettingsType.name === 'Images'">
+          <div class="images-section settings-section" ng-show="currentSettingsType.name === 'Images'">
             <div class="form-section">
               <h4 class="form-section-header">Profile Pic</h4>
               <file-upload file-selected="updateProfilePic">
                 <img class="profile-pic img-responsive img-rounded" src="{{ project.profilePic }}" width="240px" />
-                <p>
-                  <button class="btn" type="submit" ng-hide="loading" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" data-result="profilePicResult" data-options="profilePicBtnOptions" file-upload-trigger></button>
+                <p class="clearfix">
+                  <button class="btn pull-right" type="submit" ng-hide="loading" ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" result="profilePicResult" data-options="profilePicBtnOptions" file-upload-trigger></button>
                 </p>
               </file-upload>
             </div>
@@ -41,16 +42,21 @@
               <h4 class="form-section-header">Banner Pic</h4>
               <file-upload file-selected="updateBannerPic">
                 <img class="banner-pic img-responsive img-rounded" src="{{ project.bannerPic }}" width="100%" />
-                <p>
-                  <button class="btn" type="submit" ng-hide="loading" data-ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingBannerPic" data-result="bannerPicResult" data-options="bannerPicBtnOptions" file-upload-trigger></button>
+                <p class="clearfix">
+                  <button class="btn pull-right" type="submit" ng-hide="loading" ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingBannerPic" result="bannerPicResult" data-options="bannerPicBtnOptions" file-upload-trigger></button>
                 </p>
               </file-upload>
             </div>
           </div>
           <!-- Links -->
-          <div ng-show="currentSettingsType.name === 'Links'">
+          <div class="links-section settings-section" ng-show="currentSettingsType.name === 'Links'">
+            <!--             <div class="add-links clearfix">
+              <button class="btn btn-default pull-right" ng-click="showHideAddLinks()">
+                <i class="fa fa-plus"></i> Add Links
+              </button>
+            </div> -->
+            <link-input ng-repeat="link in project.socialLinks" link-input-handle="linkInputHandle" link="link" save-link="addUpdateLink"></link-input>
           </div>
-          <button class="btn btn-primary pull-right" ng-click="updateProject(updateProjectForm)">Save</button>
         </form>
       </div>
     </div>

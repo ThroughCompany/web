@@ -12,8 +12,6 @@ angular.module('throughCompanyApp').directive('affix', [
         // scope.offsetTopMobile = attrs.offsetTopMobile;
         // scope.offsetBottom = attrs.offsetBottom;
 
-        console.log('scope.offsetTop = ' + scope.offsetTop);
-
         element.affix({
           offset: {
             top: scope.offsetTop
