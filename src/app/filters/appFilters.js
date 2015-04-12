@@ -1,13 +1,19 @@
 angular.module('throughCompanyApp').filter('iconlink', function() {
   return function(input, uppercase) {
     var icons = {
-      'ICON-FACEBOOK': 'fa-facebook',
-      'ICON-twitter': 'fa-twitter',
-      'ICON-linkedin': 'fa-linkedin',
-      'ICON-pinterest': 'fa-pinterest',
-      'ICON-reddit': 'fa-reddit',
-      'ICON-GITHUB': 'fa-github',
-      'ICON-MEDIUM': 'fa-medium'
+      FACEBOOK: 'fa-facebook',
+      GITHUB: 'fa-github',
+      LINKEDIN: 'fa-linkedin',
+      TWITTER: 'fa-twitter',
+      MEETUP: 'fa-meetup',
+      DRIBBBLE: 'fa-dribbble',
+      BEHANCE: 'fa-behance',
+      YELP: 'fa-yelp',
+      GOODREADS: 'GOODREADS',
+      INSTAGRAM: 'fa-instagram',
+      WEBSITE: 'fa-link',
+      MEDIUM: 'fa-medium',
+      BLOG: 'fa-link'
     };
 
     function _findIconName(icons, icon) {

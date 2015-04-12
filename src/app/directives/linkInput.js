@@ -12,7 +12,7 @@ angular.module('throughCompanyApp').directive('linkInput', [
         '<i class="fa fa-caret-down"></i>' +
         '</a>' +
         '<div class="dropdown-menu">' +
-        '<a href="#" ng-repeat="icon in icons" ng-click="selectIcon(icon)">' +
+        '<a href="#" ng-repeat="icon in iconTypes" ng-click="selectIcon(icon)">' +
         '<i class="fa {{ icon }}"></i>' +
         '</a>' +
         '</div>' +
@@ -46,17 +46,17 @@ angular.module('throughCompanyApp').directive('linkInput', [
 
         iconDropDown.dropdown();
 
-        scope.icons = {
-          'ICON-FACEBOOK': 'fa-facebook',
-          'ICON-twitter': 'fa-twitter',
-          'ICON-linkedin': 'fa-linkedin',
-          'ICON-pinterest': 'fa-pinterest',
-          'ICON-reddit': 'fa-reddit',
-          'ICON-GITHUB': 'fa-github',
-          'ICON-MEDIUM': 'fa-medium'
+        scope.iconTypes = {
+          'FACEBOOK': 'fa-facebook',
+          'TWITTER': 'fa-twitter',
+          'LINKEDIN': 'fa-linkedin',
+          'PINTEREST': 'fa-pinterest',
+          'REDDIT': 'fa-reddit',
+          'GITHUB': 'fa-github',
+          'MEDIUM': 'fa-medium'
         };
 
-        scope.selectedIcon = _findIconName(scope.icons, scope.link.icon || 'ICON-FACEBOOK'); //default to facebook icon
+        scope.selectedIcon = _findIconName(scope.iconTypes, scope.link.type || 'FACEBOOK'); //default to facebook icon
         scope.selectIcon = function(icon) {
           scope.selectedIcon = icon;
         };
@@ -86,10 +86,9 @@ angular.module('throughCompanyApp').directive('linkInput', [
           if (!form.$valid) return;
 
           scope.saveLink({
-            type: scope.form.type,
             link: scope.form.linkUrl,
             name: scope.form.linkText,
-            icon: _findIconKey(scope.icons, scope.selectedIcon)
+            type: _findIconKey(scope.iconTypes, scope.selectedIcon)
           });
         };
 
