@@ -43,6 +43,22 @@ angular.module('throughCompanyApp').controller('signUpCtrl', [
     $scope.form = {};
     $scope.errorMsg = null;
 
+    $scope.$watch('form.email', function(val) {
+      if (!val) {
+        $scope.emailLength = 0;
+        return;
+      }
+      $scope.emailLength = val.length;
+    });
+
+    $scope.$watch('form.password', function(val) {
+      if (!val) {
+        $scope.passwordLength = 0;
+        return;
+      }
+      $scope.passwordLength = val.length;
+    });
+
     $scope.register = function(registerForm) {
 
       $scope.submitted = true;

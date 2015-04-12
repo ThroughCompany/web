@@ -33,15 +33,18 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
     $scope.unsavedSocialLinks = [];
 
     $scope.newLink = function() {
-      $scope.unsavedSocialLinks.push({
+      $scope.unsavedSocialLinks.push({});
+    };
 
-      });
+    $scope.deleteLink = function(link) {
+      console.log('delete link');
+      console.log(link);
     };
 
     $scope.addLink = function(link) {
       var patches = [{
         op: 'add',
-        path: '/socialLinks/1',
+        path: '/socialLinks/0',
         value: link
       }];
 

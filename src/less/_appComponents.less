@@ -43,69 +43,68 @@
   position: relative;
   form {
     &.link-added {
-      .form-group {
-        .link-input-icon-dropdown {
-          width: 95px;
-          a {
-            padding-right: 14px;
-          }
+      .link-input-icon-dropdown {
+        width: 80px;
+        a {
+          padding-right: 14px;
         }
-        .link-input-control-link {
-          padding-left: 115px;
-        }
+      }
+      .link-input-control-link-wrap {
+        margin-left: 80px;
       }
     }
     .form-group {
-      &.has-errors {
-        .link-input-icon-dropdown {
-          border-color: @brand-danger;
-        }
-        .link-input-btn {
-          border-color: @brand-danger;
-        }
-      }
-      .link-input-icon-dropdown {
-        position: absolute;
-        top: 0;
-        left: 0;
-        float: left;
-        border: 1px solid #cccccc;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-        width: 70px;
-        a {
-          padding: 9px 28px;
-          display: block;
-          .selectedIcon {
-            margin-right: 14px;
-          }
+      margin: 0;
+    }
+    .link-input-icon-dropdown {
+      float: left;
+      border: 1px solid #cccccc;
+      border-top-left-radius: 4px;
+      width: 50px;
+      a {
+        padding: 9px 18px;
+        display: block;
+        .selectedIcon {
+          margin-right: 14px;
         }
       }
+    }
+    .link-input-control-link-wrap {
+      margin-left: 50px;
       .link-input-control-link {
-        padding-left: 80px;
-        padding-right: 140px;
         border-left: none;
-        // border-top-left-radius: 0;
-        // border-bottom-left-radius: 0;
-      }
-      .link-input-control-text {
-        padding-left: 80px;
-        padding-right: 140px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
-      .link-input-icon-remove {
-        position: absolute;
-        top: 10px;
-        right: 110px;
-      }
-      .link-input-btn {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        position: absolute;
-        top: 0;
-        right: 0;
       }
+    }
+    .link-input-control-text-wrap {
+      position: relative;
+      clear: both;
+      .link-input-control-text-name {
+        float: left;
+        width: 70px;
+        border: 1px solid #cccccc;
+        padding: 9px 0 10px 0;
+        border-top: none;
+        border-right: none;
+      }
+      .wrap {
+        margin-left: 70px;
+        .link-input-control-text {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 0;
+          border-top: none;
+        }
+      }
+    }
+    .link-input-btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
   }
 }

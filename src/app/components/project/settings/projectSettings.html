@@ -50,12 +50,13 @@
           </div>
           <!-- Links -->
           <div class="links-section settings-section" ng-show="currentSettingsType.name === 'Links'">
-            <!--             <div class="add-links clearfix">
-              <button class="btn btn-default pull-right" ng-click="showHideAddLinks()">
-                <i class="fa fa-plus"></i> Add Links
+            <div class="add-links clearfix">
+              <button class="btn btn-sm btn-default pull-right" ng-click="newLink()">
+                <i class="fa fa-plus"></i> Add
               </button>
-            </div> -->
-            <link-input ng-repeat="link in project.socialLinks" link-input-handle="linkInputHandle" link="link" save-link="addUpdateLink"></link-input>
+            </div>
+            <link-input ng-repeat="link in unsavedSocialLinks" link-input-handle="linkInputHandle" link="link" save-link="addLink"></link-input>
+            <link-input ng-repeat="link in project.socialLinks" link-input-handle="linkInputHandle" link="link" save-link="addUpdateLink" delete-link="deleteLink"></link-input>
           </div>
         </form>
       </div>

@@ -8,16 +8,6 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
   function($scope, $rootScope, projectService, $timeout, subscribeService, utilsService) {
     $scope.loaded = false;
 
-    $timeout(function() {
-      $scope.showName1 = true;
-    }, 200);
-    $timeout(function() {
-      $scope.showName2 = true;
-    }, 1200);
-    $timeout(function() {
-      $scope.showName3 = true;
-    }, 2200);
-
     projectService.getProjects({}).then(function success(response) {
       $scope.loaded = true;
       $scope.projects = response;
@@ -40,9 +30,9 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
       buttonErrorClass: 'btn-danger'
     };
 
-    $scope.scrollTo = function(id) {
-      utilsService.scrollTo(id, 40);
-    };
+    // $scope.scrollTo = function(id) {
+    //   utilsService.scrollTo(id, 40);
+    // };
 
     $scope.subscribe = function(form) {
       $scope.submitted = true;

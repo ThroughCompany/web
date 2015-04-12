@@ -33,12 +33,41 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
       projectId: $scope.project._id
     };
 
-    $scope.addUpdateLink = function(link) {
-      console.log('ADD/UPDATE LINK');
-      console.log(link);
+    $scope.unsavedSocialLinks = [];
 
+    $scope.newLink = function() {
+      $scope.unsavedSocialLinks.push({});
+    };
+
+    $scope.deleteLink = function(link) {
+      console.log('delete link');
+      console.log(link);
+    };
+
+    $scope.addLink = function(link) {
       var patches = [{
         op: 'add',
+        path: '/socialLinks/0',
+        value: link
+      }];
+
+      projectService.updateProjectById({
+        projectId: $scope.project._id,
+        patches: patches
+      }).then(function(response) {
+        alertService.success('Settings Saved');
+
+        $scope.project.socialLinks = response.socialLinks;
+
+      }, function(response) {
+        $scope.logger.error(response);
+        alertService.error(utilsService.getServerErrorMessage(response));
+      });
+    };
+
+    $scope.updateLink = function(link) {
+      var patches = [{
+        op: 'replace',
         path: '/socialLinks/2',
         value: link
       }];

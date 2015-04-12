@@ -11,13 +11,15 @@
   </button>
   <p class="center or">or</p> -->
   <form class="clearfix" name="loginForm" role="form" novalidate>
-    <div class="form-group" ng-class="{ 'has-errors' : submitted && loginForm.email.$invalid }">
-      <input class="form-control preroll" tabindex="1" placeholder="Email" name="email" type="text" ng-model="form.email" ng-class=" { preroll : !showEmail }" required ng-pattern="regexes.email" />
+    <div class="form-group" ng-class="{ 'has-errors' : submitted && loginForm.email.$invalid, 'filled' : fillingEmail || emailLength > 0, preroll : !showEmail }">
+      <span class="placeholder">Email</span>
+      <input class="form-control preroll" tabindex="1" name="email" type="text" ng-model="form.email" ng-class=" { preroll : !showEmail }" required ng-focus="fillingEmail = true" ng-blur="fillingEmail = false" />
       <p class="error-msg" ng-show="submitted && loginForm.email.$error.required">Please enter your email.
       </p>
     </div>
-    <div class="form-group" ng-class="{ 'has-errors' : submitted && loginForm.password.$invalid }">
-      <input class="form-control preroll" tabindex="2" placeholder="Password" name="password" type="password" ng-model="form.password" ng-class="{ preroll : !showPassword }" required />
+    <div class="form-group" ng-class="{ 'has-errors' : submitted && loginForm.password.$invalid, 'filled' : fillingPassword || passwordLength > 0, preroll : !showPassword }">
+      <span class="placeholder">Password</span>
+      <input class="form-control preroll" tabindex="2" name="password" type="password" ng-model="form.password" ng-class="{ preroll : !showPassword }" required ng-focus="fillingPassword = true" ng-blur="fillingPassword = false" />
       <p class="error-msg" ng-show="submitted && loginForm.password.$error.required">Please enter your password.
       </p>
     </div>

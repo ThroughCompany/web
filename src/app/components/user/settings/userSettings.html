@@ -19,15 +19,15 @@
           <div class="profile-section settings-section" ng-show="currentSettingsType.name === 'Profile'">
             <div class="form-group">
               <label>First Name</label>
-              <input class="form-control" type="text" name="firstName" ng-model="userUpdates.firstName" ng-change="form.firstName = user.firstName" />
+              <input class="form-control" type="text" name="firstName" ng-model="userUpdates.firstName" />
             </div>
             <div class="form-group">
               <label>Last Name</label>
-              <input class="form-control" type="text" name="lastName" ng-model="userUpdates.lastName" ng-change="form.lastName = user.lastName" />
+              <input class="form-control" type="text" name="lastName" ng-model="userUpdates.lastName" />
             </div>
             <div class="form-group">
               <label>Location</label>
-              <input class="form-control" type="text" name="location" ng-model="userUpdates.location" ng-change="form.location = user.location" />
+              <input class="form-control" type="text" name="location" ng-model="userUpdates.location" />
             </div>
             <button class="btn btn-primary pull-right" ng-click="updateUser(updateUserForm)">Save</button>
           </div>
@@ -51,7 +51,7 @@
               </button>
             </div>
             <link-input ng-repeat="link in unsavedSocialLinks" link-input-handle="linkInputHandle" link="link" save-link="addLink"></link-input>
-            <link-input ng-repeat="link in currentUser.socialLinks" link-input-handle="linkInputHandle" link="link" save-link="updateLink"></link-input>
+            <link-input ng-repeat="link in currentUser.socialLinks" link-input-handle="linkInputHandle" link="link" save-link="updateLink" delete-link="deleteLink"></link-input>
           </div>
         </form>
       </div>

@@ -1,26 +1,23 @@
 <div id="home" class="clearfix">
   <div class="hero">
-    <div class="hero-slides" image-slide-show>
+    <div class="hero-slides" image-slide-show interval="8000">
       <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner1.jpg')">
+        <div class="slide-bg"></div>
+        <div class="container hero-text">
+          <p class="uppercase small-text">A better way to</p>
+          <h1>Market your skills</h1>
+          <p class="big-text">Through Company allows you to create a relevant online resume that reflects what you've done not what you say you've done.</p>
+        </div>
       </div>
-      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner2.jpg')">
-      </div>
-      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner3.jpg')">
+      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner1.jpg')">
+        <div class="slide-bg"></div>
+        <div class="container hero-text">
+          <p class="uppercase small-text">A new way to</p>
+          <h1>Tackle Big Problems</h1>
+          <p class="big-text">Through Company allows you to build the right team to meet the world's exponentially growing problems head on.</p>
+        </div>
       </div>
     </div>
-    <p class="hero-text">
-      <span class="preroll" ng-class="{ preroll : !showName1 }">Start with an idea.</span>
-      <span class="preroll" ng-class="{ preroll : !showName2 }">Find what you need.</span>
-      <span class="preroll" ng-class="{ preroll : !showName3 }"><strong>Get to work.</strong></span>
-    </p>
-    <p class="hero-cta center">
-      <!--       <button class="btn btn-primary btn-cta uppercase preroll" ui-sref-name="routes.startProject" ng-class="{ preroll : !showCta }">
-        Start a Project
-      </button> -->
-      <button class="btn btn-primary btn-cta" ng-click="scrollTo('projects')">
-        View Projects
-      </button>
-    </p>
   </div>
   <div class="content container">
     <div id="projects" class="project-list">

@@ -45,6 +45,23 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
     $scope.form = {
       email: $stateParams.email
     };
+    $scope.errorMsg = null;
+
+    $scope.$watch('form.email', function(val) {
+      if (!val) {
+        $scope.emailLength = 0;
+        return;
+      }
+      $scope.emailLength = val.length;
+    });
+
+    $scope.$watch('form.password', function(val) {
+      if (!val) {
+        $scope.passwordLength = 0;
+        return;
+      }
+      $scope.passwordLength = val.length;
+    });
 
     $scope.login = function(loginForm) {
 
