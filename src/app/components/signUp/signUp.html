@@ -28,10 +28,8 @@
     </div>
     <div class="form-group preroll" ng-class="{ 'has-errors' : submitted && registerForm.password.$invalid, 'filled' : fillingPassword || passwordLength > 0, preroll : !showPassword }">
       <span class="placeholder">Password</span>
-      <input class="form-control" name="password" tabindex="2" type="password" ng-model="form.password" required ng-minlength="6" ng-focus="fillingPassword = true" ng-blur="fillingPassword = false" />
+      <input class="form-control" name="password" tabindex="2" type="password" ng-model="form.password" required ng-focus="fillingPassword = true" ng-blur="fillingPassword = false" />
       <p class="error-msg" ng-show="submitted && registerForm.password.$error.required">Please enter your password.
-      </p>
-      <p class="error-msg" ng-show="submitted && registerForm.password.$error.minlength">Password must be at least 6 characters.
       </p>
     </div>
     <button class="btn-block btn-icon-center preroll" tabindex="3" ng-click="register(registerForm)" ng-bs-animated-button is-submitting="registerSubmitting" result="registerResult" options="registerBtnOptions" ng-class=" { preroll : !showLoginBtn }">

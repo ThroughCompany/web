@@ -74,7 +74,7 @@
           <ul>
             <li ng-repeat="link in project.socialLinks">
               <a ng-href="{{ link.link }}" target="_blank">
-                {{ link.name }}
+                <i class="fa {{ link.icon | iconlink }}"></i> {{ link.name }}
               </a>
             </li>
           </ul>

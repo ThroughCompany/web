@@ -12,19 +12,9 @@
         </p>
         <div class="profile-social">
           <ul>
-            <li ng-show="user.social.facebook">
-              <a href="{{ user.social.facebook }}" target="_blank">
-                <i class="fa fa-facebook"></i> Facebook
-              </a>
-            </li>
-            <li ng-show="user.social.linkedIn">
-              <a href="{{ user.social.linkedIn }}" target="_blank">
-                <i class="fa fa-linkedin-square"></i> LinkedIn
-              </a>
-            </li>
-            <li ng-show="user.social.gitHub">
-              <a href="{{ user.social.gitHub }}" target="_blank">
-                <i class="fa fa-github"></i> GitHub
+            <li ng-repeat="link in user.socialLinks">
+              <a href="{{ link.link }}" target="_blank">
+                <i class="fa {{ link.icon | iconlink }}"></i> {{ link.name }}
               </a>
             </li>
           </ul>
