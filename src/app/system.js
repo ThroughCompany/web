@@ -7,7 +7,8 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'textAngular',
   'ngSanitize',
   'ui.select',
-  'duScroll'
+  'duScroll',
+  'slick'
 ]);
 
 throughCompanyApp.config(['$locationProvider',
