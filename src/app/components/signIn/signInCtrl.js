@@ -101,7 +101,10 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
           }, function error(response) {
             $scope.loginSubmitting = false;
             $scope.loginResult = 'error';
-            $scope.loginBtnOptions.buttonErrorText = utilsService.getServerErrorMessage(response);
+            $scope.errorMsg = 'Invalid email or password';
+            $timeout(function() {
+              $scope.errorMsg = null;
+            }, 3000);
           });
       }, 500);
     };

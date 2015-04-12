@@ -86,6 +86,7 @@ angular.module('throughCompanyApp').controller('signUpCtrl', [
             }, 2500);
           }, 1000);
         }, function error(response) {
+          $scope.registerSubmitting = false;
           $scope.registerResult = 'error';
           $scope.errorMsg = utilsService.getServerErrorMessage(response);
           $timeout(function() {
