@@ -7,7 +7,8 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'textAngular',
   'ngSanitize',
   'ui.select',
-  'duScroll'
+  'duScroll',
+  'slick'
 ]);
 
 throughCompanyApp.config(['$locationProvider',
@@ -50,7 +51,7 @@ throughCompanyApp.run([
     $rootScope.$state = $state;
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      if (toState.data && toState.data.authenticate && !authService.isLoggedIn()) {
+      if (toState.authenticate && !authService.isLoggedIn()) {
         // User isn’t authenticated
         $rootScope.logger.error('Not Authenticated');
         $state.go('system.home');

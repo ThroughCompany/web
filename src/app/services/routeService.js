@@ -1,15 +1,16 @@
 angular.module('throughCompanyApp').constant('routes', {
-  //system routes
   home: 'system.home',
-  project: 'system.project', //public project page
+  //project
+  project: 'system.project',
   projectSettings: 'system.project.settings',
   projectApply: 'system.project.apply',
-  user: 'system.user', //public user page
-  startProject: 'system.startProject', //public project page
+  //user
+  user: 'system.user',
+  userSettings: 'system.user.settings',
+  //start project
+  createProject: 'system.createProject',
+  startProject: 'system.startProject',
+  //
   signIn: 'system.signIn',
-  signUp: 'system.signUp',
-  //user routes
-  userProfile: 'system.userProfile',
-  userSettingsProfile: 'system.userSettings.profile',
-  createProject: 'system.createProject'
+  signUp: 'system.signUp'
 });

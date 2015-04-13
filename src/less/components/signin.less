@@ -17,7 +17,7 @@
       position: relative;
       &.filled {
         .placeholder {
-          transform: translate(-100%, 0);
+          transform: translate(-170%, 0);
         }
       }
       .placeholder {
@@ -35,5 +35,11 @@
     .no-account {
       margin-top: 20px;
     }
+  }
+}
+
+@media (min-width: @screen-lg-min) {
+  #sign-in {
+    min-height: 400px;
   }
 }

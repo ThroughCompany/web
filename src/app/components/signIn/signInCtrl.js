@@ -45,6 +45,23 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
     $scope.form = {
       email: $stateParams.email
     };
+    $scope.errorMsg = null;
+
+    $scope.$watch('form.email', function(val) {
+      if (!val) {
+        $scope.emailLength = 0;
+        return;
+      }
+      $scope.emailLength = val.length;
+    });
+
+    $scope.$watch('form.password', function(val) {
+      if (!val) {
+        $scope.passwordLength = 0;
+        return;
+      }
+      $scope.passwordLength = val.length;
+    });
 
     $scope.login = function(loginForm) {
 
@@ -71,18 +88,23 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
                     projectId: response._id
                   });
                 }, function error(response) {
-                  $state.go($scope.routes.userProfile);
+                  $state.go(outes.user, {
+                    userName: $scope.currentUser.userName
+                  });
                 });
               } else {
-                $state.go(routes.userProfile, {
-                  project: $scope.project
+                $state.go(routes.user, {
+                  userName: $scope.currentUser.userName
                 });
               }
             }, 500);
           }, function error(response) {
             $scope.loginSubmitting = false;
             $scope.loginResult = 'error';
-            $scope.loginBtnOptions.buttonErrorText = utilsService.getServerErrorMessage(response);
+            $scope.errorMsg = 'Invalid email or password';
+            $timeout(function() {
+              $scope.errorMsg = null;
+            }, 3000);
           });
       }, 500);
     };

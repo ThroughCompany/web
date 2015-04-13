@@ -70,7 +70,7 @@ angular.module('throughCompanyApp').factory('authService', [
       });
     };
 
-    AuthService.prototype.logout = function() {
+    AuthService.prototype.logout = function(noRedirect) {
 
       if ($window.localStorage.fbToken) FB.logout(function() {});
 
@@ -80,7 +80,7 @@ angular.module('throughCompanyApp').factory('authService', [
       $rootScope.currentUser = null
       $rootScope.currentUserClaims = null;
 
-      $state.transitionTo('system.home');
+      if (!noRedirect) $state.transitionTo('system.home');
     };
 
     AuthService.prototype.getToken = function() {

@@ -10,7 +10,13 @@
 //         element.addClass('inline-edit-element');
 
 //         var $wrapper = $('<div class="inline-edit-wrapper"></div>');
-//         element.wrap($wrapper);
+
+//         $wrapper.css('padding', element.css('padding'))
+//           .css('margin', element.css('margin'));
+
+//         element.wrap($wrapper)
+//           .css('padding', 0)
+//           .css('margin', 0);
 
 //         var val = element.text();
 //         var fontSize = element.css('font-size').substring(0, 2);
@@ -23,7 +29,6 @@
 //         var fontWidth = val.length * (fontSize * .2);
 
 //         $inputWrapper
-//           .css('bottom', -1 * Math.round(fontSize * .2) + 'px')
 //           .css('margin-left', -1 * (fontWidth / 2));
 
 //         $input
@@ -32,9 +37,14 @@
 
 //         element.after($inputWrapper);
 
-//         $element.hover(function() {
-//           if ($wrapper.hasClass('inline-edit-show')) $wrapper.removeClass('inline-edit-show');
-//           else $wrapper.addClass('inline-edit-show');
+//         element.hover(function(e) {
+//           e.stopPropagation();
+
+//           if ($wrapper.hasClass('inline-edit-show')) {
+//             $wrapper.removeClass('inline-edit-show');
+//           } else {
+//             $wrapper.addClass('inline-edit-show');
+//           }
 //         });
 
 //         scope.$watch('show', function(val) {

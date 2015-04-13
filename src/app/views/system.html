@@ -19,12 +19,12 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a href="#" ui-sref-name="routes.userProfile">
+            <a href="#" ui-sref-name="routes.user({ userName: currentUser.userName })">
               Profile
             </a>
           </li>
           <li>
-            <a href="#" ui-sref-name="routes.userSettingsProfile">
+            <a href="#" ui-sref-name="routes.userSettings({ userName: currentUser.userName })">
               Settings
             </a>
           </li>
