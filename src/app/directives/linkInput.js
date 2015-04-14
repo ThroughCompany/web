@@ -88,6 +88,7 @@ angular.module('throughCompanyApp').directive('linkInput', [
           if (!form.$valid) return;
 
           scope.saveLink({
+            _id: scope.link._id,
             link: scope.form.linkUrl,
             name: scope.form.linkText,
             type: _findIconKey(scope.iconTypes, scope.selectedIcon)
