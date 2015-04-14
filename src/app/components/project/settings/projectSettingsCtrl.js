@@ -45,11 +45,15 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
     };
 
     $scope.addLink = function(link) {
-      var patches = [{
-        op: 'add',
-        path: '/socialLinks/0',
-        value: link
-      }];
+      var updates = angular.copy($scope.project.toJSON());
+
+      updates.socialLinks.push(link);
+
+      var patches = patchService.generatePatches({
+        socialLinks: $scope.project.toJSON().socialLinks
+      }, {
+        socialLinks: updates.socialLinks
+      });
 
       projectService.updateProjectById({
         projectId: $scope.project._id,
@@ -63,6 +67,8 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
         $scope.logger.error(response);
         alertService.error(utilsService.getServerErrorMessage(response));
       });
+
+      $scope.unsavedSocialLinks.length = 0;
     };
 
     $scope.updateLink = function(link) {

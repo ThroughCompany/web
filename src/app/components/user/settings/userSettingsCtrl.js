@@ -37,16 +37,23 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
     };
 
     $scope.deleteLink = function(link) {
-      console.log('delete link');
-      console.log(link);
-    };
+      var updates = angular.copy($scope.currentUser.toJSON());
+      var foundLink = _.find(updates.socialLinks, function(socialLink) {
+        return socialLink.name === link.name && socialLink.link === link.link && socialLink.type === link.type;
+      });
 
-    $scope.addLink = function(link) {
-      var patches = [{
-        op: 'add',
-        path: '/socialLinks/0',
-        value: link
-      }];
+      if (!foundLink) {
+        alertService.error('Link not found');
+        return;
+      }
+
+      updates.socialLinks.splice(updates.socialLinks.indexOf(foundLink), 1);
+
+      var patches = patchService.generatePatches({
+        socialLinks: $scope.currentUser.toJSON().socialLinks
+      }, {
+        socialLinks: updates.socialLinks
+      });
 
       userService.updateUserById({
         userId: $scope.currentUser._id,
@@ -62,12 +69,45 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
       });
     };
 
+    $scope.addLink = function(link) {
+      var updates = angular.copy($scope.currentUser.toJSON());
+
+      updates.socialLinks.push(link);
+
+      var patches = patchService.generatePatches({
+        socialLinks: $scope.currentUser.toJSON().socialLinks
+      }, {
+        socialLinks: updates.socialLinks
+      });
+
+      userService.updateUserById({
+        userId: $scope.currentUser._id,
+        patches: patches
+      }).then(function(response) {
+        alertService.success('Settings Saved');
+
+        $scope.currentUser.socialLinks = response.socialLinks;
+
+      }, function(response) {
+        $scope.logger.error(response);
+        alertService.error(utilsService.getServerErrorMessage(response));
+      });
+
+      $scope.unsavedSocialLinks.length = 0;
+    };
+
     $scope.updateLink = function(link) {
-      var patches = [{
-        op: 'replace',
-        path: '/socialLinks/2',
-        value: link
-      }];
+      var updates = angular.copy($scope.currentUser.toJSON());
+      var foundLink = _.find(updates.socialLinks, function(socialLink) {
+        return socialLink.name === link.name && socialLink.link === link.link;
+      });
+
+      if (!foundLink) {
+        alertService.error('Link not found');
+        return;
+      }
+
+      var patches = jsonpatch.compare($scope.currentUser, updates);
 
       userService.updateUserById({
         userId: $scope.currentUser._id,

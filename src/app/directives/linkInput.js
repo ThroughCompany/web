@@ -53,7 +53,9 @@ angular.module('throughCompanyApp').directive('linkInput', [
           'PINTEREST': 'fa-pinterest',
           'REDDIT': 'fa-reddit',
           'GITHUB': 'fa-github',
-          'MEDIUM': 'fa-medium'
+          'MEDIUM': 'fa-medium',
+          'WEBSITE': 'fa-link',
+          'BLOG': 'fa-link'
         };
 
         scope.selectedIcon = _findIconName(scope.iconTypes, scope.link.type || 'FACEBOOK'); //default to facebook icon
