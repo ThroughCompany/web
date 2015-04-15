@@ -51,20 +51,8 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
 
       $scope.addAssetTagForm.tag = val[0];
       $scope.addAssetTagForm.tags = null;
-
-      // var currentTags = $scope.project.assetTags && $scope.project.assetTags.length ? _.pluck($scope.project.assetTags, 'name') : [];
-      // var newTags = _.filter(val, function(tag) {
-      //   return !_.contains(currentTags, tag);
-      // });
-
-      // if (newTags && newTags.length) {
-      //   _.each(newTags, function(newTag) {
-      //     $scope.createAssetTag(newTag.name);
-      //   });
-      //   $scope.addAssetTagForm.tags = [];
-      //   $scope.assetTags.selected = undefined;
-      // }
     });
+
     $scope.addAssetTag = function(form) {
       if (!form.$valid) return;
 
@@ -176,6 +164,11 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
         $scope.project.assetTags.push(response);
 
         alertService.success('Asset added.');
+
+        //reset the adds tags form
+        $scope.addAssetTagForm.tag = null;
+        $scope.addAssetTagForm.description = null;
+        $scope.editNeeds = false;
       }, function error(response) {
         alertService.error(utilsService.getServerErrorMessage(response));
       });

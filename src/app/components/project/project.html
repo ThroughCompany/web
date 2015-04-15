@@ -108,7 +108,13 @@
                     <label class="control-label">
                       Search for what you need
                     </label>
-                    <ui-select multiple tagging="newAssetTag" ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false">
+                    <div class="assetTagInput" ng-show="addAssetTagForm.tag && addAssetTagForm.tag.name.length > 0">
+                      <input class="form-control" type="text" ng-model="addAssetTagForm.tag.name" readonly="readonly" />
+                      <a href="#" ng-click="addAssetTagForm.tag = null">
+                        <i class="fa fa-times-circle"></i>
+                      </a>
+                    </div>
+                    <ui-select multiple tagging="newAssetTag" ng-model="addAssetTagForm.tags" ng-hide="addAssetTagForm.tag" theme="bootstrap" reset-search-input="true">
                       <ui-select-match placeholder="Enter a tag name">{{ $item.name }}</ui-select-match>
                       <ui-select-choices repeat="assetTag in assetTags | filter:$select.search" refresh="getAssetTags($select.search)" refresh-delay="200">
                         <div ng-bind-html="assetTag.name"></div>
@@ -127,7 +133,7 @@
                   </button>
                 </form>
               </div>
-              <div class="asset-tags" ng-hide="editNeeds">
+              <div class="asset-tags">
                 <a class="asset-tag btn btn-warning btn-sm" href="#" ng-repeat="assetTag in project.assetTags" ng-click="apply(assetTag)">
                  {{ assetTag.name }}
               </a>

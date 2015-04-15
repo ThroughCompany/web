@@ -86,7 +86,7 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
       }).then(function(response) {
         alertService.success('Settings Saved');
 
-        $scope.currentUser.socialLinks = response.socialLinks;
+        $scope.currentUser.socialLinks.push(link);
 
       }, function(response) {
         $scope.logger.error(response);
