@@ -4,11 +4,11 @@ angular.module('throughCompanyApp').controller('userCtrl', [
   '$rootScope',
   'userService',
   'projectService',
-  'assetTagService',
+  'skillService',
   'alertService',
   'utilsService',
   'user',
-  function($scope, $state, $rootScope, userService, projectService, assetTagService, alertService, utilsService, user) {
+  function($scope, $state, $rootScope, userService, projectService, skillService, alertService, utilsService, user) {
     $rootScope.setMetaTitle(user.email);
 
     $scope.user = user;
@@ -62,7 +62,7 @@ angular.module('throughCompanyApp').controller('userCtrl', [
     function _getAssetTags(tagName) {
       if (!tagName || !tagName.length) return;
 
-      assetTagService.getAll({
+      skillService.getAll({
         name: tagName
       }).then(function success(response) {
         var indexedTags = _.indexBy($scope.currentUser.assetTags, 'name');
@@ -72,8 +72,6 @@ angular.module('throughCompanyApp').controller('userCtrl', [
           var exists = indexedTags[tag.name];
           return exists ? false : true;
         });
-
-        console.log($scope.assetTags);
       });
     }
 

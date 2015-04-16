@@ -9,8 +9,8 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
   'project',
   'utilsService',
   'scrollbar',
-  'assetTagService',
-  function($scope, $state, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService, scrollbar, assetTagService) {
+  'skillService',
+  function($scope, $state, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService, scrollbar, skillService) {
     $scope.setMetaTitle(project.name);
     $scope.setMetaDescription(project.name);
 
@@ -177,16 +177,17 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     function _getAssetTags(tagName) {
       if (!tagName || !tagName.length) return;
 
-      assetTagService.getAll({
+      skillService.getAll({
         name: tagName
       }).then(function success(response) {
         var indexedTags = _.indexBy($scope.project.assetTags, 'name');
 
-        $scope.assetTags = _.filter(response, function(tag) {
+        // $scope.assetTags = _.filter(response, function(tag) {
+        //   var exists = indexedTags[tag.name];
+        //   return exists ? false : true;
+        // });
 
-          var exists = indexedTags[tag.name];
-          return exists ? false : true;
-        });
+        $scope.assetTags = response;
 
         console.log($scope.assetTags);
       });
