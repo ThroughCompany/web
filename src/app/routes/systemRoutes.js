@@ -119,7 +119,8 @@ angular.module('throughCompanyApp').config([
               var deferred = $q.defer();
 
               projectService.getProjectById({
-                projectId: $stateParams.projectId
+                projectId: $stateParams.projectId,
+                fields: 'projectApplications(), projectNeeds()'
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {

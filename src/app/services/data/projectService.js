@@ -40,9 +40,9 @@ angular.module('throughCompanyApp').factory('projectService', [
         method: 'PATCH',
         url: appSettings.baseUrl + '/projects/:projectId/wiki/pages/:pageId'
       },
-      createAssetTag: {
+      createNeed: {
         method: 'POST',
-        url: appSettings.baseUrl + '/projects/:projectId/assettags'
+        url: appSettings.baseUrl + '/projects/:projectId/needs'
       }
     });
 
@@ -199,7 +199,7 @@ angular.module('throughCompanyApp').factory('projectService', [
       return deferred.promise;
     };
 
-    ProjectService.prototype.createAssetTag = function(options) {
+    ProjectService.prototype.createNeed = function(options) {
       if (!options) throw new Error('options is required');
       if (!options.projectId) throw new Error('options.projectId is required');
 
@@ -208,7 +208,7 @@ angular.module('throughCompanyApp').factory('projectService', [
 
       delete options.projectId;
 
-      return Project.createAssetTag({
+      return Project.createNeed({
         projectId: projectId
       }, options).$promise;
     };
