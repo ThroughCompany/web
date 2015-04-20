@@ -42,7 +42,8 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
       duration: {
         startDate: '',
         endDate: ''
-      }
+      },
+      locationSpecific: false
     };
 
     $scope.addProjectNeed = function(form) {
@@ -61,7 +62,8 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
         skills: _.pluck($scope.addProjectNeedForm.skills, 'name'),
         description: $scope.addProjectNeedForm.description,
         timeCommitment: $scope.addProjectNeedForm.timeCommitment,
-        duration: $scope.addProjectNeedForm.duration
+        duration: $scope.addProjectNeedForm.duration,
+        locationSpecific: $scope.addProjectNeedForm.locationSpecific
       }).then(function success(response) {
         $scope.project.projectNeeds.push(response);
 

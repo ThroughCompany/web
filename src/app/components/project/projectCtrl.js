@@ -114,6 +114,21 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       });
     };
 
+    $scope.viewProjectNeed = function(projectNeed) {
+      $modal.open({
+        templateUrl: '/app/components/project/viewNeed/projectViewNeed.html',
+        controller: 'projectViewNeedCtrl',
+        resolve: {
+          project: function() {
+            return $scope.project;
+          },
+          projectNeed: function() {
+            return projectNeed;
+          }
+        }
+      });
+    };
+
     $scope.addProjectNeed = function() {
       $modal.open({
         templateUrl: '/app/components/project/addNeed/projectAddNeed.html',

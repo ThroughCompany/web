@@ -33,7 +33,7 @@
           <label class="control-label">
             Description
           </label>
-          <textarea class="form-control" name="description" ng-model="addProjectNeedForm.description" required character-counter="addProjectNeedForm.description" character-counter-max="20">
+          <textarea class="form-control" name="description" ng-model="addProjectNeedForm.description" required character-counter="addProjectNeedForm.description" character-counter-max="300">
           </textarea>
           <p class="error-msg">Please enter a description.
           </p>
@@ -73,6 +73,13 @@
             </label>
             <date-range-picker-single ng-model="addProjectNeedForm.duration.endDate" parent-el=".end-date" opens="left"></date-range-picker-single>
           </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label">
+            Is this location specific?
+          </label>
+          <button class="btn btn-default btn-block" ng-click="addProjectNeedForm.locationSpecific = true" ng-class="{ 'btn-primary' : addProjectNeedForm.locationSpecific === true }">Yes, it must be fulfilled in person</button>
+          <button class="btn btn-default btn-block" ng-click="addProjectNeedForm.locationSpecific = false" ng-class="{ 'btn-primary' : addProjectNeedForm.locationSpecific === false }">No, it can be fulfilled remotely</button>
         </div>
       </div>
     </div>
