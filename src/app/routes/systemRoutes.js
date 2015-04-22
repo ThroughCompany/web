@@ -147,6 +147,36 @@ angular.module('throughCompanyApp').config([
           ]
         }
       });
+      
+    /* ------------------------------------------------------------
+     * Organization
+     * ------------------------------------------------------------ */
+
+    $stateProvider
+      .state('system.organization', {
+        url: 'organizations/:organizationId',
+        templateUrl: '/app/components/organization/organization.html',
+        controller: 'organizationCtrl',
+        resolve: {
+          organization: ['$rootScope', '$stateParams', '$state', 'organizationService', '$q',
+            function($rootScope, $stateParams, $state, organizationService, $q) {
+              var deferred = $q.defer();
+
+              organizationService.getOrganizationById({
+                organizationId: $stateParams.organizationId,
+                //fields: 'organizationApplications()'
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                $state.go('system.404');
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ]
+        }
+      });
 
     $stateProvider
       .state('system.project.settings', {
