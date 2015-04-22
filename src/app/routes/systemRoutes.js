@@ -60,7 +60,7 @@ angular.module('throughCompanyApp').config([
 
     /* ------------------------------------------------------------
      * Home
-     * ------------------------------------------------------------ */ 
+     * ------------------------------------------------------------ */
 
     $stateProvider
       .state('system.home', {
@@ -105,12 +105,26 @@ angular.module('throughCompanyApp').config([
       });
 
     /* ------------------------------------------------------------
+     * Start Organization
+     * ------------------------------------------------------------ */
+
+    $stateProvider
+      .state('system.createOrganization', {
+        url: 'new-organization',
+        templateUrl: '/app/components/createOrganization/createOrganization.html',
+        controller: 'createOrganizationCtrl',
+        data: {
+          authenticate: true
+        }
+      });
+
+    /* ------------------------------------------------------------
      * Project
      * ------------------------------------------------------------ */
 
     $stateProvider
       .state('system.project', {
-        url: 'project/:projectId',
+        url: 'projects/:projectId',
         templateUrl: '/app/components/project/project.html',
         controller: 'projectCtrl',
         resolve: {
@@ -149,7 +163,7 @@ angular.module('throughCompanyApp').config([
 
     $stateProvider
       .state('system.user', {
-        url: 'user/:userName',
+        url: 'users/:userName',
         templateUrl: '/app/components/user/user.html',
         controller: 'userCtrl',
         resolve: {
@@ -183,7 +197,7 @@ angular.module('throughCompanyApp').config([
     /* ------------------------------------------------------------
      * Sign In
      * ------------------------------------------------------------ */
-      
+
     $stateProvider
       .state('system.signIn', {
         url: 'signin?email&project',

@@ -10,6 +10,8 @@ angular.module('throughCompanyApp').constant('routes', {
   //start project
   createProject: 'system.createProject',
   startProject: 'system.startProject',
+  //start organization
+  createOrganization: 'system.createOrganization',
   //
   signIn: 'system.signIn',
   signUp: 'system.signUp'

@@ -44,7 +44,9 @@ angular.module('throughCompanyApp').controller('createProjectCtrl', [
 
         $timeout(function() {
           $rootScope.currentUserProjects.push(response);
-          $state.go($scope.routes.userProfile);
+          $state.go($scope.routes.user, {
+            userName: $scope.currentUser.userName
+          });
 
           alertService.success('Project Created');
 

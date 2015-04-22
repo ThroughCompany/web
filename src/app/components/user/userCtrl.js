@@ -3,16 +3,16 @@ angular.module('throughCompanyApp').controller('userCtrl', [
   '$state',
   '$rootScope',
   'userService',
-  'projectService',
   'skillService',
   'alertService',
   'utilsService',
   'user',
-  function($scope, $state, $rootScope, userService, projectService, skillService, alertService, utilsService, user) {
+  function($scope, $state, $rootScope, userService, skillService, alertService, utilsService, user) {
     $rootScope.setMetaTitle(user.email);
 
     $scope.user = user;
     $scope.addingAssetTags = false;
+    $scope.organizations = [];
     $scope.projects = [];
     $scope.createAssetTag = _createAssetTag;
     $scope.getAssetTags = _getAssetTags;
@@ -22,6 +22,7 @@ angular.module('throughCompanyApp').controller('userCtrl', [
       };
     };
 
+    _getOrganizations();
     _getProjects();
 
     $scope.addAssetTagForm = {
@@ -72,6 +73,16 @@ angular.module('throughCompanyApp').controller('userCtrl', [
           var exists = indexedTags[tag.name];
           return exists ? false : true;
         });
+      });
+    }
+
+    function _getOrganizations() {
+      userService.getUserOrganizations({
+        userId: $scope.user.id
+      }).then(function success(response) {
+        $scope.organizations = $scope.organizations.concat(response);
+      }, function error(response) {
+        console.log(utilsService.getServerErrorMessage(response));
       });
     }
 

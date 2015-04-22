@@ -55,6 +55,36 @@
           </div>
         </div>
       </div>
+      <!-- Organizations -->
+      <div class="profile-section profile-section-organizations" id="organizations">
+        <div class="header clearfix">
+          <h3>Organizations</h3>
+          <div class="add-new-btn pull-right">
+            <a href="#" class="btn btn-primary" ui-sref-name="routes.createOrganization" ng-show="(organizations && organizations.length) && auth.hasCurrentUserIdClaim(user._id)">
+              <i class="fa fa-plus"></i> Add
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6" ng-repeat="organization in organizations" equal-heights=".organization" items="organizations" ng-show="organizations && organizations.length">
+            <div class="organization">
+              <p class="name">
+                <a href="#" ui-sref-name="routes.organization({ organizationId : organization.slug })">{{ organization.name }}</a>
+              </p>
+              <p class="description">{{ organization.description }}</p>
+              <p>Started on {{ organization.created | date : 'MM/dd/yyyy' }}</p>
+            </div>
+          </div>
+          <div ng-hide="organizations && organizations.length">
+            <p class="center">
+              You don't have any organizations yet...
+            </p>
+            <p class="center">
+              <a href="#" class="btn btn-primary" ui-sref-name="routes.createOrganization">Create an Organization</a>
+            </p>
+          </div>
+        </div>
+      </div>
       <!-- Skills -->
       <div class="profile-section profile-section-skills" id="skills">
         <div class="header clearfix">

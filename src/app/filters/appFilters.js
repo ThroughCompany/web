@@ -35,6 +35,8 @@ angular.module('throughCompanyApp').filter('iconlink', function() {
 
 angular.module('throughCompanyApp').filter('moment', function() {
   return function(moment, format) {
+    if (!moment || !format) return moment;
+    
     return moment.format(format);
   };
 });
