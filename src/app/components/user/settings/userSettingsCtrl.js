@@ -208,7 +208,7 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
       if (!type) return $state.go('system.404');
 
       $scope.currentSettingsType = type;
-      $location.path('/user/' + $scope.user.userName + '/settings/' + type.name.toLowerCase());
+      //$location.path('/user/' + $scope.user.userName + '/settings/' + type.name.toLowerCase());
     }
   }
 ]);

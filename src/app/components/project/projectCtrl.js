@@ -5,11 +5,12 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
   '$modal',
   '$timeout',
   'projectService',
+  'organizationService',
   'alertService',
   'project',
   'utilsService',
   'scrollbar',
-  function($scope, $state, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService, scrollbar) {
+  function($scope, $state, $rootScope, $modal, $timeout, projectService, organizationService, alertService, project, utilsService, scrollbar) {
     $scope.setMetaTitle(project.name);
     $scope.setMetaDescription(project.name);
 
@@ -22,6 +23,14 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     }).then(function success(response) {
       $scope.projectUsers = response;
     });
+
+    if ($scope.project.organizationProject) {
+      organizationService.getOrganizationById({
+        organizationId: $scope.project.organizationProject.organization
+      }).then(function success(response) {
+        $scope.organization = response;
+      });
+    }
 
     $scope.getProjectUserName = function(projectUser) {
       if (projectUser.firstName && projectUser.lastName) return projectUser.firstName + ' ' + projectUser.lastName;
@@ -73,7 +82,7 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       utilsService.scrollTo(id, 40);
     };
 
-    $scope.navigateTo = function(state, id) {
+    $scope.navigateTo = function(state, stateParams, id) {
       var currentState = $state.current.name;
 
       if (currentState !== state) {

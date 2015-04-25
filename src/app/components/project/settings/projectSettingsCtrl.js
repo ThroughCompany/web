@@ -210,7 +210,7 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
       if (!type) return $state.go('system.404');
 
       $scope.currentSettingsType = type;
-      $location.path('/project/' + $scope.project.slug + '/settings/' + type.name.toLowerCase());
+      // $location.path('/project/' + $scope.project.slug + '/settings/' + type.name.toLowerCase());
     }
   }
 ]);
