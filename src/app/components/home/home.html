@@ -90,9 +90,9 @@
         <h3 class="uppercase">Top Needs</h3>
         <div class="needs-list">
           <div class="need" ng-repeat="skill in skills">
-            <a href="#" ui-sref-name="routes.search({ tags : getSkillsParams(skill.name) })">
-            {{ skill.name }}
-          </a>
+            <a href="#" ui-sref-name="routes.search({ tags : getSkillsParams(skill.name) })" tooltip-placement="top" tooltip="{{ skill.projectUseCount }} {{ skill.projectUseCount > 1 ? 'projects need' : 'project needs' }} this skill" tooltip-append-to-body="true">
+              <span class="count">{{ skill.projectUseCount }}</span><span class="name">{{ skill.name }}</span>
+            </a>
           </div>
         </div>
       </div>
