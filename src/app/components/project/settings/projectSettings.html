@@ -19,7 +19,7 @@
           <div class="profile-section settings-section" ng-show="currentSettingsType.name === 'Profile'">
             <div class="form-group">
               <label>Description</label>
-              <textarea class="form-control" name="description" ng-model="projectUpdates.description" ng-change="form.description = project.description"></textarea>
+              <textarea class="form-control" name="description" ng-model="projectUpdates.description" ng-change="form.description = project.description" character-counter="projectUpdates.description" character-counter-max="300" rows="4"></textarea>
             </div>
             <div class="form-group">
               <label>Location</label>

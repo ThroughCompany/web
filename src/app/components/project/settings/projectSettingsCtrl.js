@@ -121,14 +121,20 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
       if ($scope.projectUpdates.status !== $scope.project.status) {
         var originalProjectStatus = $scope.project.status;
 
-        if ($scope.projectUpdates.status === 'Open') {
-          modalService.confirm('Changing your project\'s status to Open means it will be publicly viewable. Are you sure?').then(function confirmed() {
+        if ($scope.projectUpdates.status === 'Draft') {
+          modalService.confirm('Change status back to <strong>Draft</strong> and your project will no longer be publicly visible; people will no longer be able to find your open needs.', 'Back to Draft').then(function confirmed() {
+            deferred.resolve();
+          }, function declined() {
+            $scope.projectUpdates.status = originalProjectStatus;
+          });
+        } else if ($scope.projectUpdates.status === 'Open') {
+          modalService.confirm('Changing status to <strong>Open</strong> will allow others to see what your project needs and apply to contribute. You\'ll have the opportunity to accept or reject their applications. Happy hunting.', 'Open Project').then(function confirmed() {
             deferred.resolve();
           }, function declined() {
             $scope.projectUpdates.status = originalProjectStatus;
           });
         } else if ($scope.projectUpdates.status === 'Archived') {
-          confirmPromise = modalService.confirm('Changing your project\'s status to Archived means it will no longer be publicly viewable. Are you sure?').then(function confirmed() {
+          confirmPromise = modalService.confirm('Changing your project\'s status to Archived means it will no longer be publicly viewable. Are you sure?', 'Archive It').then(function confirmed() {
             deferred.resolve();
           }, function declined() {
             $scope.projectUpdates.status = originalProjectStatus;
@@ -136,6 +142,8 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
         } else {
           deferred.resolve();
         }
+      } else {
+        deferred.resolve();
       }
 
       deferred.promise.then(function confirmed() {

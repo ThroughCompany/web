@@ -4,12 +4,11 @@ angular.module('throughCompanyApp').factory('modalService', [
 
     function ModalService() {}
 
-    ModalService.prototype.confirm = function confirm(confirmMessage) {
+    ModalService.prototype.confirm = function confirm(confirmMessage, confirmButtonMessage) {
       var modalInstance = $modal.open({
-        template: '<div class="modal-header"></div>' +
-          '<div class="modal-body" ng-bind-html="message"></div>' +
+        template: '<div class="modal-body" ng-bind-html="message"></div>' +
           '<div class="modal-footer">' +
-          '<button class="btn btn-default" ng-click="cancel()">Cancel</button><button class="btn btn-primary" ng-click="ok()">Confirm</button>' +
+          '<button class="btn btn-default" ng-click="cancel()">Cancel</button><button class="btn btn-primary" ng-click="ok()">' + (confirmButtonMessage || 'Confirm') + '</button>' +
           '</div>',
         controller: [
           '$scope',
