@@ -24,6 +24,10 @@ angular.module('throughCompanyApp').directive('typer', [
           typerDataAttr: 'data-typer-targets',
           typerInterval: scope.typerInterval || 2000
         });
+
+        // scope.$on('destroy', function() {
+          
+        // });
       }
     };
   }

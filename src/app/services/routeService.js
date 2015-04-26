@@ -1,5 +1,6 @@
 angular.module('throughCompanyApp').constant('routes', {
   home: 'system.home',
+  search: 'system.search',
   //organization
   organization: 'system.organization',
   //project

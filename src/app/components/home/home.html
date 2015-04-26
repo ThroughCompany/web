@@ -46,11 +46,11 @@
                   </div>
                   <div class="needs col-xs-3 center">
                     <p class="">{{ project.openProjectNeedsCount }}</p>
-                    <p class="label uppercase">Needs</p>
+                    <p class="label uppercase">Need<span ng-show="project.openProjectNeedsCount.length > 1">s</span></p>
                   </div>
-                  <div class="needs col-xs-3 center">
+                  <div class="members col-xs-3 center">
                     <p class="">{{ project.projectUsers.length }}</p>
-                    <p class="label uppercase">Members</p>
+                    <p class="label uppercase">Member<span ng-show="project.projectUsers.length > 1">s</span></p>
                   </div>
                 </div>
               </div>
@@ -89,9 +89,11 @@
       <div class="top-needs clearfix">
         <h3 class="uppercase">Top Needs</h3>
         <div class="needs-list">
-          <a href="#" class="need" ng-repeat="skill in skills">
+          <div class="need" ng-repeat="skill in skills">
+            <a href="#" ui-sref-name="routes.search({ tags : getSkillsParams(skill.name) })">
             {{ skill.name }}
           </a>
+          </div>
         </div>
       </div>
     </div>

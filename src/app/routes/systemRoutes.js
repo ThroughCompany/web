@@ -78,6 +78,23 @@ angular.module('throughCompanyApp').config([
     $urlRouterProvider.when('/', '/home');
 
     /* ------------------------------------------------------------
+     * Home
+     * ------------------------------------------------------------ */
+
+    $stateProvider
+      .state('system.search', {
+        url: 'search?tags',
+        templateUrl: '/app/components/search/search.html',
+        controller: 'searchCtrl',
+        data: {
+          meta: {
+            title: 'Search',
+            description: 'Welcome to Through Company.com'
+          }
+        }
+      });
+
+    /* ------------------------------------------------------------
      * Start Project
      * ------------------------------------------------------------ */
 
