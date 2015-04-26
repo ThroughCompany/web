@@ -1,7 +1,8 @@
 angular.module('throughCompanyApp').factory('utilsService', [
   '$timeout',
   '$document',
-  function($timeout, $document) {
+  'loggerService',
+  function($timeout, $document, loggerService) {
 
     function UtilsService() {}
 
@@ -20,7 +21,11 @@ angular.module('throughCompanyApp').factory('utilsService', [
 
       $timeout(function() {
         // https://github.com/durated/angular-scroll/
-        $document.scrollToElement($('#' + id), offset, 500);
+        try {
+          $document.scrollToElement($('#' + id), offset, 500);
+        } catch (err) {
+          loggerService.error(err);
+        }
       }, delay);
     };
 

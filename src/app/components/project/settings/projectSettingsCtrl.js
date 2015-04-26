@@ -4,12 +4,14 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
   '$stateParams',
   '$location',
   '$rootScope',
+  '$q',
   'userService',
   'alertService',
   'projectService',
   'utilsService',
   'patchService',
-  function($scope, $state, $stateParams, $location, $rootScope, userService, alertService, projectService, utilsService, patchService) {
+  'modalService',
+  function($scope, $state, $stateParams, $location, $rootScope, $q, userService, alertService, projectService, utilsService, patchService, modalService) {
     $rootScope.setMetaTitle($scope.project.name + ' Profile');
 
     $scope.changeCurrentSettingsType = _changeCurrentSettingsType;
@@ -24,6 +26,8 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
       name: 'Links',
       icon: 'fa fa-link'
     }];
+
+    $scope.statuses = ['Draft', 'Open', 'Archived'];
 
     $scope.changeCurrentSettingsType($stateParams.type ? _.find($scope.settingTypes, function(type) {
       return type.name.toLowerCase() === $stateParams.type.toLowerCase();
@@ -102,25 +106,53 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
       }
     };
 
-    $scope.projectUpdates = _.clone($scope.project.toJSON());
+    //$scope.projectUpdates = _.clone($scope.project.toJSON());
+    $scope.projectUpdates = _.pick($scope.project, ['description', 'location', 'status']);
 
     $scope.updateProject = function(form) {
       if (!form.$valid) return;
 
-      var patches = patchService.generatePatches($scope.project, $scope.projectUpdates);
+      var projectProperties = _.pick($scope.project, ['description', 'location', 'status']);
 
-      projectService.updateProjectById({
-        projectId: $scope.project._id,
-        patches: patches
-      }).then(function(response) {
-        alertService.success('Settings Saved');
+      var patches = patchService.generatePatches(projectProperties, $scope.projectUpdates);
 
-        $scope.project.description = response.description;
-        $scope.project.location = response.location;
+      var deferred = $q.defer();
 
-      }, function(response) {
-        $scope.logger.error(response);
-        alertService.error(utilsService.getServerErrorMessage(response));
+      if ($scope.projectUpdates.status !== $scope.project.status) {
+        var originalProjectStatus = $scope.project.status;
+
+        if ($scope.projectUpdates.status === 'Open') {
+          modalService.confirm('Changing your project\'s status to Open means it will be publicly viewable. Are you sure?').then(function confirmed() {
+            deferred.resolve();
+          }, function declined() {
+            $scope.projectUpdates.status = originalProjectStatus;
+          });
+        } else if ($scope.projectUpdates.status === 'Archived') {
+          confirmPromise = modalService.confirm('Changing your project\'s status to Archived means it will no longer be publicly viewable. Are you sure?').then(function confirmed() {
+            deferred.resolve();
+          }, function declined() {
+            $scope.projectUpdates.status = originalProjectStatus;
+          });
+        } else {
+          deferred.resolve();
+        }
+      }
+
+      deferred.promise.then(function confirmed() {
+        projectService.updateProjectById({
+          projectId: $scope.project._id,
+          patches: patches
+        }).then(function(response) {
+          alertService.success('Settings Saved');
+
+          $scope.project.description = response.description;
+          $scope.project.location = response.location;
+          $scope.project.status = response.status;
+
+        }, function(response) {
+          $scope.logger.error(response);
+          alertService.error(utilsService.getServerErrorMessage(response));
+        });
       });
     };
 
