@@ -91,17 +91,19 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     $scope.navigateTo = function(state, stateParams, id) {
       var currentState = $state.current.name;
 
-      // if (currentState !== state) {
-      //   $state.go(state);
+      $scope.currentSection = id;
 
-      //   $timeout(function() {
-      //     $scope.$emit('scroll', {
-      //       id: id
-      //     });
-      //   });
-      // } else {
-      //   $scope.scrollTo(id);
-      // }
+      if (currentState !== state) {
+        $state.go(state);
+
+        $timeout(function() {
+          $scope.$emit('scroll', {
+            id: id
+          });
+        });
+      } else {
+        $scope.scrollTo(id);
+      }
     };
 
     $timeout(function() {
