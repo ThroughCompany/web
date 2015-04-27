@@ -141,7 +141,7 @@ angular.module('throughCompanyApp').config([
 
     $stateProvider
       .state('system.project', {
-        url: 'projects/:projectId',
+        url: 'projects/:projectId?section',
         templateUrl: '/app/components/project/project.html',
         controller: 'projectCtrl',
         resolve: {

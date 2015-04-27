@@ -18,6 +18,12 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     $scope.savingWiki = false;
     $scope.loaded = false;
 
+    if ($state.params.section) {
+      $scope.currentSection = $state.params.section;
+    } else {
+      $scope.currentSection = 'project-needs';
+    }
+
     projectService.getProjectUsers({
       projectId: $scope.project._id
     }).then(function success(response) {
@@ -85,17 +91,17 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     $scope.navigateTo = function(state, stateParams, id) {
       var currentState = $state.current.name;
 
-      if (currentState !== state) {
-        $state.go(state);
+      // if (currentState !== state) {
+      //   $state.go(state);
 
-        $timeout(function() {
-          $scope.$emit('scroll', {
-            id: id
-          });
-        });
-      } else {
-        $scope.scrollTo(id);
-      }
+      //   $timeout(function() {
+      //     $scope.$emit('scroll', {
+      //       id: id
+      //     });
+      //   });
+      // } else {
+      //   $scope.scrollTo(id);
+      // }
     };
 
     $timeout(function() {

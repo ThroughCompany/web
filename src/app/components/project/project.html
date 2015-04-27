@@ -1,5 +1,5 @@
 <div id="project">
-  <div class="hero" ng-class="{ 'has-banner' : project.bannerPic }" style="background-image: url('{{ project.bannerPic }}')">
+  <!--   <div class="hero" ng-class="{ 'has-banner' : project.bannerPic }" style="background-image: url('{{ project.bannerPic }}')">
     <div class="hero-inner">
     </div>
     <div class="hero-text preroll" ng-class="{ preroll : !loaded }">
@@ -13,15 +13,24 @@
         {{ project.description }}
       </p>
     </div>
+  </div> -->
+  <div class="project-header container clearfix">
+    <div class="pic" style="background-image: url('{{ project.profilePic }}')">
+    </div>
+    <div class="name">
+      <h1>{{ project.name }}</h1>
+      <p class="description">{{ project.description }}
+      </p>
+    </div>
   </div>
-  <div class="project-nav clearfix" affix offset-top="584">
+  <div class="project-nav clearfix" affix offset-top="354">
     <div class="container clearfix">
       <ul class="nav clearfix pull-left">
-        <li>
-          <a href="#" ng-click="navigateTo(routes.project, {}, 'project-needs')">Needs</a>
+        <li ng-class="{ active: currentSection === 'project-needs' }">
+          <a href="#" ui-sref-name="routes.project({ section : 'project-needs' })">Needs</a>
         </li>
-        <li class="dropdown">
-          <a href="#" ng-click="navigateTo(routes.project, {}, 'project-wiki')">
+        <li class="dropdown" ng-class="{ active: currentSection === 'project-wiki' }">
+          <a href="#" ui-sref-name="routes.project({ section : 'project-wiki' })">
             <i class="fa fa-pencil"></i>&nbsp;Wiki
           </a>
           <!--           <ul class="dropdown-menu">
@@ -35,43 +44,21 @@
             </li>
           </ul> -->
         </li>
-        <li>
-          <a href="#" ng-click="navigateTo(routes.project, {}, 'project-team')">
+        <li ng-class="{ active: currentSection === 'project-team' }">
+          <a href="#" ui-sref-name="routes.project({ section : 'project-team' })">
             <i class="fa fa-users"></i>&nbsp;Team
           </a>
         </li>
-        <li ng-show="auth.hasProjectIdClaim(project._id)">
-          <a href="#" ng-click="navigateTo(routes.projectSettings, {}, 'project-settings')">
+        <li ng-show="auth.hasProjectIdClaim(project._id)" ui-sref-active="active">
+          <a href="#" ui-sref-name="routes.projectSettings">
             <i class="fa fa-gear"></i>&nbsp;Settings
           </a>
         </li>
       </ul>
     </div>
   </div>
-  <div class="project-container container clearfix" affix data-offset-top="584">
+  <div class="project-container container clearfix" affix offset-top="354">
     <div class="project-landing clearfix" ng-show="$state.current.name === 'system.project'">
-      <!--       <div class="project-sidebar col-sm-3">
-        <div affix data-offset-top="760">
-          <hr>
-          <p>
-            <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
-          </p>
-          <div class="social">
-            <ul>
-              <li>
-                <a href="{{ project.social.facebook }}" target="_blank">
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </li>
-              <li>
-                <a href="{{ project.social.linkedIn }}" target="_blank">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
       <div class="project-content">
         <div class="col-md-2 sidebar-left">
           <ul>
@@ -139,14 +126,4 @@
   <p class="wiki-saving" ng-show="savingWiki">
     <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Saving changes...
   </p>
-  <div id="project-apply" affix data-offset-top="584" ng-show="applying" ng-class="{ open : applying }">
-    <div class="apply-inner">
-      <a href="#" class="close" ng-click="applying = false">
-        <i class="fa fa-times"></i>
-      </a>
-      <h3 class="center">{{ applyingAssetTag.name }}</h3>
-      <h2 class="center">Coming soon!</h2>
-      <p class="center">Apply to join our project and start helping us out.</p>
-    </div>
-  </div>
 </div>
