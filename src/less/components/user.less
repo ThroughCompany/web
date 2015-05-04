@@ -62,12 +62,26 @@
         }
       }
     }
-    &.profile-section-assets {
-      .add-tags {
+    &.profile-section-organizations {
+      .organization {
+        border: 1px solid @gray-lighter;
+        padding: 15px;
+        margin-bottom: 30px;
+        border-radius: @border-radius-base;
+        .name {
+          font-size: @font-size-med;
+          border-bottom: 1px solid @gray-lighter;
+          padding-bottom: 5px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    &.profile-section-skills {
+      .add-skills {
         margin-bottom: 30px;
       }
-      .asset-tags {
-        .asset-tag {
+      .skills {
+        .skill {
           background: @brand-info;
           float: left;
           margin-right: 15px;
@@ -76,7 +90,7 @@
           color: white;
         }
       }
-      .no-tags {}
+      .no-skills {}
     }
   }
 }

@@ -3,16 +3,16 @@ angular.module('throughCompanyApp').controller('userCtrl', [
   '$state',
   '$rootScope',
   'userService',
-  'projectService',
-  'assetTagService',
+  'skillService',
   'alertService',
   'utilsService',
   'user',
-  function($scope, $state, $rootScope, userService, projectService, assetTagService, alertService, utilsService, user) {
+  function($scope, $state, $rootScope, userService, skillService, alertService, utilsService, user) {
     $rootScope.setMetaTitle(user.email);
 
     $scope.user = user;
     $scope.addingAssetTags = false;
+    $scope.organizations = [];
     $scope.projects = [];
     $scope.createAssetTag = _createAssetTag;
     $scope.getAssetTags = _getAssetTags;
@@ -22,6 +22,7 @@ angular.module('throughCompanyApp').controller('userCtrl', [
       };
     };
 
+    _getOrganizations();
     _getProjects();
 
     $scope.addAssetTagForm = {
@@ -62,7 +63,7 @@ angular.module('throughCompanyApp').controller('userCtrl', [
     function _getAssetTags(tagName) {
       if (!tagName || !tagName.length) return;
 
-      assetTagService.getAll({
+      skillService.getAll({
         name: tagName
       }).then(function success(response) {
         var indexedTags = _.indexBy($scope.currentUser.assetTags, 'name');
@@ -72,8 +73,16 @@ angular.module('throughCompanyApp').controller('userCtrl', [
           var exists = indexedTags[tag.name];
           return exists ? false : true;
         });
+      });
+    }
 
-        console.log($scope.assetTags);
+    function _getOrganizations() {
+      userService.getUserOrganizations({
+        userId: $scope.user.id
+      }).then(function success(response) {
+        $scope.organizations = $scope.organizations.concat(response);
+      }, function error(response) {
+        console.log(utilsService.getServerErrorMessage(response));
       });
     }
 

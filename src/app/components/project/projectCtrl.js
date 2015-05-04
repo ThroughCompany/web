@@ -5,12 +5,12 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
   '$modal',
   '$timeout',
   'projectService',
+  'organizationService',
   'alertService',
   'project',
   'utilsService',
   'scrollbar',
-  'assetTagService',
-  function($scope, $state, $rootScope, $modal, $timeout, projectService, alertService, project, utilsService, scrollbar, assetTagService) {
+  function($scope, $state, $rootScope, $modal, $timeout, projectService, organizationService, alertService, project, utilsService, scrollbar) {
     $scope.setMetaTitle(project.name);
     $scope.setMetaDescription(project.name);
 
@@ -18,61 +18,25 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
     $scope.savingWiki = false;
     $scope.loaded = false;
 
+    if ($state.params.section) {
+      $scope.currentSection = $state.params.section;
+    } else {
+      $scope.currentSection = 'project-needs';
+    }
+
     projectService.getProjectUsers({
       projectId: $scope.project._id
     }).then(function success(response) {
       $scope.projectUsers = response;
     });
 
-    $scope.createAssetTag = _createAssetTag;
-    $scope.getAssetTags = _getAssetTags;
-    $scope.newAssetTag = function(tag) {
-      return {
-        name: tag
-      };
-    };
-
-    $scope.applying = false;
-    $scope.applyingAssetTag = null;
-    $scope.apply = function(assetTag) {
-      $scope.applying = true;
-      $scope.applyingAssetTag = assetTag;
-    };
-
-    $scope.addAssetTagForm = {
-      tags: [],
-      tag: null,
-      description: null
-    };
-    $scope.assetTags = [];
-
-    $scope.$watch('addAssetTagForm.tags', function(val) {
-      if (!val || !val.length) return;
-
-      $scope.addAssetTagForm.tag = val[0];
-      $scope.addAssetTagForm.tags = null;
-
-      // var currentTags = $scope.project.assetTags && $scope.project.assetTags.length ? _.pluck($scope.project.assetTags, 'name') : [];
-      // var newTags = _.filter(val, function(tag) {
-      //   return !_.contains(currentTags, tag);
-      // });
-
-      // if (newTags && newTags.length) {
-      //   _.each(newTags, function(newTag) {
-      //     $scope.createAssetTag(newTag.name);
-      //   });
-      //   $scope.addAssetTagForm.tags = [];
-      //   $scope.assetTags.selected = undefined;
-      // }
-    });
-    $scope.addAssetTag = function(form) {
-      if (!form.$valid) return;
-
-      $scope.createAssetTag({
-        name: $scope.addAssetTagForm.tag.name,
-        description: $scope.addAssetTagForm.description
+    if ($scope.project.organizationProject) {
+      organizationService.getOrganizationById({
+        organizationId: $scope.project.organizationProject.organization
+      }).then(function success(response) {
+        $scope.organization = response;
       });
-    };
+    }
 
     $scope.getProjectUserName = function(projectUser) {
       if (projectUser.firstName && projectUser.lastName) return projectUser.firstName + ' ' + projectUser.lastName;
@@ -124,8 +88,10 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       utilsService.scrollTo(id, 40);
     };
 
-    $scope.navigateTo = function(state, id) {
+    $scope.navigateTo = function(state, stateParams, id) {
       var currentState = $state.current.name;
+
+      $scope.currentSection = id;
 
       if (currentState !== state) {
         $state.go(state);
@@ -165,38 +131,33 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       });
     };
 
+    $scope.viewProjectNeed = function(projectNeed) {
+      $modal.open({
+        templateUrl: '/app/components/project/viewNeed/projectViewNeed.html',
+        controller: 'projectViewNeedCtrl',
+        resolve: {
+          project: function() {
+            return $scope.project;
+          },
+          projectNeed: function() {
+            return projectNeed;
+          }
+        }
+      });
+    };
+
+    $scope.addProjectNeed = function() {
+      $modal.open({
+        templateUrl: '/app/components/project/addNeed/projectAddNeed.html',
+        controller: 'projectAddNeedCtrl',
+        resolve: {
+          project: function() {
+            return $scope.project;
+          }
+        }
+      });
+    };
+
     $scope.updateProjectThrottled = _.throttle($scope.updateProject, 2700);
-
-    function _createAssetTag(options) {
-      projectService.createAssetTag({
-        projectId: $scope.project._id,
-        name: options.name,
-        description: options.description
-      }).then(function success(response) {
-        $scope.project.assetTags.push(response);
-
-        alertService.success('Asset added.');
-      }, function error(response) {
-        alertService.error(utilsService.getServerErrorMessage(response));
-      });
-    }
-
-    function _getAssetTags(tagName) {
-      if (!tagName || !tagName.length) return;
-
-      assetTagService.getAll({
-        name: tagName
-      }).then(function success(response) {
-        var indexedTags = _.indexBy($scope.project.assetTags, 'name');
-
-        $scope.assetTags = _.filter(response, function(tag) {
-
-          var exists = indexedTags[tag.name];
-          return exists ? false : true;
-        });
-
-        console.log($scope.assetTags);
-      });
-    }
   }
 ]);

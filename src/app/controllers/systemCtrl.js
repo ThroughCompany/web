@@ -9,6 +9,8 @@ angular.module('throughCompanyApp').controller('systemCtrl', [
 
     $rootScope.currentUser = user;
     $rootScope.currentUserClaims = userClaims;
+    $rootScope.currentUserProjects = [];
+    $rootScope.currentUserOrganizations = [];
     $scope.currentYear = (new Date()).getFullYear();
 
     $scope.getUserName = function() {

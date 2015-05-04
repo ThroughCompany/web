@@ -1,0 +1,97 @@
+<div id="project-add-need">
+  <form name="addNeedForm" novalidate>
+    <div class="modal-header">
+      <h3 class="center">Add a need to your project</h3>
+    </div>
+    <div class="modal-body">
+      <div class="project-needs-add">
+        <div class="form-group" ng-class="{ 'has-errors' : submitted && addNeedForm.name.$invalid }">
+          <label class="control-label">
+            Name
+          </label>
+          <input class="form-control" name="name" type="text" ng-model="addProjectNeedForm.name" required />
+          <p class="error-msg">Please enter a name.
+          </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-errors' : submitted && (skillsInvalid && (!addProjectNeedForm.skills || !addProjectNeedForm.skills.length)) }">
+          <label>Skills</label>
+          <ui-select multiple tagging="newSkill" ng-model="addProjectNeedForm.skills" theme="bootstrap" reset-search-input="true">
+            <ui-select-match placeholder="Enter a tag name">{{ $item.name }}</ui-select-match>
+            <ui-select-choices repeat="skill in skills | filter:$select.search" refresh="getSkills($select.search)" refresh-delay="200">
+              <div ng-bind-html="skill.name"></div>
+            </ui-select-choices>
+          </ui-select>
+          <p class="error-msg">Please add some skills.
+          </p>
+        </div>
+        <!--         <div class="form-group">
+          <label>Employment Type</label>
+          <select class="form-control" ng-options="employmentType.type as employmentType.name for employmentType in employmentTypes" ng-model="addProjectNeedForm.employmentType">
+          </select>
+        </div> -->
+        <div class="description form-group" ng-class="{ 'has-errors' : submitted && addNeedForm.description.$invalid }">
+          <label class="control-label">
+            Description
+          </label>
+          <textarea class="form-control" name="description" ng-model="addProjectNeedForm.description" required character-counter="addProjectNeedForm.description" character-counter-max="300">
+          </textarea>
+          <p class="error-msg">Please enter a description.
+          </p>
+        </div>
+        <div class="time-commitment">
+          <div class="form-group">
+            <label class="control-label">
+              Time Commitment (optional)
+            </label>
+            <div class="row clearfix">
+              <div class="time-commitment-input clearfix col-xs-5">
+                <p class="center">Hours/week</p>
+                <input class="form-control" name="hoursPerWeek" type="text" ng-model="addProjectNeedForm.timeCommitment.hoursPerWeek" ng-change="addProjectNeedForm.totalHours= ''" />
+              </div>
+              <div class="or col-xs-2">
+                <p>- or -</p>
+              </div>
+              <div class="time-commitment-input clearfix col-xs-5">
+                <p class="center">Total hours</p>
+                <input class="form-control" name="totalHours" type="text" ng-model="addProjectNeedForm.timeCommitment.totalHours" ng-change="addProjectNeedForm.hoursPerWeek= ''" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <div class="date-picker start-date">
+            <label class="control-label">
+              Start Date (optional)
+            </label>
+            <date-range-picker-single date-picker-options="datePickerOptions" ng-model="addProjectNeedForm.duration.startDate" parent-el=".start-date" opens="left"></date-range-picker-single>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <div class="date-picker end-date">
+            <label class="control-label">
+              End Date (optional)
+            </label>
+            <date-range-picker-single ng-model="addProjectNeedForm.duration.endDate" parent-el=".end-date" opens="left"></date-range-picker-single>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label">
+            Is this location specific?
+          </label>
+          <button class="btn btn-default btn-block" ng-click="addProjectNeedForm.locationSpecific = true" ng-class="{ 'btn-primary' : addProjectNeedForm.locationSpecific === true }">Yes, it must be fulfilled in person</button>
+          <button class="btn btn-default btn-block" ng-click="addProjectNeedForm.locationSpecific = false" ng-class="{ 'btn-primary' : addProjectNeedForm.locationSpecific === false }">No, it can be fulfilled remotely</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer clearfix">
+      <div class="pull-right">
+        <button class="btn btn-default" ng-click="cancel()">
+          Cancel
+        </button>
+        <button class="btn btn-primary" ng-click="addProjectNeed(addNeedForm)">
+          Add Need
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

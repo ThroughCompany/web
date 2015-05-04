@@ -10,7 +10,7 @@ angular.module('throughCompanyApp').factory('patchService', [
       removeAngularKeys(original);
       removeAngularKeys(updates);
 
-      return diff(original, updates);
+      return diff.diff(original, updates);
 
       // var patches = [];
 

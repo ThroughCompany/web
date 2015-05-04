@@ -60,7 +60,7 @@ angular.module('throughCompanyApp').config([
 
     /* ------------------------------------------------------------
      * Home
-     * ------------------------------------------------------------ */ 
+     * ------------------------------------------------------------ */
 
     $stateProvider
       .state('system.home', {
@@ -76,6 +76,23 @@ angular.module('throughCompanyApp').config([
       });
 
     $urlRouterProvider.when('/', '/home');
+
+    /* ------------------------------------------------------------
+     * Home
+     * ------------------------------------------------------------ */
+
+    $stateProvider
+      .state('system.search', {
+        url: 'search?tags',
+        templateUrl: '/app/components/search/search.html',
+        controller: 'searchCtrl',
+        data: {
+          meta: {
+            title: 'Search',
+            description: 'Welcome to Through Company.com'
+          }
+        }
+      });
 
     /* ------------------------------------------------------------
      * Start Project
@@ -105,12 +122,26 @@ angular.module('throughCompanyApp').config([
       });
 
     /* ------------------------------------------------------------
+     * Start Organization
+     * ------------------------------------------------------------ */
+
+    $stateProvider
+      .state('system.createOrganization', {
+        url: 'new-organization',
+        templateUrl: '/app/components/createOrganization/createOrganization.html',
+        controller: 'createOrganizationCtrl',
+        data: {
+          authenticate: true
+        }
+      });
+
+    /* ------------------------------------------------------------
      * Project
      * ------------------------------------------------------------ */
 
     $stateProvider
       .state('system.project', {
-        url: 'project/:projectId',
+        url: 'projects/:projectId?section',
         templateUrl: '/app/components/project/project.html',
         controller: 'projectCtrl',
         resolve: {
@@ -119,7 +150,39 @@ angular.module('throughCompanyApp').config([
               var deferred = $q.defer();
 
               projectService.getProjectById({
-                projectId: $stateParams.projectId
+                projectId: $stateParams.projectId,
+                fields: 'projectApplications(), projectNeeds(), organizationProject()'
+              }).then(function success(response) {
+                deferred.resolve(response);
+              }, function error(response) {
+                $state.go('system.404');
+                deferred.resolve(null);
+              });
+
+              return deferred.promise;
+            }
+          ]
+        },
+        reloadOnSearch: false
+      });
+
+    /* ------------------------------------------------------------
+     * Organization
+     * ------------------------------------------------------------ */
+
+    $stateProvider
+      .state('system.organization', {
+        url: 'organizations/:organizationId',
+        templateUrl: '/app/components/organization/organization.html',
+        controller: 'organizationCtrl',
+        resolve: {
+          organization: ['$rootScope', '$stateParams', '$state', 'organizationService', '$q',
+            function($rootScope, $stateParams, $state, organizationService, $q) {
+              var deferred = $q.defer();
+
+              organizationService.getOrganizationById({
+                organizationId: $stateParams.organizationId,
+                //fields: 'organizationApplications()'
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {
@@ -148,7 +211,7 @@ angular.module('throughCompanyApp').config([
 
     $stateProvider
       .state('system.user', {
-        url: 'user/:userName',
+        url: 'users/:userName',
         templateUrl: '/app/components/user/user.html',
         controller: 'userCtrl',
         resolve: {
@@ -182,7 +245,7 @@ angular.module('throughCompanyApp').config([
     /* ------------------------------------------------------------
      * Sign In
      * ------------------------------------------------------------ */
-      
+
     $stateProvider
       .state('system.signIn', {
         url: 'signin?email&project',

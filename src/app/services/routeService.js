@@ -1,5 +1,8 @@
 angular.module('throughCompanyApp').constant('routes', {
   home: 'system.home',
+  search: 'system.search',
+  //organization
+  organization: 'system.organization',
   //project
   project: 'system.project',
   projectSettings: 'system.project.settings',
@@ -10,6 +13,8 @@ angular.module('throughCompanyApp').constant('routes', {
   //start project
   createProject: 'system.createProject',
   startProject: 'system.startProject',
+  //start organization
+  createOrganization: 'system.createOrganization',
   //
   signIn: 'system.signIn',
   signUp: 'system.signUp'

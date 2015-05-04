@@ -1,0 +1,37 @@
+<div id="search">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-4" ng-repeat="project in projects" equal-heights=".project" items="projects">
+        <a class="project" href="#" ui-sref-name="routes.project({ projectId : project.slug })">
+          <div class="project-pic" style="background-image: url('{{ project.profilePic }}')">
+          </div>
+          <div class="project-info">
+            <h4 class="name">
+              {{ project.name }}
+            </h4>
+            <p class="location" ng-hide="!project.location">
+              <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
+            </p>
+            <p class="description">
+              {{ project.description }}
+            </p>
+            <div class="project-details clearfix row">
+              <div class="status col-xs-3 center">
+                <p class="">{{ project.status }}</p>
+                <p class="label uppercase">Status</p>
+              </div>
+              <div class="needs col-xs-3 center">
+                <p class="">{{ project.openProjectNeedsCount }}</p>
+                <p class="label uppercase">Needs</p>
+              </div>
+              <div class="needs col-xs-3 center">
+                <p class="">{{ project.projectUsers.length }}</p>
+                <p class="label uppercase">Members</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

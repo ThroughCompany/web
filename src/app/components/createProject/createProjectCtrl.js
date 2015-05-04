@@ -7,9 +7,18 @@ angular.module('throughCompanyApp').controller('createProjectCtrl', [
   'alertService',
   'utilsService',
   'authService',
-  function($scope, $rootScope, $timeout, $state, projectService, alertService, utilsService, authService) {
+  'userService',
+  function($scope, $rootScope, $timeout, $state, projectService, alertService, utilsService, authService, userService) {
     $scope.setMetaTitle('Create a New Project');
     $scope.setMetaDescription('Have an great idea! Start a new project now.');
+
+    userService.getUserOrganizations({
+      userId: $scope.currentUser._id
+    }).then(function success(response) {
+      $scope.userOrganizations = response;
+    }, function error(response) {
+      alertService.success(response);
+    });
 
     // ---------------- buttons ----------------
     // create project button
@@ -44,7 +53,9 @@ angular.module('throughCompanyApp').controller('createProjectCtrl', [
 
         $timeout(function() {
           $rootScope.currentUserProjects.push(response);
-          $state.go($scope.routes.userProfile);
+          $state.go($scope.routes.user, {
+            userName: $scope.currentUser.userName
+          });
 
           alertService.success('Project Created');
 

@@ -39,7 +39,7 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
     $scope.deleteLink = function(link) {
       var updates = angular.copy($scope.currentUser.toJSON());
       var foundLink = _.find(updates.socialLinks, function(socialLink) {
-        return socialLink.name === link.name && socialLink.link === link.link && socialLink.type === link.type;
+        return socialLink._id === link._id;
       });
 
       if (!foundLink) {
@@ -86,7 +86,7 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
       }).then(function(response) {
         alertService.success('Settings Saved');
 
-        $scope.currentUser.socialLinks = response.socialLinks;
+        $scope.currentUser.socialLinks.push(link);
 
       }, function(response) {
         $scope.logger.error(response);
@@ -99,7 +99,7 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
     $scope.updateLink = function(link) {
       var updates = angular.copy($scope.currentUser.toJSON());
       var foundLink = _.find(updates.socialLinks, function(socialLink) {
-        return socialLink.name === link.name && socialLink.link === link.link;
+        return socialLink._id === link._id;
       });
 
       if (!foundLink) {
@@ -107,7 +107,15 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
         return;
       }
 
-      var patches = jsonpatch.compare($scope.currentUser, updates);
+      foundLink.type = link.type;
+      foundLink.name = link.name;
+      foundLink.link = link.link;
+
+      var patches = patchService.generatePatches({
+        socialLinks: $scope.currentUser.toJSON().socialLinks
+      }, {
+        socialLinks: updates.socialLinks
+      });
 
       userService.updateUserById({
         userId: $scope.currentUser._id,
@@ -200,7 +208,7 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
       if (!type) return $state.go('system.404');
 
       $scope.currentSettingsType = type;
-      $location.path('/user/' + $scope.user.userName + '/settings/' + type.name.toLowerCase());
+      //$location.path('/user/' + $scope.user.userName + '/settings/' + type.name.toLowerCase());
     }
   }
 ]);

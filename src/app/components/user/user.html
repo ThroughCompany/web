@@ -55,17 +55,47 @@
           </div>
         </div>
       </div>
-      <!-- Assets -->
-      <div class="profile-section profile-section-assets" id="assets">
+      <!-- Organizations -->
+      <div class="profile-section profile-section-organizations" id="organizations">
         <div class="header clearfix">
-          <h3>Assets</h3>
+          <h3>Organizations</h3>
+          <div class="add-new-btn pull-right">
+            <a href="#" class="btn btn-primary" ui-sref-name="routes.createOrganization" ng-show="(organizations && organizations.length) && auth.hasCurrentUserIdClaim(user._id)">
+              <i class="fa fa-plus"></i> Add
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6" ng-repeat="organization in organizations" equal-heights=".organization" items="organizations" ng-show="organizations && organizations.length">
+            <div class="organization">
+              <p class="name">
+                <a href="#" ui-sref-name="routes.organization({ organizationId : organization.slug })">{{ organization.name }}</a>
+              </p>
+              <p class="description">{{ organization.description }}</p>
+              <p>Started on {{ organization.created | date : 'MM/dd/yyyy' }}</p>
+            </div>
+          </div>
+          <div ng-hide="organizations && organizations.length">
+            <p class="center">
+              You don't have any organizations yet...
+            </p>
+            <p class="center">
+              <a href="#" class="btn btn-primary" ui-sref-name="routes.createOrganization">Create an Organization</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Skills -->
+      <div class="profile-section profile-section-skills" id="skills">
+        <div class="header clearfix">
+          <h3>Skills</h3>
           <div class="add-tags-btn pull-right">
             <a href="#" class="btn btn-primary" ng-click="addingAssetTags = !addingAssetTags" ng-show="(user.assetTags && user.assetTags.length) && auth.hasCurrentUserIdClaim(user._id)">
               <i class="fa fa-plus"></i> Add
             </a>
           </div>
         </div>
-        <div class="add-tags clearfix">
+        <div class="add-skills clearfix">
           <div ng-show="addingAssetTags">
             <ui-select multiple tagging="newAssetTag" ng-model="addAssetTagForm.tags" theme="bootstrap" reset-search-input="false">
               <ui-select-match placeholder="Enter a tag name">{{ $item.name }}</ui-select-match>
@@ -74,12 +104,12 @@
               </ui-select-choices>
           </div>
         </div>
-        <div class="asset-tags">
-          <a href="#" class="asset-tag btn btn-default" ng-repeat="assetTag in user.assetTags">
+        <div class="skills">
+          <a href="#" class="skill btn btn-default" ng-repeat="assetTag in user.assetTags">
           {{ assetTag.name }}
         </a>
         </div>
-        <div class="no-tags" ng-hide="(user.assetTags && user.assetTags.length) || addingAssetTags">
+        <div class="no-skills" ng-hide="(user.assetTags && user.assetTags.length) || addingAssetTags">
           <p class="center">
             You don't have any assets yet...
           </p>

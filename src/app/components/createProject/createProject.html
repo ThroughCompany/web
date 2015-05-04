@@ -12,6 +12,10 @@
       <p class="error-msg" ng-show="submitted && createProjectForm.description.$error.required">Please enter a description of your project.
       </p>
     </div>
+    <div class="form-group" ng-show="userOrganizations && userOrganizations.length">
+      <label class="control-label">Owner</label>
+      <select class="form-control" ng-model="form.organizationId" ng-options="organization._id as organization.name for organization in userOrganizations"></select>
+    </div>
     <button class="btn btn-primary pull-right" tabindex="3" ng-click="createProject(createProjectForm)" ng-bs-animated-button is-submitting="createProjectSubmitting" result="createProjectResult" options="createProjectBtnOptions">
     </button>
   </form>

@@ -31,6 +31,12 @@ angular.module('throughCompanyApp').factory('userService', [
         url: appSettings.baseUrl + '/users/:userId/projects',
         isArray: true
       },
+      //user organizations
+      getUserOrganizations: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/users/:userId/organizations',
+        isArray: true
+      },
       createAssetTag: {
         method: 'POST',
         url: appSettings.baseUrl + '/users/:userId/assettags'
@@ -74,6 +80,15 @@ angular.module('throughCompanyApp').factory('userService', [
       var self = this;
 
       return User.getUserProjects(options).$promise;
+    };
+
+    UserService.prototype.getUserOrganizations = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('userId is required');
+
+      var self = this;
+
+      return User.getUserOrganizations(options).$promise;
     };
 
     UserService.prototype.getUserClaims = function(options) {

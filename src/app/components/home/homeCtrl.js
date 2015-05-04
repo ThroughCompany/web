@@ -5,12 +5,17 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
   '$timeout',
   'subscribeService',
   'utilsService',
-  function($scope, $rootScope, projectService, $timeout, subscribeService, utilsService) {
+  'skillService',
+  function($scope, $rootScope, projectService, $timeout, subscribeService, utilsService, skillService) {
     $scope.loaded = false;
 
     projectService.getProjects({}).then(function success(response) {
       $scope.loaded = true;
       $scope.projects = response;
+    });
+
+    skillService.getAll({}).then(function success(response) {
+      $scope.skills = response;
     });
 
     // ---------------- buttons ----------------
@@ -28,6 +33,10 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
       buttonErrorText: 'Error subscribing',
       buttonErrorIcon: 'icon-left fa fa-remove',
       buttonErrorClass: 'btn-danger'
+    };
+
+    $scope.getSkillsParams = function(skillName) {
+      return skillName;
     };
 
     // $scope.scrollTo = function(id) {
