@@ -25,6 +25,9 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
     }, {
       name: 'Links',
       icon: 'fa fa-link'
+    }, {
+      name: 'Applications',
+      icon: 'fa fa-file-code-o'
     }];
 
     $scope.statuses = ['Draft', 'Open', 'Archived'];

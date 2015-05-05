@@ -43,6 +43,10 @@ angular.module('throughCompanyApp').factory('projectService', [
       createNeed: {
         method: 'POST',
         url: appSettings.baseUrl + '/projects/:projectId/needs'
+      },
+      createApplication: {
+        method: 'POST',
+        url: appSettings.baseUrl + '/projects/:projectId/applications'
       }
     });
 
@@ -209,6 +213,21 @@ angular.module('throughCompanyApp').factory('projectService', [
       delete options.projectId;
 
       return Project.createNeed({
+        projectId: projectId
+      }, options).$promise;
+    };
+
+    ProjectService.prototype.createApplication = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.projectId) throw new Error('options.projectId is required');
+      if (!options.needId) throw new Error('options.needId is required');
+
+      var self = this;
+      var projectId = options.projectId;
+
+      delete options.projectId;
+
+      return Project.createApplication({
         projectId: projectId
       }, options).$promise;
     };
