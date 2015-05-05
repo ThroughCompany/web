@@ -6,11 +6,18 @@ angular.module('throughCompanyApp').controller('projectViewNeedCtrl', [
   'project',
   'projectNeed',
   'projectService',
+  'skillService',
   'alertService',
   'utilsService',
-  function($scope, $state, $rootScope, $modalInstance, project, projectNeed, projectService, alertService, utilsService) {
+  function($scope, $state, $rootScope, $modalInstance, project, projectNeed, projectService, skillService, alertService, utilsService) {
     $scope.project = project;
     $scope.projectNeed = projectNeed;
+
+    skillService.getAll({
+      projectNeedId: $scope.projectNeed._id
+    }).then(function success(response) {
+      $scope.skills = response;
+    });
 
     if ($scope.projectNeed.duration) {
       if ($scope.projectNeed.duration.startDate) $scope.projectNeed.duration.startDate = moment($scope.projectNeed.duration.startDate);
