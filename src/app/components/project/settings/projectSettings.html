@@ -62,6 +62,26 @@
             <link-input ng-repeat="link in unsavedSocialLinks" link-input-handle="linkInputHandle" link="link" save-link="addLink"></link-input>
             <link-input ng-repeat="link in project.socialLinks" link-input-handle="linkInputHandle" link="link" save-link="addUpdateLink" delete-link="deleteLink"></link-input>
           </div>
+          <!-- Applications -->
+          <div class="applications-section settings-section" ng-show="currentSettingsType.name === 'Applications'">
+            <div class="application clearfix" ng-repeat="application in project.projectApplications">
+              <div class="pull-left">
+                <p>{{ application.userFirstName ? (application.userFirstName + ' ' + application.userLastName) : application.userName }} has applied to join your project!</p>
+                <p>{{ application.userFirstName ? application.userFirstName : application.userName }} applied on {{ application.created | date : 'mm/dd/yyyy' }}</p>
+                <a href="#" ui-sref-name="routes.user({ userName : application.userName })">
+                View {{ application.userFirstName ? application.userFirstName : application.userName }}'s Profile
+              </a>
+              </div>
+              <div class="application-buttons pull-right">
+                <button class="btn btn-default">
+                  <i class="fa fa-times"></i>&nbsp;Decline
+                </button>
+                <button class="btn btn-primary">
+                  <i class="fa fa-check"></i>&nbsp;Accept
+                </button>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>

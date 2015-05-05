@@ -24,7 +24,8 @@ angular.module('throughCompanyApp').config([
               if (!userId) return deferred.resolve(null);
 
               userService.getUserById({
-                userId: userId
+                userId: userId,
+                fields: 'projectApplications()'
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {

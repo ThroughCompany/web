@@ -5,7 +5,10 @@ angular.module('throughCompanyApp').controller('projectViewNeedCtrl', [
   '$modalInstance',
   'project',
   'projectNeed',
-  function($scope, $state, $rootScope, $modalInstance, project, projectNeed) {
+  'projectService',
+  'alertService',
+  'utilsService',
+  function($scope, $state, $rootScope, $modalInstance, project, projectNeed, projectService, alertService, utilsService) {
     $scope.project = project;
     $scope.projectNeed = projectNeed;
 
@@ -18,6 +21,23 @@ angular.module('throughCompanyApp').controller('projectViewNeedCtrl', [
 
     $scope.cancel = function() {
       $modalInstance.dismiss('cancel');
+    };
+
+    $scope.apply = function() {
+      if (!$scope.currentUser) {
+        $modalInstance.close();
+        $state.go($scope.routes.signIn);
+      } else {
+        projectService.createApplication({
+          projectId: $scope.project._id,
+          needId: $scope.projectNeed._id
+        }).then(function success(response) {
+          $scope.currentUser.projectApplications.push(response);
+          alertService.success('Your application has been sent to the project admins, you should hear back from them shortly.');
+        }, function error(response) {
+          alertService.error(utilsService.getServerErrorMessage(response));
+        });
+      }
     };
   }
 ]);

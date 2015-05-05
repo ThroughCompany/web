@@ -20,6 +20,9 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
     }, {
       name: 'Links',
       icon: 'fa fa-link'
+    }, {
+      name: 'Applications',
+      icon: 'fa fa-file-code-o'
     }];
 
     $scope.changeCurrentSettingsType($stateParams.type ? _.find($scope.settingTypes, function(type) {
