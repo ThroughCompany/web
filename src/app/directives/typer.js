@@ -13,20 +13,22 @@ angular.module('throughCompanyApp').directive('typer', [
         return element.attr('data-typer-targets', text);
       },
       link: function(scope, element, attrs) {
-        console.log(scope.typerInterval);
-
-        element.typer({
-          highlightSpeed: 2,
-          typeSpeed: 100,
-          clearDelay: 500,
-          typeDelay: 200,
+        var options = {
+          highlightSpeed: 10,
+          typeSpeed: 80,
+          clearDelay: 20,
+          typeDelay: 100,
           clearOnHighlight: true,
           typerDataAttr: 'data-typer-targets',
           typerInterval: scope.typerInterval || 2000
-        });
+        };
+
+        $.typer.options = options;
+
+        element.typer();
 
         // scope.$on('destroy', function() {
-          
+
         // });
       }
     };
