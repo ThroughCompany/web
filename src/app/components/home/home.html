@@ -1,26 +1,48 @@
 <div id="home" class="clearfix">
   <div class="hero">
     <div class="hero-slides">
-      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner1.jpg')">
+      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner2.jpg')">
         <div class="slide-bg"></div>
         <div class="container hero-text">
-          <p class="small-text">A better way to</p>
           <!--           <h1 typer="build a career, collaborate with everyone, find interesting projects, tackle big problems, encourage innovation" typer-interval="100"></h1> -->
-          <h1>tackle big problems</h1>
+          <h1>A better way to tackle big problems</h1>
           <div class="big-text clearfix">
-            <p class="">We help ambitious projects find what they need, and help people find satisfying work.</p>
-            <p class="center">
+            <p class="text">We help ambitious projects find what they need, and help people find satisfying work.</p>
+            <!-- <p class="center">
               <a href="#" class="btn btn-primary btn-lg" ui-sref-name="routes.signUp">
                   Sign up
                 </a>
-            </p>
+            </p> -->
+          </div>
+          <div class="get-started center">
+            <div class="trans">
+              <form class="clearfix form-inline" name="registerForm" role="form" novalidate>
+                <div class="form-group" ng-class="{ 'has-errors' : submitted && registerForm.email.$invalid, 'filled' : fillingEmail || emailLength > 0, preroll : !showEmail }">
+                  <input class="form-control" placeholder="Your Email" name="email" tabindex="1" type="text" ng-model="form.email" required ng-focus="fillingEmail = true" ng-blur="fillingEmail = false" />
+                  <p class="error-msg" ng-show="submitted && registerForm.email.$error.required">Please enter your email.
+                  </p>
+                  <p class="error-msg" ng-show="submitted && registerForm.email.$error.pattern">Please enter a valid email.
+                  </p>
+                </div>
+                <div class="form-group preroll" ng-class="{ 'has-errors' : submitted && registerForm.password.$invalid, 'filled' : fillingPassword || passwordLength > 0, preroll : !showPassword }">
+                  <input class="form-control" placeholder="Create a Password" name="password" tabindex="2" type="password" ng-model="form.password" required ng-focus="fillingPassword = true" ng-blur="fillingPassword = false" />
+                  <p class="error-msg" ng-show="submitted && registerForm.password.$error.required">Please enter your password.
+                  </p>
+                </div>
+                <button class="btn btn-icon-center preroll" tabindex="3" ng-click="register(registerForm)" ng-bs-animated-button is-submitting="registerSubmitting" result="registerResult" options="registerBtnOptions" ng-class=" { preroll : !showLoginBtn }">
+                </button>
+              </form>
+              <div class="error-msg alert alert-danger" ng-show="errorMsg">
+              {{ errorMsg }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="content-wrap clearfix">
-    <div class="content col-sm-8 col-xs-12 col-sm-offset-1">
+  <div class="content-wrap container clearfix">
+    <div class="content col-sm-8 col-xs-12">
       <div class="most-recent-projects">
         <div class="header">
           <h2>New Projects.</h2>
@@ -86,7 +108,7 @@
         </div>
       </div> -->
     </div>
-    <div class="sidebar col-sm-3 col-xs-12">
+    <div class="sidebar col-sm-4 col-xs-12">
       <div class="top-needs clearfix">
         <h3 class="uppercase">Top Skills</h3>
         <div class="needs-list">
