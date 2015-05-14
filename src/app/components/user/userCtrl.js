@@ -7,7 +7,8 @@ angular.module('throughCompanyApp').controller('userCtrl', [
   'alertService',
   'utilsService',
   'user',
-  function($scope, $state, $rootScope, userService, skillService, alertService, utilsService, user) {
+  '$modal',
+  function($scope, $state, $rootScope, userService, skillService, alertService, utilsService, user, $modal) {
     $rootScope.setMetaTitle(user.email);
 
     $scope.user = user;
@@ -46,6 +47,21 @@ angular.module('throughCompanyApp').controller('userCtrl', [
         $scope.assetTags.selected = undefined;
       }
     });
+
+    $scope.addNeed = function() {
+      $modal.open({
+        templateUrl: '/app/views/addNeed.html',
+        controller: 'addNeedCtrl',
+        resolve: {
+          user: function() {
+            return $scope.user;
+          },
+          project: function() {
+            return null;
+          }
+        }
+      });
+    };
 
     function _createAssetTag(tagName) {
       userService.createAssetTag({

@@ -1,4 +1,4 @@
-angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
+angular.module('throughCompanyApp').controller('addNeedCtrl', [
   '$scope',
   '$state',
   '$rootScope',
@@ -7,11 +7,13 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
   'projectService',
   'alertService',
   'project',
+  'user',
   'utilsService',
   'skillService',
   'needService',
-  function($scope, $state, $rootScope, $modalInstance, $timeout, projectService, alertService, project, utilsService, skillService, needService) {
+  function($scope, $state, $rootScope, $modalInstance, $timeout, projectService, alertService, project, user, utilsService, skillService, needService) {
     $scope.project = project;
+    $scope.user = user;
 
     $scope.skills = [];
     $scope.getSkills = _getSkills;
@@ -25,18 +27,7 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
       $modalInstance.dismiss('cancel');
     };
 
-    // $scope.employmentTypes = [{
-    //   name: 'Volunteer',
-    //   type: 'VOLUNTEER'
-    // }, {
-    //   name: 'Full Time',
-    //   type: 'FULL_TIME'
-    // }, {
-    //   name: 'Part Time',
-    //   type: 'PART_TIME'
-    // }];
-
-    $scope.addProjectNeedForm = {
+    $scope.addNeedForm = {
       skills: [],
       timeCommitment: {},
       description: null,
@@ -47,27 +38,29 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
       locationSpecific: false
     };
 
-    $scope.addProjectNeed = function(form) {
+    $scope.addNeed = function(form) {
       $scope.submitted = true;
 
-      if (!$scope.addProjectNeedForm.skills || !$scope.addProjectNeedForm.skills.length) {
+      if (!$scope.addNeedForm.skills || !$scope.addNeedForm.skills.length) {
         $scope.skillsInvalid = true;
         return;
       }
       if (!form.$valid) return;
 
       needService.create({
-        projectId: $scope.project._id,
-        name: $scope.addProjectNeedForm.name,
-        skills: _.pluck($scope.addProjectNeedForm.skills, 'name'),
-        description: $scope.addProjectNeedForm.description,
-        timeCommitment: $scope.addProjectNeedForm.timeCommitment,
-        duration: $scope.addProjectNeedForm.duration,
-        locationSpecific: $scope.addProjectNeedForm.locationSpecific
+        projectId: $scope.project ? $scope.project._id : null,
+        userId: $scope.user ? $scope.user._id : null,
+        name: $scope.addNeedForm.name,
+        skills: _.pluck($scope.addNeedForm.skills, 'name'),
+        description: $scope.addNeedForm.description,
+        timeCommitment: $scope.addNeedForm.timeCommitment,
+        duration: $scope.addNeedForm.duration,
+        locationSpecific: $scope.addNeedForm.locationSpecific
       }).then(function success(response) {
-        $scope.project.needs.push(response);
+        if ($scope.project) $scope.project.needs.push(response);
+        if ($scope.user) $scope.user.needs.push(response);
 
-        alertService.success('Project need added.');
+        alertService.success('Need added.');
 
         $modalInstance.close();
       }, function error(response) {
@@ -76,7 +69,8 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
     };
 
     $scope.form = {
-      projectId: $scope.project._id
+      projectId: $scope.project ? $scope.project._id : null,
+      userId: $scope.user ? $scope.user._id : null,
     };
 
     $scope.datePickerOptions = {

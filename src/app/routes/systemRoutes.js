@@ -221,7 +221,8 @@ angular.module('throughCompanyApp').config([
               var deferred = $q.defer();
 
               userService.getUserById({
-                userId: $stateParams.userName
+                userId: $stateParams.userName,
+                fields: 'userApplications(), needs()'
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {

@@ -146,13 +146,16 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
       });
     };
 
-    $scope.addProjectNeed = function() {
+    $scope.addNeed = function() {
       $modal.open({
-        templateUrl: '/app/components/project/addNeed/projectAddNeed.html',
-        controller: 'projectAddNeedCtrl',
+        templateUrl: '/app/views/addNeed.html',
+        controller: 'addNeedCtrl',
         resolve: {
           project: function() {
             return $scope.project;
+          },
+          user: function() {
+            return null;
           }
         }
       });

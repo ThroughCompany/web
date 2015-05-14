@@ -74,14 +74,14 @@
             <div class="header clearfix">
               <h2>Needs</h2>
               <p class="sub">What we need right now.</p>
-              <a href="#" class="btn btn-default btn-edit btn-xs pull-right" ng-click="addProjectNeed()" ng-show="auth.hasProjectIdClaim(project._id)">
+              <a href="#" class="btn btn-default btn-edit btn-xs pull-right" ng-click="addNeed()" ng-show="auth.hasProjectIdClaim(project._id)">
                 <i class="fa fa-plus"></i>
               </a>
             </div>
             <div class="clearfix">
-              <div class="project-needs-list">
-                <a class="project-need btn btn-primary btn-sm" href="#" ng-repeat="projectNeed in project.needs" ng-click="viewProjectNeed(projectNeed)">
-                 {{ projectNeed.name }}
+              <div class="needs-list">
+                <a class="need btn btn-primary btn-sm" href="#" ng-repeat="need in project.needs" ng-click="viewProjectNeed(need)">
+                 {{ need.name }}
               </a>
               </div>
             </div>
