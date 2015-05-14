@@ -19,6 +19,8 @@ var replace = require('gulp-replace');
 var sh = require('shelljs');
 var watch = require('gulp-watch');
 var protractor = require('gulp-protractor').protractor;
+var wrap = require('gulp-wrap');
+var concat = require('gulp-concat');
 //var fontcustom = require('fontcustom');
 
 require('gulp-task-list')(gulp);
@@ -31,7 +33,8 @@ console.log('\n\nENV: ' + ENV + '\n\n');
 var BUILDDIR = 'build';
 
 //js
-var MINIFIEDSCRIPT = 'throughcompanyApp.min.js';
+var MINIFIED_SRC_SCRIPT = 'throughcompanyApp.min.js';
+var MINIFIED_VENDOR_SCRIPT = 'throughcompanyLibs.min.js';
 var UGLIFYOPTIONS = {
   mangle: true,
   compress: true
@@ -41,6 +44,29 @@ var UGLIFYOPTIONS = {
 var LESSOPTIONS = {
   compress: ENV_PROD
 };
+
+var VENDOR_JS = [
+  BUILDDIR + '/bower_components/console-polyfill/index.js',
+  BUILDDIR + '/bower_components/angular/angular.js',
+  BUILDDIR + '/bower_components/bootstrap/dist/js/bootstrap.js',
+  BUILDDIR + '/bower_components/angular-resource/angular-resource.js',
+  BUILDDIR + '/bower_components/angular-ui-router/release/angular-ui-router.js',
+  BUILDDIR + '/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+  BUILDDIR + '/bower_components/underscore/underscore.js',
+  BUILDDIR + '/bower_components/angular-animate/angular-animate.js',
+  BUILDDIR + '/bower_components/angular-sanitize/angular-sanitize.js',
+  BUILDDIR + '/bower_components/angular-ui-select/dist/select.js',
+  BUILDDIR + '/bower_components/angular-scroll/angular-scroll.js',
+  BUILDDIR + '/bower_components/textAngular/src/textAngular.js',
+  BUILDDIR + '/bower_components/textAngular/src/textAngularSetup.js',
+  BUILDDIR + '/bower_components/rangy/rangy-core.js',
+  BUILDDIR + '/bower_components/rangy/rangy-selectionsaverestore.js',
+  BUILDDIR + '/bower_components/moment/moment.js',
+  BUILDDIR + '/bower_components/toastr/toastr.js',
+  BUILDDIR + '/bower_components/bootstrap-daterangepicker/daterangepicker.js',
+  BUILDDIR + '/vendor/js/rfc6902.js',
+  BUILDDIR + '/vendor/js/ng-bs-animated-button.js'
+];
 
 /* =========================================================================
  * Tasks
@@ -63,9 +89,24 @@ gulp.task('clean', function(next) {
 });
 
 // Copy src folder to build directory
-gulp.task('copy', ['clean'], function(next) {
-  return _init(gulp.src('src/**/*.*'))
+gulp.task('copy', ['clean', 'copy-bower', 'copy-vendor'], function(next) {
+  //exclude bower_compoents js files
+  return _init(gulp.src(['src/**/*.*', '!src/vendor/js/**/*.*', 'src/bower_components/**/*.css', 'src/bower_components/**/*.less', 'src/bower_components/**/*.html', '!src/bower_components/**/*.js']))
     .pipe(gulp.dest(BUILDDIR));
+});
+
+gulp.task('copy-bower', ['clean'], function(next) {
+  //copy bower_components js files - wrap in self-invoking function to prevent issues when concatenating and minifying
+  return _init(gulp.src('src/bower_components/**/**/*.js'))
+    .pipe(wrap('(function(){<%= contents %>\n})();'))
+    .pipe(gulp.dest(BUILDDIR + '/bower_components'));
+});
+
+gulp.task('copy-vendor', ['clean'], function(next) {
+  //copy venue js files - wrap in self-invoking function to prevent issues when concatenating and minifying
+  return _init(gulp.src('src/vendor/js/*.js'))
+    .pipe(wrap('(function(){<%= contents %>\n})();'))
+    .pipe(gulp.dest(BUILDDIR + '/vendor/js'));
 });
 
 // Copy src folder to build directory
@@ -94,16 +135,35 @@ gulp.task('css', ['replace'], function() {
 /**
  * Minify javascript files
  */
-gulp.task('js', ['copy', 'replace'], function() {
+gulp.task('js', ['js-vendor', 'copy', 'replace'], function() {
   var target = gulp.src(BUILDDIR + '/index.html');
 
-  var sources = gulp.src(BUILDDIR + '/app/**/**/*.js')
-    .pipe(gulpIf(ENV_PROD, uglify(MINIFIEDSCRIPT, UGLIFYOPTIONS)))
+  var sources = gulp.src([BUILDDIR + '/app/**/**/*.js', '!' + BUILDDIR + '/app/' + MINIFIED_SRC_SCRIPT, '!' + BUILDDIR + '/app/' + MINIFIED_VENDOR_SCRIPT])
+    .pipe(gulpIf(ENV_PROD, uglify(MINIFIED_SRC_SCRIPT, UGLIFYOPTIONS)))
     .pipe(gulpIf(ENV_PROD, gulp.dest(BUILDDIR + '/app')));
 
   return target.pipe(inject(sources, {
-      starttag: '<!-- inject:js -->',
-      endtag: '<!-- endinject -->',
+      starttag: '<!-- injectSrcJs:js -->',
+      endtag: '<!-- endinjectSrcJs -->',
+      transform: function(filepath) {
+        var path = filepath.replace('/build', '');
+        return '<script src="' + path + '"></script>';
+      }
+    }))
+    .pipe(gulp.dest(BUILDDIR));
+});
+
+gulp.task('js-vendor', ['copy', 'replace'], function() {
+  var target = gulp.src(BUILDDIR + '/index.html');
+
+  var sources = gulp.src(VENDOR_JS)
+    // .pipe(gulpIf(ENV_PROD, uglify(MINIFIED_VENDOR_SCRIPT, UGLIFYOPTIONS)))
+    .pipe(gulpIf(ENV_PROD, concat(MINIFIED_VENDOR_SCRIPT)))
+    .pipe(gulpIf(ENV_PROD, gulp.dest(BUILDDIR + '/app')));
+
+  return target.pipe(inject(sources, {
+      starttag: '<!-- injectVendorJs:js -->',
+      endtag: '<!-- endinjectVendorJs -->',
       transform: function(filepath) {
         var path = filepath.replace('/build', '');
         return '<script src="' + path + '"></script>';

@@ -9,7 +9,8 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
   'project',
   'utilsService',
   'skillService',
-  function($scope, $state, $rootScope, $modalInstance, $timeout, projectService, alertService, project, utilsService, skillService) {
+  'needService',
+  function($scope, $state, $rootScope, $modalInstance, $timeout, projectService, alertService, project, utilsService, skillService, needService) {
     $scope.project = project;
 
     $scope.skills = [];
@@ -49,14 +50,13 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
     $scope.addProjectNeed = function(form) {
       $scope.submitted = true;
 
-
       if (!$scope.addProjectNeedForm.skills || !$scope.addProjectNeedForm.skills.length) {
         $scope.skillsInvalid = true;
         return;
       }
       if (!form.$valid) return;
 
-      projectService.createNeed({
+      needService.create({
         projectId: $scope.project._id,
         name: $scope.addProjectNeedForm.name,
         skills: _.pluck($scope.addProjectNeedForm.skills, 'name'),
@@ -65,7 +65,7 @@ angular.module('throughCompanyApp').controller('projectAddNeedCtrl', [
         duration: $scope.addProjectNeedForm.duration,
         locationSpecific: $scope.addProjectNeedForm.locationSpecific
       }).then(function success(response) {
-        $scope.project.projectNeeds.push(response);
+        $scope.project.needs.push(response);
 
         alertService.success('Project need added.');
 

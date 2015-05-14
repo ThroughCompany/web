@@ -6,10 +6,8 @@ var fs = require('fs');
 
 //middleware
 var ssl = require('../middleware/ssl');
-var deeplink = require('../middleware/deeplink');
 var headers = require('../middleware/headers');
 var cacheControl = require('../middleware/cacheControl');
-var isFile = require('../middleware/isFile');
 var error = require('../middleware/error');
 var prerender = require('prerender-node');
 
@@ -30,7 +28,6 @@ function configure(appConfig) {
 
 function loadMiddleware(app, appConfig) {
   app.use(ssl(appConfig));
-  app.use('/dl/*', deeplink(appConfig));
   app.use(headers(appConfig));
 
   if (appConfig.SEO) {

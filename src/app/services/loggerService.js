@@ -19,9 +19,9 @@ angular.module('throughCompanyApp').factory('loggerService', [
       console.info(message);
     };
 
-    Logger.prototype.debug = function debug(message) {
+    Logger.prototype.warning = function warning(message) {
       if (appSettings.ENV === 'production') return;
-      console.debug(message);
+      console.warn(message);
     };
 
     return new Logger();

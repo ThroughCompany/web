@@ -7,7 +7,6 @@ var _ = require('underscore');
  * App Config Settings
  * ========================================================================= */
 var defaultSettings = {
-  NEWRELIC: '2960e30f148c7141c12ffa97fa4485c88e05d15a',
   ROBOTS: '/',
   PORT: process.env.PORT || 2020,
   BUILD_DIR: 'build',

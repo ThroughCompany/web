@@ -2,13 +2,13 @@
   <form class="col-md-6 col-md-offset-3" name="createProjectForm" novalidate>
     <div class="form-group" ng-class="{ 'has-errors' : submitted && !createProjectForm.name.$valid }">
       <label class="control-label">Name</label>
-      <input class="form-control" type="text" name="name" ng-model="form.name" required />
+      <input class="form-control" type="text" name="name" ng-model="form.name" tabindex="1" required />
       <p class="error-msg" ng-show="submitted && createProjectForm.name.$error.required">Please enter a project name.
       </p>
     </div>
     <div class="form-group" ng-class="{ 'has-errors' : submitted && !createProjectForm.description.$valid }">
       <label class="control-label">Description</label>
-      <textarea class="form-control" type="text" name="description" ng-model="form.description" required></textarea>
+      <textarea class="form-control" type="text" name="description" ng-model="form.description" tabindex="2" required></textarea>
       <p class="error-msg" ng-show="submitted && createProjectForm.description.$error.required">Please enter a description of your project.
       </p>
     </div>

@@ -152,7 +152,7 @@ angular.module('throughCompanyApp').config([
 
               projectService.getProjectById({
                 projectId: $stateParams.projectId,
-                fields: 'projectApplications(), projectNeeds(), organizationProject()'
+                fields: 'projectApplications(), needs(), organizationProject()'
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {
