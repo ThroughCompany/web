@@ -50,14 +50,11 @@ angular.module('throughCompanyApp').controller('userCtrl', [
 
     $scope.addNeed = function() {
       $modal.open({
-        templateUrl: '/app/views/addNeed.html',
-        controller: 'addNeedCtrl',
+        templateUrl: '/app/components/user/addNeed/userAddNeed.html',
+        controller: 'userAddNeedCtrl',
         resolve: {
           user: function() {
             return $scope.user;
-          },
-          project: function() {
-            return null;
           }
         }
       });

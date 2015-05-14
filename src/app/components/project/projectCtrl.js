@@ -148,14 +148,11 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
 
     $scope.addNeed = function() {
       $modal.open({
-        templateUrl: '/app/views/addNeed.html',
-        controller: 'addNeedCtrl',
+        templateUrl: '/app/components/project/addNeed/projectAddNeed.html',
+        controller: 'projectAddNeedCtrl',
         resolve: {
           project: function() {
             return $scope.project;
-          },
-          user: function() {
-            return null;
           }
         }
       });

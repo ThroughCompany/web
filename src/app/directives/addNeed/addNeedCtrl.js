@@ -2,29 +2,19 @@ angular.module('throughCompanyApp').controller('addNeedCtrl', [
   '$scope',
   '$state',
   '$rootScope',
-  '$modalInstance',
   '$timeout',
   'projectService',
   'alertService',
-  'project',
-  'user',
   'utilsService',
   'skillService',
   'needService',
-  function($scope, $state, $rootScope, $modalInstance, $timeout, projectService, alertService, project, user, utilsService, skillService, needService) {
-    $scope.project = project;
-    $scope.user = user;
-
+  function($scope, $state, $rootScope, $timeout, projectService, alertService, utilsService, skillService, needService) {
     $scope.skills = [];
     $scope.getSkills = _getSkills;
     $scope.newSkill = function(skill) {
       return {
         name: skill
       };
-    };
-
-    $scope.cancel = function() {
-      $modalInstance.dismiss('cancel');
     };
 
     $scope.addNeedForm = {
@@ -62,7 +52,7 @@ angular.module('throughCompanyApp').controller('addNeedCtrl', [
 
         alertService.success('Need added.');
 
-        $modalInstance.close();
+        if ($scope.close) $scope.close();
       }, function error(response) {
         alertService.error(utilsService.getServerErrorMessage(response));
       });
