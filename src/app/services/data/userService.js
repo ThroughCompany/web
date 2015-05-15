@@ -40,6 +40,12 @@ angular.module('throughCompanyApp').factory('userService', [
       createAssetTag: {
         method: 'POST',
         url: appSettings.baseUrl + '/users/:userId/assettags'
+      },
+      //user applications
+      getUserApplications: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/users/:userId/applications',
+        isArray: true
       }
     });
 
@@ -151,6 +157,20 @@ angular.module('throughCompanyApp').factory('userService', [
       delete options.userId;
 
       return User.createAssetTag({
+        userId: userId
+      }, options).$promise;
+    };
+
+    UserService.prototype.getUserApplications = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('options.userId is required');
+
+      var self = this;
+      var userId = options.userId;
+
+      delete options.userId;
+
+      return User.getUserApplications({
         userId: userId
       }, options).$promise;
     };

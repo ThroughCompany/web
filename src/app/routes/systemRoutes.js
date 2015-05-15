@@ -222,7 +222,7 @@ angular.module('throughCompanyApp').config([
 
               userService.getUserById({
                 userId: $stateParams.userName,
-                fields: 'userApplications(), needs()'
+                fields: 'createdApplications(), applications(), needs()'
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {
@@ -241,6 +241,14 @@ angular.module('throughCompanyApp').config([
         templateUrl: '/app/components/user/settings/userSettings.html',
         controller: 'userSettingsCtrl',
         reloadOnSearch: false,
+        authenticate: true
+      });
+
+    $stateProvider
+      .state('system.user.application', {
+        url: '/applications/:applicationId',
+        templateUrl: '/app/components/user/viewApplication/viewApplication.html',
+        controller: 'userViewApplicationCtrl',
         authenticate: true
       });
 

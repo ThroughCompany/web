@@ -88,15 +88,14 @@
       <!-- Needs -->
       <div class="profile-section profile-section-needs" id="needs">
         <div class="header clearfix">
-          <h2>Needs</h2>
-          <p class="sub">What I need right now.</p>
+          <h3>Needs</h3>
           <a href="#" class="btn btn-default btn-edit btn-xs pull-right" ng-click="addNeed()" ng-show="auth.hasCurrentUserIdClaim(user._id)">
             <i class="fa fa-plus"></i>
           </a>
         </div>
         <div class="clearfix">
           <div class="needs-list">
-            <a class="need btn btn-primary btn-sm" href="#" ng-repeat="need in user.needs" ng-click="viewProjectNeed(projectNeed)">
+            <a class="need btn btn-primary btn-sm" href="#" ng-repeat="need in user.needs" ng-click="viewNeed(need)">
                  {{ need.name }}
               </a>
           </div>

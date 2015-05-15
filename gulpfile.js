@@ -40,11 +40,6 @@ var UGLIFYOPTIONS = {
   compress: true
 };
 
-//css
-var LESSOPTIONS = {
-  compress: ENV_PROD
-};
-
 var VENDOR_JS = [
   BUILDDIR + '/bower_components/console-polyfill/index.js',
   BUILDDIR + '/bower_components/angular/angular.js',
@@ -66,6 +61,22 @@ var VENDOR_JS = [
   BUILDDIR + '/bower_components/bootstrap-daterangepicker/daterangepicker.js',
   BUILDDIR + '/vendor/js/rfc6902.js',
   BUILDDIR + '/vendor/js/ng-bs-animated-button.js'
+];
+
+//css
+var MINIFIED_VENDOR_CSS = 'throughcompanyLibs.css';
+
+var LESSOPTIONS = {
+  compress: ENV_PROD
+};
+
+var VENDOR_CSS = [
+  BUILDDIR + '/fonts/fonts.css',
+  BUILDDIR + '/font-glyphs/fontcustom.css',
+  BUILDDIR + '//bower_components/toastr/toastr.css',
+  BUILDDIR + '/bower_components/textAngular/src/textAngular.css',
+  BUILDDIR + '/bower_components/angular-ui-select/dist/select.css',
+  BUILDDIR + '/bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css'
 ];
 
 /* =========================================================================
@@ -126,9 +137,15 @@ gulp.task('replace', ['copy'], function() {
 });
 
 // Compile .less files to .css
-gulp.task('css', ['replace'], function() {
+gulp.task('css', ['css-vendor'], function() {
   return _init(gulp.src('build/less/main.less'))
     .pipe(less(LESSOPTIONS))
+    .pipe(gulp.dest(BUILDDIR + '/css'));
+});
+
+gulp.task('css-vendor', ['copy', 'replace'], function() {
+  return gulp.src(VENDOR_CSS)
+    .pipe(concat(MINIFIED_VENDOR_CSS))
     .pipe(gulp.dest(BUILDDIR + '/css'));
 });
 

@@ -5,6 +5,7 @@ var express = require('express');
 var fs = require('fs');
 
 //middleware
+var compression = require('compression');
 var ssl = require('../middleware/ssl');
 var headers = require('../middleware/headers');
 var cacheControl = require('../middleware/cacheControl');
@@ -27,6 +28,7 @@ function configure(appConfig) {
 }
 
 function loadMiddleware(app, appConfig) {
+  app.use(compression());
   app.use(ssl(appConfig));
   app.use(headers(appConfig));
 

@@ -1,10 +1,10 @@
-angular.module('throughCompanyApp').controller('projectViewNeedCtrl', [
+angular.module('throughCompanyApp').controller('userViewNeedCtrl', [
   '$scope',
   '$modalInstance',
-  'project',
+  'user',
   'need',
-  function($scope, $modalInstance, project, need) {
-    $scope.project = project;
+  function($scope, $modalInstance, user, need) {
+    $scope.user = user;
     $scope.need = need;
 
     $scope.cancel = function() {

@@ -139,7 +139,7 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
           project: function() {
             return $scope.project;
           },
-          projectNeed: function() {
+          need: function() {
             return projectNeed;
           }
         }

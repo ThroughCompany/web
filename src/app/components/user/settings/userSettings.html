@@ -55,9 +55,9 @@
           </div>
           <!-- Applications -->
           <div class="applications-section settings-section" ng-show="currentSettingsType.name === 'Applications'">
-            <div class="" ng-repeat="application in currentUser.projectApplications">
-              Project: {{ application.projectName }}<br>
-              Status: {{ application.status }}
+            <div class="" ng-repeat="application in user.createdApplications">
+              {{ application.type }}: {{ application.projectName }}
+              <br> Status: {{ application.status }}
             </div>
           </div>
         </form>

@@ -10,6 +10,7 @@ angular.module('throughCompanyApp').constant('routes', {
   //user
   user: 'system.user',
   userSettings: 'system.user.settings',
+  userApplication: 'system.user.application',
   //start project
   createProject: 'system.createProject',
   startProject: 'system.startProject',

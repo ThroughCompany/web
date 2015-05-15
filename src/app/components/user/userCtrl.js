@@ -60,6 +60,22 @@ angular.module('throughCompanyApp').controller('userCtrl', [
       });
     };
 
+    $scope.viewNeed = function(projectNeed) {
+      $modal.open({
+        templateUrl: '/app/components/user/viewNeed/userViewNeed.html',
+        controller: 'userViewNeedCtrl',
+        resolve: {
+          user: function() {
+            return $scope.user;
+          },
+          need: function() {
+            return projectNeed;
+          }
+        }
+      });
+    };
+
+
     function _createAssetTag(tagName) {
       userService.createAssetTag({
         userId: $scope.currentUser._id,
