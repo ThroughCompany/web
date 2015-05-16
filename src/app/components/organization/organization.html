@@ -1,13 +1,19 @@
 <div id="organization">
-  <div class="hero" ng-class="{ 'has-banner' : project.bannerPic }" style="background-image: url('{{ project.bannerPic }}')">
-    <div class="hero-inner">
+  <div class="header container clearfix">
+    <div class="profile-pic">
+      <img class="img-responsive" ng-src="{{ organization.profilePic }}" />
+      <file-upload file-selected="updateProfilePic" class="edit">
+        <a href="#" ng-show="auth.hasOrganizationIdClaim(organization._id)" file-upload-trigger>
+          <i class="fa fa-pencil"></i>&nbsp;Edit
+        </a>
+      </file-upload>
+      <div class="saving" ng-show="isSubmittingProfilePic">
+        <i class="fa fa-cog fa-spin"></i>
+      </div>
     </div>
-    <div class="hero-text" ng-class="{ preroll : !loaded }">
-      <h2 class="center" inline-edit inline-edit-show="auth.hasOrganizationIdClaim(organization._id)">
-      {{ organization.name }}
-      </h2>
-      <p class="center" inline-edit inline-edit-show="auth.hasOrganizationIdClaim(organization._id)">
-        {{ organization.description }}
+    <div class="name">
+      <h1>{{ organization.name }}</h1>
+      <p class="description">{{ organization.description }}
       </p>
     </div>
   </div>
@@ -21,16 +27,6 @@
           <a href="#" ng-click="navigateTo(routes.project, 'project-wiki')">
             <i class="fa fa-pencil"></i>&nbsp;Wiki
           </a>
-          <!--           <ul class="dropdown-menu">
-            <li ng-repeat="page in project.wiki.pages">
-              <a href="#" ng-click="changeWikiPage(page, $event)">{{ page.title }}</a>
-            </li>
-            <li ng-show="auth.hasProjectIdClaim(project._id)">
-              <a href="#" ng-click="createWikiPage($event)">
-                <i class="fa fa-plus"></i>&nbsp;Add
-              </a>
-            </li>
-          </ul> -->
         </li>
         <li>
           <a href="#" ng-click="navigateTo(routes.project, 'project-team')">
@@ -136,14 +132,4 @@
   <p class="wiki-saving" ng-show="savingWiki">
     <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Saving changes...
   </p>
-  <div id="project-apply" affix data-offset-top="584" ng-show="applying" ng-class="{ open : applying }">
-    <div class="apply-inner">
-      <a href="#" class="close" ng-click="applying = false">
-        <i class="fa fa-times"></i>
-      </a>
-      <h3 class="center">{{ applyingAssetTag.name }}</h3>
-      <h2 class="center">Coming soon!</h2>
-      <p class="center">Apply to join our project and start helping us out.</p>
-    </div>
-  </div>
 </div>

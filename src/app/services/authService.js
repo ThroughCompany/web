@@ -124,6 +124,18 @@ angular.module('throughCompanyApp').factory('authService', [
       return _.contains(projectIds, projectId);
     };
 
+    AuthService.prototype.hasOrganizationIdClaim = function(organizationId) {
+      var _this = this;
+
+      var claims = $rootScope.currentUserClaims;
+
+      if (!claims) return false;
+
+      var organizationIds = claims.organizationIds;
+
+      return _.contains(organizationIds, organizationId);
+    };
+
     AuthService.prototype.getUser = function() {
 
       var _this = this;

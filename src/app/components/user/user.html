@@ -2,7 +2,15 @@
   <div class="user-landing" ng-show="$state.current.name === 'system.user'">
     <div class="col-md-3">
       <div class="profile-pic">
-        <img class="img-responsive img-rounded" ng-src="{{ user.profilePic }}" />
+        <img class="img-responsive" ng-src="{{ user.profilePic }}" />
+        <file-upload file-selected="updateProfilePic" class="edit">
+          <a href="#" ng-show="auth.hasCurrentUserIdClaim(user._id)" file-upload-trigger>
+            <i class="fa fa-pencil"></i>&nbsp;Edit
+          </a>
+        </file-upload>
+        <div class="saving" ng-show="isSubmittingProfilePic">
+          <i class="fa fa-cog fa-spin"></i>
+        </div>
       </div>
       <div class="profile-info">
         <p class="name" ng-show="!user.firstName && !user.lastName">{{ user.email }}</p>
@@ -25,36 +33,6 @@
       </div>
     </div>
     <div class="col-md-9">
-      <!-- Projects -->
-      <div class="profile-section profile-section-projects" id="projects">
-        <div class="header clearfix">
-          <h3>Projects</h3>
-          <div class="add-new-btn pull-right">
-            <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject" ng-show="(projects && projects.length) && auth.hasCurrentUserIdClaim(user._id)">
-              <i class="fa fa-plus"></i> Add
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6" ng-repeat="project in projects" equal-heights=".project" items="projects" ng-show="projects && projects.length">
-            <div class="project">
-              <p class="name">
-                <a href="#" ui-sref-name="routes.project({ projectId : project.slug })">{{ project.name }}</a>
-              </p>
-              <p class="description">{{ project.shortDescription }}</p>
-              <p>Started on {{ project.created | date : 'MM/dd/yyyy' }}</p>
-            </div>
-          </div>
-          <div ng-hide="projects && projects.length">
-            <p class="center">
-              You don't have any projects yet...
-            </p>
-            <p class="center">
-              <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject">Create a Project</a>
-            </p>
-          </div>
-        </div>
-      </div>
       <!-- Organizations -->
       <div class="profile-section profile-section-organizations" id="organizations">
         <div class="header clearfix">
@@ -85,6 +63,36 @@
           </div>
         </div>
       </div>
+      <!-- Projects -->
+      <!--       <div class="profile-section profile-section-projects" id="projects">
+        <div class="header clearfix">
+          <h3>Projects</h3>
+          <div class="add-new-btn pull-right">
+            <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject" ng-show="(projects && projects.length) && auth.hasCurrentUserIdClaim(user._id)">
+              <i class="fa fa-plus"></i> Add
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6" ng-repeat="project in projects" equal-heights=".project" items="projects" ng-show="projects && projects.length">
+            <div class="project">
+              <p class="name">
+                <a href="#" ui-sref-name="routes.project({ projectId : project.slug })">{{ project.name }}</a>
+              </p>
+              <p class="description">{{ project.shortDescription }}</p>
+              <p>Started on {{ project.created | date : 'MM/dd/yyyy' }}</p>
+            </div>
+          </div>
+          <div ng-hide="projects && projects.length">
+            <p class="center">
+              You don't have any projects yet...
+            </p>
+            <p class="center">
+              <a href="#" class="btn btn-primary" ui-sref-name="routes.createProject">Create a Project</a>
+            </p>
+          </div>
+        </div>
+      </div> -->
       <!-- Needs -->
       <div class="profile-section profile-section-needs" id="needs">
         <div class="header clearfix">
@@ -96,8 +104,8 @@
         <div class="clearfix">
           <div class="needs-list">
             <a class="need btn btn-primary btn-sm" href="#" ng-repeat="need in user.needs" ng-click="viewNeed(need)">
-                 {{ need.name }}
-              </a>
+               {{ need.name }}
+            </a>
           </div>
         </div>
       </div>
