@@ -52,6 +52,7 @@ var VENDOR_JS = [
   BUILDDIR + '/bower_components/angular-sanitize/angular-sanitize.js',
   BUILDDIR + '/bower_components/angular-ui-select/dist/select.js',
   BUILDDIR + '/bower_components/angular-scroll/angular-scroll.js',
+  BUILDDIR + '/bower_components/angular-local-storage/dist/angular-local-storage.js',
   BUILDDIR + '/bower_components/textAngular/src/textAngular.js',
   BUILDDIR + '/bower_components/textAngular/src/textAngularSetup.js',
   BUILDDIR + '/bower_components/rangy/rangy-core.js',

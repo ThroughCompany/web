@@ -9,10 +9,10 @@ angular.module('throughCompanyApp').config([
     $urlRouterProvider.when('/', '/home');
 
     $stateProvider
-      .state('system', {
+      .state('app', {
         url: '/',
-        templateUrl: '/app/views/system.html',
-        controller: 'systemCtrl',
+        templateUrl: '/app/views/app.html',
+        controller: 'appCtrl',
         abstract: true,
         resolve: {
           user: ['$rootScope', 'userService', 'authService', '$q',
@@ -64,7 +64,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.home', {
+      .state('app.home', {
         url: 'home',
         templateUrl: '/app/components/home/home.html',
         controller: 'homeCtrl',
@@ -83,7 +83,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.search', {
+      .state('app.search', {
         url: 'search?tags',
         templateUrl: '/app/components/search/search.html',
         controller: 'searchCtrl',
@@ -100,7 +100,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.startProject', {
+      .state('app.startProject', {
         url: 'start-project',
         templateUrl: '/app/components/startProject/startProject.html',
         controller: 'startProjectCtrl',
@@ -113,7 +113,7 @@ angular.module('throughCompanyApp').config([
       });
 
     $stateProvider
-      .state('system.createProject', {
+      .state('app.createProject', {
         url: 'new-project',
         templateUrl: '/app/components/createProject/createProject.html',
         controller: 'createProjectCtrl',
@@ -127,7 +127,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.createOrganization', {
+      .state('app.createOrganization', {
         url: 'new-organization',
         templateUrl: '/app/components/createOrganization/createOrganization.html',
         controller: 'createOrganizationCtrl',
@@ -141,7 +141,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.project', {
+      .state('app.project', {
         url: 'projects/:projectId?section',
         templateUrl: '/app/components/project/project.html',
         controller: 'projectCtrl',
@@ -156,7 +156,7 @@ angular.module('throughCompanyApp').config([
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {
-                $state.go('system.404');
+                $state.go('app.404');
                 deferred.resolve(null);
               });
 
@@ -172,7 +172,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.organization', {
+      .state('app.organization', {
         url: 'organizations/:organizationId',
         templateUrl: '/app/components/organization/organization.html',
         controller: 'organizationCtrl',
@@ -187,7 +187,7 @@ angular.module('throughCompanyApp').config([
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {
-                $state.go('system.404');
+                $state.go('app.404');
                 deferred.resolve(null);
               });
 
@@ -198,7 +198,7 @@ angular.module('throughCompanyApp').config([
       });
 
     $stateProvider
-      .state('system.project.settings', {
+      .state('app.project.settings', {
         url: '/settings/:type',
         templateUrl: '/app/components/project/settings/projectSettings.html',
         controller: 'projectSettingsCtrl',
@@ -211,7 +211,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.user', {
+      .state('app.user', {
         url: 'users/:userName',
         templateUrl: '/app/components/user/user.html',
         controller: 'userCtrl',
@@ -236,7 +236,7 @@ angular.module('throughCompanyApp').config([
       });
 
     $stateProvider
-      .state('system.user.settings', {
+      .state('app.user.settings', {
         url: '/settings/:type',
         templateUrl: '/app/components/user/settings/userSettings.html',
         controller: 'userSettingsCtrl',
@@ -245,7 +245,7 @@ angular.module('throughCompanyApp').config([
       });
 
     $stateProvider
-      .state('system.user.application', {
+      .state('app.user.application', {
         url: '/applications/:applicationId',
         templateUrl: '/app/components/user/viewApplication/viewApplication.html',
         controller: 'userViewApplicationCtrl',
@@ -257,7 +257,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.signIn', {
+      .state('app.signIn', {
         url: 'signin?email&project',
         templateUrl: '/app/components/signIn/signIn.html',
         controller: 'signInCtrl'
@@ -268,7 +268,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.signUp', {
+      .state('app.signUp', {
         url: 'signup?project',
         templateUrl: '/app/components/signUp/signUp.html',
         controller: 'signUpCtrl'
@@ -279,7 +279,7 @@ angular.module('throughCompanyApp').config([
      * ------------------------------------------------------------ */
 
     $stateProvider
-      .state('system.404', {
+      .state('app.404', {
         url: '404',
         templateUrl: '/app/components/notFound/notFound.html',
         controller: 'notFoundCtrl'

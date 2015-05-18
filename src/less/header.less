@@ -1,23 +1,70 @@
 #header {
   margin-bottom: 0;
   z-index: 100;
+  border: 1px solid @gray-lighter;
   .sans-serif;
   #logo {
-    padding: 20px;
+    padding: 20px 40px;
     font-size: 18px;
     font-weight: 200;
     height: auto;
     color: @gray-darker;
   }
   #header-nav {
-    &.not-logged-in {
-      padding-right: 20px;
-    }
     .nav {
+      &.navbar {
+        li {
+          > a {
+            padding: 18px 0;
+            height: 65px;
+            > span {
+              display: inline-block;
+              padding: 2px 20px;
+            }
+          }
+        }
+      }
+      &.navbar-left {
+        li {
+          &:hover {
+            a {
+              > span {
+                border-right: 1px solid transparent;
+              }
+            }
+          }
+          > a {
+            > span {
+              border-right: 1px solid @gray-light;
+            }
+          }
+        }
+      }
+      &.navbar-right {
+        padding-right: 40px;
+      }
       > li {
+        &:hover, &.active {
+          background: @brand-secondary;
+          > a {
+            color: white;
+          }
+        }
+        &:last-child {
+          a {
+            > span {
+              border-right: none;
+            }
+          }
+        }
+        &.messages {
+          .badge {
+            margin-left: 10px;
+            background: @brand-tertiary;
+          }
+        }
         > a {
           color: @gray-darker;
-          padding: 20px;
           background: none;
           &:hover {
             background: none;
@@ -25,10 +72,21 @@
         }
         &.sign-in {
           padding: 8px 8px 6px;
-          a {
+          &:hover, &.active {
+            background: none;
+            border-color: darken(@brand-secondary, 10%);
+            a {
+              background: @brand-secondary;
+            }
+          }
+          > a {
             padding: 12px 15px;
+            height: auto;
             background: @brand-primary;
             color: white;
+            > span {
+              padding: 0;
+            }
           }
         }
       }
@@ -37,7 +95,6 @@
       position: relative;
       &.open {
         .dropdown-toggle {
-          border-left: 1px solid @gray-lighter;
           z-index: 1000;
           &:focus {
             border: none;
@@ -47,29 +104,55 @@
           z-index: 1000;
         }
       }
-      .dropdown-toggle {
-        // border-left: 1px solid white;
-        // border-bottom: 1px solid white;
-      }
       .dropdown-menu {
         box-shadow: none;
         border: 1px solid @gray-lighter;
-        width: 250px;
+        border-radius: 6px;
+        width: 350px;
         z-index: 100;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-top: 1px;
+        padding: 20px;
+        margin-top: 18px;
         font-size: 14px;
-        li {
-          a {
-            padding: 12px 20px;
-          }
-          &.logout {
-            list-style: none;
+        position: absolute;
+        &:after, &:before {
+          bottom: 100%;
+          left: 12%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+        }
+        &:after {
+          border-color: rgba(136, 183, 213, 0);
+          border-bottom-color: white;
+          border-width: 9px;
+          margin-left: -9px;
+        }
+        &:before {
+          border-color: rgba(194, 225, 245, 0);
+          border-bottom-color: @gray-lighter;
+          border-width: 10px;
+          margin-left: -10px;
+        }
+        h4 {
+          margin: 0 0 15px 0;
+        }
+        ul {
+          margin: 0;
+          padding: 0;
+          li {
             a {
-              padding-top: 20px;
-              padding-bottom: 20px;
-              border-top: 1px solid @gray-lighter;
+              padding: 12px 0;
+            }
+            &.logout {
+              list-style: none;
+              a {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                border-top: 1px solid @gray-lighter;
+              }
             }
           }
         }

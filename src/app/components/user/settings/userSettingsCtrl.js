@@ -166,7 +166,7 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
     };
 
     function _changeCurrentSettingsType(type) {
-      if (!type) return $state.go('system.404');
+      if (!type) return $state.go('app.404');
 
       $scope.currentSettingsType = type;
       //$location.path('/user/' + $scope.user.userName + '/settings/' + type.name.toLowerCase());

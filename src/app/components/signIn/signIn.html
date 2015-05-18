@@ -17,7 +17,7 @@
     </div>
     <button class="btn-block btn-icon-center preroll" tabindex="3" ng-click="login(loginForm)" ng-bs-animated-button is-submitting="loginSubmitting" result="loginResult" options="loginBtnOptions" ng-class="{ preroll : !showLoginBtn }">
     </button>
-    <p class="center no-account preroll" ng-class="{ preroll : !showNoAccount }">Don't have an account? <a href="#" ui-sref="system.signUp({ project : project })">Sign Up</a>
+    <p class="center no-account preroll" ng-class="{ preroll : !showNoAccount }">Don't have an account? <a href="#" ui-sref="app.signUp({ project : project })">Sign Up</a>
     </p>
   </form>
   <!--   <button class="btn btn-facebook btn-block" type="button" ng-click="loginFacebook($event)" ng-class="{ 'btn-danger' : loginFacebookError, 'btn-primary' : !loginFacebookError, 'facebook-login-btn' : !loginFacebookError }">

@@ -1,5 +1,5 @@
 <div id="user" class="container clearfix">
-  <div class="user-landing" ng-show="$state.current.name === 'system.user'">
+  <div class="user-landing" ng-show="$state.current.name === 'app.user'">
     <div class="col-md-3">
       <div class="profile-pic">
         <img class="img-responsive" ng-src="{{ user.profilePic }}" />
@@ -27,9 +27,6 @@
             </li>
           </ul>
         </div>
-        <a class="update-settings" href="#" ui-sref-name="routes.userSettings" ng-show="auth.hasCurrentUserIdClaim(user._id)">
-          <i class="fa fa-gear"></i> Update your settings
-        </a>
       </div>
     </div>
     <div class="col-md-9">
@@ -134,11 +131,11 @@
         </a>
         </div>
         <div class="no-skills" ng-hide="(user.assetTags && user.assetTags.length) || addingAssetTags">
-          <p class="center">
-            You don't have any assets yet...
+          <p class="center" ng-show="auth.hasCurrentUserIdClaim(user._id)">
+            You haven't listed any of your skills yet...
           </p>
-          <p class="center">
-            <button class="btn btn-primary" ng-click="addingAssetTags = true">Add Assets</button>
+          <p class="center" ng-show="auth.hasCurrentUserIdClaim(user._id)">
+            <button class="btn btn-primary" ng-click="addingAssetTags = true">Add Skill</button>
           </p>
         </div>
       </div>

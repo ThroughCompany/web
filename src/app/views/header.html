@@ -1,0 +1,107 @@
+<div id="header" class="navbar navbar-static-top navbar">
+  <div class="navbar-header">
+    <button class="navbar-toggle" type="button" data-target=".bs-navbar-collapse" data-toggle="collapse">
+      <i class="fa fa-bars"></i>
+    </button>
+    <a id="logo" href="#" class="navbar-brand" ui-sref-name="routes.home">
+      Through Company
+    </a>
+  </div>
+  <div id="header-nav" class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+    <ul class="nav navbar-nav navbar-left navbar">
+      <li ui-sref-active="active">
+        <a href="#" ui-sref-name="routes.search">
+          <span>
+            Find Needs
+          </span>
+        </a>
+      </li>
+      <li class="messages dropdown" ng-if="auth.isLoggedIn()">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+          <span>
+            Messages&nbsp;<span class="badge">{{ (currentUserMessages  | filter : { type: 'Received' }).length }}</span>
+          </span>
+        </a>
+        <div class="dropdown-menu" ng-show="currentUserMessages.length > 0">
+          <h4>Inbox</h4>
+          <ul>
+            <li ng-repeat="message in receivedMessages = (currentUserMessages | filter : { type: 'Received' })">
+              <a href="#">
+              {{ message.message }}
+            </a>
+            </li>
+          </ul>
+          <!--           <ul ng-show="currentMessageType === 'Sent'">
+            <li ng-repeat="message in sentMessages = (currentUserMessages | filter : { type: 'Sent' })">
+              <a href="#">
+              {{ message.messageBody }}
+            </a>
+            </li>
+          </ul> -->
+        </div>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar" ng-show="auth.isLoggedIn()">
+      <li ui-sref-active="active">
+        <a href="#" ui-sref-name="routes.user({ userName: currentUser.userName })">
+          <span>
+            <img class="img-circle" ng-src="{{ currentUser.profilePic }}" height="24px" /> {{ getUserName() }}
+          </span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a href="#" ui-sref-name="routes.userSettings({ userName: currentUser.userName })" tooltip-placement="bottom" tooltip="Settings">
+          <span>
+            <i class="fa fa-cog"></i>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" ng-click="auth.logout()" tooltip-placement="bottom" tooltip="Sign out">
+          <span>
+            <i class="fa fa-sign-out"></i>
+          </span>
+        </a>
+      </li>
+      <!--       <li class="dropdown">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+          <img class="img-circle" ng-src="{{ currentUser.profilePic }}" height="18px" />
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#" ui-sref-name="routes.user({ userName: currentUser.userName })">
+              Profile
+            </a>
+          </li>
+          <li>
+            <a href="#" ui-sref-name="routes.userSettings({ userName: currentUser.userName })">
+              Settings
+            </a>
+          </li>
+          <li class="logout">
+            <a href="#" ng-click="auth.logout()">
+              Log out
+            </a>
+          </li>
+        </ul>
+      </li> -->
+    </ul>
+    <ul class="nav navbar-nav navbar-right navbar" ng-hide="auth.isLoggedIn()">
+      <li ui-sref-active="active">
+        <a href="#" ui-sref-name="routes.signIn">
+          <span>
+            Log in
+          </span>
+        </a>
+      </li>
+      <li ui-sref-active="active" class="sign-in">
+        <a class="btn btn-primary" href="#" ui-sref-name="routes.signUp">
+          <span>
+            Sign up
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

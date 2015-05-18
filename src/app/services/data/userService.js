@@ -46,6 +46,12 @@ angular.module('throughCompanyApp').factory('userService', [
         method: 'GET',
         url: appSettings.baseUrl + '/users/:userId/applications',
         isArray: true
+      },
+      //user messages
+      getUserMessages: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/users/:userId/messages',
+        isArray: true
       }
     });
 
@@ -171,6 +177,20 @@ angular.module('throughCompanyApp').factory('userService', [
       delete options.userId;
 
       return User.getUserApplications({
+        userId: userId
+      }, options).$promise;
+    };
+
+    UserService.prototype.getUserMessages = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('options.userId is required');
+
+      var self = this;
+      var userId = options.userId;
+
+      delete options.userId;
+
+      return User.getUserMessages({
         userId: userId
       }, options).$promise;
     };

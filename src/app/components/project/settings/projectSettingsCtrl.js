@@ -259,7 +259,7 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
     };
 
     function _changeCurrentSettingsType(type) {
-      if (!type) return $state.go('system.404');
+      if (!type) return $state.go('app.404');
 
       $scope.currentSettingsType = type;
       // $location.path('/project/' + $scope.project.slug + '/settings/' + type.name.toLowerCase());

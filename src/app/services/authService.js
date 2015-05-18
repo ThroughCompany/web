@@ -80,7 +80,7 @@ angular.module('throughCompanyApp').factory('authService', [
       $rootScope.currentUser = null
       $rootScope.currentUserClaims = null;
 
-      if (!noRedirect) $state.transitionTo('system.home');
+      if (!noRedirect) $state.transitionTo('app.home');
     };
 
     AuthService.prototype.getToken = function() {

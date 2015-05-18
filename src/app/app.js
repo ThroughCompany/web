@@ -7,12 +7,15 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'textAngular',
   'ngSanitize',
   'ui.select',
-  'duScroll'
+  'duScroll',
+  'LocalStorageModule'
 ]);
 
-throughCompanyApp.config(['$locationProvider',
+throughCompanyApp.config([
+  '$locationProvider',
   function($locationProvider) {
     $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!'); //prerender.io
   }
 ]);
 
@@ -28,8 +31,6 @@ throughCompanyApp.run([
   'userService',
   'analytics',
   function($rootScope, $state, $window, $timeout, authService, regexService, routes, loggerService, userService, analytics) {
-    // $rootScope.menu = menuService.init();
-
     $rootScope.meta = {
       title: null,
       description: null
@@ -53,7 +54,7 @@ throughCompanyApp.run([
       if (toState.authenticate && !authService.isLoggedIn()) {
         // User isn’t authenticated
         $rootScope.logger.error('Not Authenticated');
-        $state.go('system.home');
+        $state.go('app.home');
         event.preventDefault();
       }
 
