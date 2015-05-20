@@ -1,6 +1,7 @@
 angular.module('throughCompanyApp').controller('userCtrl', [
   '$scope',
   '$state',
+  '$stateParams',
   '$rootScope',
   'userService',
   'skillService',
@@ -9,7 +10,7 @@ angular.module('throughCompanyApp').controller('userCtrl', [
   'user',
   '$modal',
   'loggerService',
-  function($scope, $state, $rootScope, userService, skillService, alertService, utilsService, user, $modal, loggerService) {
+  function($scope, $state, $stateParams, $rootScope, userService, skillService, alertService, utilsService, user, $modal, loggerService) {
     $rootScope.setMetaTitle(user.email);
 
     $scope.user = $scope.currentUser && $scope.currentUser._id === user._id ? _.extend($scope.currentUser, user) : user;
@@ -75,6 +76,14 @@ angular.module('throughCompanyApp').controller('userCtrl', [
         }
       });
     };
+
+    if ($stateParams.needId) {
+      var need = _.find($scope.user.needs, function(n) {
+        return n._id === $stateParams.needId;
+      });
+
+      if (need) $scope.viewNeed(need);
+    }
 
     $scope.isSubmittingProfilePic = null;
     $scope.profilePicResult = null;

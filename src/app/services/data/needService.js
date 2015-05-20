@@ -10,6 +10,11 @@ angular.module('throughCompanyApp').factory('needService', [
         method: 'POST',
         url: appSettings.baseUrl + '/needs',
         isArray: false
+      },
+      getAll: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/needs',
+        isArray: true
       }
     });
 
@@ -21,6 +26,14 @@ angular.module('throughCompanyApp').factory('needService', [
       var self = this;
 
       return Need.create(options).$promise;
+    };
+
+    NeedService.prototype.getAll = function(options) {
+      if (!options) throw new Error('options is required');
+
+      var self = this;
+
+      return Need.getAll(options).$promise;
     };
 
     return new NeedService();

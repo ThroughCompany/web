@@ -2,12 +2,15 @@ angular.module('throughCompanyApp').factory('customHttpInterceptor', [
   'authUtilService',
   function(authUtilService) {
     return {
-      request: function(data) {
+      request: function(request) {
         var token = authUtilService.getToken();
 
-        if (token) data.headers['x-access-token'] = token;
+        if (token) request.headers['x-access-token'] = token;
 
-        return data;
+        return request;
+      },
+      response: function(response) {
+        return response;
       }
     };
   }

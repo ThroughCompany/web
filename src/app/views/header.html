@@ -42,7 +42,7 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right navbar" ng-show="auth.isLoggedIn()">
-      <li ui-sref-active="active">
+      <li ng-class="{ active : $state.current.name === 'app.user' }">
         <a href="#" ui-sref-name="routes.user({ userName: currentUser.userName })">
           <span>
             <img class="img-circle" ng-src="{{ currentUser.profilePic }}" height="24px" /> {{ getUserName() }}

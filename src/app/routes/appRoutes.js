@@ -173,7 +173,7 @@ angular.module('throughCompanyApp').config([
 
     $stateProvider
       .state('app.organization', {
-        url: 'organizations/:organizationId',
+        url: 'organizations/:organizationId?needId',
         templateUrl: '/app/components/organization/organization.html',
         controller: 'organizationCtrl',
         resolve: {
@@ -212,12 +212,17 @@ angular.module('throughCompanyApp').config([
 
     $stateProvider
       .state('app.user', {
-        url: 'users/:userName',
+        url: 'users/:userName?needId',
         templateUrl: '/app/components/user/user.html',
         controller: 'userCtrl',
         resolve: {
-          user: ['$rootScope', '$stateParams', 'userService', '$q',
-            function($rootScope, $stateParams, userService, $q) {
+          user: [
+            '$rootScope',
+            '$stateParams',
+            'userService',
+            '$q',
+            '$state',
+            function($rootScope, $stateParams, userService, $q, $state) {
               var deferred = $q.defer();
 
               userService.getUserById({
@@ -226,6 +231,7 @@ angular.module('throughCompanyApp').config([
               }).then(function success(response) {
                 deferred.resolve(response);
               }, function error(response) {
+                $state.go('app.404');
                 deferred.resolve(null);
               });
 

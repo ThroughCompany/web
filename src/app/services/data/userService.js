@@ -37,9 +37,9 @@ angular.module('throughCompanyApp').factory('userService', [
         url: appSettings.baseUrl + '/users/:userId/organizations',
         isArray: true
       },
-      createAssetTag: {
+      createSkills: {
         method: 'POST',
-        url: appSettings.baseUrl + '/users/:userId/assettags'
+        url: appSettings.baseUrl + '/users/:userId/skills'
       },
       //user applications
       getUserApplications: {

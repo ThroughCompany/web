@@ -1,36 +1,64 @@
 <div id="search">
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-sm-4" ng-repeat="project in projects" equal-heights=".project" items="projects">
-        <a class="project" href="#" ui-sref-name="routes.project({ projectId : project.slug })">
-          <div class="project-pic" style="background-image: url('{{ project.profilePic }}')">
-          </div>
-          <div class="project-info">
-            <h4 class="name">
-              {{ project.name }}
-            </h4>
-            <p class="location" ng-hide="!project.location">
-              <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
-            </p>
-            <p class="description">
-              {{ project.description }}
-            </p>
-            <div class="project-details clearfix row">
-              <div class="status col-xs-3 center">
-                <p class="">{{ project.status }}</p>
-                <p class="label uppercase">Status</p>
-              </div>
-              <div class="needs col-xs-3 center">
-                <p class="">{{ project.openProjectNeedsCount }}</p>
-                <p class="label uppercase">Needs</p>
-              </div>
-              <div class="needs col-xs-3 center">
-                <p class="">{{ project.projectUsers.length }}</p>
-                <p class="label uppercase">Members</p>
+      <div class="col-md-4 col-sm-4" ng-repeat="need in needs" equal-heights=".project" items="projects">
+        <div class="need" ng-if="need.type === 'User'">
+          <a href="#" ui-sref-name="routes.user({ userName : need.user.userName, needId: need._id })">
+            <div class="need-pic" style="background-image: url('{{ need.user.profilePic }}')">
+            </div>
+            <div class="need-info">
+              <h4 class="name">
+                  {{ need.name }}
+                </h4>
+              <p class="description">
+                {{ need.description }}
+              </p>
+              <div class="need-details clearfix row">
+                <div class="status col-xs-3 center">
+                  <p class="">{{ need.status }}</p>
+                  <p class="label uppercase">Status</p>
+                </div>
+                <div class="col-xs-3 center">
+                  <p class="">Type</p>
+                  <p class="label uppercase">{{ need.type }}</p>
+                </div>
+                <!--            
+                  <div class="members col-xs-3 center">
+                    <p class="">{{ project.projectUsers.length }}</p>
+                    <p class="label uppercase">Member<span ng-show="project.projectUsers.length > 1">s</span></p>
+                  </div> -->
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
+        <div class="need" ng-if="need.type === 'Organization'">
+          <a href="#" ui-sref-name="routes.organization({ organizationId : need.organization._id, needId: need._id })">
+            <div class="need-pic" style="background-image: url('{{ need.organization.profilePic }}')">
+            </div>
+            <div class="need-info">
+              <h4 class="name">
+                  {{ need.name }}
+                </h4>
+              <p class="description">
+                {{ need.description }}
+              </p>
+              <div class="need-details clearfix row">
+                <div class="status col-xs-3 center">
+                  <p class="">{{ need.status }}</p>
+                  <p class="label uppercase">Status</p>
+                </div>
+                <!--                   <div class="needs col-xs-3 center">
+                    <p class="">{{ project.openProjectNeedsCount }}</p>
+                    <p class="label uppercase">Need<span ng-show="project.openProjectNeedsCount > 1">s</span></p>
+                  </div>
+                  <div class="members col-xs-3 center">
+                    <p class="">{{ project.projectUsers.length }}</p>
+                    <p class="label uppercase">Member<span ng-show="project.projectUsers.length > 1">s</span></p>
+                  </div> -->
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>

@@ -170,6 +170,7 @@ gulp.task('css-vendor', ['js', 'copy', 'replace'], function() {
   var target = gulp.src(BUILDDIR + '/index.html');
 
   var sources = gulp.src(VENDOR_CSS)
+    .pipe(less(LESSOPTIONS))
     .pipe(concat(MINIFIED_VENDOR_CSS))
     .pipe(gulp.dest(BUILDDIR + '/css'));
 
@@ -209,8 +210,7 @@ gulp.task('js-vendor', ['copy', 'replace'], function() {
   var target = gulp.src(BUILDDIR + '/index.html');
 
   var sources = gulp.src(VENDOR_JS)
-    // .pipe(gulpIf(ENV_PROD, uglify(MINIFIED_VENDOR_SCRIPT, UGLIFYOPTIONS)))
-    .pipe(gulpIf(ENV_PROD, concat(MINIFIED_VENDOR_SCRIPT)))
+    .pipe(gulpIf(ENV_PROD, uglify(MINIFIED_VENDOR_SCRIPT, UGLIFYOPTIONS)))
     .pipe(gulpIf(ENV_PROD, gulp.dest(BUILDDIR + '/app')));
 
   return target.pipe(inject(sources, {

@@ -2,24 +2,32 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
   '$scope',
   '$state',
   '$rootScope',
-  'projectService',
   '$timeout',
   'subscribeService',
   'utilsService',
+  'needService',
   'skillService',
   'userService',
   'authService',
   'routes',
-  function($scope, $state, $rootScope, projectService, $timeout, subscribeService, utilsService, skillService, userService, authService, routes) {
+  'loggerService',
+  function($scope, $state, $rootScope, $timeout, subscribeService, utilsService, needService, skillService, userService, authService, routes, loggerService) {
     $scope.loaded = false;
-
-    projectService.getProjects({}).then(function success(response) {
-      $scope.loaded = true;
-      $scope.projects = response;
-    });
 
     skillService.getAll({}).then(function success(response) {
       $scope.skills = response;
+    }, function error(response) {
+      loggerService.error(response);
+    });
+
+    needService.getAll({
+      sort: '-created',
+      limit: 10,
+      fields: 'user(), project(), organization()'
+    }).then(function success(response) {
+      $scope.needs = response;
+    }, function error(response) {
+      loggerService.error(response);
     });
 
     // ---------------- buttons ----------------
@@ -57,7 +65,6 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
     $scope.getSkillsParams = function(skillName) {
       return skillName;
     };
-
     // $scope.scrollTo = function(id) {
     //   utilsService.scrollTo(id, 40);
     // };

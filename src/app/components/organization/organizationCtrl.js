@@ -1,12 +1,13 @@
 angular.module('throughCompanyApp').controller('organizationCtrl', [
   '$scope',
   '$state',
+  '$stateParams',
   '$rootScope',
   'organization',
   'organizationService',
   'loggerService',
   'alertService',
-  function($scope, $state, $rootScope, organization, organizationService, loggerService, alertService) {
+  function($scope, $state, $stateParams, $rootScope, organization, organizationService, loggerService, alertService) {
     $scope.setMetaTitle(organization.name);
     $scope.setMetaDescription(organization.name);
 
@@ -50,5 +51,13 @@ angular.module('throughCompanyApp').controller('organizationCtrl', [
         $scope.isSubmittingProfilePic = false;
       });
     };
+
+    // if ($stateParams.needId) {
+    //   var need = _.find($scope.user.needs, function(n) {
+    //     return n._id === $stateParams.needId;
+    //   });
+
+    //   if (need) $scope.viewNeed(need);
+    // }
   }
 ]);
