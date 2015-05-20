@@ -21,6 +21,8 @@ var watch = require('gulp-watch');
 var protractor = require('gulp-protractor').protractor;
 var wrap = require('gulp-wrap');
 var concat = require('gulp-concat');
+var uuid = require('node-uuid');
+var rename = require('gulp-rename');
 //var fontcustom = require('fontcustom');
 
 require('gulp-task-list')(gulp);
@@ -32,12 +34,18 @@ console.log('\n\nENV: ' + ENV + '\n\n');
  * ========================================================================= */
 var BUILDDIR = 'build';
 
+var BUILD_ID = uuid.v4();
+
 //js
-var MINIFIED_SRC_SCRIPT = 'throughcompanyApp.min.js';
-var MINIFIED_VENDOR_SCRIPT = 'throughcompanyLibs.min.js';
+var MINIFIED_SRC_SCRIPT = 'throughcompanyApp-' + BUILD_ID + '.min.js';
+var MINIFIED_VENDOR_SCRIPT = 'throughcompanyLibs-' + BUILD_ID + '.min.js';
+
 var UGLIFYOPTIONS = {
-  mangle: true,
-  compress: true
+  mangle: false,
+  compress: true,
+  output: {
+    comments: false
+  }
 };
 
 var VENDOR_JS = [
@@ -65,7 +73,8 @@ var VENDOR_JS = [
 ];
 
 //css
-var MINIFIED_VENDOR_CSS = 'throughcompanyLibs.css';
+var MINIFIED_SRC_CSS = 'throughcompany-' + BUILD_ID + '.css';
+var MINIFIED_VENDOR_CSS = 'throughcompanyLibs-' + BUILD_ID + '.css';
 
 var LESSOPTIONS = {
   compress: ENV_PROD
@@ -138,16 +147,41 @@ gulp.task('replace', ['copy'], function() {
 });
 
 // Compile .less files to .css
-gulp.task('css', ['css-vendor'], function() {
-  return _init(gulp.src('build/less/main.less'))
+gulp.task('css', ['js', 'css-vendor'], function() {
+  var target = gulp.src(BUILDDIR + '/index.html');
+
+  var sources = gulp.src(BUILDDIR + '/less/main.less')
     .pipe(less(LESSOPTIONS))
+    .pipe(rename(MINIFIED_SRC_CSS))
     .pipe(gulp.dest(BUILDDIR + '/css'));
+
+  return target.pipe(inject(sources, {
+      starttag: '<!-- injectSrcCss:css -->',
+      endtag: '<!-- endinjectSrcCss -->',
+      transform: function(filepath) {
+        var path = filepath.replace('/build', '');
+        return '<link rel="stylesheet" href="' + path + '"/>';
+      }
+    }))
+    .pipe(gulp.dest(BUILDDIR));
 });
 
-gulp.task('css-vendor', ['copy', 'replace'], function() {
-  return gulp.src(VENDOR_CSS)
+gulp.task('css-vendor', ['js', 'copy', 'replace'], function() {
+  var target = gulp.src(BUILDDIR + '/index.html');
+
+  var sources = gulp.src(VENDOR_CSS)
     .pipe(concat(MINIFIED_VENDOR_CSS))
     .pipe(gulp.dest(BUILDDIR + '/css'));
+
+  return target.pipe(inject(sources, {
+      starttag: '<!-- injectVendorCss:css -->',
+      endtag: '<!-- endinjectVendorCss -->',
+      transform: function(filepath) {
+        var path = filepath.replace('/build', '');
+        return '<link rel="stylesheet" href="' + path + '"/>';
+      }
+    }))
+    .pipe(gulp.dest(BUILDDIR));
 });
 
 /**
@@ -215,6 +249,7 @@ gulp.task('server', ['default'], function() {
         //reprocess main.less in the build dir - regenerate css
         return gulp.src(BUILDDIR + '/less/main.less')
           .pipe(less(LESSOPTIONS))
+          .pipe(rename(MINIFIED_SRC_CSS))
           .pipe(gulp.dest(BUILDDIR + '/css'));
       });
     });

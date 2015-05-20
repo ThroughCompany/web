@@ -15,11 +15,11 @@ angular.module('throughCompanyApp').config([
         controller: 'appCtrl',
         abstract: true,
         resolve: {
-          user: ['$rootScope', 'userService', 'authService', '$q',
-            function($rootScope, userService, authService, $q) {
+          user: ['$rootScope', 'userService', 'authService', 'authUtilService', '$q',
+            function($rootScope, userService, authService, authUtilService, $q) {
               var deferred = $q.defer();
 
-              var userId = authService.getUserId();
+              var userId = authUtilService.getUserId();
 
               if (!userId) return deferred.resolve(null);
 
@@ -36,11 +36,11 @@ angular.module('throughCompanyApp').config([
               return deferred.promise;
             }
           ],
-          userClaims: ['userService', 'authService', '$q',
-            function(userService, authService, $q) {
+          userClaims: ['userService', 'authService', 'authUtilService', '$q',
+            function(userService, authService, authUtilService, $q) {
               var deferred = $q.defer();
 
-              var userId = authService.getUserId();
+              var userId = authUtilService.getUserId();
 
               if (!userId) return deferred.resolve(null);
 

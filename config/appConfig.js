@@ -16,7 +16,8 @@ var defaultSettings = {
   },
   GOOGLE_ANALYTICS: 'xxxxxxxxxx',
   SSL: process.env.SSL,
-  ROLLBAR: 'xxx'
+  ROLLBAR: 'xxx',
+  STORAGE_PREFIX: 'throughcompany'
 };
 
 var production = _.extend(_.clone(defaultSettings), {

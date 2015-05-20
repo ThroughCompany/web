@@ -1,13 +1,14 @@
 angular.module('throughCompanyApp').factory('authService', [
   '$rootScope',
-  '$window',
   '$http',
   '$q',
   'appSettings',
   '$state',
   'loggerService',
   'userService',
-  function($rootScope, $window, $http, $q, appSettings, $state, loggerService, userService) {
+  'localStorageService',
+  'authUtilService',
+  function($rootScope, $http, $q, appSettings, $state, loggerService, userService, localStorageService, authUtilService) {
 
     function AuthService() {}
 
@@ -20,9 +21,7 @@ angular.module('throughCompanyApp').factory('authService', [
       }).then(function success(response) {
         if (!response || !response.data) return $q.reject(response);
 
-        $window.localStorage.tokenExpires = new Date(response.data.expires);
-        $window.localStorage.token = response.data.token;
-        $window.localStorage.userId = response.data.user._id;
+        _saveAuthInfo(response.data);
 
         return deferred.resolve(response.data);
       }, function error(response) {
@@ -61,45 +60,29 @@ angular.module('throughCompanyApp').factory('authService', [
       }).then(function storeToken(response) {
         if (!response || !response.data) return $q.reject(response);
 
-        $window.localStorage.tokenExpires = new Date(response.data.expires);
-        $window.localStorage.token = response.data.token;
-        $window.localStorage.userId = response.data.user._id;
-        $window.localStorage.fbToken = fbToken;
+        _saveAuthInfo(response.data, fbToken);
 
         return response.data;
       });
     };
 
     AuthService.prototype.logout = function(noRedirect) {
+      var fbToken = localStorageService.get('fbToken');
 
-      if ($window.localStorage.fbToken) FB.logout(function() {});
+      if (fbToken) FB.logout(function() {});
 
-      delete $window.localStorage.token;
-      delete $window.localStorage.userId;
-      delete $window.localStorage.fbToken;
+      _removeAuthInfo();
+
       $rootScope.currentUser = null
       $rootScope.currentUserClaims = null;
 
       if (!noRedirect) $state.transitionTo('app.home');
     };
 
-    AuthService.prototype.getToken = function() {
-      return $window.localStorage.token;
-    };
-
-    AuthService.prototype.getUserId = function() {
-      return $window.localStorage.userId;
-    };
-
-    AuthService.prototype.authTokenExpired = function() {
-      var tokenExpires = $window.localStorage.tokenExpires;
-      return tokenExpires <= Date.now();
-    };
-
     AuthService.prototype.isLoggedIn = function() {
       var _this = this;
 
-      return (_this.getToken() && _this.getToken().length) && !_this.authTokenExpired() && (_this.getUserId() && _this.getUserId().length);
+      return (authUtilService.getToken() && authUtilService.getToken().length) && !authUtilService.authTokenExpired() && (authUtilService.getUserId() && authUtilService.getUserId().length);
     };
 
     AuthService.prototype.hasCurrentUserIdClaim = function(userId) {
@@ -141,7 +124,7 @@ angular.module('throughCompanyApp').factory('authService', [
       var _this = this;
 
       userService.getUserById({
-        userId: _this.getUserId()
+        userId: authUtilService.getUserId()
       }).then(function success(response) {
         $rootScope.currentUser = response;
       }, function error(response) {
@@ -155,7 +138,7 @@ angular.module('throughCompanyApp').factory('authService', [
       var _this = this;
 
       userService.getUserClaims({
-        userId: _this.getUserId()
+        userId: authUtilService.getUserId()
       }).then(function success(response) {
         $rootScope.currentUserClaims = response;
       }, function error(response) {
@@ -163,6 +146,22 @@ angular.module('throughCompanyApp').factory('authService', [
         _this.logout();
       });
     };
+
+    function _saveAuthInfo(auth, fbToken) {
+      localStorageService.set('tokenExpires', new Date(auth.expires));
+      localStorageService.set('token', auth.token);
+      localStorageService.set('userId', auth.user._id);
+      if (fbToken) {
+        localStorageService.set('fbToken', fbToken);
+      }
+    }
+
+    function _removeAuthInfo(auth) {
+      localStorageService.remove('tokenExpires');
+      localStorageService.remove('token');
+      localStorageService.remove('userId');
+      localStorageService.remove('fbToken');
+    }
 
     return new AuthService();
   }

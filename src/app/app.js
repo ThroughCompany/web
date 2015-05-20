@@ -13,9 +13,12 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
 
 throughCompanyApp.config([
   '$locationProvider',
-  function($locationProvider) {
+  'localStorageServiceProvider',
+  function($locationProvider, localStorageServiceProvider) {
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!'); //prerender.io
+
+    localStorageServiceProvider.setPrefix('@@STORAGE_PREFIX');
   }
 ]);
 
@@ -70,10 +73,5 @@ throughCompanyApp.run([
         $window.scrollTo(0, 0);
       }, 100);
     });
-
-    // if (authService.isLoggedIn()) {
-    //   authService.getUser();
-    //   authService.getUserClaims();
-    // }
   }
 ]);
