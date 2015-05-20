@@ -45,10 +45,10 @@
     <div class="content col-sm-8 col-xs-12">
       <div class="needs">
         <div class="header">
-          <h2>New Needs.</h2>
+          <h2>New Jobs.</h2>
         </div>
         <div class="row">
-          <div class="col-md-6 col-sm-6" ng-repeat="need in needs" equal-heights=".need" items="needs">
+          <div class="col-md-6 col-sm-6 col-xs-12" ng-repeat="need in needs" equal-heights=".need" items="needs">
             <div class="need" ng-if="need.type === 'User'">
               <a href="#" ui-sref-name="routes.user({ userName : need.user.userName, needId: need._id })">
                 <div class="need-pic" style="background-image: url('{{ need.user.profilePic }}')">
@@ -110,7 +110,7 @@
         </div>
       </div>
     </div>
-    <div class="sidebar col-sm-4 col-xs-12">
+    <div class="sidebar col-sm-4 col-xs-12 hidden-xs">
       <div class="top-skills clearfix">
         <h3 class="uppercase">Top Skills</h3>
         <div class="skills-list">

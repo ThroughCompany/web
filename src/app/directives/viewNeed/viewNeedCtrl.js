@@ -24,7 +24,7 @@ angular.module('throughCompanyApp').controller('viewNeedCtrl', [
     $scope.apply = function() {
       if (!$rootScope.currentUser) {
         if ($scope.close) $scope.close();
-        $state.go($rootScope.routes.signIn);
+        $state.go($rootScope.routes.signUp);
       } else {
         modalService.confirm({
           confirmMessage: 'Are you sure you would like to apply?',

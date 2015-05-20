@@ -79,7 +79,7 @@ angular.module('throughCompanyApp').config([
     $urlRouterProvider.when('/', '/home');
 
     /* ------------------------------------------------------------
-     * Home
+     * Search
      * ------------------------------------------------------------ */
 
     $stateProvider
@@ -89,7 +89,24 @@ angular.module('throughCompanyApp').config([
         controller: 'searchCtrl',
         data: {
           meta: {
-            title: 'Search',
+            title: 'Find Jobs',
+            description: 'Welcome to Through Company.com'
+          }
+        }
+      });
+
+    /* ------------------------------------------------------------
+     * How It Works
+     * ------------------------------------------------------------ */
+
+    $stateProvider
+      .state('app.howItWorks', {
+        url: 'how-it-works',
+        templateUrl: '/app/components/howItWorks/howItWorks.html',
+        controller: 'howItWorksCtrl',
+        data: {
+          meta: {
+            title: 'How It Works',
             description: 'Welcome to Through Company.com'
           }
         }
