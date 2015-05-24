@@ -84,7 +84,7 @@ angular.module('throughCompanyApp').config([
 
     $stateProvider
       .state('app.search', {
-        url: 'search?tags',
+        url: 'search?skill',
         templateUrl: '/app/components/search/search.html',
         controller: 'searchCtrl',
         data: {

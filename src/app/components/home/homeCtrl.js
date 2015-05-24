@@ -62,13 +62,6 @@ angular.module('throughCompanyApp').controller('homeCtrl', [
       buttonErrorClass: 'btn-danger'
     };
 
-    $scope.getSkillsParams = function(skillName) {
-      return skillName;
-    };
-    // $scope.scrollTo = function(id) {
-    //   utilsService.scrollTo(id, 40);
-    // };
-
     $scope.subscribe = function(form) {
       $scope.submitted = true;
 
