@@ -8,12 +8,17 @@ var throughCompanyApp = angular.module('throughCompanyApp', [
   'ngSanitize',
   'ui.select',
   'duScroll',
-  'slick'
+  'LocalStorageModule'
 ]);
 
-throughCompanyApp.config(['$locationProvider',
-  function($locationProvider) {
+throughCompanyApp.config([
+  '$locationProvider',
+  'localStorageServiceProvider',
+  function($locationProvider, localStorageServiceProvider) {
     $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!'); //prerender.io
+
+    localStorageServiceProvider.setPrefix('@@STORAGE_PREFIX');
   }
 ]);
 
@@ -29,8 +34,6 @@ throughCompanyApp.run([
   'userService',
   'analytics',
   function($rootScope, $state, $window, $timeout, authService, regexService, routes, loggerService, userService, analytics) {
-    // $rootScope.menu = menuService.init();
-
     $rootScope.meta = {
       title: null,
       description: null
@@ -54,7 +57,7 @@ throughCompanyApp.run([
       if (toState.authenticate && !authService.isLoggedIn()) {
         // User isn’t authenticated
         $rootScope.logger.error('Not Authenticated');
-        $state.go('system.home');
+        $state.go('app.home');
         event.preventDefault();
       }
 
@@ -70,10 +73,5 @@ throughCompanyApp.run([
         $window.scrollTo(0, 0);
       }, 100);
     });
-
-    // if (authService.isLoggedIn()) {
-    //   authService.getUser();
-    //   authService.getUserClaims();
-    // }
   }
 ]);

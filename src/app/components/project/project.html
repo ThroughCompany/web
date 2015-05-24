@@ -1,20 +1,5 @@
 <div id="project">
-  <!--   <div class="hero" ng-class="{ 'has-banner' : project.bannerPic }" style="background-image: url('{{ project.bannerPic }}')">
-    <div class="hero-inner">
-    </div>
-    <div class="hero-text preroll" ng-class="{ preroll : !loaded }">
-      <h2 class="center" inline-edit inline-edit-show="auth.hasProjectIdClaim(project._id)">
-      {{ project.name }}
-      </h2>
-      <p class="center">
-        <span ng-show="organization">a {{ organization.name }} project</span>
-      </p>
-      <p class="center" inline-edit inline-edit-show="auth.hasProjectIdClaim(project._id)">
-        {{ project.description }}
-      </p>
-    </div>
-  </div> -->
-  <div class="project-header container clearfix">
+  <div class="header container clearfix">
     <div class="pic" style="background-image: url('{{ project.profilePic }}')">
     </div>
     <div class="name">
@@ -58,7 +43,7 @@
     </div>
   </div>
   <div class="project-container container clearfix" affix offset-top="354">
-    <div class="project-landing clearfix" ng-show="$state.current.name === 'system.project'">
+    <div class="project-landing clearfix" ng-show="$state.current.name === 'app.project'">
       <div class="project-content">
         <div class="col-md-2 sidebar-left">
           <ul>
@@ -70,18 +55,18 @@
           </ul>
         </div>
         <div class="col-md-8">
-          <div id="project-needs" class="project-needs project-section">
+          <div id="project-needs" class="needs project-section">
             <div class="header clearfix">
               <h2>Needs</h2>
               <p class="sub">What we need right now.</p>
-              <a href="#" class="btn btn-default btn-edit btn-xs pull-right" ng-click="addProjectNeed()" ng-show="auth.hasProjectIdClaim(project._id)">
+              <a href="#" class="btn btn-default btn-edit btn-xs pull-right" ng-click="addNeed()" ng-show="auth.hasProjectIdClaim(project._id)">
                 <i class="fa fa-plus"></i>
               </a>
             </div>
             <div class="clearfix">
-              <div class="project-needs-list">
-                <a class="project-need btn btn-primary btn-sm" href="#" ng-repeat="projectNeed in project.projectNeeds" ng-click="viewProjectNeed(projectNeed)">
-                 {{ projectNeed.name }}
+              <div class="needs-list">
+                <a class="need btn btn-primary btn-sm" href="#" ng-repeat="need in project.needs" ng-click="viewProjectNeed(need)">
+                 {{ need.name }}
               </a>
               </div>
             </div>

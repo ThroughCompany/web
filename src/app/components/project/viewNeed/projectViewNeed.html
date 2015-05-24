@@ -1,42 +1,5 @@
 <div id="project-view-need">
-  <div class="modal-header">
-    <h3 class="center">We need a {{ projectNeed.name }}</h3>
-  </div>
   <div class="modal-body">
-    <p class="description">{{ projectNeed.description }}</p>
-    <p class="location" ng-show="projectNeed.locationSpecific">
-      <i class="fa fa-map-marker"></i> {{ project.location }} (location specific)
-    </p>
-    <div class="time clearfix row">
-      <div class="col-xs-4">
-        <p class="center time-label" ng-show="projectNeed.timeCommitment.hoursPerWeek">{{ projectNeed.timeCommitment.hoursPerWeek }} hrs/week</p>
-        <p class="center time-label" ng-show="projectNeed.timeCommitment.totalHours">{{ projectNeed.timeCommitment.totalHours }} total hrs</p>
-        <p class="center sub uppercase">Time Commitment</p>
-      </div>
-      <div class="col-xs-4">
-        <p class="center time-label">{{ projectNeed.durationSting }} months</p>
-        <p class="center sub uppercase">Duration</p>
-      </div>
-      <div class="col-xs-4">
-        <p class="center time-label">{{ projectNeed.duration.startDate | moment: 'MMM DD, YYYY' }} - {{ projectNeed.duration.endDate | moment: 'MMM DD, YYYY' }}</p>
-        <p class="center sub uppercase">Dates</p>
-      </div>
-    </div>
-    <div class="skills clearfix">
-      <h4>Skills Desired</h4>
-      <button class="skill btn btn-warning" ng-repeat="skill in skills">
-        {{ skill.name }}
-      </button>
-    </div>
-  </div>
-  <div class="modal-footer clearfix">
-    <div class="pull-right">
-      <button class="btn btn-default" ng-click="cancel()">
-        <i class="fa fa-times"></i> Nevermind
-      </button>
-      <button class="btn btn-primary" ng-click="apply()">
-        <i class="fa fa-check"></i> Apply
-      </button>
-    </div>
+    <view-need project="project" need="need" cancel="cancel" close="close"></add-need>
   </div>
 </div>

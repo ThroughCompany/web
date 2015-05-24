@@ -139,14 +139,14 @@ angular.module('throughCompanyApp').controller('projectCtrl', [
           project: function() {
             return $scope.project;
           },
-          projectNeed: function() {
+          need: function() {
             return projectNeed;
           }
         }
       });
     };
 
-    $scope.addProjectNeed = function() {
+    $scope.addNeed = function() {
       $modal.open({
         templateUrl: '/app/components/project/addNeed/projectAddNeed.html',
         controller: 'projectAddNeedCtrl',

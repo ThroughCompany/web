@@ -26,7 +26,7 @@ angular.module('throughCompanyApp').controller('startProjectCtrl', [
 
       if (!form.$valid) return;
 
-      $state.go('system.signUp', {
+      $state.go('app.signUp', {
         project: JSON.stringify($scope.form)
       });
     };

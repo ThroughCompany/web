@@ -1,12 +1,13 @@
 angular.module('throughCompanyApp').controller('signUpCtrl', [
   '$scope',
   '$state',
+  '$rootScope',
   'authService',
   'userService',
   'utilsService',
   'routes',
   '$timeout',
-  function($scope, $state, authService, userService, utilsService, routes, $timeout) {
+  function($scope, $state, $rootScope, authService, userService, utilsService, routes, $timeout) {
     $scope.project = $state.params.project;
 
     var start = 100;
@@ -72,19 +73,25 @@ angular.module('throughCompanyApp').controller('signUpCtrl', [
           email: $scope.form.email,
           password: $scope.form.password
         }).then(function success(response) {
-          $scope.registerSubmitting = false;
+          authService.login($scope.form.email, $scope.form.password)
+            .then(function success(response) {
+              $scope.registerSubmitting = false;
+              $rootScope.currentUser = response.user;
+              authService.getUserClaims();
 
-          $timeout(function() {
-            $scope.registerResult = 'success';
-            $scope.registerBtnOptions.buttonSuccessText = 'Your account has been created. Please sign in.';
+              $scope.loginResult = 'success';
 
-            $timeout(function() {
-              $state.transitionTo(routes.signIn, {
-                email: response.email,
-                project: $scope.project
+              $state.go(routes.user, {
+                userName: $scope.currentUser.userName
               });
-            }, 2500);
-          }, 1000);
+            }, function error(response) {
+              $scope.registerSubmitting = false;
+              $scope.registerResult = 'error';
+              $scope.errorMsg = 'Invalid email or password';
+              $timeout(function() {
+                $scope.errorMsg = null;
+              }, 3000);
+            });
         }, function error(response) {
           $scope.registerSubmitting = false;
           $scope.registerResult = 'error';

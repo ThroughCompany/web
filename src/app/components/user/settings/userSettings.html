@@ -1,5 +1,8 @@
 <div id="user-settings" class="container clearfix">
   <div class="sidebar profile-links col-md-3">
+    <a class="back-link" href="#" ui-sref-name="routes.user({ userName : currentUser.userName })">
+      <i class="fa fa-chevron-left"></i>&nbsp;Back to your profile
+    </a>
     <ul class="list-group">
       <li class="list-group-item" ng-repeat="type in settingTypes">
         <a href="#" ng-click="changeCurrentSettingsType(type)" ng-class="{ active : currentSettingsType.name === type.name }">
@@ -16,7 +19,7 @@
       <div class="panel-body">
         <form name="updateUserForm" novalidate>
           <!-- Profile -->
-          <div class="profile-section settings-section" ng-show="currentSettingsType.name === 'Profile'">
+          <div class="profile-section settings-section" ng-show="currentSettingsType.name === 'Personal Settings'">
             <div class="form-group">
               <label>First Name</label>
               <input class="form-control" type="text" name="firstName" ng-model="userUpdates.firstName" />
@@ -35,8 +38,8 @@
           <div class="images-section settings-section" ng-show="currentSettingsType.name === 'Images'">
             <div class="form-section">
               <h4 class="form-section-header">Profile Pic</h4>
+              <img class="profile-pic img-responsive img-rounded" src="{{ currentUser.profilePic }}" width="240px" />
               <file-upload file-selected="updateProfilePic">
-                <img class="profile-pic img-responsive img-rounded" src="{{ currentUser.profilePic }}" width="240px" />
                 <p class="clearfix">
                   <button class="btn pull-right" type="submit" ng-hide="loading" ng-bs-animated-button="" ng-disabled data-is-submitting="isSubmittingProfilePic" result="profilePicResult" data-options="profilePicBtnOptions" file-upload-trigger></button>
                 </p>
@@ -55,9 +58,9 @@
           </div>
           <!-- Applications -->
           <div class="applications-section settings-section" ng-show="currentSettingsType.name === 'Applications'">
-            <div class="" ng-repeat="application in currentUser.projectApplications">
-              Project: {{ application.projectName }}<br>
-              Status: {{ application.status }}
+            <div class="" ng-repeat="application in user.createdApplications">
+              {{ application.type }}: {{ application.projectName }}
+              <br> Status: {{ application.status }}
             </div>
           </div>
         </form>

@@ -125,19 +125,28 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
         var originalProjectStatus = $scope.project.status;
 
         if ($scope.projectUpdates.status === 'Draft') {
-          modalService.confirm('Change status back to <strong>Draft</strong> and your project will no longer be publicly visible; people will no longer be able to find your open needs.', 'Back to Draft').then(function confirmed() {
+          modalService.confirm({
+            confirmMessage: 'Change status back to <strong>Draft</strong> and your project will no longer be publicly visible; people will no longer be able to find your open needs.',
+            confirmButtonMessage: 'Back to Draft'
+          }).then(function confirmed() {
             deferred.resolve();
           }, function declined() {
             $scope.projectUpdates.status = originalProjectStatus;
           });
         } else if ($scope.projectUpdates.status === 'Open') {
-          modalService.confirm('Changing status to <strong>Open</strong> will allow others to see what your project needs and apply to contribute. You\'ll have the opportunity to accept or reject their applications. Happy hunting.', 'Open Project').then(function confirmed() {
+          modalService.confirm({
+            confirmMessage: 'Changing status to <strong>Open</strong> will allow others to see what your project needs and apply to contribute. You\'ll have the opportunity to accept or reject their applications. Happy hunting.',
+            confirmButtonMessage: 'Open Project'
+          }).then(function confirmed() {
             deferred.resolve();
           }, function declined() {
             $scope.projectUpdates.status = originalProjectStatus;
           });
         } else if ($scope.projectUpdates.status === 'Archived') {
-          confirmPromise = modalService.confirm('Changing your project\'s status to Archived means it will no longer be publicly viewable. Are you sure?', 'Archive It').then(function confirmed() {
+          confirmPromise = modalService.confirm({
+            confirmMessage: 'Changing your project\'s status to Archived means it will no longer be publicly viewable. Are you sure?',
+            confirmButtonMessage: 'Archive It'
+          }).then(function confirmed() {
             deferred.resolve();
           }, function declined() {
             $scope.projectUpdates.status = originalProjectStatus;
@@ -250,7 +259,7 @@ angular.module('throughCompanyApp').controller('projectSettingsCtrl', [
     };
 
     function _changeCurrentSettingsType(type) {
-      if (!type) return $state.go('system.404');
+      if (!type) return $state.go('app.404');
 
       $scope.currentSettingsType = type;
       // $location.path('/project/' + $scope.project.slug + '/settings/' + type.name.toLowerCase());

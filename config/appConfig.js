@@ -7,7 +7,6 @@ var _ = require('underscore');
  * App Config Settings
  * ========================================================================= */
 var defaultSettings = {
-  NEWRELIC: '2960e30f148c7141c12ffa97fa4485c88e05d15a',
   ROBOTS: '/',
   PORT: process.env.PORT || 2020,
   BUILD_DIR: 'build',
@@ -16,7 +15,9 @@ var defaultSettings = {
     key: 'xxxxxxxxxx'
   },
   GOOGLE_ANALYTICS: 'xxxxxxxxxx',
-  SSL: process.env.SSL
+  SSL: process.env.SSL,
+  ROLLBAR: 'xxx',
+  STORAGE_PREFIX: 'throughcompany'
 };
 
 var production = _.extend(_.clone(defaultSettings), {
@@ -26,7 +27,8 @@ var production = _.extend(_.clone(defaultSettings), {
     name: 'throughcompany-web-prod',
     key: 'e7c5a21591fb5d706825572ef8cde21bb7cde86c'
   },
-  GOOGLE_ANALYTICS: 'UA-61342983-1'
+  GOOGLE_ANALYTICS: 'UA-61342983-1',
+  ROLLBAR: '2095002781e84a8086cfbf028e9ac970'
 });
 
 var development = _.extend(_.clone(defaultSettings), {
@@ -35,7 +37,8 @@ var development = _.extend(_.clone(defaultSettings), {
   NEWRELIC: {
     name: 'throughcompany-web-dev',
     key: 'e7c5a21591fb5d706825572ef8cde21bb7cde86c'
-  }
+  },
+  ROLLBAR: '2095002781e84a8086cfbf028e9ac970'
 });
 
 var local = _.extend(_.clone(defaultSettings), {

@@ -1,21 +1,23 @@
 angular.module('throughCompanyApp').constant('routes', {
-  home: 'system.home',
-  search: 'system.search',
+  home: 'app.home',
+  search: 'app.search',
+  howItWorks: 'app.howItWorks',
   //organization
-  organization: 'system.organization',
+  organization: 'app.organization',
   //project
-  project: 'system.project',
-  projectSettings: 'system.project.settings',
-  projectApply: 'system.project.apply',
+  project: 'app.project',
+  projectSettings: 'app.project.settings',
+  projectApply: 'app.project.apply',
   //user
-  user: 'system.user',
-  userSettings: 'system.user.settings',
+  user: 'app.user',
+  userSettings: 'app.user.settings',
+  userApplication: 'app.user.application',
   //start project
-  createProject: 'system.createProject',
-  startProject: 'system.startProject',
+  createProject: 'app.createProject',
+  startProject: 'app.startProject',
   //start organization
-  createOrganization: 'system.createOrganization',
+  createOrganization: 'app.createOrganization',
   //
-  signIn: 'system.signIn',
-  signUp: 'system.signUp'
+  signIn: 'app.signIn',
+  signUp: 'app.signUp'
 });

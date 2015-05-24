@@ -1,25 +1,63 @@
 angular.module('throughCompanyApp').controller('organizationCtrl', [
   '$scope',
   '$state',
+  '$stateParams',
   '$rootScope',
   'organization',
-  function($scope, $state, $rootScope, organization) {
+  'organizationService',
+  'loggerService',
+  'alertService',
+  function($scope, $state, $stateParams, $rootScope, organization, organizationService, loggerService, alertService) {
     $scope.setMetaTitle(organization.name);
     $scope.setMetaDescription(organization.name);
 
     $scope.organization = organization;
-    //$scope.loaded = false;
     $scope.loaded = true;
 
-    // projectService.getProjectUsers({
-    //   projectId: $scope.project._id
-    // }).then(function success(response) {
-    //   $scope.projectUsers = response;
-    // });
+    $scope.isSubmittingProfilePic = null;
+    $scope.profilePicResult = null;
+    $scope.profilePicBtnOptions = {
+      buttonInitialIcon: 'icon-left fa fa-image',
+      buttonSubmittingIcon: 'icon-left fa fa-spin fa-refresh',
+      buttonDefaultText: 'Upload Profile Pic',
+      buttonDefaultIcon: 'icon-left fa fa-image',
+      buttonDefaultClass: 'btn-default',
+      buttonSubmittingText: 'Saving Profile Pic...',
+      buttonSuccessIcon: 'icon-left fa fa-check',
+      buttonSuccessText: 'Profile Pic Updated',
+      buttonErrorIcon: 'icon-left fa fa-remove',
+      buttonErrorText: 'Error Uploading Profile Pic',
+      buttonErrorClass: 'animated-button-error'
+    };
 
-    // $scope.getProjectUserName = function(projectUser) {
-    //   if (projectUser.firstName && projectUser.lastName) return projectUser.firstName + ' ' + projectUser.lastName;
-    //   return projectUser.email;
-    // };
+    $scope.updateProfilePic = function(files) {
+      var file = files[0];
+
+      $scope.isSubmittingProfilePic = true;
+
+      organizationService.uploadImage({
+        organizationId: $scope.organization._id,
+        image: file,
+        imageType: 'PROFILE_PIC_ORGANIZATION'
+      }).then(function success(response) {
+        $scope.organization.profilePic = response.profilePic;
+
+        alertService.success('Image Saved');
+
+        $scope.isSubmittingProfilePic = false;
+      }, function error(response) {
+        alertService.error(response);
+        loggerService.error(response);
+        $scope.isSubmittingProfilePic = false;
+      });
+    };
+
+    // if ($stateParams.needId) {
+    //   var need = _.find($scope.user.needs, function(n) {
+    //     return n._id === $stateParams.needId;
+    //   });
+
+    //   if (need) $scope.viewNeed(need);
+    // }
   }
 ]);

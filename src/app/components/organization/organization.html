@@ -1,74 +1,24 @@
 <div id="organization">
-  <div class="hero" ng-class="{ 'has-banner' : project.bannerPic }" style="background-image: url('{{ project.bannerPic }}')">
-    <div class="hero-inner">
+  <div class="header container clearfix">
+    <div class="profile-pic">
+      <img class="img-responsive" ng-src="{{ organization.profilePic }}" />
+      <file-upload file-selected="updateProfilePic" class="edit">
+        <a href="#" ng-show="auth.hasOrganizationIdClaim(organization._id)" file-upload-trigger>
+          <i class="fa fa-pencil"></i>&nbsp;Edit
+        </a>
+      </file-upload>
+      <div class="saving" ng-show="isSubmittingProfilePic">
+        <i class="fa fa-cog fa-spin"></i>
+      </div>
     </div>
-    <div class="hero-text" ng-class="{ preroll : !loaded }">
-      <h2 class="center" inline-edit inline-edit-show="auth.hasOrganizationIdClaim(organization._id)">
-      {{ organization.name }}
-      </h2>
-      <p class="center" inline-edit inline-edit-show="auth.hasOrganizationIdClaim(organization._id)">
-        {{ organization.description }}
+    <div class="name">
+      <h1>{{ organization.name }}</h1>
+      <p class="description">{{ organization.description }}
       </p>
     </div>
   </div>
-  <div class="project-nav clearfix" affix offset-top="584">
-    <div class="container clearfix">
-      <ul class="nav clearfix pull-left">
-        <li>
-          <a href="#" ng-click="navigateTo(routes.project, 'project-needs')">Needs</a>
-        </li>
-        <li class="dropdown">
-          <a href="#" ng-click="navigateTo(routes.project, 'project-wiki')">
-            <i class="fa fa-pencil"></i>&nbsp;Wiki
-          </a>
-          <!--           <ul class="dropdown-menu">
-            <li ng-repeat="page in project.wiki.pages">
-              <a href="#" ng-click="changeWikiPage(page, $event)">{{ page.title }}</a>
-            </li>
-            <li ng-show="auth.hasProjectIdClaim(project._id)">
-              <a href="#" ng-click="createWikiPage($event)">
-                <i class="fa fa-plus"></i>&nbsp;Add
-              </a>
-            </li>
-          </ul> -->
-        </li>
-        <li>
-          <a href="#" ng-click="navigateTo(routes.project, 'project-team')">
-            <i class="fa fa-users"></i>&nbsp;Team
-          </a>
-        </li>
-        <li ng-show="auth.hasProjectIdClaim(project._id)">
-          <a href="#" ng-click="navigateTo(routes.projectSettings, 'project-settings')">
-            <i class="fa fa-gear"></i>&nbsp;Settings
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
   <div class="project-container container clearfix" affix data-offset-top="584">
-    <div class="project-landing clearfix" ng-show="$state.current.name === 'system.project'">
-      <!--       <div class="project-sidebar col-sm-3">
-        <div affix data-offset-top="760">
-          <hr>
-          <p>
-            <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
-          </p>
-          <div class="social">
-            <ul>
-              <li>
-                <a href="{{ project.social.facebook }}" target="_blank">
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </li>
-              <li>
-                <a href="{{ project.social.linkedIn }}" target="_blank">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
+    <div class="project-landing clearfix" ng-show="$state.current.name === 'app.project'">
       <div class="project-content">
         <div class="col-md-2 sidebar-left">
           <ul>
@@ -136,14 +86,4 @@
   <p class="wiki-saving" ng-show="savingWiki">
     <i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Saving changes...
   </p>
-  <div id="project-apply" affix data-offset-top="584" ng-show="applying" ng-class="{ open : applying }">
-    <div class="apply-inner">
-      <a href="#" class="close" ng-click="applying = false">
-        <i class="fa fa-times"></i>
-      </a>
-      <h3 class="center">{{ applyingAssetTag.name }}</h3>
-      <h2 class="center">Coming soon!</h2>
-      <p class="center">Apply to join our project and start helping us out.</p>
-    </div>
-  </div>
 </div>

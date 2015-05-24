@@ -37,9 +37,21 @@ angular.module('throughCompanyApp').factory('userService', [
         url: appSettings.baseUrl + '/users/:userId/organizations',
         isArray: true
       },
-      createAssetTag: {
+      createSkills: {
         method: 'POST',
-        url: appSettings.baseUrl + '/users/:userId/assettags'
+        url: appSettings.baseUrl + '/users/:userId/skills'
+      },
+      //user applications
+      getUserApplications: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/users/:userId/applications',
+        isArray: true
+      },
+      //user messages
+      getUserMessages: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/users/:userId/messages',
+        isArray: true
       }
     });
 
@@ -151,6 +163,34 @@ angular.module('throughCompanyApp').factory('userService', [
       delete options.userId;
 
       return User.createAssetTag({
+        userId: userId
+      }, options).$promise;
+    };
+
+    UserService.prototype.getUserApplications = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('options.userId is required');
+
+      var self = this;
+      var userId = options.userId;
+
+      delete options.userId;
+
+      return User.getUserApplications({
+        userId: userId
+      }, options).$promise;
+    };
+
+    UserService.prototype.getUserMessages = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.userId) throw new Error('options.userId is required');
+
+      var self = this;
+      var userId = options.userId;
+
+      delete options.userId;
+
+      return User.getUserMessages({
         userId: userId
       }, options).$promise;
     };

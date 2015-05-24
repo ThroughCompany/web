@@ -12,11 +12,8 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
     $scope.changeCurrentSettingsType = _changeCurrentSettingsType;
 
     $scope.settingTypes = [{
-      name: 'Profile',
+      name: 'Personal Settings',
       icon: 'fa fa-building'
-    }, {
-      name: 'Images',
-      icon: 'fa fa-image'
     }, {
       name: 'Links',
       icon: 'fa fa-link'
@@ -157,6 +154,8 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
       }).then(function(response) {
         alertService.success('Settings Saved');
 
+        $scope.currentUser.firstName = response.firstName;
+        $scope.currentUser.lastName = response.lastName;
         $scope.currentUser.description = response.description;
         $scope.currentUser.location = response.location;
 
@@ -166,49 +165,8 @@ angular.module('throughCompanyApp').controller('userSettingsCtrl', [
       });
     };
 
-    $scope.isSubmittingProfilePic = null;
-    $scope.profilePicResult = null;
-    $scope.profilePicBtnOptions = {
-      buttonInitialIcon: 'icon-left fa fa-image',
-      buttonSubmittingIcon: 'icon-left fa fa-spin fa-refresh',
-      buttonDefaultText: 'Upload Profile Pic',
-      buttonDefaultIcon: 'icon-left fa fa-image',
-      buttonDefaultClass: 'btn-default',
-      buttonSubmittingText: 'Saving Profile Pic...',
-      buttonSuccessIcon: 'icon-left fa fa-check',
-      buttonSuccessText: 'Profile Pic Updated',
-      buttonErrorIcon: 'icon-left fa fa-remove',
-      buttonErrorText: 'Error Uploading Profile Pic',
-      buttonErrorClass: 'animated-button-error'
-    };
-
-    $scope.updateProfilePic = function(files) {
-
-      var file = files[0];
-
-      $scope.isSubmittingProfilePic = true;
-      $scope.profilePicResult = null;
-
-      userService.uploadImage({
-        userId: $scope.currentUser._id,
-        image: file,
-        imageType: 'PROFILE_PIC_USER'
-      }).then(function success(response) {
-        $scope.currentUser.profilePic = response.profilePic;
-
-        alertService.success('Image Saved');
-
-        $scope.isSubmittingProfilePic = false;
-        $scope.profilePicResult = 'success';
-      }, function error(response) {
-        alertService.error(response);
-        $scope.isSubmittingProfilePic = false;
-        $scope.profilePicResult = 'error';
-      });
-    };
-
     function _changeCurrentSettingsType(type) {
-      if (!type) return $state.go('system.404');
+      if (!type) return $state.go('app.404');
 
       $scope.currentSettingsType = type;
       //$location.path('/user/' + $scope.user.userName + '/settings/' + type.name.toLowerCase());

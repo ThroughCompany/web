@@ -1,98 +1,122 @@
 <div id="home" class="clearfix">
   <div class="hero">
     <div class="hero-slides">
-      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner1.jpg')">
+      <div class="slide" style="background-image:url('https://s3.amazonaws.com/throughcompany-assets/images/banner2.jpg')">
         <div class="slide-bg"></div>
         <div class="container hero-text">
-          <p class="small-text">A better way to</p>
           <!--           <h1 typer="build a career, collaborate with everyone, find interesting projects, tackle big problems, encourage innovation" typer-interval="100"></h1> -->
-          <h1>tackle big problems</h1>
+          <h1>A better way to tackle big problems</h1>
           <div class="big-text clearfix">
-            <p class="">We help ambitious projects find what they need, and help people find satisfying work.</p>
-            <p class="center">
+            <p class="text">We help ambitious projects find what they need, and help people find satisfying work.</p>
+            <!-- <p class="center">
               <a href="#" class="btn btn-primary btn-lg" ui-sref-name="routes.signUp">
                   Sign up
                 </a>
-            </p>
+            </p> -->
+          </div>
+          <div class="get-started center">
+            <div class="trans">
+              <form class="clearfix form-inline" name="registerForm" role="form" novalidate>
+                <div class="form-group" ng-class="{ 'has-errors' : submitted && registerForm.email.$invalid, 'filled' : fillingEmail || emailLength > 0, preroll : !showEmail }">
+                  <input class="form-control" placeholder="Your Email" name="email" tabindex="1" type="text" ng-model="form.email" required ng-focus="fillingEmail = true" ng-blur="fillingEmail = false" />
+                  <p class="error-msg" ng-show="submitted && registerForm.email.$error.required">Please enter your email.
+                  </p>
+                  <p class="error-msg" ng-show="submitted && registerForm.email.$error.pattern">Please enter a valid email.
+                  </p>
+                </div>
+                <div class="form-group preroll" ng-class="{ 'has-errors' : submitted && registerForm.password.$invalid, 'filled' : fillingPassword || passwordLength > 0, preroll : !showPassword }">
+                  <input class="form-control" placeholder="Create a Password" name="password" tabindex="2" type="password" ng-model="form.password" required ng-focus="fillingPassword = true" ng-blur="fillingPassword = false" />
+                  <p class="error-msg" ng-show="submitted && registerForm.password.$error.required">Please enter your password.
+                  </p>
+                </div>
+                <button class="btn btn-icon-center preroll" tabindex="3" ng-click="register(registerForm)" ng-bs-animated-button is-submitting="registerSubmitting" result="registerResult" options="registerBtnOptions" ng-class=" { preroll : !showLoginBtn }">
+                </button>
+              </form>
+              <div class="error-msg alert alert-danger" ng-show="errorMsg">
+                {{ errorMsg }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="content-wrap clearfix">
-    <div class="content col-sm-8 col-xs-12 col-sm-offset-1">
-      <div class="most-recent-projects">
+  <div class="content-wrap container clearfix">
+    <div class="content col-sm-8 col-xs-12">
+      <div class="needs">
         <div class="header">
-          <h2>New Projects.</h2>
+          <h2>New Jobs.</h2>
         </div>
         <div class="row">
-          <div class="col-md-6 col-sm-6" ng-repeat="project in projects" equal-heights=".project" items="projects">
-            <a class="project" href="#" ui-sref-name="routes.project({ projectId : project.slug })">
-              <div class="project-pic" style="background-image: url('{{ project.profilePic }}')">
-              </div>
-              <div class="project-info">
-                <h4 class="name">
-              {{ project.name }}
-            </h4>
-                <p class="location" ng-hide="!project.location">
-                  <i class="fa fa-map-marker"></i>&nbsp;{{ project.location }}
-                </p>
-                <p class="description">
-                  {{ project.description }}
-                </p>
-                <div class="project-details clearfix row">
-                  <div class="status col-xs-3 center">
-                    <p class="">{{ project.status }}</p>
-                    <p class="label uppercase">Status</p>
+          <div class="col-md-6 col-sm-6 col-xs-12" ng-repeat="need in needs" equal-heights=".need" items="needs">
+            <div class="need" ng-if="need.type === 'User'">
+              <a href="#" ui-sref-name="routes.user({ userName : need.user.userName, needId: need._id })">
+                <div class="need-pic" style="background-image: url('{{ need.user.profilePic }}')">
+                </div>
+                <div class="need-info">
+                  <h4 class="name">
+                  {{ need.name }}
+                </h4>
+                  <p class="description">
+                    {{ need.description }}
+                  </p>
+                  <div class="need-details clearfix row">
+                    <div class="status col-xs-3 center">
+                      <p class="">{{ need.status }}</p>
+                      <p class="label uppercase">Status</p>
+                    </div>
+                    <div class="col-xs-3 center">
+                      <p class="">Type</p>
+                      <p class="label uppercase">{{ need.type }}</p>
+                    </div>
+                    <!-- 
+                  <div class="members col-xs-3 center">
+                    <p class="">{{ project.projectUsers.length }}</p>
+                    <p class="label uppercase">Member<span ng-show="project.projectUsers.length > 1">s</span></p>
+                  </div> -->
                   </div>
-                  <div class="needs col-xs-3 center">
+                </div>
+              </a>
+            </div>
+            <div class="need" ng-if="need.type === 'Organization'">
+              <a href="#" ui-sref-name="routes.organization({ organizationId : need.organization._id, needId: need._id })">
+                <div class="need-pic" style="background-image: url('{{ need.organization.profilePic }}')">
+                </div>
+                <div class="need-info">
+                  <h4 class="name">
+                  {{ need.name }}
+                </h4>
+                  <p class="description">
+                    {{ need.description }}
+                  </p>
+                  <div class="need-details clearfix row">
+                    <div class="status col-xs-3 center">
+                      <p class="">{{ need.status }}</p>
+                      <p class="label uppercase">Status</p>
+                    </div>
+                    <!--                   <div class="needs col-xs-3 center">
                     <p class="">{{ project.openProjectNeedsCount }}</p>
                     <p class="label uppercase">Need<span ng-show="project.openProjectNeedsCount > 1">s</span></p>
                   </div>
                   <div class="members col-xs-3 center">
                     <p class="">{{ project.projectUsers.length }}</p>
                     <p class="label uppercase">Member<span ng-show="project.projectUsers.length > 1">s</span></p>
+                  </div> -->
                   </div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <!--       <div class="coming-soon clearfix">
-        <div class="banner">
-          <p class="center">
-            <img src="http://masschallenge.org/sites/all/themes/mcbt4/assets/images/logo-masschallenge-retina.png" height="90px" alt="Mass Challenge 2015" />
-          </p>
-          <h2 class="center">
-          We're a startup based in Somerville, MA. We've just applied to MassChallenge 2015.
-        </h2>
-          <p class="center">
-            Want us to let you know how it goes?
-          </p>
-        </div>
-        <div class="">
-          <form class="form-inline center" name="subsribeForm" novalidate>
-            <div class="form-group" ng-class="{ 'has-errors' : submitted && subsribeForm.email.$invalid }">
-              <input class="form-control" ng-model="form.email" type="text" name="email" required ng-pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/" />
-              <button class="btn btn-primary" tabindex="3" ng-click="subscribe(subsribeForm)" ng-bs-animated-button is-submitting="subscribeSubmitting" result="subscribeResult" options="subscribeBtnOptions">
-              </button>
-              <p class="error-msg" ng-show="submitted && subsribeForm.email.$error.required">Please enter your email.
-              </p>
-              <p class="error-msg" ng-show="submitted && subsribeForm.email.$error.pattern">Please enter a valid email.
-              </p>
-            </div>
-          </form>
-        </div>
-      </div> -->
     </div>
-    <div class="sidebar col-sm-3 col-xs-12">
-      <div class="top-needs clearfix">
+    <div class="sidebar col-sm-4 col-xs-12 hidden-xs">
+      <div class="top-skills clearfix">
         <h3 class="uppercase">Top Skills</h3>
-        <div class="needs-list">
-          <div class="need" ng-repeat="skill in skills">
-            <a href="#" ui-sref-name="routes.search({ tags : getSkillsParams(skill.name) })" tooltip-placement="top" tooltip="{{ skill.projectUseCount }} {{ skill.projectUseCount > 1 ? 'projects need' : 'project needs' }} this skill" tooltip-append-to-body="true">
-              <span class="count">{{ skill.projectUseCount }}</span><span class="name">{{ skill.name }}</span>
+        <div class="skills-list">
+          <div class="skill" ng-repeat="skill in skills">
+            <a href="#" ui-sref-name="routes.search({ skill : skill.name })" tooltip-placement="top" tooltip="{{ skill.totalUseCount }} {{ skill.totalUseCount > 1 ? 'projects need' : 'project needs' }} this skill" tooltip-append-to-body="true">
+              <span class="count">{{ skill.totalUseCount }}</span><span class="name">{{ skill.name }}</span>
             </a>
           </div>
         </div>

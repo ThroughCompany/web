@@ -2,19 +2,21 @@ angular.module('throughCompanyApp').controller('searchCtrl', [
   '$scope',
   '$stateParams',
   'loggerService',
-  'projectService',
-  function($scope, $stateParams, loggerService, projectService) {
+  'needService',
+  function($scope, $stateParams, loggerService, needService) {
 
-    if ($stateParams.tags) {
-      $scope.skills = $stateParams.tags;
-      _getProjects();
+    if ($stateParams.skill) {
+      $scope.skill = $stateParams.skill;
     }
 
-    function _getProjects() {
-      projectService.getProjects({
-        skills: $scope.skills
+    _getNeeds();
+
+    function _getNeeds() {
+      needService.getAll({
+        skillName: $scope.skill,
+        fields: 'user(), project(), organization()'
       }).then(function success(response) {
-        $scope.projects = response;
+        $scope.needs = response;
       });
     }
   }

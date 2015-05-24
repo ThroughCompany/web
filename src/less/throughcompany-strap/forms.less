@@ -12,21 +12,8 @@
       display: block;
     }
   }
-}
-.input-group {
-  .input-group-addon {
-      
-  }
-}
-.form-control {
-  padding: 10px;
-  height: 42px;
-}
-@media (min-width: @screen-md) {
-  .form-horizontal {
-    .control-label {
-      padding-top: 14px;
-    }
+  .form-control {
+    font-weight: 200;
   }
   .error-msg {
     display: none;
@@ -35,5 +22,22 @@
     font-family: @font-family-serif;
     font-size: (@font-size-small - 2);
     font-style: italic;
+  }
+}
+
+.input-group {
+  .input-group-addon {}
+}
+
+.form-control {
+  padding: 10px;
+  height: 42px;
+}
+
+@media (min-width: @screen-md) {
+  .form-horizontal {
+    .control-label {
+      padding-top: 14px;
+    }
   }
 }
