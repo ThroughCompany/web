@@ -96,6 +96,30 @@ angular.module('throughCompanyApp').config([
       });
 
     /* ------------------------------------------------------------
+     * Job
+     * ------------------------------------------------------------ */
+
+    $stateProvider
+      .state('app.job', {
+        url: 'job/:jobId',
+        templateUrl: '/app/components/job/job.html',
+        controller: 'jobCtrl',
+        resolve: {
+          job: [
+            '$stateParams',
+            'needService',
+            function($stateParams, needService) {
+              var jobId = $stateParams.jobId;
+
+              return needService.getById({
+                needId: jobId
+              });
+            }
+          ]
+        }
+      });
+
+    /* ------------------------------------------------------------
      * How It Works
      * ------------------------------------------------------------ */
 

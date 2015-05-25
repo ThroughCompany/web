@@ -1,0 +1,38 @@
+<div id="job" class="container clearfix">
+  <div class="content col-md-8">
+    <h2 class="name">{{ job.name }}</h2>
+    <h4>Description</h4>
+    <p class="description">{{ job.description }}</p>
+    <p class="location" ng-show="job.locationSpecific && project">
+      <i class="fa fa-map-marker"></i> {{ project.location }} (location specific)
+    </p>
+    <p class="location" ng-show="job.locationSpecific && user">
+      <i class="fa fa-map-marker"></i> {{ user.location }} (location specific)
+    </p>
+    <div class="duration" ng-show="job.duration && (job.duration.startDate || job.duration.endDate)">
+      <h4>Dates</h4>
+      <p class="center time-label">{{ job.duration.startDate | moment: 'MMM DD, YYYY' }} - {{ job.duration.endDate | moment: 'MMM DD, YYYY' }}</p>
+      <p class="center time-label">{{ job.durationSting }} months</p>
+    </div>
+    <div class="time-commitment" ng-show="job.timeCommitment && (job.timeCommitment.hoursPerWeek || job.timeCommitment.totalHours)">
+      <h4>Time Commitment</h4>
+      <p class="center time-label" ng-show="job.timeCommitment.hoursPerWeek">{{ job.timeCommitment.hoursPerWeek }} hrs/week</p>
+      <p class="center time-label" ng-show="job.timeCommitment.totalHours">{{ job.timeCommitment.totalHours }} total hrs</p>
+    </div>
+    <div class="skills clearfix">
+      <h4>Skills Desired</h4>
+      <button class="skill btn btn-warning" ng-repeat="skill in skills">
+        {{ skill.name }}
+      </button>
+    </div>
+  </div>
+  <div class="sidebar col-md-4">
+    <div class="user" ng-if="user">
+      <a href="#" ui-sref-name="routes.user({ userName : user.userName })" class="profile-pic" style="background-image:url({{user.profilePic}})">
+      </a>
+      <p class="center">
+        <a href="#" ui-sref-name="routes.user({ userName : user.userName })">{{ user.name }}</a>
+      </p>
+    </div>
+  </div>
+</div>

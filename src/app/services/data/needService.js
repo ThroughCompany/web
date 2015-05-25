@@ -11,6 +11,11 @@ angular.module('throughCompanyApp').factory('needService', [
         url: appSettings.baseUrl + '/needs',
         isArray: false
       },
+      getById: {
+        method: 'GET',
+        url: appSettings.baseUrl + '/needs/:needId',
+        isArray: false
+      },
       getAll: {
         method: 'GET',
         url: appSettings.baseUrl + '/needs',
@@ -26,6 +31,15 @@ angular.module('throughCompanyApp').factory('needService', [
       var self = this;
 
       return Need.create(options).$promise;
+    };
+
+    NeedService.prototype.getById = function(options) {
+      if (!options) throw new Error('options is required');
+      if (!options.needId) throw new Error('options.needId is required');
+
+      var self = this;
+
+      return Need.getById(options).$promise;
     };
 
     NeedService.prototype.getAll = function(options) {

@@ -50,7 +50,7 @@
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12" ng-repeat="need in needs" equal-heights=".need" items="needs">
             <div class="need" ng-if="need.type === 'User'">
-              <a href="#" ui-sref-name="routes.user({ userName : need.user.userName, needId: need._id })">
+              <a href="#" ui-sref-name="routes.job({ jobId: need._id })">
                 <div class="need-pic" style="background-image: url('{{ need.user.profilePic }}')">
                 </div>
                 <div class="need-info">
@@ -79,7 +79,7 @@
               </a>
             </div>
             <div class="need" ng-if="need.type === 'Organization'">
-              <a href="#" ui-sref-name="routes.organization({ organizationId : need.organization._id, needId: need._id })">
+              <a href="#" ui-sref-name="routes.job({ jobId: need._id })">
                 <div class="need-pic" style="background-image: url('{{ need.organization.profilePic }}')">
                 </div>
                 <div class="need-info">

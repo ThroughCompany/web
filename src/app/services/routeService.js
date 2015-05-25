@@ -2,6 +2,7 @@ angular.module('throughCompanyApp').constant('routes', {
   home: 'app.home',
   search: 'app.search',
   howItWorks: 'app.howItWorks',
+  job: 'app.job',
   //organization
   organization: 'app.organization',
   //project
