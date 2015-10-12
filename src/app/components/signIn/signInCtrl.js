@@ -98,7 +98,8 @@ angular.module('throughCompanyApp').controller('signInCtrl', [
                 });
               }
             }, 500);
-          }, function error(response) {
+          })
+          .catch(function error(response) {
             $scope.loginSubmitting = false;
             $scope.loginResult = 'error';
             $scope.errorMsg = 'Invalid email or password';
